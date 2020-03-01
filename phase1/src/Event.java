@@ -114,5 +114,11 @@ public class Event implements Serializable, Comparable<Event> {
     public int compareTo(Event e){
         return this.time.getStart().compareTo(e.getTime().getStart());
     }
+
+    @Override
+    public String toString(){
+        return "Name: " + this.eventName + "\nStart: " + this.time.getStart() + "\nEnd: " + this.time.getEnd();
+    }
+
 }
 
