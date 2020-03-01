@@ -50,4 +50,19 @@ public class User implements Serializable{
         return null;
     }
 
+    /** searches for a series by series name
+     *
+     * @param sname the series name that determines which events are returned
+     * @return an arraylist of events in this series, or an empty arraylist if no series with this name
+     */
+    public ArrayList<Event> searchEventBySeriesName(String sname){
+        ArrayList<Event> toReturn = new ArrayList<>();
+        for (Event e: this.events){
+            if (e.getSeriesName().equals(sname)){
+                toReturn.add(e);
+            }
+        }
+        return toReturn;
+    }
+
 }
