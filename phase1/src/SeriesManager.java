@@ -1,19 +1,13 @@
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 /**
  * Methods for creating a series
+ * @author Peter Sellars
  */
 public class SeriesManager {
-    /**
-     * Empty constructor
-     */
-    public SeriesManager() {
-    }
-
     /**
      * Creates a list of new Events that form a series
      *
