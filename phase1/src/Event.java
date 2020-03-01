@@ -90,19 +90,12 @@ public class Event implements Serializable, Comparable<Event> {
         this.time = time;
     }
 
-
     /** Give the status of an event as an integer
      * @param dt the time being compared to this event
      * @return 0 if the event is ongoing, 1 if the event is in the future, and -1 if the event is over
      */
     public int getStatus(LocalDateTime dt) {
-        if (this.time.getStart().compareTo(dt) <= 0 && this.time.getEnd().compareTo(dt) >= 0) {
-            return 0;
-        } else if (this.time.getEnd().compareTo(dt) < 0) {
-            return -1;
-        } else {
-            return 1;
-        }
+        return time.getStatus(dt);
     }
 
     /** Compare events based on their start times
@@ -112,7 +105,7 @@ public class Event implements Serializable, Comparable<Event> {
      */
     @Override
     public int compareTo(Event e){
-        return this.time.getStart().compareTo(e.getTime().getStart());
+        return this.time.compareStartTime(e.time);
     }
 
     @Override

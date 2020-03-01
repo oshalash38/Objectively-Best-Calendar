@@ -1,4 +1,3 @@
-import org.jetbrains.annotations.NotNull;
 
 import java.time.*;
 /**
@@ -9,9 +8,7 @@ import java.time.*;
  */
 public class TimingFactory {
 
-    public void TimingFactory(){
-
-    }
+    public void TimingFactory(){}
 
     /**
      * returns an instance of Timing with a start time but no end time
