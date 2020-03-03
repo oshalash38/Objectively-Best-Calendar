@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -10,7 +11,8 @@ import java.util.List;
 
 public class ViewModel {
     private final String enterOption= "Enter choice:";
-    private final String[] introPage = {"CALENDAR V1", "===============", "1. Login", "2. Create new user", enterOption};
+    private final List<String> startUpPage = Arrays.asList("CALENDAR V1", "===============", "1. Login", "2. Create new user", enterOption);
+    //TODO CONVERT EVERYTHING TO LIST SORRY WHOEVER IS LOOKING AT THIS I GOTTA GO BUT I'LL FIX IT
     private final String[] createUser = {"Enter new username:", "Enter new password:"};
     private final String[] signIn = {"Enter username:", "Enter password:"};
     private final String[] mainMenu = {"Main Menu:", "Current alerts:", "1. Check upcoming alerts", "2. Create memo",
@@ -28,7 +30,9 @@ public class ViewModel {
      */
     public ViewModel(){}
 
+    public void startUp(){
 
+    }
 
 
 }
