@@ -57,11 +57,11 @@ public class RecurringAlert extends Alert {
     @Override
     public int getStatus(LocalDateTime dt) {
         if (nextTime.getStatus(dt) == -1){
-            nextTime.addToThis(freq);
+            nextTime = nextTime.addToThis(freq);
             return -1;
         }
         else if(nextTime.getStatus(dt) == 0){
-            nextTime.addToThis(freq);
+            nextTime = nextTime.addToThis(freq);
             return 0;
         }
         else{
