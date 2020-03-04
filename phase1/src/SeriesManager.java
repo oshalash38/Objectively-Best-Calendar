@@ -18,11 +18,8 @@ public class SeriesManager {
      * @return the list of events forming this series
      */
     public void createSeries(User u, String seriesName, Duration dur, LocalDateTime start, int fSelection, int neSelection) {
-//        int fSelection = setFrequency();
-//        int neSelection = setNumEvents();
         ArrayList<Event> lst = new ArrayList<>();
         Timing temp = new Timing(start, start.plus(dur));
-        //add the first event
         lst.add(new Event("", temp, seriesName));
         for (int i = 1; i < neSelection; i++) {
             start = elapse(start, fSelection);
