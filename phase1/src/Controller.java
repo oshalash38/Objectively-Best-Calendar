@@ -6,7 +6,6 @@ import java.util.ArrayList;
 public class Controller {
     /**
      * Class representing the controller for the program
-     *
      * @author Omar Shalash
      */
     private User curr;
@@ -55,5 +54,17 @@ public class Controller {
         } while (!flawless);
         sm.createSeries(seriesName, u, indices);
         return "Series " + seriesName + " created.";
+    }
+
+    public void START(){
+        Presenter p1 = new Presenter();
+        switch (p1.getStartUpPageInput()){
+            case 1:
+
+            case 2:
+
+            case 3:
+                System.exit(1);
+        }
     }
 }
