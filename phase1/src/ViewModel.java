@@ -36,12 +36,14 @@ public class ViewModel {
     private final List<String> buildTiming = Arrays.asList("Enter year:", "Enter month:", "Enter day of month:",
             "Enter hour (24 hour clock):", "Enter minute:");
 
-    private final List<String> alertInfo = Arrays.asList("Name of alert:", "Repeating alert or one time alert:") ; //TODO: CONTINUE FROM HERE
+    private final List<String> alertInfo = Arrays.asList("Name of alert:", "Repeating alert or one time alert:",
+            "Frequency of alert:", "Next notification by alert:") ;
 
     private final List<String> eventInfo = Arrays.asList("Event name:", "Event start time:", "Event end time:",
             "Event series:" , "Event tag:", "Event memos:", "Event reminders:");
     private final List<String> displayEventBy = Arrays.asList("Display events filtered by...", "1. Current events",
-            "2. Past events", "3. Future events", "4. Date threshold", "5. Memo", "6. Tag", "7. Name", "8. Return", enterOption);
+            "2. Past events", "3. Future events", "4. Date threshold", "5. Memo", "6. Tag", "7. Name", "8. Return",
+            enterOption);
 
 
 
