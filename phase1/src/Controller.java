@@ -10,6 +10,7 @@ public class Controller {
     private SeriesManager sm;
 
 
+
     public String createSeriesFromScratch(String seriesName, String duration, String date, int fSelection, int neSelection){
         //interpret date as localtime and then use between to find elapsed time between localtime and midnight, convert to duration
         if (neSelection < 2){
@@ -24,5 +25,17 @@ public class Controller {
     public String createSeriesFromEvents(String seriesName){
 
         return "";
+    }
+
+    public void START(){
+        Presenter p1 = new Presenter();
+        switch (p1.getStartUpPageInput()){
+            case 1:
+
+            case 2:
+
+            case 3:
+                System.exit(1);
+        }
     }
 }
