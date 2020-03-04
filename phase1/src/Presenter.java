@@ -2,6 +2,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
+import java.time.LocalDateTime;
 import java.util.Scanner;
 
 /**
@@ -47,5 +48,52 @@ public class Presenter {
         return menuSelection(myMenus.getStartUpPage());
     }
 
+
+//    public int startupPage(){
+//
+//    }
+    private String displayTags(Event e){
+        StringBuilder s = new StringBuilder();
+        for (String tag: e.getTags()){
+            s.append(tag);
+            s.append(", ");
+        }
+        if (s.toString().equals("")){ return "";}
+        return s.substring(0, s.length()-2);
+    }
+
+    private String displayMemoIds(Event e){
+        StringBuilder s = new StringBuilder();
+        for (int id: e.getMemoIDs()){
+            s.append(id);
+            s.append(", ");
+        }
+        if (s.toString().equals("")){ return "";}
+        return s.substring(0, s.length()-2);
+    }
+    private String displayAlerts(Event e){
+        StringBuilder s = new StringBuilder();
+        for (Alert a: e.getAlerts()){
+            s.append(a.pushReminder());
+            s.append(", ");
+        }
+        if (s.toString().equals("")){ return "";}
+        return s.substring(0, s.length()-2);
+    }
+
+    public String getEventsForSeries(User u){
+        String[] s;
+        int counter = 0;
+        for (Event e: u.getEvents()){
+            s = new String[]{e.getEventName(), e.getTime().getStart().toString(),
+                    e.getTime().getEnd().toString(), e.getSeriesName(), displayTags(e),
+            displayMemoIds(e), displayAlerts(e)};
+            myModel.displayEventInfo(s, counter);
+            counter ++;
+        }
+        myModel.displaySelectionEventsForSeries();
+        Scanner kbReader = new Scanner(System.in);
+        return kbReader.next();
+    }
 
 }

@@ -1,5 +1,3 @@
-import org.jetbrains.annotations.NotNull;
-
 import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -21,6 +19,18 @@ public class ViewModel {
             "Repeat new password:");
 
     private final List<String> signIn = Arrays.asList("Enter username:", "Enter password:");
+    private final List<String> userDNE = Arrays.asList("User Does Not Exist", "1. Try again",
+            "2. Return to startup page"/*enterOption*/);
+    private final List<String> mainMenu = Arrays.asList("Main Menu:", "Current alerts:", "1. Check upcoming alerts",
+            "2. Create memo", "3. Create event", "4. Create series", "5. Event options",
+            "6. Display events filtered by...", "7. Logout" /*enterOption*/);
+    private final List<String> eventOptions = Arrays.asList("1. Delete event", "2. Associate event with memo",
+            "3. Create alert for event", "4. View alerts for event", "5. Create tag for event",
+            "6. Associate event with series", "6. return"
+            /*enterOption*/);
+    private final List<String> selectEventsForSeries = Arrays.asList("Enter the numbers " +
+            "of the events that will form this series. Separate them by commas (ex. 1,2,3 to select the first three events)");
+
 
     private final List<String> createEventAssociatedWithSeries = Arrays.asList("Enter event name:",
             "Enter event start time:", "Enter event end time:", "Enter name of series:" ,
@@ -89,15 +99,24 @@ public class ViewModel {
             System.out.println(str + " " + info[i]);
         }
     }
+    public void displayEventInfo(String[] info, int num){
+        //name, start, end, series, tag, memo, reminders
+        int counter = 0;
+        for(String str: eventInfo){
+            if (counter == 0){
+                System.out.println(num + ": " + str + " " + info[counter]);
+            }
+            else{
+            System.out.println(str + " " + info[counter]);}
+            counter++;
+        }
+    }
 
     public void pleaseTryAgain(){
         System.out.println("============================================================================================" +
                 "\nPlease try again.");
     }
-
-
-
-
-
-
+    public void displaySelectionEventsForSeries(){
+        System.out.println(this.selectEventsForSeries.get(0));
+    }
 }
