@@ -1,13 +1,16 @@
+import java.io.IOException;
 import java.time.LocalTime;
 import java.time.Duration;
 import java.time.LocalDateTime;
+/**
+ * Class representing the controller for the program
+ * @author Omar Shalash
+ */
 public class Controller {
-    /**
-     * Class representing the controller for the program
-     * @author Omar Shalash
-     */
+
     private User curr;
     private SeriesManager sm;
+    private DatabaseManager databaseManager;
 
 
     public String createSeriesFromScratch(String seriesName, String duration, String date, int fSelection, int neSelection){
@@ -24,5 +27,25 @@ public class Controller {
     public String createSeriesFromEvents(String seriesName){
 
         return "";
+    }
+
+    public void readFromDatabase(String filePath){
+        try {
+            databaseManager = new DatabaseManager(filePath);
+        }
+        catch (IOException ex){
+            System.out.println("Could not load database. Please try again later");}
+        catch (ClassNotFoundException ex) {
+            System.out.println("Database may be corrupted. Could not load database.");
+        }
+    }
+
+    public void writeIntoFile(String filePath){
+        try{
+            databaseManager.saveToFile(filePath);
+        }
+        catch(IOException ex){
+            System.out.println("Failed to write into database. Please try again later");
+        }
     }
 }

@@ -7,6 +7,9 @@ import java.util.*;
 
 //Code for timer got from https://stackoverflow.com/questions/18353689/how-to-repeat-a-task-after-a-fixed-amount-of-time-in-android
 
+/**
+ * @author ABHIJOY MANDAL
+ */
 public class AlertManager {
     private LocalDateTime currentTime = LocalDateTime.now();
     private ArrayList<Alert> upcomingAlerts = new ArrayList<>();
@@ -30,11 +33,12 @@ public class AlertManager {
         for(Event e: UserEvents){
             checkPassedAlertsEvent(e, retAlerts, currentTime);
         }
+        getUpcomingAlerts();
         t.scheduleAtFixedRate(new TimerTask() {
 
                                   @Override
                                   public void run() {
-                                        runUpcomingEvents();
+                                        runUpcomingAlerts();
                                   }
 
                               },
@@ -142,7 +146,7 @@ public class AlertManager {
         }
     }
 
-    private ArrayList<Alert> runUpcomingEvents(){
+    private ArrayList<Alert> runUpcomingAlerts(){
         ArrayList<Alert> tempAlerts = new ArrayList<>(upcomingAlerts);
         upcomingAlerts.clear();
         currentTime = LocalDateTime.now();
