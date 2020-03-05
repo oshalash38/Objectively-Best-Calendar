@@ -1,6 +1,8 @@
+import java.lang.reflect.Array;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 /**
@@ -16,18 +18,16 @@ public class SeriesManager {
      * @param start      the beginning of the series
      * @return the list of events forming this series
      */
-    public ArrayList<Event> createSeries(String seriesName, Duration dur, LocalDateTime start) {
-        int fSelection = setFrequency();
-        int neSelection = setNumEvents();
+    public void createSeries(User u, String seriesName, Duration dur, LocalDateTime start, int fSelection, int neSelection) {
         ArrayList<Event> lst = new ArrayList<>();
         Timing temp = new Timing(start, start.plus(dur));
-        //add the first event
         lst.add(new Event("", temp, seriesName));
         for (int i = 1; i < neSelection; i++) {
             start = elapse(start, fSelection);
             lst.add(new Event("", new Timing(start, start.plus(dur)), seriesName));
         }
-        return lst;
+        u.getEvents().addAll(lst);
+        Collections.sort(u.getEvents());
     }
 
     /**
@@ -36,12 +36,13 @@ public class SeriesManager {
      * @param seriesName the name of the new series
      * @param events     the collection of Events that will be a part of this series
      */
-    public void createSeries(String seriesName, ArrayList<Event> events) {
-        if (events.size() < 2) {
+    public void createSeries(String seriesName, User u, ArrayList<Integer> indices) {
+        if (indices.size() < 2) {
             System.out.println("You can't create a series with less than two events.");
-        } else {
-            for (Event e : events) {
-                e.setSeriesName(seriesName);
+        }
+        else{
+            for (int i: indices){
+                u.getEvents().get(i).setSeriesName(seriesName);
             }
         }
     }

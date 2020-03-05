@@ -1,6 +1,7 @@
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -10,59 +11,24 @@ import java.util.List;
  */
 public class User implements Serializable{
     private ArrayList<Event> events = new ArrayList<>();
+    private HashMap<Integer, String> memos = new HashMap<>();
+    private String password;
 
-    /** adds an event to this.events
+    /**Return Arralist of events.
      *
-     * @param newEvent the name of the event
-     */
-    public void addEvent (Event newEvent){
-        sortEvents(newEvent);
-    }
-
-    /** returns ArrayList of events in User
-     * @return this.events
+     * @return this.evens
      */
     public ArrayList<Event> getEvents(){return this.events;}
 
-    /** Adds a new event in the sorted Arraylist this.events, and maintains the order.
+    public Boolean validatePassword(String attempt){return this.password.equals(attempt);}
+
+    public void setPassword (String newPassword){password = newPassword;}
+
+    /**Return the HashMap containing the memos.
      *
-     * @param newEvent the event to be added to the ArrayList
+     * @return this.memos
      */
-    private void sortEvents (Event newEvent){
-        for (Event e : this.events){
-            if (e.compareTo(newEvent) >= 0){
-                this.events.add(events.indexOf(e),  newEvent);
-                return;
-            }
-        }
-        this.events.add(newEvent);
+    public HashMap<Integer, String> getMemos(){return this.memos;}
+
     }
 
-    /** searches an event in this.events by name
-     *
-     * @param name the name of the event
-     * @return the event if it exists, else null.
-     */
-    public Event searchEventByName(String name){
-        for (Event e: this.events){
-            if (e.getEventName().equals(name)){return e;}
-        }
-        return null;
-    }
-
-    /** searches for a series by series name
-     *
-     * @param sname the series name that determines which events are returned
-     * @return an arraylist of events in this series, or an empty arraylist if no series with this name
-     */
-    public ArrayList<Event> searchEventBySeriesName(String sname){
-        ArrayList<Event> toReturn = new ArrayList<>();
-        for (Event e: this.events){
-            if (e.getSeriesName().equals(sname)){
-                toReturn.add(e);
-            }
-        }
-        return toReturn;
-    }
-
-}
