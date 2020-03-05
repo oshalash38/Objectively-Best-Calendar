@@ -36,5 +36,18 @@ public class User implements Serializable{
      */
     public HashMap<Integer, String> getMemos(){return this.memos;}
 
+    /**
+     *
+     * @param l the list of integers for the memos
+     * @return List of memo strings
+     */
+    public List<String> getMemos(List<Integer> l){
+        List<String> lst = new ArrayList<String>();
+        for(int i: l){
+            lst.add(memos.get(i));
+        }
+        return lst;
+    }
+
     }
 
