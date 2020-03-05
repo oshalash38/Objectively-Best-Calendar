@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class EventManager {
     /**
@@ -15,7 +16,6 @@ public class EventManager {
      */
     public void createEvent(User user, String name, Timing timing){
         Event event = new Event(name, timing);
-        user.addEvent(event);
     }
 
     /**

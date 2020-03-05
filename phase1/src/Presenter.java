@@ -95,5 +95,8 @@ public class Presenter {
         Scanner kbReader = new Scanner(System.in);
         return kbReader.next();
     }
+    public String getParamForSeries(){
+        return "";
+    }
 
 }

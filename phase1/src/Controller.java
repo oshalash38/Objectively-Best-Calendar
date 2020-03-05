@@ -50,6 +50,10 @@ public class Controller {
                     System.out.println(selection + " is not a valid input type. Enter your selections again.");
                     break;
                 }
+                if (indices.size() < 2){
+                    flawless = false;
+                    System.out.println("You cannot create a series with fewer than 2 events.");
+                }
             }
         } while (!flawless);
         sm.createSeries(seriesName, u, indices);

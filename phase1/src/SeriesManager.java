@@ -34,17 +34,14 @@ public class SeriesManager {
      * Changes the seriesName of a bunch of events to link them together as a series
      *
      * @param seriesName the name of the new series
-     * @param events     the collection of Events that will be a part of this series
+     * @param u     the user that is making this series
+     * @param indices the list of events that the user has requested to make into a series
      */
     public void createSeries(String seriesName, User u, ArrayList<Integer> indices) {
-        if (indices.size() < 2) {
-            System.out.println("You can't create a series with less than two events.");
-        }
-        else{
-            for (int i: indices){
+        for (int i: indices){
                 u.getEvents().get(i).setSeriesName(seriesName);
-            }
         }
+
     }
 
     /**
