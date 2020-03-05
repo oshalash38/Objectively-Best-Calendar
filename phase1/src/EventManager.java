@@ -21,7 +21,7 @@ public class EventManager {
         int index = 0;
         while (index < events.size()){
             if (events.get(index).compareTo(event) == 1 || events.get(index).compareTo(event) == 0){
-                events.add(2, event);
+                events.add(index, event);
                 break;
             }
         }
