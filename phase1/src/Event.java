@@ -113,5 +113,6 @@ public class Event implements Serializable, Comparable<Event> {
         return "Name: " + this.eventName + "\nStart: " + this.time.getStart() + "\nEnd: " + this.time.getEnd();
     }
 
+
 }
 
