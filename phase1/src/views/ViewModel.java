@@ -3,7 +3,7 @@ package views;
 import java.util.*;
 
 /**
- * This class displays information to the user.
+ * This class will be deleted.
  *
  * @author Daniel Shoichet
  *
@@ -11,14 +11,13 @@ import java.util.*;
 
 public class ViewModel {
 
-    public Map<MyEnum, CalendarView> views;
+    public Map<UIViews, CalendarView> views;
 
     public ViewModel(){
          views = new HashMap();
-
-         views.put(MyEnum.startup, new StartupView());
-         views.put(MyEnum.createUser, new CreateNewUserView());
-        views.put(MyEnum.eventInfo, new EventView());
+         views.put(UIViews.startup, new StartupView());
+         views.put(UIViews.createUser, new CreateNewUserView());
+        views.put(UIViews.eventInfo, new EventView());
     }
     private final List<String> whichSeriesToAssociateWith = Arrays.asList("Which series would you like to associate this event with?");
 

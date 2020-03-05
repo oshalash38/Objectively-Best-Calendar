@@ -1,4 +1,4 @@
-import views.MyEnum;
+import views.UIViews;
 
 import java.io.IOException;
 import java.time.LocalTime;
@@ -81,12 +81,12 @@ public class Controller {
     public void START(){
         Presenter p1 = new Presenter();
 
-        List<String> input =  p1.displayView(MyEnum.startup, null);
+        List<String> input =  p1.displayView(UIViews.startup, null);
         switch (Integer.parseInt(input.get(0))){
             case 1:
 
             case 2:
-                input =  p1.displayView(MyEnum.createUser, null);
+                input =  p1.displayView(UIViews.createUser, null);
                 userList.add(new User(input.get(0), input.get(1)));
                 System.out.println(userList.get(0).getUsername());
             case 3:

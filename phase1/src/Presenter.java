@@ -1,5 +1,5 @@
 import views.CalendarView;
-import views.MyEnum;
+import views.UIViews;
 import views.ViewModel;
 
 import java.util.*;
@@ -13,12 +13,10 @@ import java.util.*;
  */
 public class Presenter {
     private ViewModel myModel = new ViewModel();
-    private MenuManger myMenus = new MenuManger();
 
-    public List<String> displayView(MyEnum view, List<String> info) {
+    public List<String> displayView(UIViews view, List<String> info) {
 
         CalendarView current = myModel.views.get(view);
-
         return current.activateView(info);
     }
 
