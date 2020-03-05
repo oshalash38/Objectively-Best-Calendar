@@ -1,4 +1,7 @@
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 
 public class EventManager {
     /**
@@ -11,10 +14,10 @@ public class EventManager {
      * @param user The user that will store the new event.
      * @param name Name of the event.
      * @param timing Timing of the event.
-     * @return The event created.
      */
     public void createEvent(User user, String name, Timing timing){
         Event event = new Event(name, timing);
+        ArrayList<Event> events = user.getEvents();
         user.addEvent(event);
     }
 
@@ -41,4 +44,15 @@ public class EventManager {
             currEvent.setEventName(newName);
         }
     }
+
+
+//    public ArrayList<Event> eventsSortedByDate(User user){
+//        ArrayList<Event> events = user.getEvents();
+//        events.sort(new Comparator<Event>() {
+//            @Override
+//            public int compare(Event o1, Event o2) {
+//                return o1.compareTo(o2);
+//            }
+//        });
+//    }
 }
