@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Represents a user of the calendar
  *
- * @author Abhijoy Mandal
+ * @author Abhijoy Mandal.
  */
 public class User implements Serializable{
     private ArrayList<Event> events = new ArrayList<>();
