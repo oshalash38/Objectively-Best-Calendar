@@ -13,16 +13,22 @@ public class User implements Serializable{
     private ArrayList<Event> events = new ArrayList<>();
     private HashMap<Integer, String> memos = new HashMap<>();
     private String password;
+    private String username;
 
-    /**Return Arralist of events.
-     *
-     * @return this.evens
-     */
+
+
+    public User(String username, String password){
+        this.username = username;
+        this.password = password;
+    }
     public ArrayList<Event> getEvents(){return this.events;}
 
     public Boolean validatePassword(String attempt){return this.password.equals(attempt);}
 
     public void setPassword (String newPassword){password = newPassword;}
+
+    public void setUsername (String username){ this.username = username;}
+    public String getUsername(){return username;}
 
     /**Return the HashMap containing the memos.
      *

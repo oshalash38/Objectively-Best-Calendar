@@ -1,7 +1,7 @@
 
 import java.time.*;
 /**
- * This class creates instances of things related to Timing with given string input
+ * This class creates instances of Timing with given string input
  *
  * @author Daniel Shoichet
  *

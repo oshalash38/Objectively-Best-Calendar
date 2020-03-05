@@ -1,5 +1,7 @@
-import java.util.ArrayList;
-import java.util.Collections;
+import java.lang.reflect.Array;
+import java.util.List;
+import java.util.Comparator;
+import java.util.List;
 
 public class EventManager {
     /**
@@ -12,10 +14,20 @@ public class EventManager {
      * @param user The user that will store the new event.
      * @param name Name of the event.
      * @param timing Timing of the event.
-     * @return The event created.
      */
     public void createEvent(User user, String name, Timing timing){
         Event event = new Event(name, timing);
+        ArrayList<Event> events = user.getEvents();
+        int index = 0;
+        while (index < events.size()){
+            if (events.get(index).compareTo(event) == 1 || events.get(index).compareTo(event) == 0){
+                events.add(index, event);
+                break;
+            }
+        }
+        if (index >= events.size()){
+            events.add(event);
+        }
     }
 
     /**
@@ -36,9 +48,21 @@ public class EventManager {
      * @param newName The new name.
      */
     public void changeEventName(User user, Event event, String newName){
-        Event currEvent = user.searchEventByName(event.getEventName());
+        Event currEvent = this.searchEventByName(user, event.getEventName());
         if (currEvent != null){
             currEvent.setEventName(newName);
         }
+    }
+
+
+
+    public Event searchEventByName(User user, String name){
+        ArrayList<Event> events = user.getEvents();
+        for (Event event: events){
+            if (event.getEventName().equals(name)){
+                return event;
+            }
+        }
+        return null;
     }
 }
