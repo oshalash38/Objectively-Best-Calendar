@@ -61,7 +61,7 @@ public class DatabaseManager implements Serializable {
     }
 
     /**
-     * Adds record to this StudentManager mm.
+     * Adds record to this StudentManager.
      *
      * @param record a record to be added.
      */

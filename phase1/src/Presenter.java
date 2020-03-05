@@ -1,8 +1,3 @@
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.InputMismatchException;
-import java.util.List;
-import java.time.LocalDateTime;
 import java.util.Scanner;
 
 /**
@@ -94,9 +89,6 @@ public class Presenter {
         myModel.displaySelectionEventsForSeries();
         Scanner kbReader = new Scanner(System.in);
         return kbReader.next();
-    }
-    public String getParamForSeries(){
-        return "";
     }
 
 }
