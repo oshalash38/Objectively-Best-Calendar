@@ -1,4 +1,3 @@
-import java.lang.reflect.Array;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -36,13 +35,12 @@ public class SeriesManager {
      * @param seriesName the name of the new series
      * @param events     the collection of Events that will be a part of this series
      */
-    public void createSeries(String seriesName, User u, ArrayList<Integer> indices) {
-        if (indices.size() < 2) {
+    public void createSeries(String seriesName, ArrayList<Event> events) {
+        if (events.size() < 2) {
             System.out.println("You can't create a series with less than two events.");
-        }
-        else{
-            for (int i: indices){
-                u.getEvents().get(i).setSeriesName(seriesName);
+        } else {
+            for (Event e : events) {
+                e.setSeriesName(seriesName);
             }
         }
     }
