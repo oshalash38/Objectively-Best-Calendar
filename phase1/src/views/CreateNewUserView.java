@@ -1,7 +1,6 @@
 package views;
 
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.List;
 
 /**
@@ -11,8 +10,9 @@ public class CreateNewUserView extends CalendarView {
     /**
      *
      * @param outputs the items that need to be displayed to the user. In this case none.
-     * @return
+     * @return The entries of the user. In this case the username and password
      */
+    @Override
     public List<String> activateView(List<String> outputs) {
         List<String> inputs = new ArrayList<>();
         System.out.println("Enter new username:");
@@ -22,5 +22,4 @@ public class CreateNewUserView extends CalendarView {
 
         return inputs;
     }
-
 }
