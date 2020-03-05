@@ -8,7 +8,7 @@ import java.util.*;
 //Code for timer got from https://stackoverflow.com/questions/18353689/how-to-repeat-a-task-after-a-fixed-amount-of-time-in-android
 
 /**
- * @author ABHIJOY MANDAL
+ * @author ABHIJOY MANDAL .
  */
 public class AlertManager {
     private LocalDateTime currentTime = LocalDateTime.now();
