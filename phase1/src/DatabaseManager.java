@@ -24,7 +24,7 @@ public class DatabaseManager implements Serializable {
     /** A mapping of usernames to Users. */
     private Map<String, User> users;
     /**
-     * Creates a new empty StudentManager.
+     * Creates a new empty UserManager.
      *
      * @throws IOException could not load file
      * @throws ClassNotFoundException the file may be corrupted with data of different type

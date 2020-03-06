@@ -10,9 +10,12 @@ import java.time.LocalDateTime;
  */
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-
+/**
+ * This class handles the logic and business rules of the Calendar
+ */
 public class Controller {
 
     private User curr;
@@ -23,14 +26,12 @@ public class Controller {
     private TimingFactory timingFactory;
     private Presenter presenter;
 
-    private List<User> userList = new ArrayList<>(); //TODO REMOVE THIS
 
-
+    /**
+     * Creates an isntance of Controller
+     */
     public Controller(){
         timingFactory = new TimingFactory();
-        userList.add(new User("Daniel", "Daniel"));
-        eventManager = new EventManager();
-        eventManager.createEvent(userList.get(0), "Birthday", timingFactory.createTiming(2020, "January",2,2, 2));
     }
 
 
@@ -83,14 +84,16 @@ public class Controller {
 
         List<String> input =  p1.displayView(UIViews.startup, null);
         switch (Integer.parseInt(input.get(0))){
-            case 1:
+            case 1: //MAIN MENU AT THE MOMENT
 
+                input = p1.displayView(UIViews.mainMenu, Arrays.asList("No current alerts"));
+                break;
             case 2:
                 input =  p1.displayView(UIViews.createUser, null);
-                userList.add(new User(input.get(0), input.get(1)));
-                System.out.println(userList.get(0).getUsername());
+                break;
             case 3:
                 System.exit(1);
+                break;
         }
     }
 

@@ -11,10 +11,7 @@ public class EventView extends CalendarView {
         List<String> inputs = new ArrayList<>();
         System.out.println(outputs.get(0));
         System.out.println(outputs.get(1));
-
         Integer.parseInt(in.nextLine());
-
-
         return inputs;
     }
 }

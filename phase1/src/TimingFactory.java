@@ -21,8 +21,8 @@ public class TimingFactory {
      * @param minute the minute for this Timing
      * @return a new Timing object as specified
      */
-    public Timing createTiming(int year, String month, int dayOfMonth, int hour, int minute){
-        return new Timing(LocalDateTime.of(year, getEnumMonth(month), dayOfMonth, hour, minute));
+    public Timing createTiming(int year, int month, int dayOfMonth, int hour, int minute){
+        return new Timing(LocalDateTime.of(year, Month.of(month), dayOfMonth, hour, minute));
     }
 
     /**
@@ -41,41 +41,9 @@ public class TimingFactory {
      * @param minute2 the minute of the end of this timing
      * @return
      */
-    public Timing createTiming(int year1, String month1, int dayOfMonth1, int hour1, int minute1, int year2,
+    public Timing createTiming(int year1, int month1, int dayOfMonth1, int hour1, int minute1, int year2,
                                String month2, int dayOfMonth2, int hour2, int minute2){
-        return new Timing(LocalDateTime.of(year1, getEnumMonth(month1), dayOfMonth1, hour1, minute1),
-                LocalDateTime.of(year2, getEnumMonth(month2), dayOfMonth2, hour2, minute2));
-    }
-
-    private Month getEnumMonth(String month){
-        switch (month.toUpperCase()){
-            case "JANUARY":
-                return  Month.of(1);
-            case "FEBRUARY":
-                return  Month.of(2);
-            case "MARCH":
-                return  Month.of(3);
-            case "APRIL":
-                return  Month.of(4);
-            case "MAY":
-                return  Month.of(5);
-            case "JUNE":
-                return  Month.of(6);
-            case "JULY":
-                return  Month.of(7);
-            case "AUGUST":
-                return  Month.of(8);
-            case "SEPTEMBER":
-                return  Month.of(9);
-            case "OCTOBER":
-                return  Month.of(10);
-            case "NOVEMBER":
-                return  Month.of(11);
-            case "DECEMBER":
-                return  Month.of(12);
-            default:
-                return null;
-
-        }
+        return new Timing(LocalDateTime.of(year1, Month.of(month1), dayOfMonth1, hour1, minute1),
+                LocalDateTime.of(year2, Month.of(month1), dayOfMonth2, hour2, minute2));
     }
 }

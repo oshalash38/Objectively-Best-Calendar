@@ -15,15 +15,30 @@ public class ViewModel {
 
     public ViewModel(){
          views = new HashMap();
-         views.put(UIViews.startup, new StartupView());
          views.put(UIViews.createUser, new CreateNewUserView());
-        views.put(UIViews.eventInfo, new EventView());
+         views.put(UIViews.eventInfo, new EventView());
+        views.put(UIViews.startup, new MenuView("CALENDAR V1\n===============" +
+                        "\n1. Login\n2. Create new user\n3. Exit", 3));
+         views.put(UIViews.mainMenu, new MenuView(
+                 "Main Menu:\nCurrent alerts:\n1. Check upcoming alerts\n2. Create memo\n3. Create event" +
+                         "\n4. Create series\n5. Event options\n6. Display events filtered by..." +
+                         "\n7. Logout", 7));
+        views.put(UIViews.displayEventBy, new MenuView(
+                "Display events filtered by...\n1. Current events\n2. Past events\n3. Future events" +
+                        "\n4. Date threshold\n5. Memo\n6. Tag\n7. Name\n8. Series\n9. Return", 9));
+        views.put(UIViews.eventType, new MenuView("What event type would you like to create?" +
+                        "\n1. Regular event\n2. Series of events\n3.Return", 3));
+        views.put(UIViews.userDNE, new MenuView("User Does Not Exist\n1. Try again" +
+                "\n2. Return to startup page", 2));
+        views.put(UIViews.eventOptions, new MenuView("What event type would you like to create?\n" +
+                "1. Regular event\n2. Series of events\n3, Return to main menu", 3));
+        views.put(UIViews.createDateTimeView, new CreateDateTimeView());
     }
+
+
     private final List<String> whichSeriesToAssociateWith = Arrays.asList("Which series would you like to associate this event with?");
 
     private final List<String> whichMemoToAssociateWith = Arrays.asList("Which memo would you like to associate this event with?");
-
-    private final List<String> createUser = Arrays.asList("Repeat new password:", "Enter new password:", "Enter new username:");
 
     private final List<String> signIn = Arrays.asList("Enter username:", "Enter password:");
 
@@ -43,9 +58,6 @@ public class ViewModel {
             "How frequently would you like to be notified? To control this, enter the next time the program should notify you and the program will calculate the delta.");
 
     private final List<String> oneTimeAlert = Arrays.asList("When should this alert begin notifying you?");
-
-    private final List<String> buildTiming = Arrays.asList("Enter year:", "Enter month number:", "Enter day of month:",
-            "Enter hour (24 hour clock):", "Enter minute:");
 
     private final List<String> alertInfo = Arrays.asList("Name of alert:", "Repeating alert or one time alert:",
             "Frequency of alert:", "Next notification by alert:");
