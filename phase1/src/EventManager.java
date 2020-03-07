@@ -14,16 +14,23 @@ public class EventManager {
      */
     public void createEvent(User user, String name, Timing timing){
         Event event = new Event(name, timing);
+        sortEvents(user, event);
+    }
+    public void createEvent(User user, String name, Timing timing, String series){
+        Event event = new Event(name, timing, series);
+        sortEvents(user,event);
+    }
+    private void sortEvents(User user, Event e){
         ArrayList<Event> events = user.getEvents();
         int index = 0;
         while (index < events.size()){
-            if (events.get(index).compareTo(event) == 1 || events.get(index).compareTo(event) == 0){
-                events.add(index, event);
+            if (events.get(index).compareTo(e) == 1 || events.get(index).compareTo(e) == 0){
+                events.add(index, e);
                 break;
             }
         }
         if (index >= events.size()){
-            events.add(event);
+            events.add(e);
         }
     }
 

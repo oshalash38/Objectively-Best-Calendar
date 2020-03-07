@@ -132,8 +132,8 @@ public class Controller {
         lst.add("What is the frequency of events" +
                 "in this series?\n 1: Hourly \n 2: Daily \n 3: Weekly \n 4: Monthly \n 5: Yearly");
         List<String> input = p1.displayView(UIViews.createSeriesScratch, lst);
-        if (parseable(input)) {
-            List<String> sub = input.subList(1, input.size());
+        List<String> sub = input.subList(1, input.size());
+        if (parseable(sub)) {
             List<Integer> numInput = getIntegerList(sub);
             List<Integer> date = numInput.subList(0, 5);
             int freq = numInput.get(5);
@@ -143,9 +143,10 @@ public class Controller {
             if (verifyStartDate(date) && verifyFrequency(freq) && verifyDuration(duration)
                     && verifyNumEvents(nE) && verifyDurationLTFreq(freqDur)) {
                 sm = new SeriesManager();
-                //TODO MODIFY SM CREATE to accept strings and ints only
+                sm.createSeries(curr,input.get(0),duration,date,freq, nE);
+                return;
             }
-        }
+        }createSeriesFromScratch();
 
     }
     private boolean parseable(List<String> lst){

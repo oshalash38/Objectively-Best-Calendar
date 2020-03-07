@@ -2,6 +2,7 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -17,16 +18,17 @@ public class SeriesManager {
      * @param start      the beginning of the series
      * @return the list of events forming this series
      */
-    public void createSeries(User u, String seriesName, Duration dur, LocalDateTime start, int fSelection, int neSelection) {
+    private TimingFactory tf = new TimingFactory();
+    private DurationFactory df = new DurationFactory();
+    public void createSeries(User u, String seriesName, List<Integer> dur, List<Integer> start, int fSelection, int neSelection) {
         ArrayList<Event> lst = new ArrayList<>();
-        Timing temp = new Timing(start, start.plus(dur));
-        lst.add(new Event("", temp, seriesName));
-        for (int i = 1; i < neSelection; i++) {
-            start = elapse(start, fSelection);
-            lst.add(new Event("", new Timing(start, start.plus(dur)), seriesName));
+        Timing temp = tf.createTiming(start.get(0), start.get(1), start.get(2), start.get(3), start.get(4));
+        Duration length = df.createDuration(dur.get(0), dur.get(1), dur.get(2));
+        Event e;
+        EventManager em = new EventManager();
+        for (int i = 0; i< neSelection; i++){
+            em.createEvent(u,"",temp, seriesName);
         }
-        u.getEvents().addAll(lst);
-        Collections.sort(u.getEvents());
     }
 
     /**
