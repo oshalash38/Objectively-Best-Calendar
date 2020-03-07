@@ -88,4 +88,6 @@ public class DatabaseManager implements Serializable {
     }
 
     public Map<String, User> getUsers() { return users; }
+
+    public User findUser(String username){ return users.get(username);}
 }

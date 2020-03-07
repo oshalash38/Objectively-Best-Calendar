@@ -34,10 +34,11 @@ public class CreateSeriesScratchView extends CalendarView{
         inputs.addAll(cdtv.activateView(null));
 
         //CHOOSE FREQUENCY VIEW
-//        System.out.println("How often would you like this series to occur?");
+        //System.out.println("How often would you like this series to occur?");
 
-        ChooseFrequencyMenu cfm = new ChooseFrequencyMenu(outputs.get(0), 5);
-        inputs.addAll(cfm.activateView());
+        MenuView cfm = new MenuView("What is the frequency of events" +
+                "in this series?\n 1: Hourly \n 2: Daily \n 3: Weekly \n 4: Monthly \n 5: Yearly", 5);
+        inputs.addAll(cfm.activateView(null));
         System.out.println("What is the duration of each event in this series?");
         CreateDurationView cdv = new CreateDurationView();
         inputs.addAll(cdv.activateView(null));

@@ -14,12 +14,12 @@ public class ViewModel {
     public Map<UIViews, CalendarView> views;
 
     public ViewModel(){
-         views = new HashMap();
-         views.put(UIViews.createUser, new CreateNewUserView());
-         views.put(UIViews.eventInfo, new EventView());
+        views = new HashMap();
+        views.put(UIViews.createUser, new CreateNewUserView());
+        views.put(UIViews.eventInfo, new EventView());
         views.put(UIViews.startup, new MenuView("CALENDAR V1\n===============" +
                         "\n1. Login\n2. Create new user\n3. Exit", 3));
-         views.put(UIViews.mainMenu, new MenuView(
+        views.put(UIViews.mainMenu, new MenuView(
                  "Main Menu:\nCurrent alerts:\n1. Check upcoming alerts\n2. Create memo\n3. Create event" +
                          "\n4. Create series\n5. Event options\n6. Display events filtered by..." +
                          "\n7. Logout", 7));
@@ -32,14 +32,18 @@ public class ViewModel {
                 "\n2. Return to startup page", 2));
         views.put(UIViews.eventOptions, new MenuView("What event type would you like to create?\n" +
                 "1. Regular event\n2. Series of events\n3, Return to main menu", 3));
+
         views.put(UIViews.createDateTimeView, new CreateDateTimeView());
         views.put(UIViews.createSeriesScratch, new CreateSeriesScratchView());
         /*TODO (Peter) Does menu really need parameters? Can't we pass the userOptions via Controller -> Presenter ->
             -> activateView(userOptions). This might be better since views like ChooseFrequency and CreateDate are used
             by other views not by presenter directly
          */
-        views.put(UIViews.chooseFrequency, new ChooseFrequencyMenu("What is the frequency of events" +
+        views.put(UIViews.chooseFrequency, new MenuView("What is the frequency of events" +
                 "in this series?\n 1: Hourly \n 2: Daily \n 3: Weekly \n 4: Monthly \n 5: Yearly", 5));
+
+        views.put(UIViews.loginView, new LoginView());
+
     }
 
 
@@ -73,5 +77,6 @@ public class ViewModel {
             "Event series:" , "Event tag:", "Event memos:", "Event reminders:");
 
     private final List<String> filterEventByRequiresSearch = Arrays.asList("Type name of ", " you are looking for:");
+
 
 }

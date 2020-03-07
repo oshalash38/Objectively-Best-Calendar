@@ -15,7 +15,6 @@ public class Presenter {
     private ViewModel myModel = new ViewModel();
 
     public List<String> displayView(UIViews view, List<String> info) {
-
         CalendarView current = myModel.views.get(view);
         return current.activateView(info);
     }

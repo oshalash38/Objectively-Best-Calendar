@@ -24,7 +24,7 @@ public class UserDNEView extends CalendarView{
         System.out.println("User Does Not Exist\n1. Try again\n2. Return to startup page");
         try {
             input = Integer.parseInt(in.nextLine());
-            if(!((1 <= input) && (input <= 3))){
+            if(!((1 <= input) && (input <= 2))){
                 throw new InputMismatchException();
             }
         }catch (Exception e){

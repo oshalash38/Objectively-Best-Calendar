@@ -26,13 +26,16 @@ public class Controller {
     private EventManager eventManager;
     private TimingFactory timingFactory;
     private Presenter presenter;
+    private User currUser;
 
 
     /**
      * Creates an instance of Controller
      */
     public Controller(){
+        readFromDatabase("database.txt");
         timingFactory = new TimingFactory();
+        presenter = new Presenter();
     }
 
 
@@ -70,20 +73,38 @@ public class Controller {
 //    }
 
     public void START(){
-        Presenter p1 = new Presenter();
+        boolean exit = false;
+        List<String> input;
+        while (exit == false) {
+            input =  presenter.displayView(UIViews.startup, null);
+            switch (Integer.parseInt(input.get(0))) {
+                case 1:
+                    userLogin();
+                    break;
+                case 2:
+                    input = presenter.displayView(UIViews.createUser, null);
+                    databaseManager.add(new User(input.get(0), input.get(1)));
+                    break;
+                case 3:
+                    exit = true;
+                    break;
+            }
+        }
 
-        List<String> input =  p1.displayView(UIViews.startup, null);
-        switch (Integer.parseInt(input.get(0))){
-            case 1: //MAIN MENU AT THE MOMENT
+        System.exit(1);
+    }
 
-                input = p1.displayView(UIViews.mainMenu, Arrays.asList("No current alerts"));
-                break;
-            case 2:
-                input =  p1.displayView(UIViews.createUser, null);
-                break;
-            case 3:
-                System.exit(1);
-                break;
+    private void userLogin(){
+        List<String> input = presenter.displayView(UIViews.loginView, null);
+        User temp = databaseManager.findUser(input.get(0));
+        if(temp != null && temp.validatePassword(input.get(1))){
+            currUser = temp;
+        }
+        else{
+            input = presenter.displayView(UIViews.userDNE, null);
+            if(Integer.parseInt(input.get(0)) == 1){
+                userLogin();
+            }
         }
     }
 
@@ -119,10 +140,7 @@ public class Controller {
     }
     public void createSeriesFromScratch() {
         Presenter p1 = new Presenter();
-        List<String> lst = new ArrayList<>();
-        lst.add("What is the frequency of events" +
-                "in this series?\n 1: Hourly \n 2: Daily \n 3: Weekly \n 4: Monthly \n 5: Yearly");
-        List<String> input = p1.displayView(UIViews.createSeriesScratch, lst);
+        List<String> input = p1.displayView(UIViews.createSeriesScratch, null);
         List<String> sub = input.subList(1, input.size());
         if (parseable(sub)) {
             List<Integer> numInput = getIntegerList(sub);
