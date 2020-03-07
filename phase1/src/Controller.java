@@ -75,7 +75,7 @@ public class Controller {
     public void START(){
         boolean exit = false;
         List<String> input;
-        while (exit == false) {
+        while (!exit) {
             input =  presenter.displayView(UIViews.startup, null);
             switch (Integer.parseInt(input.get(0))) {
                 case 1:
@@ -84,6 +84,7 @@ public class Controller {
                 case 2:
                     input = presenter.displayView(UIViews.createUser, null);
                     databaseManager.add(new User(input.get(0), input.get(1)));
+                    writeIntoFile("database.txt");
                     break;
                 case 3:
                     exit = true;
@@ -99,19 +100,7 @@ public class Controller {
         User temp = databaseManager.findUser(input.get(0));
         if(temp != null && temp.validatePassword(input.get(1))){
             currUser = temp;
-            List<String> mainMenuInput = presenter.displayView(UIViews.mainMenu, null);
-            switch (Integer.parseInt(mainMenuInput.get(0))){
-                case 1:
-                case 2:
-                case 3:
-                    createEvent();
-                    presenter.displayView(UIViews.mainMenu, null);
-                    break;
-                case 4:
-                case 5:
-                case 6:
-                case 7:
-            }
+            mainMenu();
         }
         else{
             input = presenter.displayView(UIViews.userDNE, null);
@@ -119,6 +108,59 @@ public class Controller {
                 userLogin();
             }
         }
+    }
+
+    private void mainMenu(){
+        while (true) {
+            List<String> mainMenuInput = presenter.displayView(UIViews.mainMenu, null);
+            switch (Integer.parseInt(mainMenuInput.get(0))) {
+                case 1:
+                case 2:
+                case 3:
+                    createEvent();
+                    break;
+                case 4:
+                case 5:
+                case 6:
+                    displayEventsFilteredBy();
+                    break;
+                case 7:
+                    START();
+            }
+        }
+    }
+
+    private void displayEventsFilteredBy() {
+        while (true) {
+            List<String> input = presenter.displayView(UIViews.displayEventBy, null);
+            switch (Integer.parseInt(input.get(0))) {
+                case 1:
+                case 2:
+                case 3:
+                    upcomingEvents();
+                    break;
+                case 4:
+                case 5:
+                case 6:
+                case 7:
+                case 8:
+                case 9:
+                    mainMenu();
+            }
+        }
+
+
+    }
+
+    private void upcomingEvents(){
+        ArrayList<Event> upcomingEvents = eventManager.getUpcomingEvents(currUser);
+        List<String > temp = new ArrayList<>();
+        for (Event event : upcomingEvents){
+            temp.add("Event Name: " + event.getEventName());
+            temp.add("Start Data and Time: " + event.getStartTimeString());
+            temp.add("End Date and Time: " + event.getEndTimeString());
+        }
+        presenter.displayView(UIViews.eventInfo, temp);
     }
 
     public void readFromDatabase(String filePath){
@@ -262,6 +304,7 @@ public class Controller {
         Timing eventTiming = timingFactory.createTiming(times.get(0), times.get(1), times.get(2), times.get(3),
                 times.get(4), times.get(5), times.get(6), times.get(7), times.get(8), times.get(9));
         eventManager.createEvent(currUser, eventName, eventTiming);
+        writeIntoFile("database.txt");
     }
 
     /**

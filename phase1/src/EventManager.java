@@ -1,3 +1,4 @@
+import javax.jws.soap.SOAPBinding;
 import java.util.List;
 import java.util.ArrayList;
 public class EventManager {
@@ -70,5 +71,25 @@ public class EventManager {
         return null;
     }
 
+    /**
+     * Updates the status of every event stored in the user.
+     * @param user The user.
+     */
+    public void updateStatus(User user){
+        ArrayList<Event> events = user.getEvents();
+        for (Event event : events){
+            event.updateStatus();
+        }
+    }
 
+    public ArrayList<Event> getUpcomingEvents(User user){
+        ArrayList<Event> upcomingEvents = new ArrayList<>();
+        ArrayList<Event> allEvents = user.getEvents();
+        for (Event event: allEvents){
+            if (event.getStatus() == Status.UPCOMING){
+                upcomingEvents.add(event);
+            }
+        }
+        return upcomingEvents;
+    }
 }

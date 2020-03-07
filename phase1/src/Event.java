@@ -15,6 +15,7 @@ public class Event implements Serializable, Comparable<Event> {
     private ArrayList<Alert> alerts = new ArrayList<>();
     private ArrayList<Integer> memoIDs = new ArrayList<>();
     private ArrayList<String> tags = new ArrayList<>();
+    private Status status = Status.UPCOMING;
 
     /** Construct a basic event
      *
@@ -111,6 +112,36 @@ public class Event implements Serializable, Comparable<Event> {
     @Override
     public String toString(){
         return "Name: " + this.eventName + "\nStart: " + this.time.getStart() + "\nEnd: " + this.time.getEnd();
+    }
+
+    /**
+     * Checks the time of the event relative to the current time and updates the status accordingly.
+     */
+    public void updateStatus(){
+        int status = time.getStatus(LocalDateTime.now());
+        switch (status){
+            case 0:
+                this.status = Status.CURRENT;
+                break;
+            case 1:
+                this.status = Status.UPCOMING;
+            case -1:
+                this.status = Status.PAST;
+        }
+    }
+
+    /**
+     * Returns this event's status
+     * @return This event's status
+     */
+    public Status getStatus(){return status;}
+
+    public String getStartTimeString(){
+        return this.time.getStart().toString();
+    }
+
+    public String getEndTimeString(){
+        return this.time.getEnd().toString();
     }
 
 
