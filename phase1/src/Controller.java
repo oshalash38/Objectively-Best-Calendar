@@ -114,7 +114,9 @@ public class Controller {
 
         return lst;
     }
-
+    public void createSeriesFromEvents(){
+        Presenter p = new Presenter();
+    }
     public void createSeriesFromScratch() {
         Presenter p1 = new Presenter();
         List<String> lst = new ArrayList<>();
