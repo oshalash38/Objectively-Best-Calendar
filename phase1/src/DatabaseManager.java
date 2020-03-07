@@ -81,10 +81,13 @@ public class DatabaseManager implements Serializable {
         OutputStream file = new FileOutputStream(filePath);
         OutputStream buffer = new BufferedOutputStream(file);
         ObjectOutput output = new ObjectOutputStream(buffer);
-
-        // serialize the Map
-        output.writeObject(users);
-        output.close();
+        try {
+            // serialize the Map
+            output.writeObject(users);
+            output.close();
+        }
+        catch(IOException ex){
+            System.out.println("Failed to save to file");}
     }
 
     public Map<String, User> getUsers() { return users; }

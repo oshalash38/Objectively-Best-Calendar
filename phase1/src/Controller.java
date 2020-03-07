@@ -82,19 +82,19 @@ public class Controller implements Observer {
             switch (Integer.parseInt(input.get(0))) {
                 case 1:
                     userLogin();
+
                     break;
                 case 2:
                     input = presenter.displayView(UIViews.createUser, null);
-                    databaseManager.add(new User(input.get(0), input.get(1)));
+                    currUser = new User(input.get(0), input.get(1));
+                    databaseManager.add(currUser);
+                    writeIntoFile("database.txt");
                     break;
                 case 3:
                     exit = true;
                     break;
             }
-            alertManager = new AlertManager(currUser.getEvents());
-            alertManager.addObserver(this);
-            notifications = alertManager.checkNewAlerts();
-            alertManager.keepChecking();
+
         }
 
         System.exit(1);
@@ -108,10 +108,15 @@ public class Controller implements Observer {
 
     public void displayNotifications(){
 
-        for (List<String> s: notifications){
-            presenter.displayView(UIViews.alertView, s);
+        if(notifications.size()>0) {
+            for (List<String> s : notifications) {
+                presenter.displayView(UIViews.alertView, s);
+            }
+            notifications.clear();
         }
-        notifications.clear();
+        else {
+            System.out.println("No Alerts :)");
+        }
     }
 
     private void userLogin(){
@@ -119,14 +124,19 @@ public class Controller implements Observer {
         User temp = databaseManager.findUser(input.get(0));
         if(temp != null && temp.validatePassword(input.get(1))){
             currUser = temp;
+            alertManager = new AlertManager(currUser.getEvents());
+            alertManager.addObserver(this);
+            notifications.addAll(alertManager.checkNewAlerts());
+            alertManager.keepChecking();
+            currentAlerts();
             List<String> mainMenuInput = presenter.displayView(UIViews.mainMenu, null);
             switch (Integer.parseInt(mainMenuInput.get(0))){
                 case 1:
-                    currentAlerts();
+                    checkUpcomingAlerts();
+                    presenter.displayView(UIViews.mainMenu, null);
                     break;
                 case 2:
-                    checkUpcomingAlerts();
-                    break;
+
                 case 3:
                     createEvent();
                     presenter.displayView(UIViews.mainMenu, null);
@@ -166,6 +176,7 @@ public class Controller implements Observer {
     }
 
     public void currentAlerts(){
+
         notifications.addAll(alertManager.checkNewAlerts());
         displayNotifications();
     }

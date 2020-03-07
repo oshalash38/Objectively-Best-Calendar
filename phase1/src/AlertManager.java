@@ -12,17 +12,15 @@ import java.util.*;
  */
 public class AlertManager extends Observable{
     private LocalDateTime currentTime = LocalDateTime.now();
-    private ArrayList<Alert> upcomingAlerts = new ArrayList<>();
-    private List<List<String>> printableUpcomingAlerts = new ArrayList<>();
-    private Map<Event, List<List<String>>> printableLink = new HashMap<>();
+    private ArrayList<Alert> upcomingAlerts = new ArrayList<>(0);
+    private List<List<String>> printableUpcomingAlerts = new ArrayList<>(0);
+    private Map<Event, List<List<String>>> printableLink = new HashMap<>(0);
     private Timer t = new Timer();
     private final int CHECKDURATION = 60;
     private ArrayList<Event> UserEvents;
 
     public AlertManager (ArrayList<Event> events){
         this.UserEvents = events;
-
-
     }
 
     /**
@@ -33,12 +31,14 @@ public class AlertManager extends Observable{
      */
     public List<List<String>> checkNewAlerts(){
         currentTime = LocalDateTime.now();
-        List<List<String>> retList =  new ArrayList<>();
-        for(Event e: UserEvents){
-            checkPassedAlertsEvent(e, retList, currentTime);
-        }
-        retList.addAll(runUpcomingAlerts());
+        List<List<String>> retList =  new ArrayList<>(0);
+            for (Event e : UserEvents) {
+                checkPassedAlertsEvent(e, retList, currentTime);
 
+        }
+        if(upcomingAlerts!= null) {
+            retList.addAll(runUpcomingAlerts());
+        }
         return retList;
     }
 
