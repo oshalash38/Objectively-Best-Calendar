@@ -37,17 +37,6 @@ public class Controller {
 
 
 
-//    public String createSeriesFromScratch(String seriesName, String duration, String date, int fSelection, int neSelection) {
-//        //interpret date as localtime and then use between to find elapsed time between localtime and midnight, convert to duration
-//        if (neSelection < 2) {
-//            return "Series must have at least 2 events.";
-//        }
-//        LocalTime lt = LocalTime.parse(duration);
-//        Duration d = Duration.between(LocalTime.MIN, lt);
-//        LocalDateTime ldt = LocalDateTime.parse(date);
-//        sm.createSeries(curr, seriesName, d, ldt, fSelection, neSelection);
-//        return "Series " + seriesName + " created.";
-//    }
 
 //    public String createSeriesFromEvents(User u, String seriesName) {
 //        String s;
