@@ -43,6 +43,7 @@ public class ViewModel {
                 "in this series?\n 1: Hourly \n 2: Daily \n 3: Weekly \n 4: Monthly \n 5: Yearly", 5));
 
         views.put(UIViews.loginView, new LoginView());
+        views.put(UIViews.createEvent, new CreateNewEventView());
 
     }
 

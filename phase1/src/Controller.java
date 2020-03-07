@@ -19,7 +19,6 @@ import java.util.List;
  */
 public class Controller {
 
-    private User curr;
     private SeriesManager sm;
 
     private DatabaseManager databaseManager;
@@ -36,6 +35,7 @@ public class Controller {
         readFromDatabase("database.txt");
         timingFactory = new TimingFactory();
         presenter = new Presenter();
+        eventManager = new EventManager();
     }
 
 
@@ -99,6 +99,18 @@ public class Controller {
         User temp = databaseManager.findUser(input.get(0));
         if(temp != null && temp.validatePassword(input.get(1))){
             currUser = temp;
+            List<String> mainMenuInput = presenter.displayView(UIViews.mainMenu, null);
+            switch (Integer.parseInt(mainMenuInput.get(0))){
+                case 1:
+                case 2:
+                case 3:
+                    createEvent();
+                    break;
+                case 4:
+                case 5:
+                case 6:
+                case 7:
+            }
         }
         else{
             input = presenter.displayView(UIViews.userDNE, null);
@@ -152,7 +164,7 @@ public class Controller {
             if (verifyStartDate(date) && verifyFrequency(freq) && verifyDuration(duration)
                     && verifyNumEvents(nE) && verifyDurationLTFreq(freqDur)) {
                 sm = new SeriesManager();
-                sm.createSeries(curr,input.get(0),duration,date,freq, nE);
+                sm.createSeries(currUser,input.get(0),duration,date,freq, nE);
                 return;
             }
         }createSeriesFromScratch();
@@ -237,5 +249,39 @@ public class Controller {
             newLst.add(i);
         }
         return newLst;
+    }
+
+    private void createEvent(){ 
+        List<String> input = presenter.displayView(UIViews.createEvent, null);
+        String eventName = input.get(0);
+        List<Integer> times = parseTiming(input.get(1), input.get(2));
+        Timing eventTiming = timingFactory.createTiming(times.get(0), times.get(1), times.get(2), times.get(3),
+                times.get(4), times.get(5), times.get(6), times.get(7), times.get(8), times.get(9));
+        eventManager.createEvent(currUser, eventName, eventTiming);
+    }
+
+    private List<Integer> parseTiming(String date1, String date2){
+        List<Integer> times = new ArrayList<>();
+        int year1 = Integer.parseInt(date1.substring(0, 4));
+        int month1 = Integer.parseInt(date1.substring(5, 7));
+        int day1 = Integer.parseInt(date1.substring(8, 10));
+        int hour1 = Integer.parseInt(date1.substring(11, 13));
+        int minute1 = Integer.parseInt(date1.substring(14, 16));
+        int year2 = Integer.parseInt(date2.substring(0, 4));
+        int month2 = Integer.parseInt(date2.substring(5, 7));
+        int day2 = Integer.parseInt(date2.substring(8, 10));
+        int hour2 = Integer.parseInt(date2.substring(11, 13));
+        int minute2 = Integer.parseInt(date2.substring(14, 16));
+        times.add(year1);
+        times.add(month1);
+        times.add(day1);
+        times.add(hour1);
+        times.add(minute1);
+        times.add(year2);
+        times.add(month2);
+        times.add(day2);
+        times.add(hour2);
+        times.add(minute2);
+        return times;
     }
 }

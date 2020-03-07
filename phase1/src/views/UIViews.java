@@ -5,5 +5,5 @@ package views;
  */
 public enum UIViews {
     startup, createUser, eventInfo, userDNE, mainMenu, eventType, eventOptions, displayEventBy, createDateTimeView,
-    createSeriesScratch, chooseFrequency, loginView
+    createSeriesScratch, chooseFrequency, loginView, createEvent
 }

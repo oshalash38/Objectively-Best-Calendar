@@ -42,8 +42,8 @@ public class TimingFactory {
      * @return
      */
     public Timing createTiming(int year1, int month1, int dayOfMonth1, int hour1, int minute1, int year2,
-                               String month2, int dayOfMonth2, int hour2, int minute2){
+                               int month2, int dayOfMonth2, int hour2, int minute2){
         return new Timing(LocalDateTime.of(year1, Month.of(month1), dayOfMonth1, hour1, minute1),
-                LocalDateTime.of(year2, Month.of(month1), dayOfMonth2, hour2, minute2));
+                LocalDateTime.of(year2, Month.of(month2), dayOfMonth2, hour2, minute2));
     }
 }
