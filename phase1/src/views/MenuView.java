@@ -48,4 +48,11 @@ public class MenuView extends CalendarView{
         inputs.add(input+"");
         return inputs;
     }
+
+    public String getUserOptions() {
+        return userOptions;
+    }
+    public int getNumOptions() {
+        return numOptions;
+    }
 }

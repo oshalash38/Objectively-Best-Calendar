@@ -33,6 +33,13 @@ public class ViewModel {
         views.put(UIViews.eventOptions, new MenuView("What event type would you like to create?\n" +
                 "1. Regular event\n2. Series of events\n3, Return to main menu", 3));
         views.put(UIViews.createDateTimeView, new CreateDateTimeView());
+        views.put(UIViews.createSeriesScratch, new CreateSeriesScratchView());
+        /*TODO (Peter) Does menu really need parameters? Can't we pass the userOptions via Controller -> Presenter ->
+            -> activateView(userOptions). This might be better since views like ChooseFrequency and CreateDate are used
+            by other views not by presenter directly
+         */
+        views.put(UIViews.chooseFrequency, new ChooseFrequencyMenu("What is the frequency of events" +
+                "in this series?\n 1: Hourly \n 2: Daily \n 3: Weekly \n 4: Monthly \n 5: Yearly", 5));
     }
 
 
