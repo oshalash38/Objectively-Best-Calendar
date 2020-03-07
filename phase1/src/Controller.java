@@ -121,6 +121,7 @@ public class Controller implements Observer {
                 case 2:
                 case 3:
                     createEvent();
+                    presenter.displayView(UIViews.mainMenu, null);
                     break;
                 case 4:
                 case 5:
@@ -267,6 +268,9 @@ public class Controller implements Observer {
         return newLst;
     }
 
+    /**
+     * Creates a new event.
+     */
     private void createEvent(){
         List<String> input = presenter.displayView(UIViews.createEvent, null);
         String eventName = input.get(0);
@@ -276,6 +280,12 @@ public class Controller implements Observer {
         eventManager.createEvent(currUser, eventName, eventTiming);
     }
 
+    /**
+     * Helper method that parses a formatted string date and returns a list of the values
+     * @param date1 The first date
+     * @param date2 The second date
+     * @return List of values corresponding to those dates
+     */
     private List<Integer> parseTiming(String date1, String date2){
         List<Integer> times = new ArrayList<>();
         int year1 = Integer.parseInt(date1.substring(0, 4));
