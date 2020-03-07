@@ -82,4 +82,12 @@ public class Timing implements Serializable{
     public Timing addToThis(Duration freq){
         return new Timing(this.start.plus(freq));
     }
+
+    /**
+     *
+     * @return a string with the start date and time.
+     */
+    public String toString(){
+        return new String(start.getDayOfMonth()+" " + start.getMonth() + start.getYear() + ", at: " + start.getHour() + ":"+ start.getMinute());
+    }
 }
