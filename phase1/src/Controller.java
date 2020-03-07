@@ -91,6 +91,8 @@ public class Controller implements Observer {
             }
             alertManager = new AlertManager(currUser.getEvents());
             alertManager.addObserver(this);
+            notifications = alertManager.checkNewAlerts();
+            alertManager.keepChecking();
         }
 
         System.exit(1);
@@ -118,7 +120,11 @@ public class Controller implements Observer {
             List<String> mainMenuInput = presenter.displayView(UIViews.mainMenu, null);
             switch (Integer.parseInt(mainMenuInput.get(0))){
                 case 1:
+                    currentAlerts();
+                    break;
                 case 2:
+                    checkUpcomingAlerts();
+                    break;
                 case 3:
                     createEvent();
                     presenter.displayView(UIViews.mainMenu, null);
@@ -157,6 +163,10 @@ public class Controller implements Observer {
         }
     }
 
+    public void currentAlerts(){
+        notifications.addAll(alertManager.checkNewAlerts());
+        displayNotifications();
+    }
     public List<String> formatEventInfo(Event e){
         List<String> lst = new ArrayList<String>();
         lst.add(e.getEventName());
@@ -187,6 +197,16 @@ public class Controller implements Observer {
         }createSeriesFromScratch();
 
     }
+
+    public void checkUpcomingAlerts(){
+        Presenter p = new Presenter();
+        List<List<String>> alertList = alertManager.checkUpcomingAlerts();
+        for (List<String> s: alertList){
+            p.displayView(UIViews.alertView, s);
+        }
+
+    }
+
     private boolean parseable(List<String> lst){
         int i;
         for (String s: lst){
