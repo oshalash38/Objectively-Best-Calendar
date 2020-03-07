@@ -47,7 +47,9 @@ public class ViewModel {
 
         views.put(UIViews.loginView, new LoginView());
         views.put(UIViews.createEvent, new CreateNewEventView());
-
+        views.put(UIViews.createMemo, new CreateMemoView());
+        views.put(UIViews.listEvents, new ListEventsView());
+        views.put(UIViews.editMemo, new EditMemoView());
     }
 
 

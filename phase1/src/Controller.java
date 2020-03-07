@@ -19,6 +19,7 @@ public class Controller implements Observer {
     private User curr;
     private SeriesManager sm;
     private AlertManager alertManager;
+    private MemoManager memoManager;
     private List<List<String>> notifications = new ArrayList<>();
     private DatabaseManager databaseManager;
     private EventManager eventManager;
@@ -36,6 +37,7 @@ public class Controller implements Observer {
         timingFactory = new TimingFactory();
         presenter = new Presenter();
         eventManager = new EventManager();
+        memoManager = new MemoManager();
     }
 
 
@@ -366,5 +368,9 @@ public class Controller implements Observer {
         }
         System.out.println("Invalid inputs please try again.");
         createOneAlert(e);
+    }
+
+    private void createMemo(){
+        List<String> inputs = presenter.displayView(UIViews.createMemo, null);
     }
 }

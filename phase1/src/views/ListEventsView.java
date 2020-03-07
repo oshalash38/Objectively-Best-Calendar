@@ -14,7 +14,14 @@ public class ListEventsView extends CalendarView {
             System.out.println(i + ": " + outputs.get(i));
         }
 
-        inputs.add(in.nextLine());
+        try{
+            int choice = Integer.parseInt(in.nextLine());
+            if (choice < 0 || choice >= outputs.size())
+                throw new Exception();
+        } catch (Exception e) {
+            System.out.println("\n=========PLEASE TRY AGAIN==========\n\n");
+            return activateView(outputs);
+        }
         return inputs;
     }
 }
