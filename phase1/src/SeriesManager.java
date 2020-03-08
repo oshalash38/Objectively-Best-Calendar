@@ -38,7 +38,7 @@ public class SeriesManager {
      * @param u     the user that is making this series
      * @param indices the list of events that the user has requested to make into a series
      */
-    public void createSeries(String seriesName, User u, ArrayList<Integer> indices) {
+    public void createSeries(String seriesName, User u, List<Integer> indices) {
         for (int i: indices){
                 u.getEvents().get(i).setSeriesName(seriesName);
         }

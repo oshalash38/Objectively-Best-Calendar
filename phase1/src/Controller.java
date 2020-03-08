@@ -2,6 +2,8 @@ import views.UIViews;
 
 import java.io.IOException;
 import java.lang.reflect.Array;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -38,6 +40,7 @@ public class Controller implements Observer {
         presenter = new Presenter();
         eventManager = new EventManager();
         memoManager = new MemoManager();
+        sm = new SeriesManager();
     }
 
 
@@ -226,19 +229,41 @@ public class Controller implements Observer {
         notifications.addAll(alertManager.checkNewAlerts());
         displayNotifications();
     }
-    public List<String> formatEventInfo(Event e){
-        List<String> lst = new ArrayList<String>();
-        lst.add(e.getEventName());
-        lst.add(e.getSeriesName());
-
-        return lst;
+    private String formatEventInfo(Event e){
+        StringBuilder s = new StringBuilder();
+        s.append("Name: ").append(e.getEventName()).append("\n");
+        s.append("Series Name: ").append(e.getSeriesName()).append("\n");
+        s.append(parseDateAsString(e.getTime())).append("\n");
+        s.append("Tags: ").append(parseTagsAsString(e.getTags())).append("\n\n");
+        return s.toString();
+    }
+    private List<String> listEvents(User u){
+        List<String> str = new ArrayList<>();
+        for (Event e: u.getEvents()){
+            str.add(formatEventInfo(e));
+        }
+        return str;
     }
     public void createSeriesFromEvents(){
-        Presenter p = new Presenter();
+        List<String> input = presenter.displayView(UIViews.listEvents, listEvents(curr));
+        String[] eventSelectionsArray = input.get(0).split(",");
+        List<String> eventSelections = Arrays.asList(eventSelectionsArray);
+        boolean flawless = true; int i; List<Integer> indices = new ArrayList<>();
+        if (parseable(eventSelections)){
+            for (String s: eventSelections){
+                i = Integer.parseInt(s);
+                indices.add(i);
+                flawless = flawless && (i>=0 && i<=curr.getEvents().size());
+            }
+            if (flawless){
+                sm.createSeries(input.get(1), curr, indices);
+            }
+        }
+        System.out.println("Your event selection was invalid. Please try again.");
+        createSeriesFromEvents();
     }
     public void createSeriesFromScratch() {
-        Presenter p1 = new Presenter();
-        List<String> input = p1.displayView(UIViews.createSeriesScratch, null);
+        List<String> input = presenter.displayView(UIViews.createSeriesScratch, null);
         List<String> sub = input.subList(1, input.size());
         if (parseable(sub)) {
             List<Integer> numInput = getIntegerList(sub);
@@ -249,11 +274,12 @@ public class Controller implements Observer {
             List<Integer> freqDur = numInput.subList(5, 9);
             if (verifyStartDate(date) && verifyFrequency(freq) && verifyDuration(duration)
                     && verifyNumEvents(nE) && verifyDurationLTFreq(freqDur)) {
-                sm = new SeriesManager();
                 sm.createSeries(currUser,input.get(0),duration,date,freq, nE);
+                writeIntoFile("database.txt");
                 return;
             }
-        }createSeriesFromScratch();
+        }
+        System.out.println("Some of your input was invalid. Please try again.");createSeriesFromScratch();
 
     }
 
@@ -372,6 +398,28 @@ public class Controller implements Observer {
             eventManager.createEvent(currUser, eventName, eventTiming);
         }
         writeIntoFile("database.txt");
+    }
+
+    /**Parse a Timing object as a String with the start and end date
+     *
+     * @param t the Timing object passing the date
+     * @return a String representing the start and end date (on different lines)
+     */
+    private String parseDateAsString(Timing t){
+        LocalDateTime start = t.getStart();
+        LocalDateTime end = t.getEnd();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
+        String startFormat = dateFormat.format(start);
+        String endFormat = dateFormat.format(end);
+        return "Start: " + startFormat + "\nEnd: " + endFormat;
+    }
+    private String parseTagsAsString(ArrayList<String> tags){
+        if (tags.size() == 0){return "";}
+        StringBuilder s = new StringBuilder();
+        for (String tag: tags){
+            s.append(tag).append(", ");
+        }
+        return s.substring(0, s.length()-2);
     }
 
     private void createRecurringAlert(Event e){

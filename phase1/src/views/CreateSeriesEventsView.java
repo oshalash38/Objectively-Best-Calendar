@@ -8,10 +8,16 @@ import java.util.List;
 public class CreateSeriesEventsView extends CalendarView {
     @Override
     public List<String> activateView(List<String> outputs) {
-
         List<String> inputs = new ArrayList<>();
-        System.out.println("Which events would you like to chain together as a new series?");
-        //CREATE VIEW FOR ALL EVENTS
-        return null;
+        for (int i = 0; i< outputs.size(); i++){
+            System.out.println(i + ": " + outputs.get(i));
+        }
+        System.out.println("Select the events you would like to form into a new series. \n Separate your selections with commas. " +
+                "(Ex. \"1,2,3\" will put events one, two and three in a new series.");
+        inputs.add(in.nextLine());
+        System.out.println("What is the name of this new series?");
+        inputs.add(in.nextLine());
+        return inputs;
+
     }
 }
