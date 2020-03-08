@@ -119,17 +119,14 @@ public class Event implements Serializable, Comparable<Event> {
      */
     public void updateStatus(){
         int status = time.getStatus(LocalDateTime.now());
-        switch (status){
-            case 0:
-                this.status = Status.CURRENT;
-                break;
-            case 1:
-                this.status = Status.UPCOMING;
-                break;
-            case -1:
-                this.status = Status.PAST;
+        if (status == 0){
+                this.status = Status.CURRENT;}
+        else if ( status > 1){
+                this.status = Status.UPCOMING;}
+        else{
+                this.status = Status.PAST;}
         }
-    }
+
 
     /**
      * Returns this event's status

@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
  * @author Omar Shalash
  */
 
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 /**
@@ -232,7 +233,6 @@ public class Controller implements Observer {
                     eventManager.changeEventName(currUser, e, input.get(0));
                     break;
                 case 2:
-                    changeDate(1);
                 case 3:
                 case 4:
                 case 5:
@@ -244,22 +244,6 @@ public class Controller implements Observer {
      *
      * @param type 1 to change start time. 2 to change end time.
      */
-    private void changeDate(Event e, int type){
-        List<String> input = presenter.displayView(UIViews.createDateTimeView, null);
-        if(parseable(input)){
-            if(type == 1){
-                List<Integer> temp = getIntegerList(input);
-                eventManager.ChangeTime(e, timingFactory.c);
-            }
-            else{
-
-            }
-
-        }
-        else{
-            changeDate(e, type);
-        }
-    }
 
 
     private void readFromDatabase(String filePath){
@@ -480,7 +464,7 @@ public class Controller implements Observer {
     private String parseDateAsString(Timing t){
         LocalDateTime start = t.getStart();
         LocalDateTime end = t.getEnd();
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
+        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-mm-dd hh:mm:ss");
         String startFormat = dateFormat.format(start);
         String endFormat = dateFormat.format(end);
         return "Start: " + startFormat + "\nEnd: " + endFormat;
