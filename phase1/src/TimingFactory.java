@@ -52,6 +52,14 @@ public class TimingFactory {
      */
     public Timing createTiming(int year1, int month1, int dayOfMonth1, int hour1, int minute1, int year2,
                                int month2, int dayOfMonth2, int hour2, int minute2){
+        YearMonth monthOfYear1 = YearMonth.of(year1, month1);
+        YearMonth monthOfYear2 = YearMonth.of(year2, month2);
+
+        if(dayOfMonth1 > monthOfYear1.lengthOfMonth())
+            dayOfMonth1 = monthOfYear1.lengthOfMonth();
+        if(dayOfMonth2 > monthOfYear2.lengthOfMonth())
+            dayOfMonth2 = monthOfYear2.lengthOfMonth();
+        
         return new Timing(LocalDateTime.of(year1, Month.of(month1), dayOfMonth1, hour1, minute1),
                 LocalDateTime.of(year2, Month.of(month2), dayOfMonth2, hour2, minute2));
     }
