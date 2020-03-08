@@ -16,7 +16,7 @@ public class MemoMenuView extends CalendarView {
                 System.out.println(memoName);
                 System.out.println("--------------------------------");
             }
-            System.out.println("Do you want to see events associated with a memo?");
+            System.out.println("Do you want to see events associated with a memo? (Yes/No)");
             if (in.nextLine().toLowerCase().equals("yes")){
                 System.out.println("Choose a memo to see associations:");
                 inputs.add(in.nextLine());

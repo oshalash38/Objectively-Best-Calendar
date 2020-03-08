@@ -210,8 +210,13 @@ public class Controller implements Observer {
         List<String> input = presenter.displayView(UIViews.memoMenu, strings);
         if (input.size() > 0){
             List<Event> events = memoManager.FilterByMemoId(currUser.getEvents(),Integer.parseInt(input.get(0)));
-            List<String> strings1 = eventManager.formatEventByName(events);
-            presenter.displayView(UIViews.eventInfo, strings1);
+            List<String > temp = new ArrayList<>();
+            for (Event event : events){
+                temp.add("Event Name: " + event.getEventName());
+                temp.add("Start Date and Time: " + event.getStartTimeString());
+                temp.add("End Date and Time: " + event.getEndTimeString());
+            }
+            presenter.displayView(UIViews.eventInfo, temp);
         }
 
     }
@@ -506,6 +511,7 @@ public class Controller implements Observer {
             writeIntoFile("database.txt");
         }
         else{
+            System.out.println("===Try Again - Invalid Input===");
             createEvent();
         }
     }
@@ -577,7 +583,8 @@ public class Controller implements Observer {
         List<String> listOfStrings = toListString(allEvents);
         List<String> memoMessage = presenter.displayView(UIViews.createMemo, null);
         List<String> indices = presenter.displayView(UIViews.memoEventPicking, listOfStrings);
-        int id = memoManager.CreateMemo(currUser.getMemos(), memoMessage.get(0), allEvents );
+        int id = memoManager.CreateMemo(currUser.getMemos(), memoMessage.get(0), allEvents);
+        writeIntoFile("database.txt");
         for (String index : indices) {
             int currIndex = Integer.parseInt(index);
             allEvents.get(currIndex).addMemoID(id);
