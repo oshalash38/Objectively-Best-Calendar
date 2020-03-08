@@ -145,6 +145,8 @@ public class Event implements Serializable, Comparable<Event> {
         return this.time.getEnd().toString();
     }
 
-
+    public void addMemoID(int memoID) {
+        this.memoIDs.add(memoID);
+    }
 }
 

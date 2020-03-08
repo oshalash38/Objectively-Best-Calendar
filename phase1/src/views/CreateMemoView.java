@@ -13,19 +13,18 @@ public class CreateMemoView extends CalendarView {
         inputs.add(in.nextLine());
 
         System.out.println("Associate with one or more events:");
-        System.out.println("----------------------------------");
 
-        if (outputs.size() == 0){
-            System.out.println("You have no events.");
-        }
-        else {
-            for (int i = 0; i < outputs.size(); i++){
-                if (i % 3 == 0){
-                    System.out.println("=======================");
-                }
-                System.out.println(outputs.get(i));
-            }
-        }
+//        if (outputs.size() == 0){
+//            System.out.println("You have no events.");
+//        }
+//        else {
+//            for (int i = 0; i < outputs.size(); i++){
+//                if (i % 3 == 0){
+//                    System.out.println("=======================");
+//                }
+//                System.out.println(outputs.get(i));
+//            }
+//        }
 
         return inputs;
     }

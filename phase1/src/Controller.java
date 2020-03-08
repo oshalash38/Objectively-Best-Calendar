@@ -149,7 +149,8 @@ public class Controller implements Observer {
                     checkUpcomingAlerts();
                     break;
                 case 2:
-
+                    createMemo();
+                    break;
                 case 3:
                     createEvent();
                     break;
@@ -210,7 +211,6 @@ public class Controller implements Observer {
             temp.add("Event Name: " + event.getEventName());
             temp.add("Start Date and Time: " + event.getStartTimeString());
             temp.add("End Date and Time: " + event.getEndTimeString());
-            System.out.println(events.size());
         }
         presenter.displayView(UIViews.eventInfo, temp);
         List<String> input = presenter.displayView(UIViews.doesUserWantToEdit, null);
@@ -532,8 +532,25 @@ public class Controller implements Observer {
     }
 
     private void createMemo(){
+        List<Event> allEvents = new ArrayList<>();
+        allEvents.addAll(eventManager.getCurrentEvents(currUser));
+        allEvents.addAll(eventManager.getPastEvents(currUser));
+        allEvents.addAll(eventManager.getUpcomingEvents(currUser));
+        List<String> listOfStrings = toListString(allEvents);
+        List<String> memoMessage = presenter.displayView(UIViews.createMemo, null);
+        List<String> indices = presenter.displayView(UIViews.listEvents, listOfStrings);
+        int id = memoManager.CreateMemo(currUser.getMemos(), memoMessage.get(0), allEvents );
+        for (String index : indices) {
+            int currIndex = Integer.parseInt(index);
+            allEvents.get(currIndex).addMemoID(id);
+        }
+    }
 
-        List<String> inputs = presenter.displayView(UIViews.createMemo, null);
-        memoManager.CreateMemo(currUser.getMemos(), inputs.get(0));
+    private List<String> toListString(List<Event> listOfEvents){
+        List<String> listOfStrings = new ArrayList<>();
+        for (Event event : listOfEvents){
+            listOfStrings.add(event.getEventName());
+        }
+        return listOfStrings;
     }
 }
