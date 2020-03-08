@@ -210,6 +210,17 @@ public class EventManager {
         return str;
     }
 
+    public List<Event> getEventsBetween(User currUser, Timing date1, Timing date2) {
+        List<Event> out = new ArrayList<>();
+        List<Event> events = currUser.getEvents();
+        for (Event event : events){
+            if (event.compareTo(date1) == 1 || event.compareTo(date1) == 1){
+                out.add(event);
+            }
+        }
+        return out;
+    }
+
     /**
      *
      * @param e the event to add the tag to

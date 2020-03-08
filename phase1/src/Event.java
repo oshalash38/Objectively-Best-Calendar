@@ -113,6 +113,15 @@ public class Event implements Serializable, Comparable<Event> {
         return this.time.compareStartTime(e.time);
     }
 
+    public int compareTo(Timing timing){
+        if (this.time.compareStartTime(timing) > 0 || this.time.compareEndTime(timing) < 0){
+            return 1;
+        }
+        else {
+            return 0;
+        }
+    }
+
 
     /**
      * Checks the time of the event relative to the current time and updates the status accordingly.
