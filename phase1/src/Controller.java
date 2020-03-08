@@ -18,7 +18,6 @@ import java.util.*;
  * This class handles the logic and business rules of the Calendar
  */
 public class Controller implements Observer {
-    private User curr;
     private SeriesManager sm;
     private AlertManager alertManager;
     private MemoManager memoManager;
@@ -148,7 +147,6 @@ public class Controller implements Observer {
             switch (Integer.parseInt(mainMenuInput.get(0))) {
                 case 1:
                     checkUpcomingAlerts();
-                    presenter.displayView(UIViews.mainMenu, null);
                     break;
                 case 2:
 
@@ -157,10 +155,9 @@ public class Controller implements Observer {
                     break;
                 case 4:
                 case 5:
-                case 6:
                     displayEventsFilteredBy();
                     break;
-                case 7:
+                case 6:
                     go = false;
                     START();
                     break;
@@ -170,14 +167,18 @@ public class Controller implements Observer {
 
     private void displayEventsFilteredBy() {
         boolean go = true;
-        eventManager.updateStatus(currUser);
         while (go) {
+            eventManager.updateStatus(currUser);
             List<String> input = presenter.displayView(UIViews.displayEventBy, null);
             switch (Integer.parseInt(input.get(0))) {
                 case 1:
+                    eventsByStatus(1);
+                    break;
                 case 2:
+                    eventsByStatus(2);
+                    break;
                 case 3:
-                    upcomingEvents();
+                    eventsByStatus(3);
                     break;
                 case 4:
                 case 5:
@@ -193,16 +194,24 @@ public class Controller implements Observer {
 
     }
 
-    private void upcomingEvents(){
-        ArrayList<Event> upcomingEvents = eventManager.getUpcomingEvents(currUser);
+    private void eventsByStatus(int type){
+        ArrayList<Event> upcomingEvents;
+        if(type == 1)
+            upcomingEvents = eventManager.getCurrentEvents(currUser);
+        else if(type == 2)
+            upcomingEvents = eventManager.getPastEvents(currUser);
+        else{
+            upcomingEvents = eventManager.getUpcomingEvents(currUser);
+        }
         List<String > temp = new ArrayList<>();
         for (Event event : upcomingEvents){
             temp.add("Event Name: " + event.getEventName());
             temp.add("Start Data and Time: " + event.getStartTimeString());
             temp.add("End Date and Time: " + event.getEndTimeString());
         }
-        presenter.displayView(UIViews.eventInfo, temp);
+        List<String> input = presenter.displayView(UIViews.eventInfo, temp);
     }
+
 
     public void readFromDatabase(String filePath){
         try {
@@ -245,7 +254,7 @@ public class Controller implements Observer {
         return str;
     }
     public void createSeriesFromEvents(){
-        List<String> input = presenter.displayView(UIViews.listEvents, listEvents(curr));
+        List<String> input = presenter.displayView(UIViews.listEvents, listEvents(currUser));
         String[] eventSelectionsArray = input.get(0).split(",");
         List<String> eventSelections = Arrays.asList(eventSelectionsArray);
         boolean flawless = true; int i; List<Integer> indices = new ArrayList<>();
@@ -253,10 +262,10 @@ public class Controller implements Observer {
             for (String s: eventSelections){
                 i = Integer.parseInt(s);
                 indices.add(i);
-                flawless = flawless && (i>=0 && i<=curr.getEvents().size());
+                flawless = flawless && (i>=0 && i<=currUser.getEvents().size());
             }
             if (flawless){
-                sm.createSeries(input.get(1), curr, indices);
+                sm.createSeries(input.get(1), currUser, indices);
             }
         }
         System.out.println("Your event selection was invalid. Please try again.");
@@ -385,19 +394,22 @@ public class Controller implements Observer {
         String eventName = input.get(0);
         if(parseable(input.subList(1,10))){
             dates = getIntegerList(input.subList(1,11));
-        }
-        Timing eventTiming = timingFactory.createTiming(dates.get(0), dates.get(1), dates.get(2),dates.get(3),
-                dates.get(4),dates.get(5),dates.get(6),dates.get(7),dates.get(8),dates.get(9));
+            Timing eventTiming = timingFactory.createTiming(dates.get(0), dates.get(1), dates.get(2),dates.get(3),
+                    dates.get(4),dates.get(5),dates.get(6),dates.get(7),dates.get(8),dates.get(9));
 
-        if(input.get(input.size()-1).toLowerCase().equals("yes")){
-            Event e = eventManager.createEvent(currUser, eventName, eventTiming);
-            alertManager.createNewAlert(e, timingFactory.createTiming(eventTiming.getStart()),
-                    "The event " + e.getEventName() + " is starting.");
+            if(input.get(input.size()-1).toLowerCase().equals("yes")){
+                Event e = eventManager.createEvent(currUser, eventName, eventTiming);
+                alertManager.createNewAlert(e, timingFactory.createTiming(eventTiming.getStart()),
+                        "The event " + e.getEventName() + " is starting.");
+            }
+            else{
+                eventManager.createEvent(currUser, eventName, eventTiming);
+            }
+            writeIntoFile("database.txt");
         }
         else{
-            eventManager.createEvent(currUser, eventName, eventTiming);
+            createEvent();
         }
-        writeIntoFile("database.txt");
     }
 
     /**Parse a Timing object as a String with the start and end date

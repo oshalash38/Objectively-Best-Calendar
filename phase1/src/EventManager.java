@@ -89,4 +89,26 @@ public class EventManager {
         }
         return upcomingEvents;
     }
+
+    public ArrayList<Event> getCurrentEvents(User user){
+        ArrayList<Event> currentEvents = new ArrayList<>();
+        ArrayList<Event> allEvents = user.getEvents();
+        for (Event event: allEvents){
+            if (event.getStatus() == Status.CURRENT){
+                currentEvents.add(event);
+            }
+        }
+        return currentEvents;
+    }
+
+    public ArrayList<Event> getPastEvents(User user){
+        ArrayList<Event> pastEvents = new ArrayList<>();
+        ArrayList<Event> allEvents = user.getEvents();
+        for (Event event: allEvents){
+            if (event.getStatus() == Status.PAST){
+                pastEvents.add(event);
+            }
+        }
+        return pastEvents;
+    }
 }

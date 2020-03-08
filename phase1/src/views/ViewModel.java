@@ -24,8 +24,8 @@ public class ViewModel {
                         "\n1. Login\n2. Create new user\n3. Exit", 3));
         views.put(UIViews.mainMenu, new MenuView(
                  "Main Menu:\n1. Check upcoming alerts\n2. Create memo\n3. Create event" +
-                         "\n4. Create series\n5. Event options\n6. Display events filtered by..." +
-                         "\n7. Logout", 7));
+                         "\n4. Create series\n5. Display events filtered by..." +
+                         "\n6. Logout", 6));
         views.put(UIViews.displayEventBy, new MenuView(
                 "Display events filtered by...\n1. Current events\n2. Past events\n3. Future events" +
                         "\n4. Date threshold\n5. Memo\n6. Tag\n7. Name\n8. Series\n9. Return", 9));
@@ -44,6 +44,7 @@ public class ViewModel {
          */
         views.put(UIViews.chooseFrequency, new MenuView("What is the frequency of events" +
                 "in this series?\n 1: Hourly \n 2: Daily \n 3: Weekly \n 4: Monthly \n 5: Yearly", 5));
+        views.put(UIViews.doesUserWantToEdit, new MenuView("Would you like to edit one of these events?\n1. Yes\n2. No", 2));
 
         views.put(UIViews.loginView, new LoginView());
         views.put(UIViews.createEvent, new CreateNewEventView());
