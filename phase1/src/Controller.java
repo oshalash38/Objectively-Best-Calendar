@@ -189,6 +189,8 @@ public class Controller implements Observer {
                     break;
                 case 4:
                 case 5:
+                    memo();
+                    break;
                 case 6:
                     eventByTag(presenter.displayView(UIViews.CreateTag, null).get(0));
                     break;
@@ -201,6 +203,17 @@ public class Controller implements Observer {
                     break;
             }
         }
+    }
+
+    private void memo(){
+        List<String> strings = memoManager.DisplayAllMemos(currUser.getMemos());
+        List<String> input = presenter.displayView(UIViews.memoMenu, strings);
+        if (input.size() > 0){
+            List<Event> events = memoManager.FilterByMemoId(currUser.getEvents(),Integer.parseInt(input.get(0)));
+            List<String> strings1 = eventManager.formatEventByName(events);
+            presenter.displayView(UIViews.eventInfo, strings1);
+        }
+
     }
 
     private void eventByTag(String tag){

@@ -5,10 +5,10 @@ import java.util.Random;
 
 public class MemoManager {
 
-    private Random idGen;
+    private static int idGen;
 
     public MemoManager(){
-        idGen = new Random();
+
     }
 
     /**
@@ -19,10 +19,9 @@ public class MemoManager {
      */
     public int CreateMemo(Map<Integer, String> memos, String memoValue, List<Event> events){
 
-        int id = idGen.nextInt(Integer.MAX_VALUE);
+        int id = idGen;
 
-        while(memos.containsKey(id))
-            id = idGen.nextInt(Integer.MAX_VALUE);
+        idGen++;
 
         memos.put(id, memoValue);
 
@@ -35,7 +34,7 @@ public class MemoManager {
     public List<String> DisplayAllMemos(Map<Integer, String> map){
         List<String> retList = new ArrayList<>();
         for (Map.Entry<Integer, String> entry: map.entrySet()){
-            retList.add(DisplayMemo(map, entry.getKey()));
+            retList.add(entry.getKey() + ":" + entry.getValue());
         }
         return retList;
     }

@@ -57,5 +57,6 @@ public class ViewModel {
         views.put(UIViews.memoEventPicking, new MemoEventPickingView());
         views.put(UIViews.SearchEvents, new SearchEvents());
         views.put(UIViews.CreateTag, new CreateTag());
+        views.put(UIViews.memoMenu, new MemoMenuView());
     }
 }
