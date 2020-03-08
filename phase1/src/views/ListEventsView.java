@@ -13,15 +13,24 @@ public class ListEventsView extends CalendarView {
         for(int i = 0; i < outputs.size(); i++){
             System.out.println(i + ": " + outputs.get(i));
         }
+        System.out.println("Choose one or more events to associate with (-1 to end):");
+
+        String choice = in.nextLine();
 
         try{
-            int choice = Integer.parseInt(in.nextLine());
-            if (choice < 0 || choice >= outputs.size())
+            if (Integer.parseInt(choice) < 0 || Integer.parseInt(choice) >= outputs.size())
                 throw new Exception();
         } catch (Exception e) {
             System.out.println("\n=========PLEASE TRY AGAIN==========\n\n");
             return activateView(outputs);
         }
+
+        while (Integer.parseInt(choice) != -1 && inputs.size() < outputs.size() - 1){
+            inputs.add(choice);
+            choice = in.nextLine();
+        }
+
+
         return inputs;
     }
 }

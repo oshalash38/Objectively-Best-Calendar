@@ -17,7 +17,8 @@ public class MemoManager {
      * @param memoValue The value of the memo
      * @return The id of the created memo
      */
-    public int CreateMemo(Map<Integer, String> memos, String memoValue){
+    public int CreateMemo(Map<Integer, String> memos, String memoValue, List<Event> events){
+
         int id = idGen.nextInt(Integer.MAX_VALUE);
 
         while(memos.containsKey(id))
@@ -25,6 +26,9 @@ public class MemoManager {
 
         memos.put(id, memoValue);
 
+        for (Event event : events){
+            event.addMemoID(id);
+        }
         return id;
     }
 

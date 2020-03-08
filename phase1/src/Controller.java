@@ -149,7 +149,8 @@ public class Controller implements Observer {
                     checkUpcomingAlerts();
                     break;
                 case 2:
-
+                    createMemo();
+                    break;
                 case 3:
                     createEvent();
                     break;
@@ -197,13 +198,18 @@ public class Controller implements Observer {
     }
 
     private void eventsByStatus(int type){
-        ArrayList<Event> upcomingEvents;
+        ArrayList<Event> upcomingEvents = null;
         if(type == 1)
             upcomingEvents = eventManager.getCurrentEvents(currUser);
         else if(type == 2)
             upcomingEvents = eventManager.getPastEvents(currUser);
-        else{
+        else if (type == 3){
             upcomingEvents = eventManager.getUpcomingEvents(currUser);
+        } else if (type == 4){
+            upcomingEvents = new ArrayList<>();
+            upcomingEvents.addAll(eventManager.getCurrentEvents(currUser));
+            upcomingEvents.addAll(eventManager.getPastEvents(currUser));
+            upcomingEvents.addAll(eventManager.getUpcomingEvents(currUser));
         }
         List<String > temp = new ArrayList<>();
         for (Event event : upcomingEvents){
@@ -497,8 +503,25 @@ public class Controller implements Observer {
     }
 
     private void createMemo(){
+        List<Event> allEvents = new ArrayList<>();
+        allEvents.addAll(eventManager.getCurrentEvents(currUser));
+        allEvents.addAll(eventManager.getPastEvents(currUser));
+        allEvents.addAll(eventManager.getUpcomingEvents(currUser));
+        List<String> listOfStrings = toListString(allEvents);
+        List<String> memoMessage = presenter.displayView(UIViews.createMemo, null);
+        List<String> indices = presenter.displayView(UIViews.listEvents, listOfStrings);
+        int id = memoManager.CreateMemo(currUser.getMemos(), memoMessage.get(0), allEvents );
+        for (String index : indices) {
+            int currIndex = Integer.parseInt(index);
+            allEvents.get(currIndex).addMemoID(id);
+        }
+    }
 
-        List<String> inputs = presenter.displayView(UIViews.createMemo, null);
-        memoManager.CreateMemo(currUser.getMemos(), inputs.get(0));
+    private List<String> toListString(List<Event> listOfEvents){
+        List<String> listOfStrings = new ArrayList<>();
+        for (Event event : listOfEvents){
+            listOfStrings.add(event.getEventName());
+        }
+        return listOfStrings;
     }
 }
