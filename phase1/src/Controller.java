@@ -236,7 +236,7 @@ public class Controller implements Observer {
                     createRecurringAlert(e);
                     break;
                 case 4:
-                    //associateMemoWithEvent(e);
+                    associateMemoWithEvent(e);
                 case 5:
                     eventByTag(presenter.displayView(UIViews.CreateTag, null).get(0));
                 case 6:
@@ -245,6 +245,21 @@ public class Controller implements Observer {
             }
         }
     }
+
+   private void associateMemoWithEvent(Event e){
+        List<String> outputs = memoManager.DisplayAllMemos(currUser.getMemos());
+        List<String> inputs = presenter.displayView(UIViews.listMemos, outputs);
+        Integer choice = Integer.parseInt(inputs.get(0));
+        try{
+            currUser.getMemos().get(choice);
+            e.addMemoID(choice);
+        }
+        catch (Exception ex){
+            presenter.displayView(UIViews.error, null);
+            associateMemoWithEvent(e);
+        }
+    }
+
 
 
     private void readFromDatabase(String filePath){
