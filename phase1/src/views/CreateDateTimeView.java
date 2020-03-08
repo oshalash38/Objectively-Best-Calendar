@@ -24,8 +24,6 @@ public class CreateDateTimeView extends CalendarView {
         inputs.add(in.nextLine());
         System.out.println("Enter hour: (24 hour clock)");
         inputs.add(in.nextLine());
-//        System.out.println("Enter month number:");
-//        inputs.add(in.nextLine());
         System.out.println("Enter minute: (0-59)");
         inputs.add(in.nextLine());
         return inputs;

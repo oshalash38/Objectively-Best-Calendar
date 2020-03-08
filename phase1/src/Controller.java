@@ -213,11 +213,13 @@ public class Controller implements Observer {
             temp.add("End Date and Time: " + event.getEndTimeString());
         }
         presenter.displayView(UIViews.eventInfo, temp);
-        List<String> input = presenter.displayView(UIViews.doesUserWantToEdit, null);
-        if (input.size() > 0) {
-            if (Integer.parseInt(input.get(0)) == 1) {//User want to edit one of the events displayed
-                input = presenter.displayView(UIViews.listEvents, eventManager.formatEventByName(events));
-                eventManipulation(events.get(Integer.parseInt(input.get(0))-1));
+        if(!events.isEmpty()) {
+            List<String> input = presenter.displayView(UIViews.doesUserWantToEdit, null);
+            if (input.size() > 0) {
+                if (Integer.parseInt(input.get(0)) == 1) {//User want to edit one of the events displayed
+                    input = presenter.displayView(UIViews.listEvents, eventManager.formatEventByName(events));
+                    eventManipulation(events.get(Integer.parseInt(input.get(0)) - 1));
+                }
             }
         }
     }
@@ -232,34 +234,20 @@ public class Controller implements Observer {
                     eventManager.changeEventName(currUser, e, input.get(0));
                     break;
                 case 2:
-                    changeDate(1);
+                    createOneAlert(e);
+                    break;
                 case 3:
+                    createRecurringAlert(e);
+                    break;
                 case 4:
+
                 case 5:
+                    go = false;
+                    break;
             }
         }
     }
 
-    /**
-     *
-     * @param type 1 to change start time. 2 to change end time.
-     */
-    private void changeDate(Event e, int type){
-        List<String> input = presenter.displayView(UIViews.createDateTimeView, null);
-        if(parseable(input)){
-            if(type == 1){
-                List<Integer> temp = getIntegerList(input);
-                eventManager.ChangeTime(e, timingFactory.c);
-            }
-            else{
-
-            }
-
-        }
-        else{
-            changeDate(e, type);
-        }
-    }
 
 
     private void readFromDatabase(String filePath){

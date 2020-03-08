@@ -112,17 +112,6 @@ public class EventManager {
         return pastEvents;
     }
 
-    public void ChangeTime(Event e, List<Integer> input, int type){
-        TimingFactory timingFactory = new TimingFactory();
-        if(type == 1){
-            Timing current = e.getTime();
-            e.setTime(timingFactory.createTiming());
-        }
-        else{
-
-        }
-
-    }
 
     /**
      *

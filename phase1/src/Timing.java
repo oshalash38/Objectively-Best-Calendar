@@ -102,4 +102,5 @@ public class Timing implements Serializable{
     public void setEnd(LocalDateTime end){
         this.end = end;
     }
+
 }
