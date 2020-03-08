@@ -96,5 +96,10 @@ public class Timing implements Serializable{
         return new String(start.getDayOfMonth()+" " + start.getMonth()+ " " + start.getYear() + ", at: " + start.getHour() + ":"+ start.getMinute());
     }
 
-
+    public void setStart(LocalDateTime start){
+        this.start = start;
+    }
+    public void setEnd(LocalDateTime end){
+        this.end = end;
+    }
 }

@@ -197,32 +197,67 @@ public class Controller implements Observer {
     }
 
     private void eventsByStatus(int type){
-        ArrayList<Event> upcomingEvents;
+        ArrayList<Event> events;
         if(type == 1)
-            upcomingEvents = eventManager.getCurrentEvents(currUser);
+            events = eventManager.getCurrentEvents(currUser);
         else if(type == 2)
-            upcomingEvents = eventManager.getPastEvents(currUser);
+            events = eventManager.getPastEvents(currUser);
         else{
-            upcomingEvents = eventManager.getUpcomingEvents(currUser);
+            events = eventManager.getUpcomingEvents(currUser);
         }
         List<String > temp = new ArrayList<>();
-        for (Event event : upcomingEvents){
+        for (Event event : events){
             temp.add("Event Name: " + event.getEventName());
-            temp.add("Start Data and Time: " + event.getStartTimeString());
+            temp.add("Start Date and Time: " + event.getStartTimeString());
             temp.add("End Date and Time: " + event.getEndTimeString());
+            System.out.println(events.size());
         }
-            List<String> input = presenter.displayView(UIViews.eventInfo, temp);
+        presenter.displayView(UIViews.eventInfo, temp);
+        List<String> input = presenter.displayView(UIViews.doesUserWantToEdit, null);
         if (input.size() > 0) {
             if (Integer.parseInt(input.get(0)) == 1) {//User want to edit one of the events displayed
+                input = presenter.displayView(UIViews.listEvents, eventManager.formatEventByName(events));
+                eventManipulation(events.get(Integer.parseInt(input.get(0))-1));
             }
         }
     }
 
     private void eventManipulation(Event e){
         boolean go = true;
-
         while (go){
+            List<String> input = presenter.displayView(UIViews.EventManipulation, null);
+            switch (Integer.parseInt(input.get(0))){
+                case 1:
+                    input = presenter.displayView(UIViews.ChangeName, null);
+                    eventManager.changeEventName(currUser, e, input.get(0));
+                    break;
+                case 2:
+                    changeDate(1);
+                case 3:
+                case 4:
+                case 5:
+            }
+        }
+    }
 
+    /**
+     *
+     * @param type 1 to change start time. 2 to change end time.
+     */
+    private void changeDate(Event e, int type){
+        List<String> input = presenter.displayView(UIViews.createDateTimeView, null);
+        if(parseable(input)){
+            if(type == 1){
+                List<Integer> temp = getIntegerList(input);
+                eventManager.ChangeTime(e, timingFactory.c);
+            }
+            else{
+
+            }
+
+        }
+        else{
+            changeDate(e, type);
         }
     }
 
