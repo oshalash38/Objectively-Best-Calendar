@@ -149,8 +149,7 @@ public class Controller implements Observer {
                     checkUpcomingAlerts();
                     break;
                 case 2:
-                    createMemo();
-                    break;
+
                 case 3:
                     createEvent();
                     break;
@@ -217,8 +216,16 @@ public class Controller implements Observer {
         }
     }
 
+    private void eventManipulation(Event e){
+        boolean go = true;
 
-    public void readFromDatabase(String filePath){
+        while (go){
+
+        }
+    }
+
+
+    private void readFromDatabase(String filePath){
         try {
             databaseManager = new DatabaseManager(filePath);
         }
