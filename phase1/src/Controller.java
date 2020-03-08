@@ -18,6 +18,7 @@ import java.util.*;
  * This class handles the logic and business rules of the Calendar
  */
 public class Controller implements Observer {
+    private User curr;
     private SeriesManager sm;
     private AlertManager alertManager;
     private MemoManager memoManager;
@@ -167,6 +168,7 @@ public class Controller implements Observer {
 
     private void displayEventsFilteredBy() {
         boolean go = true;
+        eventManager.updateStatus(currUser);
         while (go) {
             eventManager.updateStatus(currUser);
             List<String> input = presenter.displayView(UIViews.displayEventBy, null);
@@ -209,9 +211,8 @@ public class Controller implements Observer {
             temp.add("Start Data and Time: " + event.getStartTimeString());
             temp.add("End Date and Time: " + event.getEndTimeString());
         }
-        List<String> input = presenter.displayView(UIViews.eventInfo, temp);
+        presenter.displayView(UIViews.eventInfo, temp);
     }
-
 
     public void readFromDatabase(String filePath){
         try {
