@@ -145,5 +145,6 @@ public class Event implements Serializable, Comparable<Event> {
     public void addMemoID(int memoID) {
         this.memoIDs.add(memoID);
     }
+    public void removeAlert(Alert a) {this.alerts.remove(a);}
 }
 

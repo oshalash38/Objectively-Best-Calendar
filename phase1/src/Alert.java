@@ -47,7 +47,6 @@ public abstract class Alert implements Serializable, Comparable<Alert>{
     /**
      * Returns the string that should be pushed to the user.
      *
-     * TODO: It might make more sense to implement this with getStatus
      *
      * @return The message associated with this Alert
      */

@@ -125,7 +125,7 @@ public class AlertManager extends Observable{
             }
         }
         for(Alert a: temp){
-            alerts.remove(a);
+            e.getAlerts().remove(a);
         }
         for (Alert a: retAlerts){
             retList.add(this.formatAlertDisplay(e, a));
@@ -218,31 +218,24 @@ public class AlertManager extends Observable{
         return tempPrint;
     }
 
-//    /**
-//     *
-//     * @param afterTime the number of seconds till the alerts
-//     * @return Returns an ArrayList of alerts which will excecute after afterTime seconds.
-//     */
-//    public ArrayList<Alert> getUpcomingAlerts(int afterTime){
-//        ArrayList<Alert> retList = new ArrayList<>();
-//        LocalDateTime checkTime = currentTime.plusSeconds(afterTime);
-//        if(afterTime <CHECKDURATION) {
-//            for (Alert a : upcomingAlerts) {
-//                if (a.getNextTime().getStart().compareTo(checkTime) <= 0) {
-//                    retList.add(a);
-//                }
-//            }
-//        }
-//        else if (afterTime == CHECKDURATION){retList.addAll(upcomingAlerts);}
-//        else{
-//            retList.addAll(upcomingAlerts);
-//            for(Event e: this.UserEvents){
-//                if(e.getAlerts().size() >0){retList.add(e.getAlerts().get(0));}
-//            }
-//
-//        }
-//
-//        return retList;
- //   }
+    /**
+     * Displays the list of reminders formatted nicely
+     * @param e the event associated with the reminders
+     * @return a string as a representation of all the reminders
+     */
+    public String formatReminders(Event e){
+        String toDisplay = "";
+        int counter = 1;
+        for(Alert alert: e.getAlerts()){
+            if(counter != 1){
+                toDisplay+="\n";
+            }
+            toDisplay += " This is alert #" + counter+"\n";
+            toDisplay += "  This alert's message is " + alert.pushReminder()+"\n";
+            toDisplay += "  This alert will next activate at " + alert.getNextTime();
+            counter++;
+        }
+        return toDisplay;
+    }
 
 }

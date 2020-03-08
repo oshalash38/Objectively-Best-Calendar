@@ -1,10 +1,8 @@
 import views.UIViews;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.LocalTime;
 import java.time.Duration;
 import java.time.LocalDateTime;
 /**
@@ -42,40 +40,6 @@ public class Controller implements Observer {
         sm = new SeriesManager();
     }
 
-
-
-
-//    public String createSeriesFromEvents(User u, String seriesName) {
-//        String s;
-//        String[] sSplit;
-//        ArrayList<Integer> indices;
-//        int i;
-//        boolean flawless;
-//        do {
-//            s = presenter.getEventsForSeries(u);
-//            sSplit = s.split(",");
-//            indices = new ArrayList<>();
-//            flawless = true;
-//            for (String selection : sSplit) {
-//                try {
-//                    i = Integer.parseInt(selection);
-//                    if (i < 0 || i > u.getEvents().size() - 1) {
-//                        flawless = false;
-//                        System.out.println(selection + " is out of bounds. Enter your selections again.");
-//                        break;
-//                    }
-//                    indices.add(i);
-//                } catch (NumberFormatException x) {
-//                    flawless = false;
-//                    System.out.println(selection + " is not a valid input type. Enter your selections again.");
-//                    break;
-//                }
-//            }
-//        } while (!flawless);
-//        sm.createSeries(seriesName, u, indices);
-//        return "Series " + seriesName + " created.";
-//    }
-
     public void START(){
         boolean exit = false;
         List<String> input;
@@ -92,6 +56,7 @@ public class Controller implements Observer {
                     writeIntoFile("database.txt");
                     break;
                 case 3:
+                    writeIntoFile("database.txt");
                     exit = true;
                     break;
             }
@@ -223,26 +188,12 @@ public class Controller implements Observer {
 
     private void eventByTag(String tag){
         List<Event> events = eventManager.getEventsByTag(currUser, tag);
-
-        List<String > temp = new ArrayList<>();
-        for (Event event : events){
-            temp.add("Event Name: " + event.getEventName());
-            temp.add("Start Date and Time: " + event.getStartTimeString());
-            temp.add("End Date and Time: " + event.getEndTimeString());
-        }
-        presenter.displayView(UIViews.eventInfo, temp);
+        printDetailedEvents(events);
     }
 
     private void eventByName(String name){
         List<Event> events = eventManager.searchEventsByName(currUser, name);
-
-        List<String > temp = new ArrayList<>();
-        for (Event event : events){
-            temp.add("Event Name: " + event.getEventName());
-            temp.add("Start Date and Time: " + event.getStartTimeString());
-            temp.add("End Date and Time: " + event.getEndTimeString());
-        }
-        presenter.displayView(UIViews.eventInfo, temp);
+        printDetailedEvents(events);
     }
 
     private void eventsByStatus(int type){
@@ -255,12 +206,8 @@ public class Controller implements Observer {
             events = eventManager.getUpcomingEvents(currUser);
         }
         List<String > temp = new ArrayList<>();
-        for (Event event : events){
-            temp.add("Event Name: " + event.getEventName());
-            temp.add("Start Date and Time: " + event.getStartTimeString());
-            temp.add("End Date and Time: " + event.getEndTimeString());
-        }
-        presenter.displayView(UIViews.eventInfo, temp);
+        printDetailedEvents(events);
+        presenter.displayView(UIViews.eventsInfo, temp);
         if(!events.isEmpty()) {
             List<String> input = presenter.displayView(UIViews.doesUserWantToEdit, null);
             if (input.size() > 0) {
@@ -298,11 +245,6 @@ public class Controller implements Observer {
             }
         }
     }
-
-   // private void associateMemoWithEvent(Event e){
-   //     List<String> inputs = presenter.displayView(UIViews.);
-    //}
-
 
 
     private void readFromDatabase(String filePath){
@@ -597,5 +539,15 @@ public class Controller implements Observer {
             listOfStrings.add(event.getEventName());
         }
         return listOfStrings;
+    }
+
+    private void printDetailedEvents(List<Event> listOfEvents){
+        for(Event e: listOfEvents){
+            printDetailedEvent(e);
+        }
+    }
+
+    private void printDetailedEvent(Event e){
+        presenter.displayView(UIViews.EventInfo, eventManager.getDetailedEvent(e, alertManager));
     }
 }

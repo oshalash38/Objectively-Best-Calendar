@@ -19,7 +19,7 @@ public class ViewModel {
         views.put(UIViews.createRecurringAlertView, new CreateRecurringAlertView());
         views.put(UIViews.createOneAlertView, new CreateOneAlertView());
         views.put(UIViews.createUser, new CreateNewUserView());
-        views.put(UIViews.eventInfo, new EventView());
+        views.put(UIViews.eventsInfo, new EventsView());
         views.put(UIViews.startup, new MenuView("CALENDAR V1\n===============" +
                         "\n1. Login\n2. Create new user\n3. Exit", 3));
         views.put(UIViews.mainMenu, new MenuView(
@@ -58,5 +58,6 @@ public class ViewModel {
         views.put(UIViews.SearchEvents, new SearchEvents());
         views.put(UIViews.CreateTag, new CreateTag());
         views.put(UIViews.memoMenu, new MemoMenuView());
+        views.put(UIViews.EventInfo , new EventInfo());
     }
 }

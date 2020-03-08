@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
 
-public class EventView extends CalendarView {
+public class EventsView extends CalendarView {
     public static int counter = 0;
     @Override
     public List<String> activateView(List<String> outputs) {

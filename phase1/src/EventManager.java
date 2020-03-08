@@ -151,12 +151,43 @@ public class EventManager {
      */
     public List<Event> getEventsByTag(User user, String tag){
         List<Event> events = user.getEvents();
-        List<Event> eventsByTag = user.getEvents();
+        List<Event> eventsByTag = new ArrayList<Event>();
         for(Event e: events){
             if (e.getTags().contains(tag)){
                 eventsByTag.add(e);
             }
         }
         return eventsByTag;
+    }
+
+    /**
+     * Returns a detailed view of this event
+     * @param e the event
+     * @param alertManager the way to interact with alerts
+     * @return
+     */
+    public List<String> getDetailedEvent(Event e, AlertManager alertManager){
+        List<String> content = new ArrayList<String>();
+        content.add(e.getEventName());
+        if(e.getSeriesName().equals(""))
+            content.add("No series");
+        else{
+            content.add(e.getSeriesName());
+        }
+        content.add(e.getStartTimeString());
+        content.add(e.getEndTimeString());
+        content.add(alertManager.formatReminders(e));
+        content.add(getTags(e));
+        return content;
+    }
+
+    private String getTags(Event e){
+        String str = "";
+        if(e.getTags().isEmpty())
+            return "No tags";
+        for(String tag: e.getTags()){
+            str+=tag + ", ";
+        }
+        return str;
     }
 }
