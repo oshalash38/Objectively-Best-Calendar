@@ -57,7 +57,12 @@ public class EventManager {
     }
 
 
-
+    /**
+     *
+     * @param user the user that is being manipulated
+     * @param name the name being searched
+     * @return the Event matching the name
+     */
     public Event searchEventByName(User user, String name){
         ArrayList<Event> events = user.getEvents();
         for (Event event: events){
@@ -66,6 +71,17 @@ public class EventManager {
             }
         }
         return null;
+    }
+
+    public List<Event> searchEventsByName(User user, String name){
+        ArrayList<Event> events = user.getEvents();
+        ArrayList<Event> output = new ArrayList<Event>();
+        for (Event event: events){
+            if (event.getEventName().equals(name)){
+                output.add(event);
+            }
+        }
+        return output;
     }
 
     /**
@@ -125,5 +141,22 @@ public class EventManager {
             nameList.add(event.getEventName());
         }
         return nameList;
+    }
+
+    /**
+     * Retrurn a list of events that are associated with a given tag
+     * @param user the user that has all these events
+     * @param tag the tag being searched for
+     * @return
+     */
+    public List<Event> getEventsByTag(User user, String tag){
+        List<Event> events = user.getEvents();
+        List<Event> eventsByTag = user.getEvents();
+        for(Event e: events){
+            if (e.getTags().contains(tag)){
+                eventsByTag.add(e);
+            }
+        }
+        return eventsByTag;
     }
 }

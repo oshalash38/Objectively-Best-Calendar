@@ -36,7 +36,7 @@ public class ViewModel {
         views.put(UIViews.eventOptions, new MenuView("What event type would you like to create?\n" +
                 "1. Regular event\n2. Series of events\n3, Return to main menu", 3));
 
-        views.put(UIViews.EventManipulation, new MenuView("1. Change event name\n2. Create one time alert\n3. Create recurring alert\n4. Associate with memo\5. Return", 5));
+        views.put(UIViews.EventManipulation, new MenuView("1. Change event name\n2. Create one time alert\n3. Create recurring alert\n4. Associate with memo\n5. Associate with tag \n6. Return", 6));
 
         views.put(UIViews.createDateTimeView, new CreateDateTimeView());
         views.put(UIViews.createSeriesScratch, new CreateSeriesScratchView());
@@ -55,5 +55,7 @@ public class ViewModel {
                 "new series from scratch. \n Type your selection (1 or 2).", 2));
         views.put(UIViews.ChangeName, new ChangeName());
         views.put(UIViews.memoEventPicking, new MemoEventPickingView());
+        views.put(UIViews.SearchEvents, new SearchEvents());
+        views.put(UIViews.CreateTag, new CreateTag());
     }
 }

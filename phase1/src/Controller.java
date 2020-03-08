@@ -187,15 +187,41 @@ public class Controller implements Observer {
                 case 4:
                 case 5:
                 case 6:
+                    eventByTag(presenter.displayView(UIViews.CreateTag, null).get(0));
+                    break;
                 case 7:
+                    eventByName(presenter.displayView(UIViews.SearchEvents, new ArrayList<>()).get(0));
+                    break;
                 case 8:
                 case 9:
                     go = false;
                     break;
             }
         }
+    }
 
+    private void eventByTag(String tag){
+        List<Event> events = eventManager.getEventsByTag(currUser, tag);
 
+        List<String > temp = new ArrayList<>();
+        for (Event event : events){
+            temp.add("Event Name: " + event.getEventName());
+            temp.add("Start Date and Time: " + event.getStartTimeString());
+            temp.add("End Date and Time: " + event.getEndTimeString());
+        }
+        presenter.displayView(UIViews.eventInfo, temp);
+    }
+
+    private void eventByName(String name){
+        List<Event> events = eventManager.searchEventsByName(currUser, name);
+
+        List<String > temp = new ArrayList<>();
+        for (Event event : events){
+            temp.add("Event Name: " + event.getEventName());
+            temp.add("Start Date and Time: " + event.getStartTimeString());
+            temp.add("End Date and Time: " + event.getEndTimeString());
+        }
+        presenter.displayView(UIViews.eventInfo, temp);
     }
 
     private void eventsByStatus(int type){
@@ -244,6 +270,8 @@ public class Controller implements Observer {
                 case 4:
 
                 case 5:
+                    eventByTag(presenter.displayView(UIViews.CreateTag, null).get(0));
+                case 6:
                     go = false;
                     break;
             }
