@@ -16,7 +16,7 @@ public class AlertManager extends Observable{
     private List<List<String>> printableUpcomingAlerts = new ArrayList<>(0);
     private Map<Event, List<List<String>>> printableLink = new HashMap<>(0);
     private Timer t = new Timer();
-    private final int CHECKDURATION = 5;
+    private final int CHECKDURATION = 30;
     private ArrayList<Event> UserEvents;
     private TimerTask timerTask = new TimerTask() {
 
@@ -70,6 +70,7 @@ public class AlertManager extends Observable{
     }
 
     private void sortAdd(ArrayList<Alert> alerts, Alert newAlert){
+        if (!alerts.isEmpty() && newAlert.compareTo(alerts.get(0)) < 0){alerts.add(0, newAlert); return;}
         for (Alert a: alerts){
             if (newAlert.compareTo(a) >= 0){ alerts.add(alerts.indexOf(a), newAlert); return;}
         }

@@ -68,12 +68,26 @@ public class Controller implements Observer {
     }
 
     @Override
-    public void update(Observable obs, Object o) {
-        notifications.addAll((List<List<String>>) o);
+    public void update(Observable obs, Object o){
+        notifications.addAll((List<List<String>>)o);
+        if(!notifications.isEmpty()) {
+            presenter.displayView(UIViews.alertView, Arrays.asList("You have new notifications"));
+        }
     }
 
-    public void displayNotifications() {
-        if (notifications.size() > 0) {
+
+
+    public void displayNotifications(){
+        if (notifications.isEmpty()) {
+            notifications.add(Arrays.asList("No new notifications."));
+
+
+            for (List<String> s : notifications) {
+                presenter.displayView(UIViews.alertView, s);
+            }
+            notifications.clear();
+        }
+        else {
             for (List<String> s : notifications) {
                 presenter.displayView(UIViews.alertView, s);
             }
@@ -107,21 +121,24 @@ public class Controller implements Observer {
             List<String> mainMenuInput = presenter.displayView(UIViews.mainMenu, null);
             switch (Integer.parseInt(mainMenuInput.get(0))) {
                 case 1:
-                    checkUpcomingAlerts();
+                    displayNotifications();
                     break;
                 case 2:
-                    createMemo();
+                    checkUpcomingAlerts();
                     break;
                 case 3:
-                    createEvent();
+                    createMemo();
                     break;
                 case 4:
-                    seriesMenu();
+                    createEvent();
                     break;
                 case 5:
-                    displayEventsFilteredBy();
+                    seriesMenu();
                     break;
                 case 6:
+                    displayEventsFilteredBy();
+                    break;
+                case 7:
                     go = false;
                     alertManager.stopTimer();
                     START();
@@ -236,7 +253,7 @@ public class Controller implements Observer {
             List<String> input = presenter.displayView(UIViews.doesUserWantToEdit, null);
             if (input.size() > 0) {
                 if (Integer.parseInt(input.get(0)) == 1) {//User want to edit one of the events displayed
-                    input = presenter.displayView(UIViews.listEvents, eventManager.formatEventByName(events));
+                    input = presenter.displayView(UIViews.eventsView, eventManager.formatEventByName(events));
                     eventManipulation(events.get(Integer.parseInt(input.get(0)) - 1));
                 }
             }
@@ -307,12 +324,17 @@ public class Controller implements Observer {
     /**
      * Displays the current alerts
      */
-    public void currentAlerts() {
-        notifications.addAll(alertManager.checkNewAlerts());
-        displayNotifications();
+    public void currentAlerts(){
+        List<List<String>> alerts = alertManager.checkNewAlerts();
+
+        if(!alerts.isEmpty()){
+            notifications.addAll(alerts);
+            displayNotifications();
+        }
+
     }
 
-    private String formatEventInfo(Event e) {
+    private String formatEventInfo(Event e){
         StringBuilder s = new StringBuilder();
         s.append("Name: ").append(e.getEventName()).append("\n");
         s.append("Series Name: ").append(e.getSeriesName()).append("\n");

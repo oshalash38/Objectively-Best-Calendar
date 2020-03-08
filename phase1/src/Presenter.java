@@ -13,7 +13,7 @@ public class Presenter {
     public Map<UIViews, CalendarView> views;
 
     public Presenter(){
-        views = new HashMap();
+        views = new HashMap<>();
         generateHashMap();
     }
 
@@ -37,9 +37,9 @@ public class Presenter {
         views.put(UIViews.startup, new MenuView("CALENDAR V1\n===============" +
                 "\n1. Login\n2. Create new user\n3. Exit", 3));
         views.put(UIViews.mainMenu, new MenuView(
-                "Main Menu:\n1. Check upcoming alerts\n2. Create memo\n3. Create event" +
-                        "\n4. Create series\n5. Display events filtered by..." +
-                        "\n6. Logout", 6));
+                "Main Menu:\n1.Check notifications\n2. Check upcoming alerts\n3. Create memo\n4. Create event" +
+                        "\n5. Create series\n6. Display events filtered by..." +
+                        "\n7. Logout", 7));
         views.put(UIViews.displayEventBy, new MenuView(
                 "Display events filtered by...\n1. Current events\n2. Past events\n3. Future events" +
                         "\n4. Date threshold\n5. Memo\n6. Tag\n7. Name\n8. Series\n9. Return", 9));
@@ -78,5 +78,6 @@ public class Presenter {
         views.put(UIViews.memoMenu, new MemoMenuView());
         views.put(UIViews.EventInfo , new EventInfo());
         views.put(UIViews.eventBySeriesName, new EventBySeriesName());
+        views.put(UIViews.eventsView, new EventsView());
     }
 }

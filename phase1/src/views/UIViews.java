@@ -6,9 +6,9 @@ package views;
 public enum UIViews {
     startup, createUser, userDNE, mainMenu, eventType, eventOptions, displayEventBy, createDateTimeView,
     createSeriesScratch, chooseFrequency, loginView, createEvent,
-    createRecurringAlertView, alertView, createOneAlertView, createMemo, listEvents, editMemo, doesUserWantToEdit
+    createRecurringAlertView, alertView, createOneAlertView, createMemo, eventsView, editMemo, doesUserWantToEdit
     , seriesMenu, createSeriesEvents, EventManipulation, ChangeName, memoEventPicking, listMemos
-    ,SearchEvents, CreateTag, EventInfo, memoMenu, eventsInfo, dateThreshold, eventBySeriesName
-    ,  error
+    ,SearchEvents, CreateTag, EventInfo, memoMenu, eventsInfo, dateThreshold, listEvents,
+    error ,eventBySeriesName
 
 }

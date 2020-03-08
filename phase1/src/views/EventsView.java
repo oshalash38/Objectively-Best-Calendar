@@ -15,16 +15,14 @@ public class EventsView extends CalendarView {
         }
         else {
             for (int i = 0; i < outputs.size(); i++){
-                if (i % 3 == 0){
-                    System.out.println("=======================");
-                }
-                System.out.println(outputs.get(i));
+                System.out.println("=======================");
+                System.out.println((i +1)+ ":" + outputs.get(i));
             }
         }
         System.out.println("=======================");
-        System.out.println("Press enter to go back");
-        System.out.println("=======================");
-        in.nextLine();
+        System.out.println("Which event would you like to edit?");
+        inputs.add(in.nextLine());
+
         return inputs;
     }
 }
