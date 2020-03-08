@@ -56,6 +56,7 @@ public class Controller implements Observer {
                     writeIntoFile("database.txt");
                     break;
                 case 3:
+                    writeIntoFile("database.txt");
                     exit = true;
                     break;
             }
