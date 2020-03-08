@@ -125,7 +125,7 @@ public class AlertManager extends Observable{
             }
         }
         for(Alert a: temp){
-            alerts.remove(a);
+            e.getAlerts().remove(a);
         }
         for (Alert a: retAlerts){
             retList.add(this.formatAlertDisplay(e, a));
