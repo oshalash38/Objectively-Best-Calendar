@@ -38,10 +38,8 @@ public class ViewModel {
 
         views.put(UIViews.createDateTimeView, new CreateDateTimeView());
         views.put(UIViews.createSeriesScratch, new CreateSeriesScratchView());
-        /*TODO (Peter) Does menu really need parameters? Can't we pass the userOptions via Controller -> Presenter ->
-            -> activateView(userOptions). This might be better since views like ChooseFrequency and CreateDate are used
-            by other views not by presenter directly
-         */
+        views.put(UIViews.createSeriesEvents, new CreateSeriesEventsView());
+
         views.put(UIViews.chooseFrequency, new MenuView("What is the frequency of events" +
                 "in this series?\n 1: Hourly \n 2: Daily \n 3: Weekly \n 4: Monthly \n 5: Yearly", 5));
         views.put(UIViews.doesUserWantToEdit, new MenuView("Would you like to edit one of these events?\n1. Yes\n2. No", 2));
@@ -51,6 +49,8 @@ public class ViewModel {
         views.put(UIViews.createMemo, new CreateMemoView());
         views.put(UIViews.listEvents, new ListEventsView());
         views.put(UIViews.editMemo, new EditMemoView());
+        views.put(UIViews.seriesMenu, new MenuView("Would you like to create a series: \n 1: By choosing events to make into a new series \n 2: By making a completely" +
+                "new series from scratch. \n Type your selection (1 or 2).", 2));
     }
 
 
@@ -59,10 +59,6 @@ public class ViewModel {
     private final List<String> whichMemoToAssociateWith = Arrays.asList("Which memo would you like to associate this event with?");
 
     private final List<String> signIn = Arrays.asList("Enter username:", "Enter password:");
-
-    private final List<String> selectEventsForSeries = Arrays.asList("Enter the numbers " +
-            "of the events that will form this series. Separate them by commas (ex. 1,2,3 to select the first three events)");
-
 
     private final List<String> createEventAssociatedWithSeries = Arrays.asList();
 
