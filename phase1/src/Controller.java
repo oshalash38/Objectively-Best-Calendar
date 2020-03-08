@@ -522,7 +522,7 @@ public class Controller implements Observer {
         int id = memoManager.CreateMemo(currUser.getMemos(), memoMessage.get(0), allEvents );
         for (String index : indices) {
             int currIndex = Integer.parseInt(index);
-            allEvents.get(currIndex).addMemoID(id);
+            allEvents.get(currIndex - 1).addMemoID(id);
         }
     }
 
