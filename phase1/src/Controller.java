@@ -420,6 +420,8 @@ public class Controller implements Observer {
     private boolean verifyNumEvents(int i) {
         return i >= 2;
     }
+    private boolean verifyStartEnd(Timing t){
+        return t.getStart().isBefore(t.getEnd());   }
 
     private boolean verifyFrequency(int i) {
         return i >= 1 && i <= 5;
@@ -463,9 +465,13 @@ public class Controller implements Observer {
         String eventName = input.get(0);
         if (parseable(input.subList(1, 10))) {
             dates = getIntegerList(input.subList(1, 11));
-            Timing eventTiming = timingFactory.createTiming(dates.get(0), dates.get(1), dates.get(2), dates.get(3),
-                    dates.get(4), dates.get(5), dates.get(6), dates.get(7), dates.get(8), dates.get(9));
-
+            Timing eventTiming = timingFactory.createTiming(dates.get(0), dates.get(1), dates.get(2), dates.get(3),dates.get(4),
+                    dates.get(5), dates.get(6), dates.get(7), dates.get(8), dates.get(9));
+            if (!verifyStartEnd(eventTiming)){
+                System.out.println("Your start time is later than your end time. Please try again.");
+                createEvent();
+                return;
+            }
             if (input.get(input.size() - 1).toLowerCase().equals("yes")) {
                 Event e = eventManager.createEvent(currUser, eventName, eventTiming);
                 alertManager.createNewAlert(e, timingFactory.createTiming(eventTiming.getStart()),

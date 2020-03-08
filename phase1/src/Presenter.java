@@ -53,6 +53,7 @@ public class Presenter {
         views.put(UIViews.EventManipulation, new MenuView("1. Change event name\n2. Create one time alert"+
                 "\n3. Create recurring alert\n4. Associate with memo\n5. Associate with tag " +
                 "\n6. Return", 6));
+        views.put(UIViews.dateThreshold, new DateThresholdView());
 
         views.put(UIViews.createDateTimeView, new CreateDateTimeView());
         views.put(UIViews.createSeriesScratch, new CreateSeriesScratchView());
