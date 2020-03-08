@@ -4,6 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CreateNewEventView extends CalendarView{
+    /**Collect the user's preferences for a new event creation
+     *
+     * @param outputs the strings that need to be displayed to the user.
+     * @return the user's inputs
+     */
     @Override
     public List<String> activateView(List<String> outputs) {
         // TODO: Implement validation check for format.

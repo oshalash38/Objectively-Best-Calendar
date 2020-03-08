@@ -5,7 +5,11 @@ import java.util.InputMismatchException;
 import java.util.List;
 
 public class EventsView extends CalendarView {
-    public static int counter = 0;
+    /** Collect, as a List of String, the event that the user wants to view
+     *
+     * @param outputs the strings that need to be displayed to the user.
+     * @return the event that the user wants to view
+     */
     @Override
     public List<String> activateView(List<String> outputs) {
         // TODO: Handle when inputs is empty so that the return doesnt break the code.

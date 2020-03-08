@@ -4,6 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MemoEventPickingView extends CalendarView {
+    /**Collect user preferences for which events to associate with a given memo
+     *
+     * @param outputs the strings that need to be displayed to the user.
+     * @return user inputs
+     */
     @Override
     public List<String> activateView(List<String> outputs) {
         List<String> inputs = new ArrayList<>();

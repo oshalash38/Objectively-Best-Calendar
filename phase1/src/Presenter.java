@@ -12,6 +12,9 @@ import java.util.*;
 public class Presenter {
     public Map<UIViews, CalendarView> views;
 
+    /**Creates a presenter instance and initializes a hashmap of views.
+     *
+     */
     public Presenter(){
         views = new HashMap<>();
         generateHashMap();

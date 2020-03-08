@@ -6,6 +6,11 @@ import java.util.List;
  * The UI for selecting events to put in a new series
  */
 public class CreateSeriesEventsView extends CalendarView {
+    /** Collect user's selection of which events to form into a new series
+     *
+     * @param outputs the strings that need to be displayed to the user.
+     * @return list of strings as user input
+     */
     @Override
     public List<String> activateView(List<String> outputs) {
         List<String> inputs = new ArrayList<>();

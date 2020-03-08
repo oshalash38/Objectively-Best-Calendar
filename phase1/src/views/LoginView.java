@@ -7,7 +7,7 @@ import java.util.List;
  * This class is responsible for user login
  */
 public class LoginView extends CalendarView {
-    /**
+    /**Collect the user's login information
      *
      * @param outputs the items that need to be displayed to the user. In this case none.
      * @return The entries of the user. In this case the username and password

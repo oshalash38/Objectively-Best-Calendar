@@ -4,6 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DateThresholdView extends CalendarView {
+    /** Collect the user's preference for a date range between which to find an event
+     *
+     * @param outputs the strings that need to be displayed to the user.
+     * @return the user's preference for a date range
+     */
     @Override
     public List<String> activateView(List<String> outputs) {
         System.out.println("Find events between 2 dates:");

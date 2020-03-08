@@ -27,22 +27,6 @@ public class SeriesManager {
         ArrayList<Event> lst = new ArrayList<>();
         Timing temp = tf.createTiming(start.get(0), start.get(1), start.get(2), start.get(3), start.get(4),
                 start.get(0), start.get(1), dur.get(0)+start.get(2), dur.get(1)+start.get(3), dur.get(2)+start.get(4));
-//        LocalDateTime ldt;
-//        if (dur.get(0) == 0 && dur.get(1) == 0){
-//            ldt = LocalDateTime.of(start.get(0), Month.of(start.get(1)),start.get(2), start.get(3), + start.get(4) + dur.get(2));
-//        }
-//        else if (dur.get(0)!=0 && dur.get(1) == 0){
-//            ldt = LocalDateTime.of(start.get(0), start.get(1), dur.get(0)+ start.get(2), start.get(3), start.get(4) + dur.get(2));
-//        }
-//        else if (dur.get(0) == 0 && dur.get(1) != 0){
-//            ldt = LocalDateTime.of(start.get(0), start.get(1), start.get(2), start.get(3) + dur.get(1), start.get(4) + dur.get(2));
-//        }
-//        else{
-//            ldt = LocalDateTime.of(start.get(0), start.get(1), start.get(2)+ dur.get(0), start.get(3) + dur.get(1), start.get(4) + dur.get(2));
-//        }
-//        temp.setEnd(ldt);
-        //Duration length = df.createDuration(dur.get(0), dur.get(1), dur.get(2));
-        Event e;
         EventManager em = new EventManager();
         em.createEvent(u, "", temp, seriesName);
         Duration length;
@@ -83,19 +67,6 @@ public class SeriesManager {
         }
 
     }
-//    private Duration oneMonthFromNow(Month m, int day){
-//        Duration d;
-//        switch(m.plus(1)){
-//            case JANUARY:
-//            case MARCH:
-//            case MAY:
-//            case JULY:
-//            case AUGUST:
-//            case OCTOBER:
-//            case DECEMBER:
-//                d = Duration.ofDays
-//        }
-//    }
 
 
 }

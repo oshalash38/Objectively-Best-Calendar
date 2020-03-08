@@ -4,6 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CreateTag extends CalendarView {
+    /** Collect input of user's desired tag
+     *
+     * @param outputs the strings that need to be displayed to the user.
+     * @return list of strings of user input
+     */
     @Override
     public List<String> activateView(List<String> outputs) {
         List<String> inputs = new ArrayList<>();

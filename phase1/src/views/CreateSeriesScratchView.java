@@ -20,21 +20,19 @@ import java.util.List;
  * 10: number of events
  */
 public class CreateSeriesScratchView extends CalendarView{
-    @Override
 
+    /**Collects user's preferences for creating a series from scratch.
+     * @param outputs null
+     */
+    @Override
     public List<String> activateView(List<String> outputs) {
         List<String> inputs = new ArrayList<>();
         System.out.println("Choose your new series' properties.\n What is this series' name?");
         inputs.add(in.nextLine());
 
-        //CREATE DATE TIME VIEW
         System.out.println("What is the start time of this new series?");
         CreateDateTimeView cdtv = new CreateDateTimeView();
         inputs.addAll(cdtv.activateView(null));
-
-        //CHOOSE FREQUENCY VIEW
-        //System.out.println("How often would you like this series to occur?");
-
         MenuView cfm = new MenuView("What is the frequency of events" +
                 " in this series?\n 1: Hourly \n 2: Daily \n 3: Weekly \n 4: Monthly \n 5: Yearly", 5);
         inputs.addAll(cfm.activateView(null));
