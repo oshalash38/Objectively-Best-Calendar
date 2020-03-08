@@ -16,7 +16,7 @@ public class AlertManager extends Observable{
     private List<List<String>> printableUpcomingAlerts = new ArrayList<>(0);
     private Map<Event, List<List<String>>> printableLink = new HashMap<>(0);
     private Timer t = new Timer();
-    private final int CHECKDURATION = 60;
+    private final int CHECKDURATION = 5;
     private ArrayList<Event> UserEvents;
 
     public AlertManager (ArrayList<Event> events){
@@ -47,8 +47,13 @@ public class AlertManager extends Observable{
 
                                   @Override
                                   public void run() {
-                                      List<List<String>> displayAlerts = runUpcomingAlerts();
-                                      notifyObservers(displayAlerts);
+                                      try {
+                                          List<List<String>> displayAlerts = runUpcomingAlerts();
+                                          notifyObservers(displayAlerts);
+                                      }
+                                      catch (ConcurrentModificationException ex){
+                                          run();
+                                      }
                                   }
 
                               },
