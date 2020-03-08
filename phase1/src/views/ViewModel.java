@@ -36,6 +36,8 @@ public class ViewModel {
         views.put(UIViews.eventOptions, new MenuView("What event type would you like to create?\n" +
                 "1. Regular event\n2. Series of events\n3, Return to main menu", 3));
 
+        views.put(UIViews.EventManipulation, new MenuView("1. Change event name\n 2. Change event start time\n3. Change event end time\n4. Create one time alert\n5. Create recurring alert\n6. ", 3));
+
         views.put(UIViews.createDateTimeView, new CreateDateTimeView());
         views.put(UIViews.createSeriesScratch, new CreateSeriesScratchView());
         views.put(UIViews.createSeriesEvents, new CreateSeriesEventsView());

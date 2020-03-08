@@ -111,4 +111,17 @@ public class EventManager {
         }
         return pastEvents;
     }
+
+    /**
+     *
+     * @param events the events that need to be formatted
+     * @return a list of the names of the strings provided
+     */
+    public List<String> formatEventByName(List<Event> events ){
+        List<String> nameList = new ArrayList<String>();
+        for(Event event: events){
+            nameList.add(event.getEventName());
+        }
+        return nameList;
+    }
 }

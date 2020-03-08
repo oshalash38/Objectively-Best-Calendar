@@ -27,7 +27,6 @@ public class Controller implements Observer {
     private TimingFactory timingFactory;
     private Presenter presenter;
     private User currUser;
-    private Event currEvent;
 
 
     /**
@@ -41,40 +40,6 @@ public class Controller implements Observer {
         memoManager = new MemoManager();
         sm = new SeriesManager();
     }
-
-
-
-
-//    public String createSeriesFromEvents(User u, String seriesName) {
-//        String s;
-//        String[] sSplit;
-//        ArrayList<Integer> indices;
-//        int i;
-//        boolean flawless;
-//        do {
-//            s = presenter.getEventsForSeries(u);
-//            sSplit = s.split(",");
-//            indices = new ArrayList<>();
-//            flawless = true;
-//            for (String selection : sSplit) {
-//                try {
-//                    i = Integer.parseInt(selection);
-//                    if (i < 0 || i > u.getEvents().size() - 1) {
-//                        flawless = false;
-//                        System.out.println(selection + " is out of bounds. Enter your selections again.");
-//                        break;
-//                    }
-//                    indices.add(i);
-//                } catch (NumberFormatException x) {
-//                    flawless = false;
-//                    System.out.println(selection + " is not a valid input type. Enter your selections again.");
-//                    break;
-//                }
-//            }
-//        } while (!flawless);
-//        sm.createSeries(seriesName, u, indices);
-//        return "Series " + seriesName + " created.";
-//    }
 
     public void START(){
         boolean exit = false;
@@ -195,28 +160,40 @@ public class Controller implements Observer {
     }
 
     private void eventsByStatus(int type){
-        ArrayList<Event> upcomingEvents;
+        ArrayList<Event> events;
         if(type == 1)
-            upcomingEvents = eventManager.getCurrentEvents(currUser);
+            events = eventManager.getCurrentEvents(currUser);
         else if(type == 2)
-            upcomingEvents = eventManager.getPastEvents(currUser);
+            events = eventManager.getPastEvents(currUser);
         else{
-            upcomingEvents = eventManager.getUpcomingEvents(currUser);
+            events = eventManager.getUpcomingEvents(currUser);
         }
         List<String > temp = new ArrayList<>();
-        for (Event event : upcomingEvents){
+        for (Event event : events){
             temp.add("Event Name: " + event.getEventName());
             temp.add("Start Data and Time: " + event.getStartTimeString());
             temp.add("End Date and Time: " + event.getEndTimeString());
         }
+
+
         List<String> input = presenter.displayView(UIViews.eventInfo, temp);
-        if(Integer.parseInt(input.get(0)) == 1){//User want to edit one of the events displayed
+        if (Integer.parseInt(input.get(0)) == 1) {//User want to edit one of the events displayed
+                input = presenter.displayView(UIViews.listEvents, eventManager.formatEventByName(events));
+                events.get(Integer.parseInt(input.get(0)) - 1);
+        }
+
+    }
+
+    private void eventManipulation(Event e){
+        boolean go = true;
+
+        while (go){
 
         }
     }
 
 
-    public void readFromDatabase(String filePath){
+    private void readFromDatabase(String filePath){
         try {
             databaseManager = new DatabaseManager(filePath);
         }
