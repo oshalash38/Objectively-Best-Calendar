@@ -530,7 +530,7 @@ public class Controller implements Observer {
         allEvents.addAll(eventManager.getUpcomingEvents(currUser));
         List<String> listOfStrings = toListString(allEvents);
         List<String> memoMessage = presenter.displayView(UIViews.createMemo, null);
-        List<String> indices = presenter.displayView(UIViews.listEvents, listOfStrings);
+        List<String> indices = presenter.displayView(UIViews.memoEventPicking, listOfStrings);
         int id = memoManager.CreateMemo(currUser.getMemos(), memoMessage.get(0), allEvents );
         for (String index : indices) {
             int currIndex = Integer.parseInt(index);
