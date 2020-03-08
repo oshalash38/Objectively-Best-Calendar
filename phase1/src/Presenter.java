@@ -67,14 +67,15 @@ public class Presenter {
         views.put(UIViews.createEvent, new CreateNewEventView());
         views.put(UIViews.createMemo, new CreateMemoView());
         views.put(UIViews.editMemo, new EditMemoView());
-        views.put(UIViews.seriesMenu, new MenuView("Would you like to create a series: " +
-                "\n 1: By choosing events to make into a new series \n 2: By making a completely" +
-                "new series from scratch. \n Type your selection (1 or 2).", 2));
+        views.put(UIViews.seriesMenu, new MenuView("Would you like to: " +
+                "\n 1: Create a series by choosing existing events to make into a new series \n 2: Create a series by making new events" +
+                " from scratch. \n3: Return to the main menu. \nType your selection (1, 2 or 3).", 3));
         views.put(UIViews.ChangeName, new ChangeName());
         views.put(UIViews.memoEventPicking, new MemoEventPickingView());
         views.put(UIViews.SearchEvents, new SearchEvents());
         views.put(UIViews.CreateTag, new CreateTag());
         views.put(UIViews.memoMenu, new MemoMenuView());
         views.put(UIViews.EventInfo , new EventInfo());
+        views.put(UIViews.eventBySeriesName, new EventBySeriesName());
     }
 }

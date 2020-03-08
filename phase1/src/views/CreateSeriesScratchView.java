@@ -7,7 +7,6 @@ import java.util.List;
  * The UI for creating a series from scratch
  * (i.e. when the user enters frequency, duration, number of events, series name)
  * @author Peter Sellars
- * {@link ViewModel#ViewModel()}
  * 0: SeriesName
  * 1: Start year
  * 2: Start month
@@ -42,7 +41,7 @@ public class CreateSeriesScratchView extends CalendarView{
         System.out.println("What is the duration of each event in this series?");
         CreateDurationView cdv = new CreateDurationView();
         inputs.addAll(cdv.activateView(null));
-        System.out.println("How many events are in this series?");
+        System.out.println("How many events are in this series? There must be a minimum of 2 events in all series.");
         inputs.add(in.nextLine());
         System.out.println("=================================================");
         return inputs;

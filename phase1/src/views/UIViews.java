@@ -8,7 +8,7 @@ public enum UIViews {
     createSeriesScratch, chooseFrequency, loginView, createEvent,
     createRecurringAlertView, alertView, createOneAlertView, createMemo, listEvents, editMemo, doesUserWantToEdit
     , seriesMenu, createSeriesEvents, EventManipulation, ChangeName, memoEventPicking, listMemos
-    ,SearchEvents, CreateTag, EventInfo, memoMenu, eventsInfo, dateThreshold
+    ,SearchEvents, CreateTag, EventInfo, memoMenu, eventsInfo, dateThreshold, eventBySeriesName
     ,  error
 
 }

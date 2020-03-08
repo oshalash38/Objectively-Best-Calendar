@@ -178,6 +178,15 @@ public class EventManager {
         }
         return eventsByTag;
     }
+    public List<Event> getEventsBySeriesName(User user, String sname){
+        List<Event> events = user.getEvents();
+        List<Event> snEvents = new ArrayList<>();
+        for (Event e: events){
+            if (e.getSeriesName().equals(sname)){
+                snEvents.add(e);
+            }
+        }return snEvents;
+    }
 
     /**
      * Returns a detailed view of this event
