@@ -5,7 +5,7 @@ import java.util.Random;
 
 public class MemoManager {
 
-    private static int idGen;
+    private static int idGen = 0;
 
     public MemoManager(){
 
@@ -19,18 +19,29 @@ public class MemoManager {
      */
     public int CreateMemo(Map<Integer, String> memos, String memoValue, List<Event> events){
 
-        int id = idGen;
-
-        idGen++;
-
-        memos.put(id, memoValue);
-
-        for (Event event : events){
-            event.addMemoID(id);
+        int high = -1;
+        for (Map.Entry<Integer, String> entry: memos.entrySet()){
+            if(entry.getKey() > high){high = entry.getKey();}
         }
-        return id;
+        idGen = high + 1;
+        memos.put(idGen, memoValue);
+        for (Event event : events){
+            event.addMemoID(idGen);
+        }
+        return idGen;
     }
 
+    public int associateMemo(Map<Integer, String> memos, String memoValue, Event e){
+        int temp = -1;
+        for (Map.Entry<Integer, String> entry: memos.entrySet()){
+            if (entry.getValue().equals(memoValue)){
+                e.addMemoID(entry.getKey());
+                temp = entry.getKey();
+                break;
+            }
+        }
+        return temp;
+    }
     public List<String> DisplayAllMemos(Map<Integer, String> map){
         List<String> retList = new ArrayList<>();
         for (Map.Entry<Integer, String> entry: map.entrySet()){
