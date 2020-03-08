@@ -10,7 +10,6 @@ import java.util.*;
  * @author Daniel Shoichet
  */
 public class Presenter {
-    private ViewModel myModel = new ViewModel();
     public Map<UIViews, CalendarView> views;
 
     public Presenter(){
@@ -18,8 +17,14 @@ public class Presenter {
         generateHashMap();
     }
 
+    /**
+     * Handles interactions between controller and the UI
+     * @param view the name of the screen that needs to pe presented
+     * @param info the additional info that may need to be displayed.
+     * @return the input that the user may have entered.
+     */
     public List<String> displayView(UIViews view, List<String> info) {
-        CalendarView current = myModel.views.get(view);
+        CalendarView current = views.get(view);
         return current.activateView(info);
     }
 
@@ -73,8 +78,4 @@ public class Presenter {
         views.put(UIViews.memoMenu, new MemoMenuView());
         views.put(UIViews.EventInfo , new EventInfo());
     }
-
-
-
-
 }
