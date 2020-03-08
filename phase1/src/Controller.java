@@ -134,7 +134,8 @@ public class Controller implements Observer {
     }
 
     private void mainMenu(){
-        while (true) {
+        boolean go = true;
+        while (go) {
             alertManager = new AlertManager(currUser.getEvents());
             alertManager.addObserver(this);
             notifications.addAll(alertManager.checkNewAlerts());
@@ -157,13 +158,17 @@ public class Controller implements Observer {
                     displayEventsFilteredBy();
                     break;
                 case 7:
+                    go = false;
                     START();
+                    break;
             }
         }
     }
 
     private void displayEventsFilteredBy() {
-        while (true) {
+        boolean go = true;
+        eventManager.updateStatus(currUser);
+        while (go) {
             List<String> input = presenter.displayView(UIViews.displayEventBy, null);
             switch (Integer.parseInt(input.get(0))) {
                 case 1:
@@ -177,7 +182,8 @@ public class Controller implements Observer {
                 case 7:
                 case 8:
                 case 9:
-                    mainMenu();
+                    go = false;
+                    break;
             }
         }
 
@@ -254,6 +260,9 @@ public class Controller implements Observer {
     public void checkUpcomingAlerts(){
         Presenter p = new Presenter();
         List<List<String>> alertList = alertManager.checkUpcomingAlerts();
+        if (alertList.isEmpty()){
+            alertList.add(Arrays.asList("No upcoming alerts."));
+        }
         for (List<String> s: alertList){
             p.displayView(UIViews.alertView, s);
         }
@@ -346,43 +355,23 @@ public class Controller implements Observer {
      */
     private void createEvent(){
         List<String> input = presenter.displayView(UIViews.createEvent, null);
+        List<Integer> dates = new ArrayList<Integer>();
         String eventName = input.get(0);
-        List<Integer> times = parseTiming(input.get(1), input.get(2));
-        Timing eventTiming = timingFactory.createTiming(times.get(0), times.get(1), times.get(2), times.get(3),
-                times.get(4), times.get(5), times.get(6), times.get(7), times.get(8), times.get(9));
-        eventManager.createEvent(currUser, eventName, eventTiming);
-        writeIntoFile("database.txt");
-    }
+        if(parseable(input.subList(1,10))){
+            dates = getIntegerList(input.subList(1,11));
+        }
+        Timing eventTiming = timingFactory.createTiming(dates.get(0), dates.get(1), dates.get(2),dates.get(3),
+                dates.get(4),dates.get(5),dates.get(6),dates.get(7),dates.get(8),dates.get(9));
 
-    /**
-     * Helper method that parses a formatted string date and returns a list of the values
-     * @param date1 The first date
-     * @param date2 The second date
-     * @return List of values corresponding to those dates
-     */
-    private List<Integer> parseTiming(String date1, String date2){
-        List<Integer> times = new ArrayList<>();
-        int year1 = Integer.parseInt(date1.substring(0, 4));
-        int month1 = Integer.parseInt(date1.substring(5, 7));
-        int day1 = Integer.parseInt(date1.substring(8, 10));
-        int hour1 = Integer.parseInt(date1.substring(11, 13));
-        int minute1 = Integer.parseInt(date1.substring(14, 16));
-        int year2 = Integer.parseInt(date2.substring(0, 4));
-        int month2 = Integer.parseInt(date2.substring(5, 7));
-        int day2 = Integer.parseInt(date2.substring(8, 10));
-        int hour2 = Integer.parseInt(date2.substring(11, 13));
-        int minute2 = Integer.parseInt(date2.substring(14, 16));
-        times.add(year1);
-        times.add(month1);
-        times.add(day1);
-        times.add(hour1);
-        times.add(minute1);
-        times.add(year2);
-        times.add(month2);
-        times.add(day2);
-        times.add(hour2);
-        times.add(minute2);
-        return times;
+        if(input.get(input.size()-1).toLowerCase().equals("yes")){
+            Event e = eventManager.createEvent(currUser, eventName, eventTiming);
+            alertManager.createNewAlert(e, timingFactory.createTiming(eventTiming.getStart()),
+                    "The event " + e.getEventName() + " is starting.");
+        }
+        else{
+            eventManager.createEvent(currUser, eventName, eventTiming);
+        }
+        writeIntoFile("database.txt");
     }
 
     private void createRecurringAlert(Event e){

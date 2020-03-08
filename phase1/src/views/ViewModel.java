@@ -23,7 +23,7 @@ public class ViewModel {
         views.put(UIViews.startup, new MenuView("CALENDAR V1\n===============" +
                         "\n1. Login\n2. Create new user\n3. Exit", 3));
         views.put(UIViews.mainMenu, new MenuView(
-                 "Main Menu:\nCurrent alerts:\n1. Check upcoming alerts\n2. Create memo\n3. Create event" +
+                 "Main Menu:\n1. Check upcoming alerts\n2. Create memo\n3. Create event" +
                          "\n4. Create series\n5. Event options\n6. Display events filtered by..." +
                          "\n7. Logout", 7));
         views.put(UIViews.displayEventBy, new MenuView(
@@ -63,10 +63,7 @@ public class ViewModel {
             "of the events that will form this series. Separate them by commas (ex. 1,2,3 to select the first three events)");
 
 
-    private final List<String> createEventAssociatedWithSeries = Arrays.asList("Enter event name:",
-            "Enter event start time:", "Enter event end time:", "Enter name of series:" ,
-            "Type in frequency of series events \n Options are: hourly, daily, weekly, monthly, yearly:",
-            "Would you like to be reminded when this event begins?\nOptions are: yes, no:");
+    private final List<String> createEventAssociatedWithSeries = Arrays.asList();
 
     private final List<String> typeAlert = Arrays.asList("Enter name of this alert (type none if you don't want a name associated with this alert):"
             ,"Is this a one time alert or a repeating alert?", "1. One time", "2. Repeating");

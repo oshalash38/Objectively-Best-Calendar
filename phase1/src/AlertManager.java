@@ -58,7 +58,7 @@ public class AlertManager extends Observable{
 
     private void sortAdd(ArrayList<Alert> alerts, Alert newAlert){
         for (Alert a: alerts){
-            if (newAlert.compareTo(a) >= 0){ alerts.add(alerts.indexOf(a), newAlert); break;}
+            if (newAlert.compareTo(a) >= 0){ alerts.add(alerts.indexOf(a), newAlert); return;}
         }
         alerts.add(newAlert);
     }
@@ -76,6 +76,8 @@ public class AlertManager extends Observable{
     private ArrayList<Alert> checkPassedAlertsEvent(Event e, List<List<String>> retList, LocalDateTime T){
         ArrayList<Alert> alerts = e.getAlerts();
         ArrayList<Alert> retAlerts = new ArrayList<>();
+        List<Alert> temp = new ArrayList<Alert>();
+
         //Iterates over each alert
         for(Alert a: alerts) {
             Timing currentAlertTime = a.getNextTime();
@@ -99,13 +101,18 @@ public class AlertManager extends Observable{
 
                     }
                     //if the above loop is terminated because the event has passed, then we can delete the alert from the ArrayList.
-                    if (a.getNextTime().getStart().compareTo(e.getTime().getStart()) >0){alerts.remove(a);}
+                    if (a.getNextTime().getStart().compareTo(e.getTime().getStart()) >0){temp.add(a);}
                 }
 
                 //Else if the alert is a OneTimeAlert, then we can delete it from the ArrayList directly.
-                else{alerts.remove(a);}
+                else{
+                    temp.add(a);
+                }
 
             }
+        }
+        for(Alert a: temp){
+            alerts.remove(a);
         }
         for (Alert a: retAlerts){
             retList.add(this.formatAlertDisplay(e, a));

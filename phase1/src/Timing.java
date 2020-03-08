@@ -47,12 +47,17 @@ public class Timing implements Serializable{
      * @return 0 if the event is ongoing, 1 if the event is in the future, and -1 if the event is over
      */
     public int getStatus(LocalDateTime dt) {
-        if (start.compareTo(dt) <= 0 && end.compareTo(dt) >= 0) {
-            return 0;
-        } else if (end.compareTo(dt) < 0) {
-            return -1;
-        } else {
-            return 1;
+        if(end != null) {
+            if (start.compareTo(dt) <= 0 && end.compareTo(dt) >= 0) {
+                return 0;
+            } else if (end.compareTo(dt) < 0) {
+                return -1;
+            } else {
+                return 1;
+            }
+        }
+        else{
+            return start.compareTo(dt);
         }
     }
 
@@ -88,7 +93,7 @@ public class Timing implements Serializable{
      * @return a string with the start date and time.
      */
     public String toString(){
-        return new String(start.getDayOfMonth()+" " + start.getMonth() + start.getYear() + ", at: " + start.getHour() + ":"+ start.getMinute());
+        return new String(start.getDayOfMonth()+" " + start.getMonth()+ " " + start.getYear() + ", at: " + start.getHour() + ":"+ start.getMinute());
     }
 
 

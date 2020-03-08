@@ -13,26 +13,23 @@ public class EventManager {
      * @param name Name of the event.
      * @param timing Timing of the event.
      */
-    public void createEvent(User user, String name, Timing timing){
+    public Event createEvent(User user, String name, Timing timing){
         Event event = new Event(name, timing);
         sortEvents(user, event);
+        return event;
     }
-    public void createEvent(User user, String name, Timing timing, String series){
+    public Event createEvent(User user, String name, Timing timing, String series){
         Event event = new Event(name, timing, series);
         sortEvents(user,event);
+        return event;
     }
     private void sortEvents(User user, Event e){
         ArrayList<Event> events = user.getEvents();
-        int index = 0;
-        while (index < events.size()){
-            if (events.get(index).compareTo(e) == 1 || events.get(index).compareTo(e) == 0){
-                events.add(index, e);
-                break;
-            }
+
+        for (Event event: events){
+            if (event.compareTo(e) >= 0){ events.add(events.indexOf(event), e); return;}
         }
-        if (index >= events.size()){
-            events.add(e);
-        }
+        events.add(e);
     }
 
     /**

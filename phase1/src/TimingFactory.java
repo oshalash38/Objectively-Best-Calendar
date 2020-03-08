@@ -26,6 +26,15 @@ public class TimingFactory {
     }
 
     /**
+     * Creates a new Timing
+     * @param time the time
+     * @return the Timing
+     */
+    public Timing createTiming(LocalDateTime time){
+        return new Timing(time);
+    }
+
+    /**
      * returns an instance of Timing with a start time and an end time. The first set of parameters is for start time
      * and the second set of parameters is for end time.
      *

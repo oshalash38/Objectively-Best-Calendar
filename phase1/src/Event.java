@@ -125,6 +125,7 @@ public class Event implements Serializable, Comparable<Event> {
                 break;
             case 1:
                 this.status = Status.UPCOMING;
+                break;
             case -1:
                 this.status = Status.PAST;
         }
