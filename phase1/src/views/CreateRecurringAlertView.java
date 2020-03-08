@@ -3,6 +3,9 @@ package views;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Allow user to create a new recurring alert
+ */
 public class CreateRecurringAlertView extends CalendarView {
     /**Collect user preferences on a new recurring alert
      *

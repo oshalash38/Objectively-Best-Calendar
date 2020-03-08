@@ -3,6 +3,9 @@ package views;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Allow user to change the name
+ */
 public class ChangeName extends CalendarView {
     /** Collect as a List of Strings the user's selection for a new name
      *

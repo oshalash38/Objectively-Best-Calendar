@@ -219,6 +219,13 @@ public class EventManager {
         return str;
     }
 
+    /**Return a list of user's events between two dates
+     *
+     * @param currUser user passed
+     * @param date1 the first date
+     * @param date2 the second date
+     * @return a list of events between date1 and date2
+     */
     public List<Event> getEventsBetween(User currUser, Timing date1, Timing date2) {
         List<Event> out = new ArrayList<>();
         List<Event> events = currUser.getEvents();

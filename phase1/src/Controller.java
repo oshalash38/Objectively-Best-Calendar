@@ -41,6 +41,9 @@ public class Controller implements Observer {
         sm = new SeriesManager();
     }
 
+    /**
+     * Runs the calendar (the home screen)
+     */
     public void START() {
         boolean exit = false;
         List<String> input;
@@ -67,6 +70,11 @@ public class Controller implements Observer {
         System.exit(1);
     }
 
+    /**Let the user know that they have new notifications
+     *
+     * @param obs AlertManager
+     * @param o list of alerts to display
+     */
     @Override
     public void update(Observable obs, Object o){
         notifications.addAll((List<List<String>>)o);
@@ -76,7 +84,9 @@ public class Controller implements Observer {
     }
 
 
-
+    /**
+     * Display the user's notifications
+     */
     public void displayNotifications(){
         if (notifications.isEmpty()) {
             notifications.add(Arrays.asList("No new notifications."));
