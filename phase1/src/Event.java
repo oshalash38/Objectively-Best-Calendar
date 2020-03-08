@@ -109,6 +109,15 @@ public class Event implements Serializable, Comparable<Event> {
         return this.time.compareStartTime(e.time);
     }
 
+    public int compareTo(Timing timing){
+        if (this.time.compareStartTime(timing) > 0 || this.time.compareEndTime(timing) < 0){
+            return 1;
+        }
+        else {
+            return 0;
+        }
+    }
+
     @Override
     public String toString(){
         return "Name: " + this.eventName + "\nStart: " + this.time.getStart() + "\nEnd: " + this.time.getEnd();

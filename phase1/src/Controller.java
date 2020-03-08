@@ -153,6 +153,8 @@ public class Controller implements Observer {
                     eventsByStatus(3);
                     break;
                 case 4:
+                    eventByThreshold();
+                    break;
                 case 5:
                     memo();
                     break;
@@ -167,6 +169,28 @@ public class Controller implements Observer {
                     go = false;
                     break;
             }
+        }
+    }
+
+    private void eventByThreshold(){
+        List<String> input = presenter.displayView(UIViews.dateThreshold, null);
+        Timing date1 = timingFactory.createTiming(Integer.parseInt(input.get(0)), Integer.parseInt(input.get(1)),
+                Integer.parseInt(input.get(2)), Integer.parseInt(input.get(3)), Integer.parseInt(input.get(4)));
+                ;
+
+        Timing date2 = timingFactory.createTiming(Integer.parseInt(input.get(5)), Integer.parseInt(input.get(6)),
+                Integer.parseInt(input.get(7)), Integer.parseInt(input.get(8)), Integer.parseInt(input.get(9)));
+
+
+        List<Event> events = eventManager.getEventsBetween(currUser, date1, date2);
+        List<String > temp = new ArrayList<>();
+        for (Event event : events){
+            temp.add("Event Name: " + event.getEventName());
+            temp.add("Start Date and Time: " + event.getStartTimeString());
+            temp.add("End Date and Time: " + event.getEndTimeString());
+        }
+        if (temp.size() > 0) {
+            presenter.displayView(UIViews.eventInfo, temp);
         }
     }
 

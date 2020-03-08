@@ -59,5 +59,6 @@ public class ViewModel {
         views.put(UIViews.CreateTag, new CreateTag());
         views.put(UIViews.memoMenu, new MemoMenuView());
         views.put(UIViews.EventInfo , new EventInfo());
+        views.put(UIViews.dateThreshold, new DateThresholdView());
     }
 }
