@@ -250,6 +250,8 @@ public class Controller implements Observer {
 
 
 
+
+
     private void readFromDatabase(String filePath){
         try {
             databaseManager = new DatabaseManager(filePath);

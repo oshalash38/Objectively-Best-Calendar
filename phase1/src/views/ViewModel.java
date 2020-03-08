@@ -54,5 +54,6 @@ public class ViewModel {
         views.put(UIViews.seriesMenu, new MenuView("Would you like to create a series: \n 1: By choosing events to make into a new series \n 2: By making a completely" +
                 "new series from scratch. \n Type your selection (1 or 2).", 2));
         views.put(UIViews.ChangeName, new ChangeName());
+        views.put(UIViews.memoEventPicking, new MemoEventPickingView());
     }
 }

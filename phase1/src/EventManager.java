@@ -113,6 +113,7 @@ public class EventManager {
     }
 
 
+
     /**
      *
      * @param events the events that need to be formatted
