@@ -10,22 +10,22 @@ import java.time.LocalDateTime;
  * @author Omar Shalash
  */
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 /**
  * This class handles the logic and business rules of the Calendar
  */
-public class Controller {
-
+public class Controller implements Observer {
+    private User curr;
     private SeriesManager sm;
-
+    private AlertManager alertManager;
+    private List<List<String>> notifications = new ArrayList<>();
     private DatabaseManager databaseManager;
     private EventManager eventManager;
     private TimingFactory timingFactory;
     private Presenter presenter;
     private User currUser;
+    private Event currEvent;
 
 
     /**
@@ -80,6 +80,7 @@ public class Controller {
             switch (Integer.parseInt(input.get(0))) {
                 case 1:
                     userLogin();
+
                     break;
                 case 2:
                     input = presenter.displayView(UIViews.createUser, null);
@@ -90,9 +91,29 @@ public class Controller {
                     exit = true;
                     break;
             }
+
         }
 
         System.exit(1);
+    }
+
+    public void update(Observable obs, Object o){
+        notifications.addAll((List<List<String>>)o);
+        if (notifications.size()!=0){ System.out.println("You have new notifications.");}
+
+    }
+
+    public void displayNotifications(){
+
+        if(notifications.size()>0) {
+            for (List<String> s : notifications) {
+                presenter.displayView(UIViews.alertView, s);
+            }
+            notifications.clear();
+        }
+        else {
+            System.out.println("No Alerts :)");
+        }
     }
 
     private void userLogin(){
@@ -112,10 +133,19 @@ public class Controller {
 
     private void mainMenu(){
         while (true) {
+            alertManager = new AlertManager(currUser.getEvents());
+            alertManager.addObserver(this);
+            notifications.addAll(alertManager.checkNewAlerts());
+            alertManager.keepChecking();
+            currentAlerts();
             List<String> mainMenuInput = presenter.displayView(UIViews.mainMenu, null);
             switch (Integer.parseInt(mainMenuInput.get(0))) {
                 case 1:
+                    checkUpcomingAlerts();
+                    presenter.displayView(UIViews.mainMenu, null);
+                    break;
                 case 2:
+
                 case 3:
                     createEvent();
                     break;
@@ -183,6 +213,11 @@ public class Controller {
         }
     }
 
+    public void currentAlerts(){
+
+        notifications.addAll(alertManager.checkNewAlerts());
+        displayNotifications();
+    }
     public List<String> formatEventInfo(Event e){
         List<String> lst = new ArrayList<String>();
         lst.add(e.getEventName());
@@ -213,6 +248,16 @@ public class Controller {
         }createSeriesFromScratch();
 
     }
+
+    public void checkUpcomingAlerts(){
+        Presenter p = new Presenter();
+        List<List<String>> alertList = alertManager.checkUpcomingAlerts();
+        for (List<String> s: alertList){
+            p.displayView(UIViews.alertView, s);
+        }
+
+    }
+
     private boolean parseable(List<String> lst){
         int i;
         for (String s: lst){
@@ -336,5 +381,42 @@ public class Controller {
         times.add(hour2);
         times.add(minute2);
         return times;
+    }
+
+    private void createRecurringAlert(Event e){
+        Presenter p = new Presenter();
+        List<String> inputs = presenter.displayView(UIViews.createRecurringAlertView, null);
+        if (parseable(inputs.subList(1, 9))) {
+            DurationFactory durationFactory = new DurationFactory();
+            List<Integer> date = getIntegerList(inputs.subList(1, 6));
+            Timing t = timingFactory.createTiming(date.get(0).intValue(), date.get(1).intValue(), date.get(2).intValue(), date.get(3).intValue(), date.get(4).intValue());
+            List<Integer> dur = getIntegerList(inputs.subList(6, 9));
+            Duration d = durationFactory.createDuration(dur.get(0).intValue(), dur.get(1).intValue(), dur.get(2).intValue());
+            if (inputs.get(0).equals("null")) {
+                alertManager.createNewAlert(e, t, d);
+            } else {
+                alertManager.createNewAlert(e, t, inputs.get(0), d);
+            }
+            return ;
+        }
+        System.out.println("Invalid inputs please try again.");
+        createRecurringAlert(e);
+    }
+
+    private void createOneAlert(Event e){
+        Presenter p = new Presenter();
+        List<String> inputs = presenter.displayView(UIViews.createOneAlertView, null);
+        if (parseable(inputs.subList(1, 6))) {
+            List<Integer> date = getIntegerList(inputs.subList(1, 6));
+            Timing t = timingFactory.createTiming(date.get(0).intValue(), date.get(1).intValue(), date.get(2).intValue(), date.get(3).intValue(), date.get(4).intValue());
+            if (inputs.get(0).equals("null")) {
+                alertManager.createNewAlert(e, t);
+            } else {
+                alertManager.createNewAlert(e, t, inputs.get(0));
+            }
+            return ;
+        }
+        System.out.println("Invalid inputs please try again.");
+        createOneAlert(e);
     }
 }

@@ -1,8 +1,8 @@
-import javax.jws.soap.SOAPBinding;
-import java.io.Serializable;
+
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.*;
+
 
 
 //Code for timer got from https://stackoverflow.com/questions/18353689/how-to-repeat-a-task-after-a-fixed-amount-of-time-in-android
@@ -10,16 +10,17 @@ import java.util.*;
 /**
  * @author ABHIJOY MANDAL .
  */
-public class AlertManager {
+public class AlertManager extends Observable{
     private LocalDateTime currentTime = LocalDateTime.now();
-    private ArrayList<Alert> upcomingAlerts = new ArrayList<>();
-    Timer t = new Timer();
-    private int CHECKDURATION = 60;
+    private ArrayList<Alert> upcomingAlerts = new ArrayList<>(0);
+    private List<List<String>> printableUpcomingAlerts = new ArrayList<>(0);
+    private Map<Event, List<List<String>>> printableLink = new HashMap<>(0);
+    private Timer t = new Timer();
+    private final int CHECKDURATION = 60;
     private ArrayList<Event> UserEvents;
 
     public AlertManager (ArrayList<Event> events){
         this.UserEvents = events;
-
     }
 
     /**
@@ -28,23 +29,31 @@ public class AlertManager {
      *
      * @return Returns an ArrayList of Alert which have passed.
      */
-    public ArrayList<Alert> checkNewAlerts(){
-        ArrayList<Alert> retAlerts = new ArrayList<>();
-        for(Event e: UserEvents){
-            checkPassedAlertsEvent(e, retAlerts, currentTime);
+    public List<List<String>> checkNewAlerts(){
+        currentTime = LocalDateTime.now();
+        List<List<String>> retList =  new ArrayList<>(0);
+            for (Event e : UserEvents) {
+                checkPassedAlertsEvent(e, retList, currentTime);
+
         }
-        getUpcomingAlerts();
+        if(upcomingAlerts!= null) {
+            retList.addAll(runUpcomingAlerts());
+        }
+        return retList;
+    }
+
+    public void keepChecking(){
         t.scheduleAtFixedRate(new TimerTask() {
 
                                   @Override
                                   public void run() {
-                                        runUpcomingAlerts();
+                                      List<List<String>> displayAlerts = runUpcomingAlerts();
+                                      notifyObservers(displayAlerts);
                                   }
 
                               },
-                0,
+                CHECKDURATION*1000,
                 CHECKDURATION*1000);
-        return retAlerts;
     }
 
     private void sortAdd(ArrayList<Alert> alerts, Alert newAlert){
@@ -54,8 +63,19 @@ public class AlertManager {
         alerts.add(newAlert);
     }
 
-    private void checkPassedAlertsEvent(Event e, ArrayList<Alert> retAlerts, LocalDateTime T){
+    private List<String> formatAlertDisplay(Event e, Alert a){
+        List<String> retList = new ArrayList<>();
+        retList.add("New Alert for:");
+        retList.add("Event name: " + e.getEventName());
+        retList.add("Event Start time: " + e.getTime().toString());
+        retList.add("Alert message: " + a.pushReminder());
+        retList.add("Alert Time: "+ a.getNextTime().toString());
+        return retList;
+    }
+
+    private ArrayList<Alert> checkPassedAlertsEvent(Event e, List<List<String>> retList, LocalDateTime T){
         ArrayList<Alert> alerts = e.getAlerts();
+        ArrayList<Alert> retAlerts = new ArrayList<>();
         //Iterates over each alert
         for(Alert a: alerts) {
             Timing currentAlertTime = a.getNextTime();
@@ -65,7 +85,9 @@ public class AlertManager {
                 break;
 
             } else {
+
                 sortAdd(retAlerts, a);
+
                 //Updates the 'next time' of the alert and checks if it changes
                 a.getStatus(T);
 
@@ -74,6 +96,7 @@ public class AlertManager {
                     //then we add in every recurring alert which is scheduled before today.
                     while (a.getNextTime().getStart().compareTo(T) <= 0 && a.getNextTime().getStart().compareTo(e.getTime().getStart())<=0) {
                         sortAdd(retAlerts, a);
+
                     }
                     //if the above loop is terminated because the event has passed, then we can delete the alert from the ArrayList.
                     if (a.getNextTime().getStart().compareTo(e.getTime().getStart()) >0){alerts.remove(a);}
@@ -84,6 +107,23 @@ public class AlertManager {
 
             }
         }
+        for (Alert a: retAlerts){
+            retList.add(this.formatAlertDisplay(e, a));
+        }
+        printableLink.put(e, retList);
+        return retAlerts;
+    }
+
+    public List<List<String>> checkUpcomingAlerts (){
+       List<List<String>> retList = new ArrayList<>();
+
+       for(Event e: this.UserEvents) {
+           if (e.getAlerts().size() > 0) {
+               retList.add(formatAlertDisplay(e, e.getAlerts().get(0)));
+           }
+       }
+       retList.addAll(printableUpcomingAlerts);
+       return retList;
     }
 
     /**
@@ -142,43 +182,47 @@ public class AlertManager {
     private void getUpcomingAlerts(){
         for (Event e: UserEvents){
             LocalDateTime nextUpdateTime = currentTime.plusSeconds(CHECKDURATION);
-            checkPassedAlertsEvent(e, upcomingAlerts, nextUpdateTime);
+            upcomingAlerts = checkPassedAlertsEvent(e, printableUpcomingAlerts, nextUpdateTime);
         }
     }
 
-    private ArrayList<Alert> runUpcomingAlerts(){
-        ArrayList<Alert> tempAlerts = new ArrayList<>(upcomingAlerts);
+    private List<List<String>> runUpcomingAlerts(){
+        List<List<String>> tempPrint= new ArrayList<>();
+        tempPrint.addAll(printableUpcomingAlerts);
         upcomingAlerts.clear();
+        printableUpcomingAlerts.clear();
+        printableLink.clear();
         currentTime = LocalDateTime.now();
         getUpcomingAlerts();
-        return tempAlerts;
+
+        return tempPrint;
     }
 
-    /**
-     *
-     * @param afterTime the number of seconds till the alerts
-     * @return Returns an ArrayList of alerts which will excecute after afterTime seconds.
-     */
-    public ArrayList<Alert> getUpcomingAlerts(int afterTime){
-        ArrayList<Alert> retList = new ArrayList<>();
-        LocalDateTime checkTime = currentTime.plusSeconds(afterTime);
-        if(afterTime <CHECKDURATION) {
-            for (Alert a : upcomingAlerts) {
-                if (a.getNextTime().getStart().compareTo(checkTime) <= 0) {
-                    retList.add(a);
-                }
-            }
-        }
-        else if (afterTime == CHECKDURATION){retList.addAll(upcomingAlerts);}
-        else{
-            retList.addAll(upcomingAlerts);
-            for(Event e: this.UserEvents){
-                checkPassedAlertsEvent(e, retList, checkTime);
-            }
-
-        }
-
-        return retList;
-    }
+//    /**
+//     *
+//     * @param afterTime the number of seconds till the alerts
+//     * @return Returns an ArrayList of alerts which will excecute after afterTime seconds.
+//     */
+//    public ArrayList<Alert> getUpcomingAlerts(int afterTime){
+//        ArrayList<Alert> retList = new ArrayList<>();
+//        LocalDateTime checkTime = currentTime.plusSeconds(afterTime);
+//        if(afterTime <CHECKDURATION) {
+//            for (Alert a : upcomingAlerts) {
+//                if (a.getNextTime().getStart().compareTo(checkTime) <= 0) {
+//                    retList.add(a);
+//                }
+//            }
+//        }
+//        else if (afterTime == CHECKDURATION){retList.addAll(upcomingAlerts);}
+//        else{
+//            retList.addAll(upcomingAlerts);
+//            for(Event e: this.UserEvents){
+//                if(e.getAlerts().size() >0){retList.add(e.getAlerts().get(0));}
+//            }
+//
+//        }
+//
+//        return retList;
+ //   }
 
 }

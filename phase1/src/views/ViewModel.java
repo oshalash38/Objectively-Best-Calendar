@@ -15,6 +15,9 @@ public class ViewModel {
 
     public ViewModel(){
         views = new HashMap();
+        views.put(UIViews.alertView, new AlertView());
+        views.put(UIViews.createRecurringAlertView, new CreateRecurringAlertView());
+        views.put(UIViews.createOneAlertView, new CreateOneAlertView());
         views.put(UIViews.createUser, new CreateNewUserView());
         views.put(UIViews.eventInfo, new EventView());
         views.put(UIViews.startup, new MenuView("CALENDAR V1\n===============" +
