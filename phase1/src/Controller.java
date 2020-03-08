@@ -119,6 +119,8 @@ public class Controller implements Observer {
                     createEvent();
                     break;
                 case 4:
+                    seriesMenu();
+                    break;
                 case 5:
                     displayEventsFilteredBy();
                     break;
@@ -233,8 +235,18 @@ public class Controller implements Observer {
         }
         return str;
     }
+    private void seriesMenu(){
+        List<String> input = presenter.displayView(UIViews.seriesMenu, null);
+        int i = Integer.parseInt(input.get(0));
+        if (i==1){
+            createSeriesFromEvents();
+        }
+        else{
+            createSeriesFromScratch();
+        }
+    }
     public void createSeriesFromEvents(){
-        List<String> input = presenter.displayView(UIViews.listEvents, listEvents(currUser));
+        List<String> input = presenter.displayView(UIViews.createSeriesEvents, listEvents(currUser));
         String[] eventSelectionsArray = input.get(0).split(",");
         List<String> eventSelections = Arrays.asList(eventSelectionsArray);
         boolean flawless = true; int i; List<Integer> indices = new ArrayList<>();
@@ -246,6 +258,7 @@ public class Controller implements Observer {
             }
             if (flawless){
                 sm.createSeries(input.get(1), currUser, indices);
+                writeIntoFile("database.txt");
             }
         }
         System.out.println("Your event selection was invalid. Please try again.");
