@@ -149,7 +149,8 @@ public class Controller implements Observer {
                     checkUpcomingAlerts();
                     break;
                 case 2:
-
+                    createMemo();
+                    break;
                 case 3:
                     createEvent();
                     break;
@@ -209,9 +210,10 @@ public class Controller implements Observer {
             temp.add("Start Data and Time: " + event.getStartTimeString());
             temp.add("End Date and Time: " + event.getEndTimeString());
         }
-        List<String> input = presenter.displayView(UIViews.eventInfo, temp);
-        if(Integer.parseInt(input.get(0)) == 1){//User want to edit one of the events displayed
-
+            List<String> input = presenter.displayView(UIViews.eventInfo, temp);
+        if (input.size() > 0) {
+            if (Integer.parseInt(input.get(0)) == 1) {//User want to edit one of the events displayed
+            }
         }
     }
 
@@ -475,6 +477,8 @@ public class Controller implements Observer {
     }
 
     private void createMemo(){
+
         List<String> inputs = presenter.displayView(UIViews.createMemo, null);
+        memoManager.CreateMemo(currUser.getMemos(), inputs.get(0));
     }
 }

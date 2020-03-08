@@ -8,9 +8,24 @@ public class CreateMemoView extends CalendarView {
     public List<String> activateView(List<String> outputs) {
         List<String> inputs = new ArrayList<>();
 
-        System.out.println("What should the memo say:");
+        System.out.println("Enter message of memo: ");
 
         inputs.add(in.nextLine());
+
+        System.out.println("Associate with one or more events:");
+        System.out.println("----------------------------------");
+
+        if (outputs.size() == 0){
+            System.out.println("You have no events.");
+        }
+        else {
+            for (int i = 0; i < outputs.size(); i++){
+                if (i % 3 == 0){
+                    System.out.println("=======================");
+                }
+                System.out.println(outputs.get(i));
+            }
+        }
 
         return inputs;
     }
