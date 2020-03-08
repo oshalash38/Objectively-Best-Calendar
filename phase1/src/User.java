@@ -16,18 +16,33 @@ public class User implements Serializable{
     private String username;
 
 
-
+    /**
+     * Created an instance of User
+     * @param username the username of this user
+     * @param password the password of this user
+     */
     public User(String username, String password){
         this.username = username;
         this.password = password;
     }
+
+    /**
+     * A getter method for getEvents
+     * @return the events of this user.
+     */
     public ArrayList<Event> getEvents(){return this.events;}
 
+    /**
+     * A function to make sure if the client entered the correct password to gave the right to interact with the user
+     * @param attempt the trial by the client
+     * @return true if the client entered the right password. false otherwise.
+     */
     public Boolean validatePassword(String attempt){return this.password.equals(attempt);}
 
-    public void setPassword (String newPassword){password = newPassword;}
-
-    public void setUsername (String username){ this.username = username;}
+    /**
+     * A getter method for the username
+     * @return the username of this user
+     */
     public String getUsername(){return username;}
 
     /**Return the HashMap containing the memos.

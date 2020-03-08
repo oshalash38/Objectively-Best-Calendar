@@ -11,6 +11,10 @@ import java.util.Scanner;
  * @author Peter Sellars
  */
 public class SeriesManager {
+
+    private TimingFactory tf = new TimingFactory();
+    private DurationFactory df = new DurationFactory();
+
     /**
      * Creates a list of new Events that form a series
      *
@@ -19,8 +23,6 @@ public class SeriesManager {
      * @param start      the beginning of the series
      * @return the list of events forming this series
      */
-    private TimingFactory tf = new TimingFactory();
-    private DurationFactory df = new DurationFactory();
     public void createSeries(User u, String seriesName, List<Integer> dur, List<Integer> start, int fSelection, int neSelection) {
         ArrayList<Event> lst = new ArrayList<>();
         Timing temp = tf.createTiming(start.get(0), start.get(1), start.get(2), start.get(3), start.get(4)

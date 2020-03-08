@@ -90,7 +90,16 @@ public class DatabaseManager implements Serializable {
             System.out.println("Failed to save to file");}
     }
 
+    /**
+     *  a getter method for the Users hashMap
+     * @return a map of users
+     */
     public Map<String, User> getUsers() { return users; }
 
+    /**
+     * Return the user with the given username
+     * @param username the username being requested
+     * @return the User
+     */
     public User findUser(String username){ return users.get(username);}
 }

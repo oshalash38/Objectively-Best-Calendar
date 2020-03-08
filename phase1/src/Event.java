@@ -79,16 +79,20 @@ public class Event implements Serializable, Comparable<Event> {
         return tags;
     }
 
+    /**
+     * A setter method for eventName
+     * @param eventName the new eventName
+     */
     public void setEventName(String eventName) {
         this.eventName = eventName;
     }
 
+    /**
+     * A setter method for seriesName
+     * @param seriesName the new seriesName
+     */
     public void setSeriesName(String seriesName) {
         this.seriesName = seriesName;
-    }
-
-    public void setTime(Timing time) {
-        this.time = time;
     }
 
     /** Give the status of an event as an integer
@@ -109,10 +113,6 @@ public class Event implements Serializable, Comparable<Event> {
         return this.time.compareStartTime(e.time);
     }
 
-    @Override
-    public String toString(){
-        return "Name: " + this.eventName + "\nStart: " + this.time.getStart() + "\nEnd: " + this.time.getEnd();
-    }
 
     /**
      * Checks the time of the event relative to the current time and updates the status accordingly.
@@ -134,17 +134,28 @@ public class Event implements Serializable, Comparable<Event> {
      */
     public Status getStatus(){return status;}
 
+    /**
+     * A getter method for startTime
+     * @return startTime of this event
+     */
     public String getStartTimeString(){
         return this.time.getStart().toString();
     }
 
+    /**
+     * A getter method for endTime
+     * @return endTime of this event
+     */
     public String getEndTimeString(){
         return this.time.getEnd().toString();
     }
 
+    /**
+     * Adds a memo to the list of memos for this event
+     * @param memoID the ID of the memo
+     */
     public void addMemoID(int memoID) {
         this.memoIDs.add(memoID);
     }
-    public void removeAlert(Alert a) {this.alerts.remove(a);}
 }
 

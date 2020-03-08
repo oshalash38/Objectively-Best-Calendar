@@ -46,11 +46,6 @@ public class RecurringAlert extends Alert {
 
     /** Give the status of an event as an integer
      *
-     * TODO: If you load this program up and several RecurringAlerts have passed, you would need to check getStatus many many times. I don't know if this is a problem yet but it might be in the future
-     *
-     *
-     *
-     *
      * @param dt the time being compared to this event
      * @return 0 if the event is ongoing, 1 if the event is in the future, and -1 if the event is over
      */

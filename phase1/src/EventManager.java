@@ -18,11 +18,20 @@ public class EventManager {
         sortEvents(user, event);
         return event;
     }
+
+    /**
+     * Creates a new event and returns it.
+     * @param user The user that will store the new event.
+     * @param name Name of the event.
+     * @param timing Timing of the event.
+     * @param series series of the event.
+     */
     public Event createEvent(User user, String name, Timing timing, String series){
         Event event = new Event(name, timing, series);
         sortEvents(user,event);
         return event;
     }
+
     private void sortEvents(User user, Event e){
         ArrayList<Event> events = user.getEvents();
 
@@ -32,16 +41,6 @@ public class EventManager {
         events.add(e);
     }
 
-    /**
-     * Deletes an event.
-     * @param user The user that contains the event to be removed.
-     * @param event The event to be removed.
-     * @return True iff the event was removed.
-     */
-    public boolean deleteEvent(User user, Event event){
-        ArrayList<Event> events = user.getEvents();
-        return events.remove(event);
-    }
 
     /**
      * Changes the name of an event.
@@ -73,6 +72,12 @@ public class EventManager {
         return null;
     }
 
+    /**
+     * Returns a list of all the events that have the name sent in
+     * @param user the user being searched in
+     * @param name the name being looked for
+     * @return the list of Events
+     */
     public List<Event> searchEventsByName(User user, String name){
         ArrayList<Event> events = user.getEvents();
         ArrayList<Event> output = new ArrayList<Event>();
@@ -95,6 +100,11 @@ public class EventManager {
         }
     }
 
+    /**
+     * Returns a list of upcoming events
+     * @param user the user that this method looks in
+     * @return the list of upcoming events
+     */
     public ArrayList<Event> getUpcomingEvents(User user){
         ArrayList<Event> upcomingEvents = new ArrayList<>();
         ArrayList<Event> allEvents = user.getEvents();
@@ -106,6 +116,11 @@ public class EventManager {
         return upcomingEvents;
     }
 
+    /**
+     * Returns a list of events that are currently happening
+     * @param user the user that this method looks in
+     * @return the list of current events
+     */
     public ArrayList<Event> getCurrentEvents(User user){
         ArrayList<Event> currentEvents = new ArrayList<>();
         ArrayList<Event> allEvents = user.getEvents();
@@ -117,6 +132,11 @@ public class EventManager {
         return currentEvents;
     }
 
+    /**
+     * Returns a list of past events
+     * @param user the user that this method looks in
+     * @return the list of past events
+     */
     public ArrayList<Event> getPastEvents(User user){
         ArrayList<Event> pastEvents = new ArrayList<>();
         ArrayList<Event> allEvents = user.getEvents();
@@ -128,9 +148,8 @@ public class EventManager {
         return pastEvents;
     }
 
-
-
     /**
+     * Formats the events by name. Returns only the name of the requested events
      *
      * @param events the events that need to be formatted
      * @return a list of the names of the strings provided
@@ -189,5 +208,14 @@ public class EventManager {
             str+=tag + ", ";
         }
         return str;
+    }
+
+    /**
+     *
+     * @param e the event to add the tag to
+     * @param newTag the string that is required for the tag creation
+     */
+    public void addTag(Event e, String newTag){
+        e.getTags().add(newTag);
     }
 }

@@ -14,11 +14,11 @@ public class EventInfo extends CalendarView{
     @Override
     public List<String> activateView(List<String> outputs) {
         System.out.println("The name of this event is " + outputs.get(0));
-        System.out.println("The name of this series is " + outputs.get(1));
-        System.out.println("This event starts at " + outputs.get(2));
-        System.out.println("This event ends at " + outputs.get(3));
-        System.out.println("This event has Alerts:\n" + outputs.get(4));
-        System.out.println("This event has tags " + outputs.get(5));
+        System.out.println("  The name of this series is " + outputs.get(1));
+        System.out.println("  This event starts at " + outputs.get(2));
+        System.out.println("  This event ends at " + outputs.get(3));
+        System.out.println("  This event has Alerts:\n" + outputs.get(4));
+        System.out.println(" This event has tags " + outputs.get(5));
         return null;
     }
 }

@@ -134,9 +134,13 @@ public class AlertManager extends Observable{
         return retAlerts;
     }
 
-    public List<List<String>> checkUpcomingAlerts (){
+    /**
+     * This method compiles a list of a list of alerts in string format
+     * @return the upcoming alerts
+     */
+    public List<List<String>> checkUpcomingAlerts ()
+    {
        List<List<String>> retList = new ArrayList<>();
-
        for(Event e: this.UserEvents) {
            if (e.getAlerts().size() > 0) {
                retList.add(formatAlertDisplay(e, e.getAlerts().get(0)));

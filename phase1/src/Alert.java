@@ -41,8 +41,6 @@ public abstract class Alert implements Serializable, Comparable<Alert>{
      */
     public abstract int getStatus(LocalDateTime dt);
 
-    //TODO: I don't yet know how data will be passed around within the usecases but this will have to be implemented eventually
-    //public abstract void getInfo();
 
     /**
      * Returns the string that should be pushed to the user.

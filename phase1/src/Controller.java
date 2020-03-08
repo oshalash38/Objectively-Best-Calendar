@@ -68,21 +68,14 @@ public class Controller implements Observer {
 
     @Override
     public void update(Observable obs, Object o){
-        notifications.addAll((List<List<String>>)o);
-        if (notifications.size()!=0){ System.out.println("You have new notifications.");}
-
-    }
+        notifications.addAll((List<List<String>>)o); }
 
     public void displayNotifications(){
-
         if(notifications.size()>0) {
             for (List<String> s : notifications) {
                 presenter.displayView(UIViews.alertView, s);
             }
             notifications.clear();
-        }
-        else {
-            System.out.println("No Alerts :)");
         }
     }
 
@@ -200,9 +193,7 @@ public class Controller implements Observer {
         else{
             events = eventManager.getUpcomingEvents(currUser);
         }
-        List<String > temp = new ArrayList<>();
         printDetailedEvents(events);
-        presenter.displayView(UIViews.eventsInfo, temp);
         if(!events.isEmpty()) {
             List<String> input = presenter.displayView(UIViews.doesUserWantToEdit, null);
             if (input.size() > 0) {
@@ -233,7 +224,7 @@ public class Controller implements Observer {
                 case 4:
                     //associateMemoWithEvent(e);
                 case 5:
-                    eventByTag(presenter.displayView(UIViews.CreateTag, null).get(0));
+                    eventManager.addTag(e, presenter.displayView(UIViews.CreateTag, null).get(0));
                 case 6:
                     go = false;
                     break;
@@ -246,27 +237,29 @@ public class Controller implements Observer {
         try {
             databaseManager = new DatabaseManager(filePath);
         }
-        catch (IOException ex){
-            System.out.println("Could not load database. Please try again later");}
-        catch (ClassNotFoundException ex) {
-            System.out.println("Database may be corrupted. Could not load database.");
-        }
+        catch (IOException ex){}
+        catch (ClassNotFoundException ex) {}
     }
 
+    /**
+     * Writes onto the file
+     * @param filePath the String where the file is stored
+     */
     public void writeIntoFile(String filePath){
         try{
             databaseManager.saveToFile(filePath);
         }
-        catch(IOException ex){
-            System.out.println("Failed to write into database. Please try again later");
-        }
+        catch(IOException ex){}
     }
 
+    /**
+     * Displays the current alerts
+     */
     public void currentAlerts(){
-
         notifications.addAll(alertManager.checkNewAlerts());
         displayNotifications();
     }
+
     private String formatEventInfo(Event e){
         StringBuilder s = new StringBuilder();
         s.append("Name: ").append(e.getEventName()).append("\n");
@@ -311,7 +304,8 @@ public class Controller implements Observer {
         System.out.println("Your event selection was invalid. Please try again.");
         createSeriesFromEvents();
     }
-    public void createSeriesFromScratch() {
+
+    private void createSeriesFromScratch() {
         List<String> input = presenter.displayView(UIViews.createSeriesScratch, null);
         List<String> sub = input.subList(1, input.size());
         if (parseable(sub)) {
@@ -332,7 +326,7 @@ public class Controller implements Observer {
 
     }
 
-    public void checkUpcomingAlerts(){
+    private void checkUpcomingAlerts(){
         Presenter p = new Presenter();
         List<List<String>> alertList = alertManager.checkUpcomingAlerts();
         if (alertList.isEmpty()){
@@ -341,7 +335,6 @@ public class Controller implements Observer {
         for (List<String> s: alertList){
             p.displayView(UIViews.alertView, s);
         }
-
     }
 
     private boolean parseable(List<String> lst){
@@ -355,49 +348,24 @@ public class Controller implements Observer {
         }return true;
     }
 
-    /** Verify valid input for number of events
-     *
-     * @param i number of events the user chose
-     * @return true iff the user chose more than one event to be in a series
-     */
     private boolean verifyNumEvents(int i){
         return i >= 2;
     }
 
-    /**Verify valid input for frequency
-     *
-     * @param i how often the events in this series will begin
-     * @return true iff the user chose one of hourly, daily, weekly, monthly, or yearly
-     */
     private boolean verifyFrequency(int i){
         return i>=1 && i<=5;
     }
 
-    /**Verify valid input for duration
-     *
-     * @param lst the List<Integer> of inputs the user gave for duration of each event in the series
-     * @return true iff the selections were valid
-     */
     private boolean verifyDuration(List<Integer> lst){
         return (0 <= lst.get(0)) && (6 >= lst.get(0)) && (lst.get(1) >= 0) && (lst.get(1) <= 23)
                 && (lst.get(2) >= 0) && (lst.get(2) <= 59);
     }
 
-    /**Verify valid input for the start date
-     *
-     * @param lst the List<Integer> of inputs the user gave for the start date of the series
-     * @return true iff the user's inputs add up to a valid start date and time
-     */
     private boolean verifyStartDate(List<Integer> lst){
         return lst.get(1) >= 1 && lst.get(1) <= 12 && lst.get(2) >= 1 && lst.get(2) <= 31
                 && lst.get(3) >= 0 && lst.get(3) <= 23 && lst.get(4) >= 0 && lst.get(4) <= 59;
     }
 
-    /**Verify valid input for duration with respect to frequency
-     *
-     * @param lst the user's input for duration and frequency
-     * @return true iff the duration does not extend past the frequency
-     */
     private boolean verifyDurationLTFreq(List<Integer> lst){
         //lst contains 8 numbers (the selected duration appended to the selected frequency)
         switch(lst.get(0)){
@@ -410,11 +378,6 @@ public class Controller implements Observer {
         }
     }
 
-    /**Get an integer list from a list of strings (assume all elements can be parsed)
-     *
-     * @param lst the original list of strings
-     * @return a list of integers representing the old list of strings
-     */
     private List<Integer> getIntegerList(List<String> lst){
         List<Integer> newLst = new ArrayList<>();
         int i;
@@ -425,9 +388,6 @@ public class Controller implements Observer {
         return newLst;
     }
 
-    /**
-     * Creates a new event.
-     */
     private void createEvent(){
         List<String> input = presenter.displayView(UIViews.createEvent, null);
         List<Integer> dates = new ArrayList<Integer>();
@@ -452,11 +412,6 @@ public class Controller implements Observer {
         }
     }
 
-    /**Parse a Timing object as a String with the start and end date
-     *
-     * @param t the Timing object passing the date
-     * @return a String representing the start and end date (on different lines)
-     */
     private String parseDateAsString(Timing t){
         LocalDateTime start = t.getStart();
         LocalDateTime end = t.getEnd();
@@ -490,7 +445,6 @@ public class Controller implements Observer {
             }
             return ;
         }
-        System.out.println("Invalid inputs please try again.");
         createRecurringAlert(e);
     }
 
@@ -507,7 +461,6 @@ public class Controller implements Observer {
             }
             return ;
         }
-        System.out.println("Invalid inputs please try again.");
         createOneAlert(e);
     }
 

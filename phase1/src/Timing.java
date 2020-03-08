@@ -92,6 +92,11 @@ public class Timing implements Serializable{
             return new Timing(this.start.plus(freq), this.end.plus(freq));
         }
     }
+
+    /**
+     * a setter for end
+     * @param end the new end
+     */
     public void setEnd(LocalDateTime end){
         this.end = end;
     }
@@ -103,6 +108,10 @@ public class Timing implements Serializable{
         return new String(start.getDayOfMonth()+" " + start.getMonth()+ " " + start.getYear() + ", at: " + start.getHour() + ":"+ start.getMinute());
     }
 
+    /**
+     * A setter for start
+     * @param start the new start
+     */
     public void setStart(LocalDateTime start){
         this.start = start;
     }
