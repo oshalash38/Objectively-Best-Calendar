@@ -85,9 +85,16 @@ public class Timing implements Serializable{
      * @return a new Timing instance with freq added to the start time
      */
     public Timing addToThis(Duration freq){
-        return new Timing(this.start.plus(freq));
+        if (end == null) {
+            return new Timing(this.start.plus(freq));
+        }
+        else{
+            return new Timing(this.start.plus(freq), this.end.plus(freq));
+        }
     }
-
+    public void setEnd(LocalDateTime end){
+        this.end = end;
+    }
     /**
      *
      * @return a string with the start date and time.
@@ -99,7 +106,5 @@ public class Timing implements Serializable{
     public void setStart(LocalDateTime start){
         this.start = start;
     }
-    public void setEnd(LocalDateTime end){
-        this.end = end;
-    }
+
 }
