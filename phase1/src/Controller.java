@@ -138,6 +138,7 @@ public class Controller implements Observer {
     private void mainMenu(){
         boolean go = true;
         while (go) {
+            eventManager.updateStatus(currUser);
             alertManager = new AlertManager(currUser.getEvents());
             alertManager.addObserver(this);
             notifications.addAll(alertManager.checkNewAlerts());
@@ -227,6 +228,7 @@ public class Controller implements Observer {
     private void eventManipulation(Event e){
         boolean go = true;
         while (go){
+            eventManager.updateStatus(currUser);
             List<String> input = presenter.displayView(UIViews.EventManipulation, null);
             switch (Integer.parseInt(input.get(0))){
                 case 1:

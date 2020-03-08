@@ -121,7 +121,7 @@ public class Event implements Serializable, Comparable<Event> {
         int status = time.getStatus(LocalDateTime.now());
         if (status == 0){
                 this.status = Status.CURRENT;}
-        else if ( status > 1){
+        else if ( status == 1){
                 this.status = Status.UPCOMING;}
         else{
                 this.status = Status.PAST;}
