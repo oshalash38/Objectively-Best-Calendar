@@ -101,6 +101,7 @@ public class Controller implements Observer {
         System.exit(1);
     }
 
+    @Override
     public void update(Observable obs, Object o){
         notifications.addAll((List<List<String>>)o);
         if (notifications.size()!=0){ System.out.println("You have new notifications.");}
@@ -163,7 +164,9 @@ public class Controller implements Observer {
                     break;
                 case 6:
                     go = false;
+                    alertManager.stopTimer();
                     START();
+
                     break;
             }
         }
@@ -268,7 +271,7 @@ public class Controller implements Observer {
                     createRecurringAlert(e);
                     break;
                 case 4:
-
+                    //associateMemoWithEvent(e);
                 case 5:
                     eventByTag(presenter.displayView(UIViews.CreateTag, null).get(0));
                 case 6:
@@ -278,7 +281,9 @@ public class Controller implements Observer {
         }
     }
 
-
+   // private void associateMemoWithEvent(Event e){
+   //     List<String> inputs = presenter.displayView(UIViews.);
+    //}
 
 
 

@@ -18,7 +18,23 @@ public class AlertManager extends Observable{
     private Timer t = new Timer();
     private final int CHECKDURATION = 5;
     private ArrayList<Event> UserEvents;
+    private TimerTask timerTask = new TimerTask() {
 
+        @Override
+        public void run() {
+            AlertManager.this.run();
+        }
+    };
+
+    private void run(){
+        try {
+            List<List<String>> displayAlerts = runUpcomingAlerts();
+            setChanged();
+            notifyObservers(displayAlerts);
+        } catch (ConcurrentModificationException ex) {
+            run();
+        }
+    }
     public AlertManager (ArrayList<Event> events){
         this.UserEvents = events;
     }
@@ -43,22 +59,14 @@ public class AlertManager extends Observable{
     }
 
     public void keepChecking(){
-        t.scheduleAtFixedRate(new TimerTask() {
+        t.scheduleAtFixedRate(timerTask, CHECKDURATION*1000, CHECKDURATION*1000);
+    }
 
-                                  @Override
-                                  public void run() {
-                                      try {
-                                          List<List<String>> displayAlerts = runUpcomingAlerts();
-                                          notifyObservers(displayAlerts);
-                                      }
-                                      catch (ConcurrentModificationException ex){
-                                          run();
-                                      }
-                                  }
-
-                              },
-                CHECKDURATION*1000,
-                CHECKDURATION*1000);
+    public void stopTimer(){
+        timerTask.cancel();
+        t.cancel();
+        t.purge();
+        return;
     }
 
     private void sortAdd(ArrayList<Alert> alerts, Alert newAlert){

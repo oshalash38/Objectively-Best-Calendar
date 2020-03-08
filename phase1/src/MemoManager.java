@@ -32,6 +32,14 @@ public class MemoManager {
         return id;
     }
 
+    public List<String> DisplayAllMemos(Map<Integer, String> map){
+        List<String> retList = new ArrayList<>();
+        for (Map.Entry<Integer, String> entry: map.entrySet()){
+            retList.add(DisplayMemo(map, entry.getKey()));
+        }
+        return retList;
+    }
+
     /**
      * Formats memo output
      * @param memos The memo map from User

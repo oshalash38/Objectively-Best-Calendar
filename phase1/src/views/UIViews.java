@@ -7,5 +7,6 @@ public enum UIViews {
     startup, createUser, eventInfo, userDNE, mainMenu, eventType, eventOptions, displayEventBy, createDateTimeView,
     createSeriesScratch, chooseFrequency, loginView, createEvent,
     createRecurringAlertView, alertView, createOneAlertView, createMemo, listEvents, editMemo, doesUserWantToEdit
-    , seriesMenu, createSeriesEvents, EventManipulation, ChangeName, memoEventPicking, SearchEvents, CreateTag
+    , seriesMenu, createSeriesEvents, EventManipulation, ChangeName, memoEventPicking, listMemos
+    ,SearchEvents, CreateTag
 }
