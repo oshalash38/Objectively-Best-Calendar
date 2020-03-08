@@ -66,7 +66,6 @@ public class Presenter {
         views.put(UIViews.loginView, new LoginView());
         views.put(UIViews.createEvent, new CreateNewEventView());
         views.put(UIViews.createMemo, new CreateMemoView());
-        views.put(UIViews.listEvents, new ListEventsView());
         views.put(UIViews.editMemo, new EditMemoView());
         views.put(UIViews.seriesMenu, new MenuView("Would you like to create a series: " +
                 "\n 1: By choosing events to make into a new series \n 2: By making a completely" +
