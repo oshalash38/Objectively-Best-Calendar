@@ -210,6 +210,9 @@ public class Controller implements Observer {
             temp.add("End Date and Time: " + event.getEndTimeString());
         }
         List<String> input = presenter.displayView(UIViews.eventInfo, temp);
+        if(Integer.parseInt(input.get(0)) == 1){//User want to edit one of the events displayed
+
+        }
     }
 
 
