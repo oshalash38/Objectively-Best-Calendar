@@ -382,7 +382,7 @@ public class Controller implements Observer {
             for (String s : eventSelections) {
                 i = Integer.parseInt(s);
                 indices.add(i);
-                flawless = flawless && (i >= 0 && i <= currUser.getEvents().size());
+                flawless = flawless && (i >= 0 && i < currUser.getEvents().size());
             }
             if (flawless) {
                 sm.createSeries(input.get(1), currUser, indices);
@@ -446,29 +446,46 @@ public class Controller implements Observer {
         return t.getStart().isBefore(t.getEnd());   }
 
     private boolean verifyFrequency(int i) {
+        if (!(i>=1 && i<=5)){
+            System.out.println("Your frequency selection was incorrect.");}
         return i >= 1 && i <= 5;
     }
 
     private boolean verifyDuration(List<Integer> lst) {
+        if (!((0 <= lst.get(0)) && (6 >= lst.get(0)) && (lst.get(1) >= 0) && (lst.get(1) <= 23)
+                && (lst.get(2) >= 0) && (lst.get(2) <= 59))){
+            System.out.println("Your duration selection was incorrect.");
+        }
         return (0 <= lst.get(0)) && (6 >= lst.get(0)) && (lst.get(1) >= 0) && (lst.get(1) <= 23)
                 && (lst.get(2) >= 0) && (lst.get(2) <= 59);
     }
 
     private boolean verifyStartDate(List<Integer> lst) {
+        if (!(lst.get(1) >= 1 && lst.get(1) <= 12 && lst.get(2) >= 1 && lst.get(2) <= 31
+                && lst.get(3) >= 0 && lst.get(3) <= 23 && lst.get(4) >= 0 && lst.get(4) <= 59)){
+            System.out.println("Your start date selection was incorrect.");
+        }
         return lst.get(1) >= 1 && lst.get(1) <= 12 && lst.get(2) >= 1 && lst.get(2) <= 31
                 && lst.get(3) >= 0 && lst.get(3) <= 23 && lst.get(4) >= 0 && lst.get(4) <= 59;
     }
 
     private boolean verifyDurationLTFreq(List<Integer> lst) {
         //lst contains 8 numbers (the selected duration appended to the selected frequency)
+        boolean ret;
         switch (lst.get(0)) {
             case 1:
-                return lst.get(1) < 1 && lst.get(2) < 1;
+                ret =  lst.get(1) < 1 && lst.get(2) < 1;
+                break;
             case 2:
-                return lst.get(1) < 1;
+                ret =  lst.get(1) < 1;
+                break;
             default:
-                return true;
+                ret =  true;
+                break;
         }
+        if (!ret) {
+            System.out.println("The duration of each event is longer than the frequency.");
+        }  return ret;
     }
 
     private List<Integer> getIntegerList(List<String> lst) {

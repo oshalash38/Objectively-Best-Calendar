@@ -22,6 +22,10 @@ public class TimingFactory {
      * @return a new Timing object as specified
      */
     public Timing createTiming(int year, int month, int dayOfMonth, int hour, int minute){
+        YearMonth ym = YearMonth.of(year,month);
+        if (dayOfMonth > ym.lengthOfMonth()){
+            dayOfMonth = ym.lengthOfMonth();
+        }
         return new Timing(LocalDateTime.of(year, Month.of(month), dayOfMonth, hour, minute));
     }
 

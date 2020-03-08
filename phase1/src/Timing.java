@@ -89,6 +89,9 @@ public class Timing implements Serializable{
             return new Timing(this.start.plus(freq));
         }
         else{
+            if (freq.toDays() == 30){
+                return new Timing(this.start.plusMonths(1), this.end.plusMonths(1));
+            }
             return new Timing(this.start.plus(freq), this.end.plus(freq));
         }
     }
