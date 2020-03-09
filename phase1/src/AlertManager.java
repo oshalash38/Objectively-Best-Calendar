@@ -14,7 +14,6 @@ public class AlertManager extends Observable{
     private LocalDateTime currentTime = LocalDateTime.now();
     private ArrayList<Alert> upcomingAlerts = new ArrayList<>(0);
     private List<List<String>> printableUpcomingAlerts = new ArrayList<>(0);
-    private Map<Event, List<List<String>>> printableLink = new HashMap<>(0);
     private Timer t = new Timer();
     private final int CHECKDURATION = 30;
     private ArrayList<Event> UserEvents;
@@ -35,6 +34,11 @@ public class AlertManager extends Observable{
             run();
         }
     }
+
+    /**
+     *
+     * @param events initialises alertManager with the events of the logged in user
+     */
     public AlertManager (ArrayList<Event> events){
         this.UserEvents = events;
     }
@@ -58,10 +62,17 @@ public class AlertManager extends Observable{
         return retList;
     }
 
+    /**
+     * Starts the timer task to excecute every CHECKDURATION*1000 seconds.
+     */
     public void keepChecking(){
         t.scheduleAtFixedRate(timerTask, CHECKDURATION*1000, CHECKDURATION*1000);
     }
 
+
+    /**
+     * Stops the timer task when user logs out
+     */
     public void stopTimer(){
         timerTask.cancel();
         t.cancel();
@@ -131,7 +142,6 @@ public class AlertManager extends Observable{
         for (Alert a: retAlerts){
             retList.add(this.formatAlertDisplay(e, a));
         }
-        printableLink.put(e, retList);
         return retAlerts;
     }
 
@@ -216,7 +226,6 @@ public class AlertManager extends Observable{
         tempPrint.addAll(printableUpcomingAlerts);
         upcomingAlerts.clear();
         printableUpcomingAlerts.clear();
-        printableLink.clear();
         currentTime = LocalDateTime.now();
         getUpcomingAlerts();
 
