@@ -23,12 +23,11 @@ public class SeriesManager {
      * @param start      the beginning of the series
      * @return the list of events forming this series
      */
-    public void createSeries(User u, String seriesName, List<Integer> dur, List<Integer> start, int fSelection, int neSelection) {
+    public void createSeries(User u, String seriesName, List<Integer> dur, List<Integer> start, int fSelection, int neSelection, EventManager eventManager) {
         ArrayList<Event> lst = new ArrayList<>();
         Timing temp = tf.createTiming(start.get(0), start.get(1), start.get(2), start.get(3), start.get(4),
                 start.get(0), start.get(1), dur.get(0)+start.get(2), dur.get(1)+start.get(3), dur.get(2)+start.get(4));
-        EventManager em = new EventManager();
-        em.createEvent(u, "", temp, seriesName);
+        eventManager.createEvent(u, seriesName, temp, seriesName);
         Duration length;
         switch(fSelection){
             case 1:
@@ -49,7 +48,7 @@ public class SeriesManager {
         }
         for (int i = 0; i< neSelection; i++){
             temp = temp.addToThis(length);
-            em.createEvent(u,"",temp, seriesName);
+            eventManager.createEvent(u,seriesName+ i, temp, seriesName);
         }
 
     }

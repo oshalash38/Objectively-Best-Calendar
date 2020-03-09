@@ -18,15 +18,23 @@ public class EventsView extends CalendarView {
             System.out.println("You have no events.");
         }
         else {
-            for (int i = 0; i < outputs.size(); i++){
+            for (int i = 0; i < outputs.size()/6; i++){
                 System.out.println("=======================");
-                System.out.println((i +1)+ ":" + outputs.get(i));
+                System.out.println("Event " + (i+1)+":");
+
+                System.out.println("  The name of this event is " + outputs.get(6*i));
+                System.out.println("    The name of this series is " + outputs.get(6*i+1));
+                System.out.println("    This event starts at " + outputs.get(6*i+2));
+                System.out.println("    This event ends at " + outputs.get(6*i+3));
+                System.out.println("    This event has Alerts:\n" + outputs.get(6*i+4));
+                System.out.println("  This event has tags " + outputs.get(6*i+5)+"\n");
             }
         }
-        System.out.println("=======================");
-        System.out.println("Which event would you like to edit?");
-        inputs.add(in.nextLine());
-
+        if(outputs.size() != 0) {
+            System.out.println("=======================");
+            System.out.println("Which event would you like to edit? type \"none\" if you don't want to edit anything or type the \"#\" of event.");
+            inputs.add(in.nextLine());
+        }
         return inputs;
     }
 }

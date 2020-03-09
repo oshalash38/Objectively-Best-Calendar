@@ -1,8 +1,6 @@
 import views.UIViews;
 
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.time.LocalDateTime;
 /**
@@ -204,17 +202,8 @@ public class Controller implements Observer {
         Timing date2 = timingFactory.createTiming(Integer.parseInt(input.get(5)), Integer.parseInt(input.get(6)),
                 Integer.parseInt(input.get(7)), Integer.parseInt(input.get(8)), Integer.parseInt(input.get(9)));
 
-
         List<Event> events = eventManager.getEventsBetween(currUser, date1, date2);
-        List<String> temp = new ArrayList<>();
-        for (Event event : events) {
-            temp.add("Event Name: " + event.getEventName());
-            temp.add("Start Date and Time: " + event.getStartTimeString());
-            temp.add("End Date and Time: " + event.getEndTimeString());
-        }
-        if (temp.size() > 0) {
-            presenter.displayView(UIViews.eventsInfo, temp);
-        }
+        displayEventsAfterFiltring(events);
     }
 
     private void memo() {
@@ -222,16 +211,28 @@ public class Controller implements Observer {
         List<String> input = presenter.displayView(UIViews.memoMenu, strings);
         if (input.size() > 0) {
             List<Event> events = memoManager.FilterByMemoId(currUser.getEvents(), Integer.parseInt(input.get(0)));
-
-            List<String> temp = new ArrayList<>();
-            for (Event event : events) {
-                temp.add("Event Name: " + event.getEventName());
-                temp.add("Start Date and Time: " + event.getStartTimeString());
-                temp.add("End Date and Time: " + event.getEndTimeString());
-            }
-            presenter.displayView(UIViews.eventsInfo, temp);
+            displayEventsAfterFiltring(events);
         }
 
+    }
+
+    private void displayEventsAfterFiltring(List<Event> events){
+        List<String> outputs = new ArrayList<String>();
+        List<String> input = new ArrayList<String>();
+        for(Event event: events){
+            outputs.addAll(eventManager.getDetailedEvent(event, alertManager));
+        }
+        input = presenter.displayView(UIViews.eventsInfoWithNumbers, outputs);
+        int choice;
+        try{
+            choice = Integer.valueOf(input.get(0));
+            if(choice > events.size() || choice <= 0)
+                throw new NumberFormatException();
+        }
+        catch (Exception  e){
+            return;
+        }
+        eventManipulation(events.get(Integer.parseInt(input.get(0)) - 1));
     }
 
     private void eventByTag(String tag) {
@@ -258,16 +259,7 @@ public class Controller implements Observer {
         else {
             events = eventManager.getUpcomingEvents(currUser);
         }
-        printDetailedEvents(events);
-        if (!events.isEmpty()) {
-            List<String> input = presenter.displayView(UIViews.doesUserWantToEdit, null);
-            if (input.size() > 0) {
-                if (Integer.parseInt(input.get(0)) == 1) {//User want to edit one of the events displayed
-                    input = presenter.displayView(UIViews.eventsView, eventManager.formatEventByName(events));
-                    eventManipulation(events.get(Integer.parseInt(input.get(0)) - 1));
-                }
-            }
-        }
+        displayEventsAfterFiltring(events);
     }
 
     private void eventManipulation(Event e) {
@@ -388,7 +380,7 @@ public class Controller implements Observer {
         boolean flawless = true;
         int i;
         List<Integer> indices = new ArrayList<>();
-        if (parseable(eventSelections)) {
+        if (parsable(eventSelections)) {
             for (String s : eventSelections) {
                 i = Integer.parseInt(s);
                 indices.add(i);
@@ -407,7 +399,7 @@ public class Controller implements Observer {
     private void createSeriesFromScratch() {
         List<String> input = presenter.displayView(UIViews.createSeriesScratch, null);
         List<String> sub = input.subList(1, input.size());
-        if (parseable(sub)) {
+        if (parsable(sub)) {
             List<Integer> numInput = getIntegerList(sub);
             List<Integer> date = numInput.subList(0, 5);
             int freq = numInput.get(5);
@@ -416,7 +408,7 @@ public class Controller implements Observer {
             List<Integer> freqDur = numInput.subList(5, 9);
             if (verifyStartDate(date) && verifyFrequency(freq) && verifyDuration(duration)
                     && verifyNumEvents(nE) && verifyDurationLTFreq(freqDur)) {
-                sm.createSeries(currUser, input.get(0), duration, date, freq, nE);
+                sm.createSeries(currUser, input.get(0), duration, date, freq, nE, eventManager);
                 writeIntoFile("database.txt");
                 return;
             }
@@ -437,7 +429,7 @@ public class Controller implements Observer {
         }
     }
 
-    private boolean parseable(List<String> lst) {
+    private boolean parsable(List<String> lst) {
         int i;
         for (String s : lst) {
             try {
@@ -512,7 +504,7 @@ public class Controller implements Observer {
         List<String> input = presenter.displayView(UIViews.createEvent, null);
         List<Integer> dates = new ArrayList<Integer>();
         String eventName = input.get(0);
-        if (parseable(input.subList(1, 10))) {
+        if (parsable(input.subList(1, 10))) {
             dates = getIntegerList(input.subList(1, 11));
             Timing eventTiming = timingFactory.createTiming(dates.get(0), dates.get(1), dates.get(2), dates.get(3),dates.get(4),
                     dates.get(5), dates.get(6), dates.get(7), dates.get(8), dates.get(9));
@@ -558,7 +550,7 @@ public class Controller implements Observer {
     private void createRecurringAlert(Event e) {
         Presenter p = new Presenter();
         List<String> inputs = presenter.displayView(UIViews.createRecurringAlertView, null);
-        if (parseable(inputs.subList(1, 9))) {
+        if (parsable(inputs.subList(1, 9))) {
             DurationFactory durationFactory = new DurationFactory();
             List<Integer> date = getIntegerList(inputs.subList(1, 6));
             Timing t = timingFactory.createTiming(date.get(0).intValue(), date.get(1).intValue(), date.get(2).intValue(), date.get(3).intValue(), date.get(4).intValue());
@@ -577,7 +569,7 @@ public class Controller implements Observer {
     private void createOneAlert(Event e) {
         Presenter p = new Presenter();
         List<String> inputs = presenter.displayView(UIViews.createOneAlertView, null);
-        if (parseable(inputs.subList(1, 6))) {
+        if (parsable(inputs.subList(1, 6))) {
             List<Integer> date = getIntegerList(inputs.subList(1, 6));
             Timing t = timingFactory.createTiming(date.get(0).intValue(), date.get(1).intValue(), date.get(2).intValue(), date.get(3).intValue(), date.get(4).intValue());
             if (inputs.get(0).equals("null")) {
@@ -599,7 +591,6 @@ public class Controller implements Observer {
         List<String> memoMessage = presenter.displayView(UIViews.createMemo, null);
         List<String> indices = presenter.displayView(UIViews.memoEventPicking, listOfStrings);
         int id = memoManager.CreateMemo(currUser.getMemos(), memoMessage.get(0), allEvents);
-        System.out.println("SIZE : " + currUser.getMemos().size());
         writeIntoFile("database.txt");
         for (String index : indices) {
             int currIndex = Integer.parseInt(index);
@@ -620,7 +611,8 @@ public class Controller implements Observer {
             printDetailedEvent(e);
         }
         if (listOfEvents.isEmpty()){
-            System.out.println("No events match this description.\n");}
+            //System.out.println("No events match this description.\n");
+        }
     }
 
     private void printDetailedEvent(Event e) {

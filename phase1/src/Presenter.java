@@ -36,11 +36,11 @@ public class Presenter {
         views.put(UIViews.createRecurringAlertView, new CreateRecurringAlertView());
         views.put(UIViews.createOneAlertView, new CreateOneAlertView());
         views.put(UIViews.createUser, new CreateNewUserView());
-        views.put(UIViews.eventsInfo, new EventsView());
+        views.put(UIViews.eventsInfoWithNumbers, new EventsView());
         views.put(UIViews.startup, new MenuView("CALENDAR V1\n===============" +
                 "\n1. Login\n2. Create new user\n3. Exit", 3));
         views.put(UIViews.mainMenu, new MenuView(
-                "Main Menu:\n1.Check notifications\n2. Check upcoming alerts\n3. Create memo\n4. Create event" +
+                "Main Menu:\n1. Check notifications\n2. Check upcoming alerts\n3. Create memo\n4. Create event" +
                         "\n5. Create series\n6. Display events filtered by..." +
                         "\n7. Logout", 7));
         views.put(UIViews.displayEventBy, new MenuView(
