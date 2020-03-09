@@ -1,4 +1,4 @@
-To start the program, if you are using intellij then run the set up the program so that Main.java the class you run.
+To start the program, if you are using intellij then set it up so that Main.java is the class you run.
 
 
 Instructions:
