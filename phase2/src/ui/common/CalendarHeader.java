@@ -15,6 +15,7 @@ public class CalendarHeader extends JPanel {
         c.fill = GridBagConstraints.BOTH;
         c.weighty = 1;
         c.weightx = 1;
+        c.gridy = 0;
         c.anchor = GridBagConstraints.CENTER;
 
         Label timeLabel = new Label(MONTHS[month - 1]);

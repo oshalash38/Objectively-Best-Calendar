@@ -1,4 +1,6 @@
+import ui.core.CalendarFrame;
 import ui.core.CalendarPanel;
+import ui.core.StartupPanel;
 
 import javax.swing.*;
 import java.io.IOException;
@@ -14,10 +16,8 @@ public class Main {
 //        myController.START();
 
         //UNCOMMENT TO SEE BAD GUI!!!
-        JFrame uiTest = new JFrame();
-        uiTest.add(new CalendarPanel());
-        uiTest.setSize(800, 600);
-        uiTest.setVisible(true);
-        uiTest.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        CalendarFrame app = new CalendarFrame();
+        app.setVisible(true);
+
     }
 }
