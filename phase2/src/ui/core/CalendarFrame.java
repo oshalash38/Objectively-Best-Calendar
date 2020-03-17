@@ -10,6 +10,8 @@ public class CalendarFrame extends JFrame {
         this.add(new CalendarPanel());
         this.setSize(800, 600);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
+        this.setJMenuBar(new CalendarToolBar());
     }
 
 }
