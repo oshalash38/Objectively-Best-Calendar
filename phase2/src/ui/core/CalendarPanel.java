@@ -1,8 +1,8 @@
 package ui.core;
 
-import ui.common.CalendarComponent;
-import ui.common.CalendarFooter;
-import ui.common.CalendarHeader;
+import ui.common.calendar.CalendarComponent;
+import ui.common.calendar.CalendarFooter;
+import ui.common.calendar.CalendarHeader;
 
 import javax.swing.*;
 import java.awt.*;
@@ -39,7 +39,6 @@ public class CalendarPanel extends JPanel {
     }
 
     private void displayCalendar() {
-
         GridBagConstraints c = new GridBagConstraints();
         c.fill = GridBagConstraints.BOTH;
         c.weighty = 0.1;

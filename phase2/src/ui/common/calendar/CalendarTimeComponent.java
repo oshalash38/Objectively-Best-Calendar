@@ -1,4 +1,4 @@
-package ui.common;
+package ui.common.calendar;
 
 import javax.swing.*;
 import java.awt.*;
