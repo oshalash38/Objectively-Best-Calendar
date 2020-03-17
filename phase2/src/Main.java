@@ -10,14 +10,14 @@ import java.io.IOException;
  */
 public class Main {
     public static void main(String[] args){
-        Controller myController = new Controller();
-        myController.START();
+//        Controller myController = new Controller();
+//        myController.START();
 
         //UNCOMMENT TO SEE BAD GUI!!!
-//        JFrame uiTest = new JFrame();
-//        uiTest.add(new CalendarPanel());
-//        uiTest.setSize(800, 600);
-//        uiTest.setVisible(true);
-//        uiTest.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        JFrame uiTest = new JFrame();
+        uiTest.add(new CalendarPanel());
+        uiTest.setSize(800, 600);
+        uiTest.setVisible(true);
+        uiTest.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 }

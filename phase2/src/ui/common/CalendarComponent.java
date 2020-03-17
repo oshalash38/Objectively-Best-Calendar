@@ -2,13 +2,15 @@ package ui.common;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.time.LocalDateTime;
 import java.time.YearMonth;
 import java.time.temporal.ChronoField;
 
 public class CalendarComponent extends JPanel {
 
-    JPanel[][] calendarComponent;
+    List<JPanel> calendarComponent;
 
     public CalendarComponent(int month) {
         super(new GridBagLayout());
@@ -17,7 +19,7 @@ public class CalendarComponent extends JPanel {
     }
 
     private void setUpCalendar(int month) {
-        calendarComponent = new JPanel[7][6];
+        calendarComponent = new ArrayList<>();
 
         LocalDateTime tempLocal = LocalDateTime.of(2020, month,1,1,1);
         int weekDay = tempLocal.get(ChronoField.DAY_OF_WEEK) % 7;
@@ -32,13 +34,7 @@ public class CalendarComponent extends JPanel {
         c.weighty = 0.1;
         c.weightx = 1;
 
-        this.add(new Label("Sunday"),c);
-        this.add(new Label("Monday"),c);
-        this.add(new Label("Tuesday"),c);
-        this.add(new Label("Wednesday"),c);
-        this.add(new Label("Thursday"),c);
-        this.add(new Label("Friday"),c);
-        this.add(new Label("Saturday"),c);
+        this.addDates();
 
         c.weighty = 1;
 
@@ -53,14 +49,34 @@ public class CalendarComponent extends JPanel {
 
                 if ((y == 0 && x < weekDay) || (currDay > monthLength)){
                     timeComponent = new JPanel();
+                    timeComponent.setBorder(BorderFactory.createLineBorder(Color.GRAY));
                 } else {
                     timeComponent = new CalendarTimeComponent(currDay);
                     currDay++;
                 }
 
-                calendarComponent[x][y] = timeComponent;
+                calendarComponent.add(timeComponent);
                 this.add(timeComponent, c);
             }
+        }
+    }
+
+    private void addDates() {
+        GridBagConstraints c = new GridBagConstraints();
+        c.fill = GridBagConstraints.BOTH;
+        c.gridy = 0;
+        c.weighty = 0.1;
+        c.weightx = 1;
+
+        String[] dayOfTheWeek = new String[] {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
+
+        for(String day : dayOfTheWeek) {
+            JPanel dayPanel = new JPanel();
+            dayPanel.add(new Label(day));
+
+            dayPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+
+            this.add(dayPanel, c);
         }
     }
 
