@@ -17,7 +17,6 @@ public class CalendarPanel extends JPanel {
 
     public CalendarPanel() {
         super(new GridBagLayout());
-        this.setBackground(Color.YELLOW);
 
         refreshCalendar();
     }
