@@ -1,5 +1,9 @@
 package com.group_0225;
 
+import com.group_0225.api.WeatherRequester;
+
+import java.io.IOException;
+
 /**
  * The main class
  *

@@ -18,7 +18,7 @@ public class CalendarHeader extends JPanel {
         c.gridy = 0;
         c.anchor = GridBagConstraints.CENTER;
 
-        Label timeLabel = new Label(MONTHS[month - 1]);
+        Label timeLabel = new Label(MONTHS[month - 1] + " 2020");
         timeLabel.setAlignment(Label.CENTER);
 
         this.add(timeLabel, c);

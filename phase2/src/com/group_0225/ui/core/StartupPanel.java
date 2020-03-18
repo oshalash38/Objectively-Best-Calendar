@@ -2,6 +2,8 @@ package com.group_0225.ui.core;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class StartupPanel extends JPanel {
 
@@ -45,14 +47,24 @@ public class StartupPanel extends JPanel {
 
         //DUMMY THICC BUTTONS
         c.gridy = 3;
-        bottomPane.add(new Button("Login"), c);
+        Button loginButton = new Button("Login");
+        loginButton.addActionListener(getLoginButtonListener());
+        bottomPane.add(loginButton, c);
         c.gridy = 4;
         bottomPane.add(new Button("Create New User"), c);
 
         //Adds bottom pane
-        c.fill = GridBagConstraints.VERTICAL;
         c.gridy = 1;
         this.add(bottomPane, c);
     }
 
+    private ActionListener getLoginButtonListener() {
+        return new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        };
+    }
 }
