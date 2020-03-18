@@ -1,5 +1,6 @@
 package com.group_0225.ui.common.calendar;
 
+import com.group_0225.ui.core.EventListDialog;
 import com.group_0225.ui.core.TestDialog;
 
 import javax.swing.*;
@@ -32,7 +33,7 @@ public class CalendarTimeComponent extends JPanel {
         this.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                TestDialog testdialog = new TestDialog((JFrame) SwingUtilities.getWindowAncestor(itself), "Test");
+                EventListDialog testdialog = new EventListDialog();
                 testdialog.setVisible(true);
             }
 
