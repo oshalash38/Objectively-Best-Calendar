@@ -50,7 +50,7 @@ public class StartupPanel extends JPanel {
         bottomPane.add(new Button("Create New User"), c);
 
         //Adds bottom pane
-        c.fill = GridBagConstraints.HORIZONTAL;
+        c.fill = GridBagConstraints.VERTICAL;
         c.gridy = 1;
         this.add(bottomPane, c);
     }

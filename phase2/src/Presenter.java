@@ -1,3 +1,4 @@
+import ui.core.CalendarFrame;
 import views.*;
 
 import java.util.*;
@@ -11,11 +12,14 @@ import java.util.*;
  */
 public class Presenter {
     public Map<UIViews, CalendarView> views;
+    public CalendarFrame ui;
 
     /**Creates a presenter instance and initializes a hashmap of views.
      *
      */
     public Presenter(){
+        ui = new CalendarFrame();
+        ui.setVisible(true);
         views = new HashMap<>();
         generateHashMap();
     }

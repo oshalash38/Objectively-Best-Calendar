@@ -12,12 +12,7 @@ import java.io.IOException;
  */
 public class Main {
     public static void main(String[] args){
-//        Controller myController = new Controller();
+        Controller myController = new Controller();
 //        myController.START();
-
-        //UNCOMMENT TO SEE BAD GUI!!!
-        CalendarFrame app = new CalendarFrame();
-        app.setVisible(true);
-
     }
 }
