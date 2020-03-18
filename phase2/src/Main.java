@@ -1,3 +1,4 @@
+import api.WeatherRequester;
 import ui.core.CalendarFrame;
 import ui.core.CalendarPanel;
 import ui.core.StartupPanel;
@@ -14,5 +15,13 @@ public class Main {
     public static void main(String[] args){
         Controller myController = new Controller();
 //        myController.START();
+
+        //Calls the weather api
+//        WeatherRequester requester = new WeatherRequester();
+//        try {
+//            System.err.println(requester.requestFiveDayForecast());
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
     }
 }
