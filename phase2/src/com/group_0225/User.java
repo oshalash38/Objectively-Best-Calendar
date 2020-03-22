@@ -15,6 +15,8 @@ public class User implements Serializable{
     private HashMap<Integer, String> memos = new HashMap<>();
     private String password;
     private String username;
+    private List<EventMessage> requests;
+    private List<EventMessage> responses;
 
 
     /**
@@ -25,6 +27,7 @@ public class User implements Serializable{
     public User(String username, String password){
         this.username = username;
         this.password = password;
+        requests = new ArrayList<EventMessage>();
     }
 
     /**
@@ -65,5 +68,21 @@ public class User implements Serializable{
         return lst;
     }
 
+    public void addRequest(EventMessage request){
+        requests.add(request);
     }
+
+    public boolean hasRequests(){
+        return requests.size() > 0;
+    }
+
+    public List<EventMessage> getRequests(){
+        return requests;
+    }
+
+    public void addResponse(EventMessage response){
+        responses.add(response);
+    }
+
+}
 
