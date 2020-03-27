@@ -32,41 +32,47 @@ public class StartupPanel extends CalendarLayoutPanel {
 
         //Creates bottom portion of the panel
         JPanel bottomPane = new JPanel(new GridBagLayout());
+        TextField usernameField = addTextField(c,bottomPane,1, "Username:");
+        TextField passwordField = addTextField(c,bottomPane,2, "Password:");
+        Button loginButton = addButton(c, bottomPane, 3, "login");
+        Button createNewUserButton = addButton(c, bottomPane, 4, "create new user");
 
-        //Creates the username area
-        c.fill = GridBagConstraints.NONE;
-        c.gridy = 1;
-        JPanel username = new JPanel();
-        TextField usernameField = new TextField();
-        usernameField.setColumns(30);
-        username.add(new Label("Username:"));
-        username.add(usernameField);
-        bottomPane.add(username, c);
-
-        //Creates the password area
-        c.gridy = 2;
-        JPanel password = new JPanel();
-        TextField passwordField = new TextField();
-        passwordField.setColumns(30);
-        password.add(new Label("Password:"));
-        password.add(passwordField);
-        bottomPane.add(password, c);
-
-        //DUMMY THICC BUTTONS
-        c.gridy = 3;
-        Button loginButton = new Button("Login");
         loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 controllerFacade.login(usernameField.getText(), passwordField.getText());
             }
         });
-        bottomPane.add(loginButton, c);
-        c.gridy = 4;
-        bottomPane.add(new Button("Create New User"), c);
+
+        createNewUserButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                controllerFacade.createNewUser(); // <- Still needs to be implemented
+            }
+        });
+
 
         //Adds bottom pane
         c.gridy = 1;
         this.add(bottomPane, c);
+    }
+
+    private Button addButton(GridBagConstraints c, JPanel bottomPane, int yPosition, String label){
+        Button button = new Button(label);
+        c.gridy = yPosition;
+        bottomPane.add(button, c);
+        return button;
+    }
+
+    private TextField addTextField(GridBagConstraints c, JPanel bottomPane, int yPosition, String label){
+        c.fill = GridBagConstraints.NONE;
+        c.gridy = yPosition;
+        JPanel username = new JPanel();
+        TextField usernameField = new TextField();
+        usernameField.setColumns(30);
+        username.add(new Label(label));
+        username.add(usernameField);
+        bottomPane.add(username, c);
+        return usernameField;
     }
 }

@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Represents a user of the calendar
@@ -12,7 +13,7 @@ import java.util.List;
  */
 public class User implements Serializable{
     private ArrayList<Event> events = new ArrayList<>();
-    private HashMap<Integer, String> memos = new HashMap<>();
+    private Map<Integer, String> memos = new HashMap<>();
     private String password;
     private String username;
     private List<EventMessage> requests;
@@ -53,7 +54,7 @@ public class User implements Serializable{
      *
      * @return this.memos
      */
-    public HashMap<Integer, String> getMemos(){return this.memos;}
+    public Map<Integer, String> getMemos(){return this.memos;}
 
     /**
      *

@@ -21,5 +21,6 @@ public abstract class CalendarLayoutPanel extends JPanel {
         this.buildPanel(inputs);
     }
 
+
     protected abstract void buildPanel(List<String> inputs);
 }

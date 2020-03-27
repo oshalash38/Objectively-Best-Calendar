@@ -1,4 +1,4 @@
-package com.group_0225.ui.core.test;
+package com.group_0225.ui.core.tests;
 
 import com.group_0225.ui.core.CalendarFrame;
 

@@ -20,4 +20,8 @@ public class ControllerFacade {
     }
 
     public void login(String username, String password) { login.login(username, password);}
+
+    public void createNewUser(){
+        //TODO Needs implementation
+    }
 }
