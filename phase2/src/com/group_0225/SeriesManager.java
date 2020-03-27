@@ -65,5 +65,58 @@ public class SeriesManager {
 
     }
 
+    /**
+     * Removes the given seriesName from its corresponding events
+     * @param seriesName the name of the series to be disbanded
+     * @param u the user
+     */
+    public void deleteSeriesAffiliation(String seriesName, User u){
+        List<Event> lst = u.getEvents();
+        for (Event e: lst){
+            if (e.getSeriesName().equals(seriesName)){
+                e.setSeriesName("");
+            }
+        }
+    }
 
+    /**
+     * Removes all the events with the given seriesName
+     * @param seriesName the name of the series to be completely deleted
+     * @param u the user
+     * @param em an EventManager instance to delete each event
+     */
+    public void deleteSeries(String seriesName, User u, EventManager em){
+        for (Event e: u.getEvents()){
+            if (e.getSeriesName().equals(seriesName)){
+                em.deleteEvent(e,u,this);
+            }
+        }
+    }
+    //To be used in changeFrequency, changeDuration
+    private List<Event> collectSeriesFromUser(String seriesName, User u){
+        ArrayList<Event> lst = new ArrayList<>();
+        for (Event e: u.getEvents()){
+            if (e.getSeriesName().equals(seriesName)){
+                lst.add(e);
+            }
+        }
+        return lst;
+    }
+
+    /**
+     * If there is one event in a series, then remove that affiliation
+     * @param seriesName the series in question
+     * @param u the user
+     */
+    public void checkAlone(String seriesName, User u){
+        int count = 0;
+        for (Event e: u.getEvents()){
+            if (e.getSeriesName().equals(seriesName)){
+                count ++;
+            }
+        }
+        if (count == 1){
+            deleteSeriesAffiliation(seriesName, u);
+        }
+    }
 }

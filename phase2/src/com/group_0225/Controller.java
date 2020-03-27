@@ -23,6 +23,7 @@ public class Controller implements Observer {
     private List<List<String>> notifications = new ArrayList<>();
     private DatabaseManager databaseManager;
     private EventManager eventManager;
+    private MessagingManager messagingManager;
     private TimingFactory timingFactory;
     private Presenter presenter;
     private User currUser;
@@ -38,6 +39,7 @@ public class Controller implements Observer {
         presenter = new Presenter();
         eventManager = new EventManager();
         memoManager = new MemoManager();
+        messagingManager = new MessagingManager();
         sm = new SeriesManager();
     }
 
@@ -420,6 +422,29 @@ public class Controller implements Observer {
 
     }
 
+    /**
+     * Deletes the chosen series, but keeps all the events.
+     */
+    private void deleteSeriesAffiliation(){
+        //TODO: finish this method when design is finalized
+        //get series name here with UI and Presenter connections
+        sm.deleteSeriesAffiliation("PLACEHOLDER", currUser);
+    }
+
+    /**
+     * Deletes the chosen series AND all its events.
+     */
+    private void deleteSeries(){
+        //TODO: Finish this method when design is finalized
+        //get series name here with UI and Presenter connections
+        sm.deleteSeries("PLACEHOLDER", currUser, eventManager);
+        }
+
+    //TODO: encapsulate the following when design is finalized
+    private void viewEventMessages(){}
+    private void acceptEventMessage(){}
+    private void rejectEventMessage(){}
+
     private void checkUpcomingAlerts() {
         Presenter p = new Presenter();
         List<List<String>> alertList = alertManager.checkUpcomingAlerts();
@@ -620,4 +645,5 @@ public class Controller implements Observer {
     private void printDetailedEvent(Event e) {
         presenter.displayView(UIViews.EventInfo, eventManager.getDetailedEvent(e, alertManager));
     }
+
 }
