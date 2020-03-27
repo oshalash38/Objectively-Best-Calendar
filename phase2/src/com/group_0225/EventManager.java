@@ -246,4 +246,10 @@ public class EventManager {
     public void addTag(Event e, String newTag){
         e.getTags().add(newTag);
     }
+    public void deleteEvent(Event e, User u, SeriesManager sm){
+        u.getEvents().remove(e);
+        if (!e.getSeriesName().equals("")){
+            sm.checkAlone(e.getSeriesName(), u);
+        }
+    }
 }

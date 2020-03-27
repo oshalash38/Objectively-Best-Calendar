@@ -1,7 +1,9 @@
-package com.group_0225.ui.core.tests;
+package com.group_0225.ui.core.test;
 
+import com.group_0225.ui.core.CalendarPanel;
 import com.group_0225.ui.core.CalendarToolBar;
 import com.group_0225.ui.core.CreateUserPanel;
+import com.group_0225.ui.core.StartupPanel;
 
 import javax.swing.*;
 
@@ -13,7 +15,7 @@ class CreateUserPanelTest extends JFrame {
 
     private void run(){
 
-        this.add(new CreateUserPanel());
+        //this.add(new StartupPanel());
         this.setSize(800, 600);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 

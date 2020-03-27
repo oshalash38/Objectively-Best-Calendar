@@ -1,17 +1,58 @@
 package com.group_0225.ui.core;
 
-import javax.swing.*;
+import com.group_0225.GUIBuilder;
+import com.group_0225.PanelInfo;
+import com.group_0225.UIPresenter;
+import com.group_0225.ui.common.calendar.CalendarLayoutPanel;
 
-public class CalendarFrame extends JFrame {
+import javax.swing.*;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.Observable;
+import java.util.Observer;
+
+public class CalendarFrame extends JFrame implements Observer {
+
+    UIPresenter presenter;
+    GUIBuilder guiBuilder;
+
+    Map<String,CalendarLayoutPanel> panels;
+
+    JPanel currPanel;
 
     public CalendarFrame() {
         super();
 
-        this.add(new CalendarPanel());
+        presenter = new UIPresenter();
+        presenter.addObserver(this);
+        guiBuilder = new GUIBuilder();
+
+        panels = guiBuilder.buildPanels(presenter);
+    }
+
+    public void run(){
+        this.displayCalendarPanel(new PanelInfo("Startup", new ArrayList<>()));
         this.setSize(800, 600);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         this.setJMenuBar(new CalendarToolBar());
+
+        this.setVisible(true);
     }
 
+    @Override
+    public void update(Observable o, Object arg) {
+        PanelInfo info = (PanelInfo) arg;
+        this.displayCalendarPanel(info);
+    }
+
+    private void displayCalendarPanel(PanelInfo info) {
+        if(currPanel != null)
+            this.remove(currPanel);
+
+        CalendarLayoutPanel currP = panels.get(info.getPanelKey());
+        currP.updatePanel(info.getPanelData());
+
+        this.add(currP);
+    }
 }
