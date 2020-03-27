@@ -15,7 +15,6 @@ public class CreateUserPanel extends JPanel {
         this.add(new Label("New Username:"), c);
         this.add(new TextField(), c);
 
-        c.weighty = 1;
         c.gridy = 1;
         this.add(new Label("New Password:"), c);
         this.add(new TextField(), c);
