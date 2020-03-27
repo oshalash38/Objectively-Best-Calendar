@@ -36,7 +36,7 @@ public class MessagingManager {
      */
     public void acceptRequest(EventMessage request, String message){
         EventMessage response = new EventMessage(request.getEvent(), message, request.getTo(), request.getFrom());
-            request.getFrom().addResponse(response);
+        request.getFrom().addResponse(response);
         ev.createEvent(request.getTo(), request.getEvent().getEventName(), request.getEvent().getTime());
     }
 
@@ -46,5 +46,6 @@ public class MessagingManager {
      */
     public void rejectRequest(EventMessage request){
         EventMessage response = new EventMessage(request.getEvent(), null, request.getTo(), request.getFrom());
+        request.getFrom().addResponse(response);
     }
 }
