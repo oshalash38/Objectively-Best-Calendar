@@ -1,15 +1,22 @@
 package com.group_0225.ui.core;
 
+import com.group_0225.controller.ControllerFacade;
+import com.group_0225.ui.common.calendar.CalendarLayoutPanel;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
-public class StartupPanel extends JPanel {
+public class StartupPanel extends CalendarLayoutPanel {
 
-    public StartupPanel() {
-        super(new GridBagLayout());
+    public StartupPanel(ControllerFacade controllerFacade) {
+        super(new GridBagLayout(), controllerFacade);
+    }
 
+    @Override
+    protected void buildPanel(List<String> inputs) {
         GridBagConstraints c = new GridBagConstraints();
         c.fill = GridBagConstraints.BOTH;
         c.gridy = 0;
@@ -48,7 +55,12 @@ public class StartupPanel extends JPanel {
         //DUMMY THICC BUTTONS
         c.gridy = 3;
         Button loginButton = new Button("Login");
-        loginButton.addActionListener(getLoginButtonListener());
+        loginButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                controllerFacade.login(usernameField.getText(), passwordField.getText());
+            }
+        });
         bottomPane.add(loginButton, c);
         c.gridy = 4;
         bottomPane.add(new Button("Create New User"), c);
@@ -56,15 +68,5 @@ public class StartupPanel extends JPanel {
         //Adds bottom pane
         c.gridy = 1;
         this.add(bottomPane, c);
-    }
-
-    private ActionListener getLoginButtonListener() {
-        return new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-            }
-        };
     }
 }

@@ -15,7 +15,7 @@ class CreateUserPanelTest extends JFrame {
 
     private void run(){
 
-        this.add(new StartupPanel());
+        //this.add(new StartupPanel());
         this.setSize(800, 600);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
