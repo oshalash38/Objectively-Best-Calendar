@@ -12,7 +12,8 @@ import java.util.Map;
  * @author Abhijoy Mandal.
  */
 public class User implements Serializable{
-    private ArrayList<Event> events = new ArrayList<>();
+//    private ArrayList<Event> events = new ArrayList<>();
+    private Map<Integer, Event> events = new HashMap<>();
     private Map<Integer, String> memos = new HashMap<>();
     private String password;
     private String username;
@@ -35,7 +36,7 @@ public class User implements Serializable{
      * A getter method for getEvents
      * @return the events of this user.
      */
-    public ArrayList<Event> getEvents(){return this.events;}
+    public Map<Integer,Event> getEvents(){return this.events;}
 
     /**
      * A function to make sure if the client entered the correct password to gave the right to interact with the user

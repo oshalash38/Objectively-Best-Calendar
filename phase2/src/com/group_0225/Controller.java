@@ -351,8 +351,8 @@ public class Controller implements Observer {
 
     private List<String> listEvents(User u) {
         List<String> str = new ArrayList<>();
-        for (Event e : u.getEvents()) {
-            str.add(formatEventInfo(e));
+        for (Map.Entry<Integer, Event> entry: u.getEvents().entrySet()){
+            str.add(formatEventInfo(entry.getValue()));
         }
         return str;
     }

@@ -1,12 +1,17 @@
 package com.group_0225;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Map;
+
 public class EventManager {
     /**
      * Use case for events.
      * @author Omar Shalash
      */
+
+    private static int idGen = 0;
 
     /**
      * Creates a new event and returns it.
@@ -33,13 +38,15 @@ public class EventManager {
         return event;
     }
 
-    private void sortEvents(User user, Event e){
-        ArrayList<Event> events = user.getEvents();
-
-        for (Event event: events){
-            if (event.compareTo(e) >= 0){ events.add(events.indexOf(event), e); return;}
+    private int sortEvents(User user, Event e){
+        HashMap<Integer,Event> events = (HashMap<Integer, Event>) user.getEvents();
+        int high = -1;
+        for (Map.Entry<Integer, Event> entry: events.entrySet()){
+            if(entry.getKey() > high){high = entry.getKey();}
         }
-        events.add(e);
+        idGen = high + 1;
+        events.put(idGen, e);
+        return idGen;
     }
 
 
@@ -64,10 +71,10 @@ public class EventManager {
      * @return the Event matching the name
      */
     public Event searchEventByName(User user, String name){
-        ArrayList<Event> events = user.getEvents();
-        for (Event event: events){
-            if (event.getEventName().equals(name)){
-                return event;
+        HashMap<Integer,Event> events = (HashMap<Integer, Event>) user.getEvents();
+        for (Map.Entry<Integer, Event> entry: events.entrySet()){
+            if (entry.getValue().getEventName().equals(name)){
+                return entry.getValue();
             }
         }
         return null;
@@ -80,11 +87,11 @@ public class EventManager {
      * @return the list of Events
      */
     public List<Event> searchEventsByName(User user, String name){
-        ArrayList<Event> events = user.getEvents();
+        HashMap<Integer,Event> events = (HashMap<Integer, Event>) user.getEvents();
         ArrayList<Event> output = new ArrayList<Event>();
-        for (Event event: events){
-            if (event.getEventName().equals(name)){
-                output.add(event);
+        for (Map.Entry<Integer, Event> entry: events.entrySet()){
+            if (entry.getValue().getEventName().equals(name)){
+                output.add(entry.getValue());
             }
         }
         return output;
@@ -95,9 +102,9 @@ public class EventManager {
      * @param user The user.
      */
     public void updateStatus(User user){
-        ArrayList<Event> events = user.getEvents();
-        for (Event event : events){
-            event.updateStatus();
+        Map<Integer,Event> events = user.getEvents();
+        for (Map.Entry<Integer, Event> entry: events.entrySet()){
+            entry.getValue().updateStatus();
         }
     }
 
@@ -108,10 +115,10 @@ public class EventManager {
      */
     public ArrayList<Event> getUpcomingEvents(User user){
         ArrayList<Event> upcomingEvents = new ArrayList<>();
-        ArrayList<Event> allEvents = user.getEvents();
-        for (Event event: allEvents){
-            if (event.getStatus() == Status.UPCOMING){
-                upcomingEvents.add(event);
+        HashMap<Integer,Event> allEvents = (HashMap<Integer, Event>) user.getEvents();
+        for (Map.Entry<Integer, Event> entry: allEvents.entrySet()){
+            if (entry.getValue().getStatus() == Status.UPCOMING){
+                upcomingEvents.add(entry.getValue());
             }
         }
         return upcomingEvents;
@@ -124,10 +131,10 @@ public class EventManager {
      */
     public ArrayList<Event> getCurrentEvents(User user){
         ArrayList<Event> currentEvents = new ArrayList<>();
-        ArrayList<Event> allEvents = user.getEvents();
-        for (Event event: allEvents){
-            if (event.getStatus() == Status.CURRENT){
-                currentEvents.add(event);
+        HashMap<Integer,Event> allEvents = (HashMap<Integer, Event>) user.getEvents();
+        for (Map.Entry<Integer, Event> entry: allEvents.entrySet()){
+            if (entry.getValue().getStatus() == Status.CURRENT){
+                currentEvents.add(entry.getValue());
             }
         }
         return currentEvents;
@@ -140,10 +147,10 @@ public class EventManager {
      */
     public ArrayList<Event> getPastEvents(User user){
         ArrayList<Event> pastEvents = new ArrayList<>();
-        ArrayList<Event> allEvents = user.getEvents();
-        for (Event event: allEvents){
-            if (event.getStatus() == Status.PAST){
-                pastEvents.add(event);
+        HashMap<Integer,Event> allEvents = (HashMap<Integer, Event>) user.getEvents();
+        for (Map.Entry<Integer, Event> entry: allEvents.entrySet()){
+            if (entry.getValue().getStatus() == Status.PAST){
+                pastEvents.add(entry.getValue());
             }
         }
         return pastEvents;
@@ -170,21 +177,21 @@ public class EventManager {
      * @return
      */
     public List<Event> getEventsByTag(User user, String tag){
-        List<Event> events = user.getEvents();
+        HashMap<Integer,Event> events = (HashMap<Integer, Event>) user.getEvents();
         List<Event> eventsByTag = new ArrayList<Event>();
-        for(Event e: events){
-            if (e.getTags().contains(tag)){
-                eventsByTag.add(e);
+        for (Map.Entry<Integer, Event> entry: events.entrySet()){
+            if (entry.getValue().getTags().contains(tag)){
+                eventsByTag.add(entry.getValue());
             }
         }
         return eventsByTag;
     }
     public List<Event> getEventsBySeriesName(User user, String sname){
-        List<Event> events = user.getEvents();
+        HashMap<Integer,Event> events = (HashMap<Integer, Event>) user.getEvents();
         List<Event> snEvents = new ArrayList<>();
-        for (Event e: events){
-            if (e.getSeriesName().equals(sname)){
-                snEvents.add(e);
+        for (Map.Entry<Integer, Event> entry: events.entrySet()){
+            if (entry.getValue().getSeriesName().equals(sname)){
+                snEvents.add(entry.getValue());
             }
         }return snEvents;
     }
@@ -229,10 +236,10 @@ public class EventManager {
      */
     public List<Event> getEventsBetween(User currUser, Timing date1, Timing date2) {
         List<Event> out = new ArrayList<>();
-        List<Event> events = currUser.getEvents();
-        for (Event event : events){
-            if (event.compareTo(date1) == 1 || event.compareTo(date1) == 1){
-                out.add(event);
+        HashMap<Integer,Event> events = (HashMap<Integer, Event>) currUser.getEvents();
+        for (Map.Entry<Integer, Event> entry: events.entrySet()){
+            if (entry.getValue().compareTo(date1) == 1 || entry.getValue().compareTo(date1) == 1){
+                out.add(entry.getValue());
             }
         }
         return out;
