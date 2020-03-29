@@ -50,6 +50,7 @@ public class CalendarFrame extends JFrame implements Observer {
 
         this.add(currP);
         currPanel = currP;
+        pack();
 
     }
 }
