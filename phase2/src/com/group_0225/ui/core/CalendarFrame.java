@@ -16,7 +16,7 @@ public class CalendarFrame extends JFrame implements Observer {
     private UIPresenter presenter;
     private GUIBuilder guiBuilder;
     private Map<String,CalendarLayoutPanel> panels;
-    private JPanel currPanel;
+    JPanel currPanel;
 
     public CalendarFrame() {
         super();
@@ -47,10 +47,11 @@ public class CalendarFrame extends JFrame implements Observer {
 
         CalendarLayoutPanel currP = panels.get(info.getPanelKey());
         currP.updatePanel(info.getPanelData());
-
+        currPanel = currP;
         this.add(currP);
         currPanel = currP;
         pack();
 
     }
+
 }

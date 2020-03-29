@@ -17,8 +17,11 @@ public class LoginController extends CalendarController{
     }
 
     public void createNewUser(String userName, String password, String repeatPassword) {
-        if(!password.equals(repeatPassword)){
-            presenter.createUserPanel(userName, "Passwords do not match"); //TODO I'm not sure if a controller is allowed to have string messages
+        if(userName.length() == 0 || password.length() == 0 || repeatPassword.length() == 0){
+            presenter.createUserPanel(userName, "Please enter all fields."); //TODO I'm not sure if a controller is allowed to have string messages
+        }
+        else if(!password.equals(repeatPassword)){
+            presenter.createUserPanel(userName, "Passwords do not match. Please try again."); //TODO I'm not sure if a controller is allowed to have string messages
         }
         //else if(username already exists){
             // presenter.CreateUserPanel(userName, "Username already exists please try again");
