@@ -1,9 +1,8 @@
 package com.group_0225;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Map;
+import com.group_0225.manager.CalendarData;
+
+import java.util.*;
 
 public class EventManager {
     /**
@@ -12,6 +11,11 @@ public class EventManager {
      */
 
     private static int idGen = 0;
+    private CalendarData cd;
+
+    public EventManager(){
+        cd = new CalendarData();
+    }
 
     /**
      * Creates a new event and returns it.
@@ -253,10 +257,25 @@ public class EventManager {
     public void addTag(Event e, String newTag){
         e.getTags().add(newTag);
     }
-    public void deleteEvent(Event e, User u, SeriesManager sm){
-        u.getEvents().remove(e);
-        if (!e.getSeriesName().equals("")){
-            sm.checkAlone(e.getSeriesName(), u);
+    public void deleteEvent(Integer i, User u, SeriesManager sm){
+        u.getEvents().remove(i);
+        if (!u.getEvents().get(i).getSeriesName().equals("")){
+            sm.checkAlone(u.getEvents().get(i).getSeriesName(), u);
         }
+    }
+
+    /**
+     * Required since Maps aren't sorted and events must be returned from earliest to latest
+     * @param calendar a key-value entry in the User's calendars attribute
+     * @return a sorted list of all events from the User's calendar
+     */
+    public List<Event> getSortedEvents(Map.Entry<String,List<Integer>> calendar){
+        List<Integer> unsortedIDs = calendar.getValue();
+        List<Event> unsortedEvents = new ArrayList<>();
+        for (Integer i: unsortedIDs){
+            unsortedEvents.add(cd.getEvents().get(i));
+        }
+        Collections.sort(unsortedEvents);
+        return unsortedEvents;
     }
 }

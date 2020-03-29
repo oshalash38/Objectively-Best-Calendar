@@ -3,6 +3,7 @@ package com.group_0225;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Methods for creating a series
@@ -71,10 +72,10 @@ public class SeriesManager {
      * @param u the user
      */
     public void deleteSeriesAffiliation(String seriesName, User u){
-        List<Event> lst = u.getEvents();
-        for (Event e: lst){
-            if (e.getSeriesName().equals(seriesName)){
-                e.setSeriesName("");
+        Map<Integer, Event> events = u.getEvents();
+        for (Map.Entry<Integer, Event> e: events.entrySet()){
+            if (e.getValue().getSeriesName().equals(seriesName)){
+                e.getValue().setSeriesName("");
             }
         }
     }
@@ -86,22 +87,22 @@ public class SeriesManager {
      * @param em an EventManager instance to delete each event
      */
     public void deleteSeries(String seriesName, User u, EventManager em){
-        for (Event e: u.getEvents()){
-            if (e.getSeriesName().equals(seriesName)){
-                em.deleteEvent(e,u,this);
+        for (Map.Entry<Integer, Event> e: u.getEvents().entrySet()){
+            if (e.getValue().getSeriesName().equals(seriesName)){
+                em.deleteEvent(e.getKey(),u,this);
             }
         }
     }
     //To be used in changeFrequency, changeDuration
-    private List<Event> collectSeriesFromUser(String seriesName, User u){
-        ArrayList<Event> lst = new ArrayList<>();
-        for (Event e: u.getEvents()){
-            if (e.getSeriesName().equals(seriesName)){
-                lst.add(e);
-            }
-        }
-        return lst;
-    }
+//    private List<Event> collectSeriesFromUser(String seriesName, User u){
+//        ArrayList<Event> lst = new ArrayList<>();
+//        for (Event e: u.getEvents()){
+//            if (e.getSeriesName().equals(seriesName)){
+//                lst.add(e);
+//            }
+//        }
+//        return lst;
+//    }
 
     /**
      * If there is one event in a series, then remove that affiliation
@@ -110,8 +111,8 @@ public class SeriesManager {
      */
     public void checkAlone(String seriesName, User u){
         int count = 0;
-        for (Event e: u.getEvents()){
-            if (e.getSeriesName().equals(seriesName)){
+        for (Map.Entry<Integer, Event> e: u.getEvents().entrySet()){
+            if (e.getValue().getSeriesName().equals(seriesName)){
                 count ++;
             }
         }

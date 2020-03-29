@@ -7,7 +7,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class CalendarData {
-    private Map<String, Event> events = new HashMap<>();
+
+    private Map<Integer, Event> events = new HashMap<>();
     private Map<String, Alert> alerts = new HashMap<>();
+
     //TODO Still needs to be implemented. Waiting for key system for events
+    public Map<Integer, Event> getEvents() {
+        return events;
+    }
 }
