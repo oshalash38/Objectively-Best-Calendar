@@ -49,5 +49,7 @@ public class CalendarFrame extends JFrame implements Observer {
         currP.updatePanel(info.getPanelData());
 
         this.add(currP);
+        currPanel = currP;
+
     }
 }
