@@ -2,6 +2,7 @@ package com.group_0225;
 
 import com.group_0225.controller.ControllerFacade;
 import com.group_0225.ui.common.calendar.CalendarLayoutPanel;
+import com.group_0225.ui.core.CreateUserPanel;
 import com.group_0225.ui.core.StartupPanel;
 
 import java.util.Hashtable;
@@ -13,8 +14,8 @@ public class GUIBuilder {
         ControllerFacade facade = new ControllerFacade(presenter);
 
         Map<String, CalendarLayoutPanel> panels = new Hashtable<>();
-        panels.put("Startup", new StartupPanel(facade));
-
+        panels.put("StartupPanel", new StartupPanel(facade));
+        panels.put("CreateUserPanel", new CreateUserPanel(facade));
         return panels;
     }
 }

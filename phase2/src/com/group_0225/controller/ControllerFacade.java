@@ -13,15 +13,21 @@ public class ControllerFacade {
 
     public ControllerFacade(UIPresenter presenter) {
         this.presenter = presenter;
-
         data = new CalendarData();
-
         login = new LoginController(data, presenter);
     }
 
     public void login(String username, String password) { login.login(username, password);}
 
     public void createNewUser(){
-        //TODO Needs implementation
+        login.createNewUser();
+    }
+
+    public void createNewUser(String userName, String password, String repeatPassword) {
+        login.createNewUser(userName, password, repeatPassword);
+    }
+
+    public void startUp(){
+        login.startUp();
     }
 }

@@ -21,6 +21,32 @@ public abstract class CalendarLayoutPanel extends JPanel {
         this.buildPanel(inputs);
     }
 
+    protected Button addButton(GridBagConstraints c, JPanel bottomPane, int yPosition, String label){
+        Button button = new Button(label);
+        c.gridy = yPosition;
+        bottomPane.add(button, c);
+        return button;
+    }
+
+    protected void buildTitle(GridBagConstraints c, String text){
+        Label titleLabel = new Label(text);
+        titleLabel.setAlignment(Label.CENTER);
+        titleLabel.setFont(new Font("Serif", Font.BOLD, 25));
+        this.add(titleLabel, c);
+    }
+
+    protected TextField addTextField(GridBagConstraints c, JPanel bottomPane, int yPosition, String label, String text){
+        c.fill = GridBagConstraints.NONE;
+        c.gridy = yPosition;
+        JPanel UserText = new JPanel();
+        TextField field = new TextField(text);
+        field.setColumns(30);
+        UserText.add(new Label(label));
+        UserText.add(field);
+        bottomPane.add(UserText, c);
+        return field;
+    }
+
 
     protected abstract void buildPanel(List<String> inputs);
 }

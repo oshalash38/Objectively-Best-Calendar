@@ -30,6 +30,9 @@ public class Controller implements Observer {
     private Event currEvent;
 
 
+    //TODO THIS IS AN OLD CLASS THAT DOESNT COMPILE ANYMORE. DO NOT RUN THISSSSSSSSS
+
+
     /**
      * Creates an instance of Controller
      */
@@ -125,7 +128,7 @@ public class Controller implements Observer {
         boolean go = true;
         while (go) {
             eventManager.updateStatus(currUser);
-            alertManager = new AlertManager(currUser.getEvents());
+           // alertManager = new AlertManager(currUser.getEvents());
             alertManager.addObserver(this);
             notifications.addAll(alertManager.checkNewAlerts());
             alertManager.keepChecking();
@@ -214,8 +217,8 @@ public class Controller implements Observer {
         List<String> strings = memoManager.DisplayAllMemos(currUser.getMemos());
         List<String> input = presenter.displayView(UIViews.memoMenu, strings);
         if (input.size() > 0) {
-            List<Event> events = memoManager.FilterByMemoId(currUser.getEvents(), Integer.parseInt(input.get(0)));
-            displayEventsAfterFiltring(events);
+            //List<Event> events = memoManager.FilterByMemoId(currUser.getEvents(), Integer.parseInt(input.get(0)));
+            //displayEventsAfterFiltring(events);
         }
 
     }

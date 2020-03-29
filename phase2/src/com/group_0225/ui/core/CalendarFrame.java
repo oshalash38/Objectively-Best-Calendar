@@ -13,25 +13,20 @@ import java.util.Observer;
 
 public class CalendarFrame extends JFrame implements Observer {
 
-    UIPresenter presenter;
-    GUIBuilder guiBuilder;
-
-    Map<String,CalendarLayoutPanel> panels;
-
-    JPanel currPanel;
+    private UIPresenter presenter;
+    private GUIBuilder guiBuilder;
+    private Map<String,CalendarLayoutPanel> panels;
+    private JPanel currPanel;
 
     public CalendarFrame() {
         super();
-
-        presenter = new UIPresenter();
-        presenter.addObserver(this);
         guiBuilder = new GUIBuilder();
-
-        panels = guiBuilder.buildPanels(presenter);
     }
 
-    public void run(){
-        this.displayCalendarPanel(new PanelInfo("Startup", new ArrayList<>()));
+    public void run(UIPresenter presenter){
+        this.presenter = presenter;
+        panels = guiBuilder.buildPanels(presenter);
+        this.displayCalendarPanel(new PanelInfo("StartupPanel", new ArrayList<>()));
         this.setSize(800, 600);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
