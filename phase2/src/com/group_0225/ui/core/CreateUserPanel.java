@@ -51,7 +51,6 @@ public class CreateUserPanel extends CalendarLayoutPanel {
 
         c.gridy = 6;
         this.add(new Label(inputs.get(1)), c);
-        this.add(new TextField(), c);
 
         //Adds bottom pane
         c.gridy = 1;
