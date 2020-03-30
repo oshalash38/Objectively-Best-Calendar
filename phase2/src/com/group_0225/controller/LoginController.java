@@ -17,6 +17,8 @@ public class LoginController extends CalendarController{
     }
 
     public void createNewUser(String userName, String password, String repeatPassword) {
+
+
         if(userName.length() == 0 || password.length() == 0 || repeatPassword.length() == 0){
             presenter.createUserPanel(userName, "Please enter all fields."); //TODO I'm not sure if a controller is allowed to have string messages
         }
