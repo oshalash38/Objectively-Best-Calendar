@@ -17,6 +17,7 @@ public class Event implements Serializable, Comparable<Event> {
     private ArrayList<Integer> memoIDs = new ArrayList<>();
     private ArrayList<String> tags = new ArrayList<>();
     private Status status = Status.UPCOMING;
+    private Integer ID;
 
     /** Construct a basic event
      *
@@ -37,6 +38,9 @@ public class Event implements Serializable, Comparable<Event> {
         this(name, t);
         this.seriesName = sname;
     }
+
+    public Integer getID(){return this.ID;}
+    public void setID(Integer id){this.ID = id;}
 
     /** Get the name of this event
      * @return the name of this event

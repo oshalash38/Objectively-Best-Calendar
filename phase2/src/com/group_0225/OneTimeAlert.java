@@ -16,8 +16,8 @@ public class OneTimeAlert extends Alert {
      * @param time The time of when this alert should take place
      * @param message The message to be displayed when the alert is pushed
      */
-    public OneTimeAlert(Timing time, String message){
-        super(message);
+    public OneTimeAlert(Timing time, String message, Integer id){
+        super(message, id);
         this.time = time;
     }
 
@@ -25,8 +25,8 @@ public class OneTimeAlert extends Alert {
      * Construct a OneTimeAlert alert with a time
      * @param time The time of when this alert should take place
      */
-    public OneTimeAlert(Timing time){
-        super();
+    public OneTimeAlert(Timing time, Integer id){
+        super(id);
         this.time = time;
     }
 

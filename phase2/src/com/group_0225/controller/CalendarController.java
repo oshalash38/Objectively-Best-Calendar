@@ -7,10 +7,15 @@ public class CalendarController {
     //TODO RENAME THIS CLASS TO CONTROLLER ONCE WE DELETE THE OLD STUFF
     protected CalendarData data;
     protected UIPresenter presenter;
+    public static String currCalendar;
 
     public CalendarController(CalendarData data, UIPresenter presenter) {
         this.data = data;
         this.presenter = presenter;
+    }
+
+    public static void setCurrCalendar(String calendar){
+        currCalendar = calendar;
     }
 
 

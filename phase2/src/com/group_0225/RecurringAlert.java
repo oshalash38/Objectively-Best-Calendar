@@ -12,14 +12,14 @@ public class RecurringAlert extends Alert {
     private Timing nextTime;
     private Duration freq;
 
-    public RecurringAlert(Timing time, String message, Duration freq){
-        super(message);
+    public RecurringAlert(Timing time, String message, Duration freq, Integer id){
+        super(message, id);
         nextTime = time;
         this.freq = freq;
     }
 
-    public RecurringAlert(Timing time, Duration freq){
-        super();
+    public RecurringAlert(Timing time, Duration freq, Integer id){
+        super(id);
         nextTime = time;
         this.freq = freq;
     }

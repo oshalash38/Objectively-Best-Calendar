@@ -13,11 +13,11 @@ import java.util.*;
  */
 public class AlertManager extends Observable{
     private LocalDateTime currentTime = LocalDateTime.now();
-    private ArrayList<Alert> upcomingAlerts = new ArrayList<>(0);
+    private List<Alert> upcomingAlerts = new ArrayList<>(0);
     private List<List<String>> printableUpcomingAlerts = new ArrayList<>(0);
     private Timer t = new Timer();
     private final int CHECKDURATION = 30;
-    private ArrayList<Event> UserEvents;
+    private List<Event> UserEvents;
     private TimerTask timerTask = new TimerTask() {
 
         @Override
@@ -40,7 +40,7 @@ public class AlertManager extends Observable{
      *
      * @param events initialises alertManager with the events of the logged in user
      */
-    public AlertManager (ArrayList<Event> events){
+    public AlertManager (List<Event> events){
         this.UserEvents = events;
     }
 
@@ -78,7 +78,7 @@ public class AlertManager extends Observable{
         timerTask.cancel();
         t.cancel();
         t.purge();
-        return;
+
     }
 
     private void sortAdd(ArrayList<Alert> alerts, Alert newAlert){
@@ -170,8 +170,8 @@ public class AlertManager extends Observable{
      * @param message the message associated with the alert
      * @return returns 1, when the new alert is successfuly added to the list of alerts of the event.
      */
-    public int createNewAlert(Event e, Timing T, String message){
-        Alert newAlert = new OneTimeAlert(T, message);
+    public int createNewAlert(Event e, Timing T, String message, Integer id){
+        Alert newAlert = new OneTimeAlert(T, message, id);
         sortAdd(e.getAlerts(), newAlert);
         return 1;
     }
@@ -182,8 +182,8 @@ public class AlertManager extends Observable{
      * @param T the timing of the alert
      * @return returns 1, when the new alert is successfuly added to the list of alerts of the event.
      */
-    public int createNewAlert(Event e, Timing T){
-        Alert newAlert = new OneTimeAlert(T);
+    public int createNewAlert(Event e, Timing T, Integer id){
+        Alert newAlert = new OneTimeAlert(T, id);
         sortAdd(e.getAlerts(), newAlert);
         return 1;
     }
@@ -197,8 +197,8 @@ public class AlertManager extends Observable{
      * @param freq the duration after which the alert is repeated.
      * @return returns 1, when the new alert is successfuly added to the list of alerts of the event.
      */
-    public int createNewAlert(Event e, Timing T, String message, Duration freq){
-        Alert newAlert = new RecurringAlert(T, message, freq);
+    public int createNewAlert(Event e, Timing T, String message, Duration freq, Integer id){
+        Alert newAlert = new RecurringAlert(T, message, freq, id);
         sortAdd(e.getAlerts(), newAlert);
         return 1;
     }
@@ -209,8 +209,8 @@ public class AlertManager extends Observable{
      * @param T the timing of the alert
      * @return returns 1, when the new alert is successfuly added to the list of alerts of the event.
      */
-    public int createNewAlert(Event e, Timing T, Duration freq){
-        Alert newAlert = new RecurringAlert(T, freq);
+    public int createNewAlert(Event e, Timing T, Duration freq, Integer id){
+        Alert newAlert = new RecurringAlert(T, freq, id);
         sortAdd(e.getAlerts(), newAlert);
         return 1;
     }

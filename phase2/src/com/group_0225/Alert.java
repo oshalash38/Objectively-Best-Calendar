@@ -11,21 +11,28 @@ import java.time.LocalDateTime;
  */
 public abstract class Alert implements Serializable, Comparable<Alert>{
     protected String message;
+    public Integer ID;
+
+    public Integer getID() {
+        return ID;
+    }
 
     /**
      * Construct a basic alert with a time and a message
      * @param message The message to be displayed when the alert is pushed
      */
-    public Alert(String message){
+    public Alert(String message, Integer id){
         this.message = message;
+        this.ID = id;
     }
 
     /**
      * Construct a basic alert with a time
      *
      */
-    public Alert(){
+    public Alert(Integer id){
         this.message = null;
+        this.ID = id;
     }
 
     /**
