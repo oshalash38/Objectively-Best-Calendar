@@ -3,6 +3,8 @@ package com.group_0225.controller;
 import com.group_0225.UIPresenter;
 import com.group_0225.manager.CalendarData;
 
+import java.io.IOException;
+
 public class ControllerFacade {
 
     protected UIPresenter presenter;
@@ -19,7 +21,7 @@ public class ControllerFacade {
         series = new SeriesController(data, presenter);
     }
 
-    public void login(String username, String password) { login.login(username, password);}
+    public void login(String username, String password) throws IOException, ClassNotFoundException { login.login(username, password);}
 
     public void createNewUser(){
         login.createNewUser();

@@ -1,15 +1,24 @@
 package com.group_0225.controller;
 
+import com.group_0225.DatabaseManager;
 import com.group_0225.UIPresenter;
+import com.group_0225.User;
 import com.group_0225.manager.CalendarData;
+
+import java.io.IOException;
 
 public class LoginController extends CalendarController{
     public LoginController(CalendarData data, UIPresenter presenter) {
         super(data, presenter);
     }
 
-    public void login(String username, String password) {
+    public void login(String username, String password) throws IOException, ClassNotFoundException {
         System.err.println(username + " : " + password);
+//        DatabaseManager dm = new DatabaseManager("database.txt");
+//        User user = dm.findUser(username);
+////        if (user != null){
+            presenter.createCalendarPanel();
+//        }
     }
 
     public void createNewUser(){

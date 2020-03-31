@@ -18,7 +18,7 @@ public class GUIBuilder {
         panels.put("CreateUserPanel", new CreateUserPanel(facade));
         panels.put("CreateSeriesScratchPanel", new CreateSeriesScratchPanel(facade));
         panels.put("CreateSeriesFromEventsPanel", new CreateSeriesFromEventsPanel(facade));
-        //panels.put("CalendarPanel", new CalendarPanel());
+        panels.put("CalendarPanel", new CalendarPanel(facade));
         //TODO is the above an error or intentional? It didn't compile on my machine
         return panels;
     }

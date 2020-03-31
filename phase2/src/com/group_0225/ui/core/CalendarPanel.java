@@ -4,11 +4,14 @@ import com.group_0225.controller.ControllerFacade;
 import com.group_0225.ui.common.calendar.CalendarComponent;
 import com.group_0225.ui.common.calendar.CalendarFooter;
 import com.group_0225.ui.common.calendar.CalendarHeader;
+import com.group_0225.ui.common.calendar.CalendarLayoutPanel;
+import sun.tools.jps.Jps;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.List;
 
-public class CalendarPanel extends JPanel {
+public class CalendarPanel extends CalendarLayoutPanel {
 
     int currTime = 3;
 
@@ -16,8 +19,8 @@ public class CalendarPanel extends JPanel {
     CalendarComponent component;
     CalendarFooter footer;
 
-    public CalendarPanel() {
-        super(new GridBagLayout());
+    public CalendarPanel(ControllerFacade controllerFacade) {
+        super(new GridBagLayout(), controllerFacade);
 
         refreshCalendar();
 
@@ -61,4 +64,9 @@ public class CalendarPanel extends JPanel {
     public int getCurrentTime() { return currTime; }
     public int getCurrentTimeMax() { return 12; }
     public void setCurrentTime(int currTime) { this.currTime = currTime; }
+
+    @Override
+    protected void buildPanel(List<String> inputs) {
+        refreshCalendar();
+    }
 }
