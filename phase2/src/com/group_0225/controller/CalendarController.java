@@ -8,7 +8,7 @@ public class CalendarController {
     //TODO RENAME THIS CLASS TO CONTROLLER ONCE WE DELETE THE OLD STUFF
     protected CalendarData data;
     protected UIPresenter presenter;
-    public static String currCalendar;
+    private String currCalendar;
     protected User currUser;
 
     public CalendarController(CalendarData data, UIPresenter presenter) {
@@ -16,9 +16,12 @@ public class CalendarController {
         this.presenter = presenter;
     }
 
-    public static void setCurrCalendar(String calendar){
+    public void setCurrCalendar(String calendar){
         currCalendar = calendar;
     }
 
 
+    public String getCurrCalendar() {
+        return currCalendar;
+    }
 }
