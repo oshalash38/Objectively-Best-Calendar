@@ -14,18 +14,19 @@ public class LoginController extends CalendarController{
 
     public void login(String username, String password) throws IOException, ClassNotFoundException {
         System.err.println(username + " : " + password);
-//        DatabaseManager dm = new DatabaseManager("database.txt");
-//        User user = dm.findUser(username);
-////        if (user != null){
+        DatabaseManager dm = new DatabaseManager("database.ser");
+        User user = dm.findUser(username);
+        if (user != null){
             presenter.createCalendarPanel();
-//        }
+            currUser = user;
+        }
     }
 
     public void createNewUser(){
         presenter.createUserPanel();
     }
 
-    public void createNewUser(String userName, String password, String repeatPassword) {
+    public void createNewUser(String userName, String password, String repeatPassword) throws IOException, ClassNotFoundException {
 
 
         if(userName.length() == 0 || password.length() == 0 || repeatPassword.length() == 0){
@@ -38,8 +39,11 @@ public class LoginController extends CalendarController{
             // presenter.CreateUserPanel(userName, "Username already exists please try again");
         //}
         else{
-            // Create user I don't know how to do this yet.
-            // presenter.CreateUserPanel(userName, "User creation successful. Return to main menu to login");
+            User user = new User(userName, password); // TODO: Not sure if controller can access user directly or not.
+            DatabaseManager databaseManager = new DatabaseManager("database.ser");
+            databaseManager.add(user);
+            databaseManager.saveToFile("database.ser");
+            presenter.createUserPanel(userName, "User creation successful. Return to main menu to login");
         }
     }
 

@@ -1,6 +1,7 @@
 package com.group_0225.controller;
 
 import com.group_0225.UIPresenter;
+import com.group_0225.User;
 import com.group_0225.manager.CalendarData;
 
 import java.io.IOException;
@@ -11,14 +12,17 @@ public class ControllerFacade {
 
     private LoginController login;
     private SeriesController series;
+    private EventsController events;
 
     private CalendarData data;
+    private User currUser;
 
     public ControllerFacade(UIPresenter presenter) {
         this.presenter = presenter;
         data = new CalendarData();
         login = new LoginController(data, presenter);
         series = new SeriesController(data, presenter);
+        events = new EventsController(data, presenter, currUser);
     }
 
     public void login(String username, String password) throws IOException, ClassNotFoundException { login.login(username, password);}
@@ -27,11 +31,20 @@ public class ControllerFacade {
         login.createNewUser();
     }
 
-    public void createNewUser(String userName, String password, String repeatPassword) {
+    public void createNewUser(String userName, String password, String repeatPassword) throws IOException, ClassNotFoundException {
         login.createNewUser(userName, password, repeatPassword);
     }
 
     public void startUp(){
         login.startUp();
+    }
+
+    public void createEvent(){
+        // TODO: Needs to be implemented once we implement date picker.
+        events.createEvent();
+    }
+
+    public void mainMenu(){
+        presenter.createCalendarPanel();
     }
 }

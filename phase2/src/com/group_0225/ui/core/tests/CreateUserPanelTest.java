@@ -1,5 +1,7 @@
 package com.group_0225.ui.core.tests;
 
+import com.group_0225.UIPresenter;
+import com.group_0225.controller.ControllerFacade;
 import com.group_0225.ui.core.CalendarPanel;
 import com.group_0225.ui.core.CalendarToolBar;
 import com.group_0225.ui.core.CreateUserPanel;
@@ -18,7 +20,7 @@ class CreateUserPanelTest extends JFrame {
         this.setSize(800, 600);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-        this.setJMenuBar(new CalendarToolBar());
+        this.setJMenuBar(new CalendarToolBar(new ControllerFacade(new UIPresenter())));
 
         this.setVisible(true);
     }

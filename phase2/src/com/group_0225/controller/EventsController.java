@@ -20,7 +20,7 @@ public class EventsController extends CalendarController{
         this.currUser = currUser;
         timingFactory = new TimingFactory();
         memoManager = new MemoManager();
-        getEvents();
+//        getEvents();
 
     }
 
@@ -85,6 +85,10 @@ public class EventsController extends CalendarController{
 
         //displayEventsAfterFiltring(events);
 
+    }
+
+    public void createEvent(){
+        presenter.createEvent();
     }
 }
 

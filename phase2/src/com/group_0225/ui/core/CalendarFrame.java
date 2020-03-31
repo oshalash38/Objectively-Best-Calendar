@@ -3,6 +3,7 @@ package com.group_0225.ui.core;
 import com.group_0225.GUIBuilder;
 import com.group_0225.PanelInfo;
 import com.group_0225.UIPresenter;
+import com.group_0225.controller.ControllerFacade;
 import com.group_0225.ui.common.calendar.CalendarLayoutPanel;
 
 import javax.swing.*;
@@ -17,6 +18,7 @@ public class CalendarFrame extends JFrame implements Observer {
     private GUIBuilder guiBuilder;
     private Map<String,CalendarLayoutPanel> panels;
     JPanel currPanel;
+    private ControllerFacade controllerFacade;
 
     public CalendarFrame() {
         super();
@@ -25,13 +27,12 @@ public class CalendarFrame extends JFrame implements Observer {
 
     public void run(UIPresenter presenter){
         this.presenter = presenter;
+        controllerFacade = new ControllerFacade(presenter);
         panels = guiBuilder.buildPanels(presenter);
         this.displayCalendarPanel(new PanelInfo("StartupPanel", new ArrayList<>()));
         this.setSize(800, 600);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-
-        this.setJMenuBar(new CalendarToolBar());
-
+        this.setJMenuBar(new CalendarToolBar(controllerFacade));
         this.setVisible(true);
     }
 

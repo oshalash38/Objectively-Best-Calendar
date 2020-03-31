@@ -1,11 +1,18 @@
 package com.group_0225.ui.core;
 
+import com.group_0225.controller.ControllerFacade;
+
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class CalendarToolBar extends JMenuBar {
 
-    public CalendarToolBar() {
+    ControllerFacade controllerFacade;
+
+    public CalendarToolBar(ControllerFacade controllerFacade) {
         super();
+        this.controllerFacade = controllerFacade;
 
         JMenu fileMenu = new JMenu("Create");
         JMenuItem createEvent = new JMenuItem("Create Event");
@@ -17,6 +24,13 @@ public class CalendarToolBar extends JMenuBar {
         fileMenu.add(createAlert);
         fileMenu.add(createMemo);
         fileMenu.add(createSeries);
+
+        createEvent.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                controllerFacade.createEvent();
+            }
+        });
 
         this.add(fileMenu);
 

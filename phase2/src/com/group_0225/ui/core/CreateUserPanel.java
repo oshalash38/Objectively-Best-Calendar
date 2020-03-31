@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.List;
 
 public class CreateUserPanel extends CalendarLayoutPanel {
@@ -40,7 +41,11 @@ public class CreateUserPanel extends CalendarLayoutPanel {
         createNewUserButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                controllerFacade.createNewUser(newUsername.getText(), newPassword.getText(), repeatNewPassword.getText());
+                try {
+                    controllerFacade.createNewUser(newUsername.getText(), newPassword.getText(), repeatNewPassword.getText());
+                } catch (IOException | ClassNotFoundException ex) {
+                    ex.printStackTrace();
+                }
             }
         });
 

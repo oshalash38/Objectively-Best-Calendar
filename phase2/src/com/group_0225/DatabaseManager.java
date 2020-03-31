@@ -21,7 +21,7 @@ import java.util.Map;
  * @author ABHIJOY MANDAL
  */
 public class DatabaseManager implements Serializable {
-
+    private static final long serialVersionUID = 1L;
 
     /** A mapping of usernames to Users. */
     private Map<String, User> users;
@@ -32,7 +32,7 @@ public class DatabaseManager implements Serializable {
      * @throws ClassNotFoundException the file may be corrupted with data of different type
      */
     public DatabaseManager(String filePath) throws ClassNotFoundException, IOException {
-        users = new HashMap<String, User>();
+        users = new HashMap<>();
 
 
         // Reads serializable objects from file.

@@ -39,5 +39,10 @@ public class UIPresenter extends Observable {
         notifyObservers(new PanelInfo("CalendarPanel", null));
     }
 
+    public void createEvent(){
+        setChanged();
+        notifyObservers(new PanelInfo("CreateEventPanel", null));
+    }
+
     
 }
