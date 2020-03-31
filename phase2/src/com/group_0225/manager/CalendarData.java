@@ -8,6 +8,7 @@ import java.util.Map;
 
 public class CalendarData {
 
+    //contains mappings of ids to events (across all users and calendars)
     private Map<Integer, Event> events = new HashMap<>();
     private Map<String, Alert> alerts = new HashMap<>();
 
