@@ -4,4 +4,5 @@ import javax.swing.*;
 
 public class ReminderDialog extends JDialog {
 
+
 }

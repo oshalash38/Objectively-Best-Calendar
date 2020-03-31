@@ -31,6 +31,9 @@ public class CreateUserPanel extends CalendarLayoutPanel {
         TextField newPassword = addTextField(c,bottomPane,2, "Password:","");
         TextField repeatNewPassword = addTextField(c,bottomPane,3, "Repeat Password:","");
 
+        newPassword.setEchoChar('*');
+        repeatNewPassword.setEchoChar('*');
+
         Button createNewUserButton = addButton(c, bottomPane, 4, "login");
         Button returnButton = addButton(c, bottomPane, 5, "return");
 

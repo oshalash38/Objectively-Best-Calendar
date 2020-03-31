@@ -9,7 +9,7 @@ import java.awt.event.ActionListener;
 
 public class CalendarFooter extends JPanel {
 
-    CalendarPanel calendar;
+    private CalendarPanel calendar;
 
     public CalendarFooter(CalendarPanel calendar) {
         super();

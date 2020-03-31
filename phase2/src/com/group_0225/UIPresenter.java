@@ -10,6 +10,14 @@ import java.util.Observable;
 
 public class UIPresenter extends Observable {
 
+    public void displayPanel(PanelInfo info) {
+        setChanged();
+        notifyObservers(info);
+    }
+
+    public void displayDialog(PanelInfo info) {
+    }
+
     public void createUserPanel(){
         System.out.println("Made it ");
         setChanged();

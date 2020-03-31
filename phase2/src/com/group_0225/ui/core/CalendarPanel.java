@@ -20,6 +20,7 @@ public class CalendarPanel extends JPanel {
         super(new GridBagLayout());
 
         refreshCalendar();
+
     }
 
     public void refreshCalendar() {

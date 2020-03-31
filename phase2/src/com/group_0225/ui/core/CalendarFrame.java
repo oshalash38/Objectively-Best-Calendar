@@ -42,15 +42,24 @@ public class CalendarFrame extends JFrame implements Observer {
     }
 
     private void displayCalendarPanel(PanelInfo info) {
-        if(currPanel != null)
-            this.remove(currPanel);
 
         CalendarLayoutPanel currP = panels.get(info.getPanelKey());
         currP.updatePanel(info.getPanelData());
-        currPanel = currP;
-        this.add(currP);
-        currPanel = currP;
-        pack();
+
+        if(info.isDialog()) {
+            JDialog dialog = new JDialog();
+            dialog.add(currP);
+            dialog.setVisible(true);
+        } else {
+            if(currPanel != null)
+                this.remove(currPanel);
+
+            currPanel = currP;
+            this.add(currP);
+            pack();
+            this.setSize(800, 600);
+        }
+
 
     }
 
