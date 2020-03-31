@@ -8,6 +8,7 @@ public class ControllerFacade {
     protected UIPresenter presenter;
 
     private LoginController login;
+    private SeriesController series;
 
     private CalendarData data;
 
@@ -15,6 +16,7 @@ public class ControllerFacade {
         this.presenter = presenter;
         data = new CalendarData();
         login = new LoginController(data, presenter);
+        series = new SeriesController(data, presenter);
     }
 
     public void login(String username, String password) { login.login(username, password);}
