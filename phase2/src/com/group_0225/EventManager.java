@@ -52,10 +52,11 @@ public class EventManager {
             if(entry.getKey() > high){high = entry.getKey();}
         }
         idGen = high + 1;
-        List<Integer> userEvents = user.getEvents(CalendarController.getCurrCalendar());
-        events.put(idGen, e);
-        e.setID(idGen);
-        userEvents.add(idGen);
+        //getCurrCalendar is not static
+//        List<Integer> userEvents = user.getEvents(CalendarController.getCurrCalendar());
+//        events.put(idGen, e);
+//        e.setID(idGen);
+//        userEvents.add(idGen);
         return idGen;
     }
 
