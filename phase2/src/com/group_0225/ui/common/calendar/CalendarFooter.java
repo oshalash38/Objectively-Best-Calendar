@@ -1,27 +1,27 @@
 package com.group_0225.ui.common.calendar;
 
+import com.group_0225.controller.ControllerFacade;
 import com.group_0225.ui.core.CalendarPanel;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
-public class CalendarFooter extends JPanel {
+public class CalendarFooter extends CalendarLayoutPanel {
 
-    private CalendarPanel calendar;
+    public CalendarFooter(LayoutManager2 layoutManager2, ControllerFacade controllerFacade) {
+        super(layoutManager2, controllerFacade);
+    }
 
-    public CalendarFooter(CalendarPanel calendar) {
-        super();
-
-        this.calendar = calendar;
-
+    @Override
+    protected void buildPanel(List<String> inputs) {
         Button nextButton = new Button("Next");
         nextButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                nextTime();
-                calendar.refreshCalendar();
+                controllerFacade.alterCalendarTime(1);
             }
         });
 
@@ -29,8 +29,7 @@ public class CalendarFooter extends JPanel {
         prevButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                prevTime();
-                calendar.refreshCalendar();
+                controllerFacade.alterCalendarTime(-1);
             }
         });
 
@@ -38,18 +37,5 @@ public class CalendarFooter extends JPanel {
         this.add(nextButton);
     }
 
-    private void nextTime() {
-        int next = (calendar.getCurrentTime() % calendar.getCurrentTimeMax()) + 1;
 
-        calendar.setCurrentTime(next);
-    }
-
-    private void prevTime() {
-        int next = calendar.getCurrentTime() - 1;
-
-        if(next <= 0)
-            next = calendar.getCurrentTimeMax();
-
-        calendar.setCurrentTime(next);
-    }
 }

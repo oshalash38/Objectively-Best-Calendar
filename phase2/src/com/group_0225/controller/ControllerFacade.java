@@ -16,7 +16,7 @@ public class ControllerFacade {
     private EventsControllerTemp eventsController;
     private CalendarData calendarData;
     private CalendarGridController calendarGridController;
-    private Timing localTime;
+    private Timing localTime = new Timing();
     private User currUser;
 
     public ControllerFacade(UIPresenter presenter, CalendarData calendarData) {
@@ -56,6 +56,8 @@ public class ControllerFacade {
     public void mainMenu(){
         presenter.createCalendarPanel();
     }
+
+    public void alterCalendarTime(int alter) { calendarGridController.alterMonth(alter); }
 
     public void run(){
         loginController.startUp();

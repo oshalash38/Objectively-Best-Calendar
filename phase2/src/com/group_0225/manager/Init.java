@@ -16,6 +16,10 @@ import java.util.Map;
  */
 
 public class Init {
+
+    //PURELY FOR TESTING
+    public static UIPresenter p;
+
     public void run() throws IOException, ClassNotFoundException {
         DatabaseReader databaseReader = new DatabaseReader();
         CalendarData calendarData = new CalendarData();
@@ -29,6 +33,7 @@ public class Init {
         presenter.addObserver(frame);
         controllerFacade.run();
 
+        p = presenter;
 
         frame.addWindowListener(new WindowAdapter() {
             /**

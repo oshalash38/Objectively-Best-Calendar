@@ -8,7 +8,7 @@ public class CalendarHeader extends JPanel {
     private static final String[] MONTHS = new String[] {"January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December"};
 
-    public CalendarHeader(int month) {
+    public CalendarHeader(int month, int year) {
         super(new GridBagLayout());
 
         GridBagConstraints c = new GridBagConstraints();
@@ -18,7 +18,7 @@ public class CalendarHeader extends JPanel {
         c.gridy = 0;
         c.anchor = GridBagConstraints.CENTER;
 
-        Label timeLabel = new Label(MONTHS[month - 1] + " 2020");
+        Label timeLabel = new Label(MONTHS[month - 1] + " " + year);
         timeLabel.setAlignment(Label.CENTER);
 
         this.add(timeLabel, c);

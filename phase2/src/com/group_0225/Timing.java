@@ -2,6 +2,9 @@ package com.group_0225;
 
 import java.io.Serializable;
 import java.time.*;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Here is the main class we will use to keep track of anything that has to do with time
  *
@@ -125,6 +128,29 @@ public class Timing implements Serializable{
      */
     public String toString(){
         return new String(start.getDayOfMonth()+" " + start.getMonth()+ " " + start.getYear() + ", at: " + start.getHour() + ":"+ start.getMinute());
+    }
+    /**
+     *
+     * @return a list with all the start and end time values
+     */
+    public List<String> getInfo(){
+        List<String> info = new ArrayList<>();
+
+        info.add(start.getDayOfMonth() + "");
+        info.add(start.getMonthValue() + "");
+        info.add(start.getYear() + "");
+        info.add(start.getHour() + "");
+        info.add(start.getMinute() + "");
+
+        if(end != null) {
+            info.add(end.getDayOfMonth() + "");
+            info.add(end.getMonthValue() + "");
+            info.add(end.getYear() + "");
+            info.add(end.getHour() + "");
+            info.add(end.getMinute() + "");
+        }
+
+        return info;
     }
 
     /**

@@ -12,32 +12,33 @@ import java.util.List;
 
 public class CalendarPanel extends CalendarLayoutPanel {
 
-    int currTime = 3;
-
     CalendarHeader header;
     CalendarComponent component;
     CalendarFooter footer;
 
     public CalendarPanel(ControllerFacade controllerFacade) {
         super(new GridBagLayout(), controllerFacade);
-
-        refreshCalendar();
-
     }
 
-    public void refreshCalendar() {
+    @Override
+    protected void buildPanel(List<String> inputs) {
+
+        System.err.println(inputs.get(0));
+        int currMonth = Integer.parseInt(inputs.get(1));
+        int currYear = Integer.parseInt(inputs.get(2));
 
         if (header != null)
             this.remove(header);
-        header = new CalendarHeader(currTime);
+        header = new CalendarHeader(currMonth, currYear);
 
         if (component != null)
             this.remove(component);
-        component = new CalendarComponent(currTime);
+        component = new CalendarComponent(currMonth);
 
         if (footer != null)
             this.remove(footer);
-        footer = new CalendarFooter(this);
+        footer = new CalendarFooter(new GridBagLayout(), controllerFacade);
+        footer.updatePanel(inputs);
 
         displayCalendar();
     }
@@ -60,12 +61,5 @@ public class CalendarPanel extends CalendarLayoutPanel {
         this.revalidate();
     }
 
-    public int getCurrentTime() { return currTime; }
-    public int getCurrentTimeMax() { return 12; }
-    public void setCurrentTime(int currTime) { this.currTime = currTime; }
 
-    @Override
-    protected void buildPanel(List<String> inputs) {
-        refreshCalendar();
-    }
 }
