@@ -17,17 +17,16 @@ public class CalendarFrame extends JFrame implements Observer {
     private Map<String,CalendarLayoutPanel> panels;
     JPanel currPanel;
 
-    public CalendarFrame() {
+    public CalendarFrame(UIPresenter presenter, CalendarData calendarData, ControllerFacade controllerFacade) {
         super();
         guiBuilder = new GUIBuilder();
+        panelBuilder(presenter, calendarData, controllerFacade);
     }
 
-    public void run(UIPresenter presenter, CalendarData calendarData, ControllerFacade controllerFacade){
+    private void panelBuilder(UIPresenter presenter, CalendarData calendarData, ControllerFacade controllerFacade){
         this.presenter = presenter;
         panels = guiBuilder.buildPanels(presenter, calendarData, controllerFacade);
-        this.displayCalendarPanel(new PanelInfo("StartupPanel", Arrays.asList("", "")));
         this.setSize(800, 600);
-
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setJMenuBar(new CalendarToolBar(controllerFacade));
         this.setVisible(true);

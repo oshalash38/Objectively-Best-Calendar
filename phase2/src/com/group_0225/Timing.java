@@ -12,13 +12,28 @@ public class Timing implements Serializable{
 
     private LocalDateTime start;
 
-    private LocalDateTime end;
+    private LocalDateTime end = null;
 
-    public Timing(LocalDateTime start){
-        this.start = start;
-        this.end = null;
+    /**
+     * Creates a timing with a start time and an end time of null
+     */
+    public Timing(){
+        this.start= LocalDateTime.now();
     }
 
+    /**
+     * Creates a Timing with the given start and end of null
+     * @param start start time
+     */
+    public Timing(LocalDateTime start){
+        this.start = start;
+    }
+
+    /**
+     * Creates a Timing with start and end
+     * @param start the start of this timing
+     * @param end the end of this timing
+     */
     public Timing(LocalDateTime start, LocalDateTime end){
         this.start = start;
         this.end = end;

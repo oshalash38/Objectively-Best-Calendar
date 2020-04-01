@@ -20,10 +20,10 @@ public class Presenter {
      *
      */
     public Presenter(){
-        ui = new CalendarFrame();
-        ui.setVisible(true);
-        views = new HashMap<>();
-        generateHashMap();
+//        ui = new CalendarFrame();
+//        ui.setVisible(true);
+//        views = new HashMap<>();
+//        generateHashMap();
     }
 
     /**

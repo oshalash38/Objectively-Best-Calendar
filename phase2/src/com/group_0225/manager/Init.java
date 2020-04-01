@@ -22,11 +22,13 @@ public class Init {
 
         populate(calendarData, databaseReader);
 
-        CalendarFrame frame = new CalendarFrame();
+
         UIPresenter presenter = new UIPresenter();
         ControllerFacade controllerFacade = new ControllerFacade(presenter, calendarData);
+        CalendarFrame frame = new CalendarFrame(presenter, calendarData, controllerFacade);
         presenter.addObserver(frame);
-        frame.run(presenter, calendarData, controllerFacade);
+        controllerFacade.run();
+
 
         frame.addWindowListener(new WindowAdapter() {
             /**
@@ -38,6 +40,7 @@ public class Init {
             @Override
             public void windowClosing(WindowEvent e) {
                 try {
+                    System.out.println("saving to file");
                     databaseReader.saveToFile("users.txt", calendarData.getUsers());
                     databaseReader.saveToFile("events.txt", calendarData.getEvents());
                 } catch (IOException ex) {
@@ -52,9 +55,11 @@ public class Init {
         Object users = databaseReader.readFile("users.txt");
         Object events = databaseReader.readFile("events.txt");
         if(users != null){
+            System.out.println(((Map<String, User>)users).size());
             calendarData.setUsers((Map<String, User>)users);
         }
         if(events != null){
+            System.out.println(((Map<Integer, Event>)events).size());
             calendarData.setEvents((Map<Integer, Event>)events);
         }
     }

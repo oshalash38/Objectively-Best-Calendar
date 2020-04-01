@@ -10,8 +10,8 @@ import java.util.List;
 public class LoginController extends CalendarController{
     UserManager userManager;
 
-    public LoginController(CalendarData data, UIPresenter presenter) {
-        super(data, presenter);
+    public LoginController(CalendarData data, UIPresenter presenter, Timing localTime) {
+        super(data, presenter, localTime);
         userManager = new UserManager();
     }
 
@@ -22,10 +22,11 @@ public class LoginController extends CalendarController{
             presenter.displayPanel(new PanelInfo("StartupPanel", Arrays.asList(username, "Please enter all fields")));
             return null;
         }
-        else if(user == null || userManager.validatePassword(user, password)){
+        else if(user == null || !userManager.validatePassword(user, password)){
             presenter.displayPanel(new PanelInfo("StartupPanel", Arrays.asList(username, "Sorry, username and password did not match.")));
             return null;
         }
+        System.out.println("Login successful ");
         calendarGridController.displayGrid(user);
         return user;
     }
@@ -45,10 +46,10 @@ public class LoginController extends CalendarController{
         else if(data.getUser(username) != null){
             pushCreateNewUserScreen(Arrays.asList(username, "Username already exists please try again."));
         }
-
-        userManager.createUser(username, password, data);
-        pushCreateNewUserScreen(Arrays.asList(username, "User creation successful. Return to main menu to login."));
-
+        else {
+            userManager.createUser(username, password, data);
+            pushCreateNewUserScreen(Arrays.asList(username, "User creation successful. Return to main menu to login."));
+        }
     }
 
     private void pushCreateNewUserScreen(List<String> args){

@@ -1,5 +1,6 @@
 package com.group_0225.controller;
 
+import com.group_0225.Timing;
 import com.group_0225.UIPresenter;
 import com.group_0225.User;
 import com.group_0225.CalendarData;
@@ -15,15 +16,17 @@ public class ControllerFacade {
     private EventsControllerTemp eventsController;
     private CalendarData calendarData;
     private CalendarGridController calendarGridController;
+    private Timing localTime;
     private User currUser;
 
     public ControllerFacade(UIPresenter presenter, CalendarData calendarData) {
         this.presenter = presenter;
         this.calendarData = calendarData;
-        loginController = new LoginController(calendarData, presenter);
-        seriesController = new SeriesController(calendarData, presenter);
-        eventsController = new EventsControllerTemp(calendarData, presenter, currUser);
-        calendarGridController = new CalendarGridController(calendarData, presenter);
+        loginController = new LoginController(calendarData, presenter, localTime);
+        seriesController = new SeriesController(calendarData, presenter, localTime);
+        eventsController = new EventsControllerTemp(calendarData, presenter, localTime);
+        calendarGridController = new CalendarGridController(calendarData, presenter, localTime);
+        localTime = new Timing();
     }
 
     public void login(String username, String password) throws IOException, ClassNotFoundException {
@@ -52,5 +55,9 @@ public class ControllerFacade {
 
     public void mainMenu(){
         presenter.createCalendarPanel();
+    }
+
+    public void run(){
+        loginController.startUp();
     }
 }

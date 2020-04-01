@@ -14,8 +14,8 @@ public class SeriesController extends CalendarController{
      * @param p a UIPresenter instance
      */
     private SeriesManager sm;
-    public SeriesController(CalendarData data, UIPresenter p){
-        super(data, p);
+    public SeriesController(CalendarData data, UIPresenter p, Timing localTime){
+        super(data, p, localTime);
         sm = new SeriesManager();
     }
     public void createSeriesFromScratch(/*parameters to be added when CreateSeriesFromScratchPanel is finalized*/){

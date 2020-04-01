@@ -13,9 +13,9 @@ public class EventsControllerTemp extends CalendarController{
     private List<Event> events = new ArrayList<>();
     private TimingFactory timingFactory;
     private MemoManager memoManager;
-    public EventsControllerTemp(CalendarData data, UIPresenter presenter, User currUser) {
 
-        super(data, presenter);
+    public EventsControllerTemp(CalendarData data, UIPresenter presenter, Timing localTime) {
+        super(data, presenter, localTime);
         this.currUser = currUser;
         timingFactory = new TimingFactory();
         memoManager = new MemoManager();
