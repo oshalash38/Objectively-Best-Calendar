@@ -52,6 +52,14 @@ public class User implements Serializable{
     }
     public Map<String,List<Integer>> getMap(){return this.calendars;}
 
+    public List<Integer> getRandomCalendarEvents(){
+        List<String> temp = getCalendars();
+        if (temp.size() != 0) {
+            return getEvents(getCalendars().get(0));
+        }
+        return null;
+    }
+
 
     /**
      * A function to make sure if the client entered the correct password to gave the right to interact with the user

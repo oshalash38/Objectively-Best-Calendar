@@ -10,17 +10,15 @@ import java.util.Map;
 
 public class GUIBuilder {
 
-    public Map<String, CalendarLayoutPanel> buildPanels(UIPresenter presenter) {
-        ControllerFacade facade = new ControllerFacade(presenter);
-
+    public Map<String, CalendarLayoutPanel> buildPanels(UIPresenter presenter, CalendarData calendarData, ControllerFacade controllerFacade) {
         Map<String, CalendarLayoutPanel> panels = new Hashtable<>();
-        panels.put("StartupPanel", new StartupPanel(facade));
-        panels.put("CreateUserPanel", new CreateUserPanel(facade));
-        panels.put("CreateSeriesScratchPanel", new CreateSeriesScratchPanel(facade));
-        panels.put("CreateSeriesFromEventsPanel", new CreateSeriesFromEventsPanel(facade));
-        panels.put("CalendarPanel", new CalendarPanel(facade));
-        panels.put("CreateEventPanel", new CreateEventPanel(facade));
-        //TODO is the above an error or intentional? It didn't compile on my machine
+
+        panels.put("StartupPanel", new StartupPanel(controllerFacade));
+        panels.put("CreateUserPanel", new CreateUserPanel(controllerFacade));
+        panels.put("CreateSeriesScratchPanel", new CreateSeriesScratchPanel(controllerFacade));
+        panels.put("CreateSeriesFromEventsPanel", new CreateSeriesFromEventsPanel(controllerFacade));
+        panels.put("CalendarPanel", new CalendarPanel(controllerFacade));
+        panels.put("CreateEventPanel", new CreateEventPanel(controllerFacade));
         return panels;
     }
 }

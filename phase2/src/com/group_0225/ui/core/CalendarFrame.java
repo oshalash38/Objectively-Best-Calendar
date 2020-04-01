@@ -4,13 +4,11 @@ import com.group_0225.GUIBuilder;
 import com.group_0225.PanelInfo;
 import com.group_0225.UIPresenter;
 import com.group_0225.controller.ControllerFacade;
+import com.group_0225.CalendarData;
 import com.group_0225.ui.common.calendar.CalendarLayoutPanel;
 
 import javax.swing.*;
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.Observable;
-import java.util.Observer;
+import java.util.*;
 
 public class CalendarFrame extends JFrame implements Observer {
 
@@ -18,19 +16,18 @@ public class CalendarFrame extends JFrame implements Observer {
     private GUIBuilder guiBuilder;
     private Map<String,CalendarLayoutPanel> panels;
     JPanel currPanel;
-    private ControllerFacade controllerFacade;
 
     public CalendarFrame() {
         super();
         guiBuilder = new GUIBuilder();
     }
 
-    public void run(UIPresenter presenter){
+    public void run(UIPresenter presenter, CalendarData calendarData, ControllerFacade controllerFacade){
         this.presenter = presenter;
-        controllerFacade = new ControllerFacade(presenter);
-        panels = guiBuilder.buildPanels(presenter);
-        this.displayCalendarPanel(new PanelInfo("StartupPanel", new ArrayList<>()));
+        panels = guiBuilder.buildPanels(presenter, calendarData, controllerFacade);
+        this.displayCalendarPanel(new PanelInfo("StartupPanel", Arrays.asList("", "")));
         this.setSize(800, 600);
+
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setJMenuBar(new CalendarToolBar(controllerFacade));
         this.setVisible(true);

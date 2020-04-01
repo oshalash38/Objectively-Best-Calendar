@@ -18,11 +18,6 @@ public class UIPresenter extends Observable {
     public void displayDialog(PanelInfo info) {
     }
 
-    public void createUserPanel(){
-        System.out.println("Made it ");
-        setChanged();
-        notifyObservers(new PanelInfo("CreateUserPanel", Arrays.asList("", "")));
-    }
 
     public void createUserPanel(String triedUsername, String message){
         setChanged();

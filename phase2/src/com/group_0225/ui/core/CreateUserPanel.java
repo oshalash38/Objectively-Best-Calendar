@@ -35,7 +35,7 @@ public class CreateUserPanel extends CalendarLayoutPanel {
         newPassword.setEchoChar('*');
         repeatNewPassword.setEchoChar('*');
 
-        Button createNewUserButton = addButton(c, bottomPane, 4, "login");
+        Button createNewUserButton = addButton(c, bottomPane, 4, "create user");
         Button returnButton = addButton(c, bottomPane, 5, "return");
 
         createNewUserButton.addActionListener(new ActionListener() {

@@ -1,20 +1,19 @@
 package com.group_0225.controller;
 
 import com.group_0225.*;
-import com.group_0225.manager.CalendarData;
-import com.group_0225.views.UIViews;
+import com.group_0225.CalendarData;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class EventsController extends CalendarController{
-    private EventManager eventManager = new EventManager();
+public class EventsControllerTemp extends CalendarController{
+    private EventManager eventManager;// = new EventManager();
     private User currUser;
     private List<Event> events = new ArrayList<>();
     private TimingFactory timingFactory;
     private MemoManager memoManager;
-    public EventsController(CalendarData data, UIPresenter presenter, User currUser) {
+    public EventsControllerTemp(CalendarData data, UIPresenter presenter, User currUser) {
 
         super(data, presenter);
         this.currUser = currUser;
@@ -29,7 +28,6 @@ public class EventsController extends CalendarController{
     private void getEvents(){
         List<Integer> eventID = new ArrayList<>();
         for (Map.Entry<String, List<Integer>> calendar: currUser.getMap().entrySet()) {
-
             eventID.addAll(calendar.getValue());
         }
         for (Integer id: eventID){
@@ -67,7 +65,7 @@ public class EventsController extends CalendarController{
         }
         printDetailedEvents(retEvents);
     }
-    private void eventByThreshold(List<String> input) {
+    private List<Event> eventByThreshold(List<String> input) {
         Timing date1 = timingFactory.createTiming(Integer.parseInt(input.get(0)), Integer.parseInt(input.get(1)),
                 Integer.parseInt(input.get(2)), Integer.parseInt(input.get(3)), Integer.parseInt(input.get(4)));
 
@@ -76,8 +74,7 @@ public class EventsController extends CalendarController{
                 Integer.parseInt(input.get(7)), Integer.parseInt(input.get(8)), Integer.parseInt(input.get(9)));
 
         List<Event> events = eventManager.getEventsBetween(currUser, date1, date2, this.events);
-        //TODO: decide return
-       // displayEventsAfterFiltring(events);
+        return events;
     }
 
     private void eventByMemo(Integer memoID) {

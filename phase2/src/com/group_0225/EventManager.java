@@ -1,8 +1,5 @@
 package com.group_0225;
 
-import com.group_0225.controller.CalendarController;
-import com.group_0225.manager.CalendarData;
-
 import java.util.*;
 
 public class EventManager {
@@ -16,8 +13,7 @@ public class EventManager {
 
 
     public EventManager(){
-
-        cd = new CalendarData();
+        cd = new CalendarData(); //TODO CHANGE THIS
     }
 
     /**

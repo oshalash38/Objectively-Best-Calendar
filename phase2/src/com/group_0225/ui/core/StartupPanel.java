@@ -28,7 +28,7 @@ public class StartupPanel extends CalendarLayoutPanel {
 
         //Creates bottom portion of the panel
         JPanel bottomPane = new JPanel(new GridBagLayout());
-        TextField usernameField = addTextField(c,bottomPane,1, "Username:","");
+        TextField usernameField = addTextField(c,bottomPane,1, "Username:", inputs.get(0));
         TextField passwordField = addTextField(c,bottomPane,2, "Password:","");
 
         passwordField.setEchoChar('*');
@@ -53,6 +53,9 @@ public class StartupPanel extends CalendarLayoutPanel {
                 controllerFacade.createNewUser();
             }
         });
+
+        c.gridy = 6;
+        this.add(new Label(inputs.get(1)), c);
 
         //Adds bottom pane
         c.gridy = 1;
