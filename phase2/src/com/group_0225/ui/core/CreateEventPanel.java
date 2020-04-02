@@ -22,15 +22,15 @@ public class CreateEventPanel extends CalendarLayoutPanel {
         c.gridy = 0;
         c.anchor = GridBagConstraints.CENTER;
 
-        buildTitle(c, "Create Event");
+        buildTitle(c, viewModel.get("Create Event"));
 
         JPanel bottomPane = new JPanel(new GridBagLayout());
-        TextField nameField = addTextField(c,bottomPane,1, "Event Name:","");
-        TextField startDateField = addTextField(c,bottomPane,2, "Enter Start Date:","");
-        TextField endDateField = addTextField(c,bottomPane,3, "Enter End Date:","");
+        TextField nameField = addTextField(c,bottomPane,1, viewModel.get("Event Name:"),"");
+        TextField startDateField = addTextField(c,bottomPane,2, viewModel.get("Enter Start Date:"),"");
+        TextField endDateField = addTextField(c,bottomPane,3, viewModel.get("Enter End Date:"),"");
 
-        Button create = addButton(c, bottomPane, 5, "Create");
-        Button goBack = addButton(c, bottomPane, 6, "Cancel");
+        Button create = addButton(c, bottomPane, 5, viewModel.get("Create"));
+        Button goBack = addButton(c, bottomPane, 6, viewModel.get("Cancel"));
 
 
         goBack.addActionListener(new ActionListener() {

@@ -4,16 +4,20 @@ import com.group_0225.controller.ControllerFacade;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public abstract class CalendarLayoutPanel extends JPanel {
 
     protected ControllerFacade controllerFacade;
+    protected Map<String, String> viewModel;
 
     public CalendarLayoutPanel(LayoutManager2 layoutManager2, ControllerFacade controllerFacade) {
         super(layoutManager2);
-
         this.controllerFacade = controllerFacade;
+        ViewModelBuilder vmb = new ViewModelBuilder();
+        viewModel = vmb.build();
     }
 
     public void updatePanel(List<String> inputs) {

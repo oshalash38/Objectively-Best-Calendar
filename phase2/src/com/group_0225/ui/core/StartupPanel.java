@@ -26,17 +26,17 @@ public class StartupPanel extends CalendarLayoutPanel{// implements KeyListener 
         c.gridy = 0;
         c.anchor = GridBagConstraints.CENTER;
 
-        buildTitle(c, "OBJECTIVELY BEST CALENDAR");
+        buildTitle(c, viewModel.get("OBJECTIVELY BEST CALENDAR"));
 
         //Creates bottom portion of the panel
         JPanel bottomPane = new JPanel(new GridBagLayout());
-        TextField usernameField = addTextField(c,bottomPane,1, "Username:", inputs.get(0));
-        TextField passwordField = addTextField(c,bottomPane,2, "Password:","");
+        TextField usernameField = addTextField(c,bottomPane,1, viewModel.get("Username:"), inputs.get(0));
+        TextField passwordField = addTextField(c,bottomPane,2, viewModel.get("Password:"),"");
 
         passwordField.setEchoChar('*');
 
-        Button loginButton = addButton(c, bottomPane, 3, "login");
-        Button createNewUserButton = addButton(c, bottomPane, 4, "create new user");
+        Button loginButton = addButton(c, bottomPane, 3, viewModel.get("Login"));
+        Button createNewUserButton = addButton(c, bottomPane, 4, viewModel.get("Create New User"));
 
         loginButton.addActionListener(new ActionListener() {
             @Override

@@ -24,19 +24,19 @@ public class CreateUserPanel extends CalendarLayoutPanel {
         c.gridy = 0;
         c.anchor = GridBagConstraints.CENTER;
 
-        buildTitle(c, "Create New User");
+        buildTitle(c, viewModel.get("Create New User"));
 
         //Creates bottom portion of the panel
         JPanel bottomPane = new JPanel(new GridBagLayout());
-        TextField newUsername = addTextField(c,bottomPane,1, "Username:", inputs.get(0));
-        TextField newPassword = addTextField(c,bottomPane,2, "Password:","");
-        TextField repeatNewPassword = addTextField(c,bottomPane,3, "Repeat Password:","");
+        TextField newUsername = addTextField(c,bottomPane,1, viewModel.get("Username:"), inputs.get(0));
+        TextField newPassword = addTextField(c,bottomPane,2, viewModel.get("Password:"),"");
+        TextField repeatNewPassword = addTextField(c,bottomPane,3, viewModel.get("Repeat Password:"),"");
 
         newPassword.setEchoChar('*');
         repeatNewPassword.setEchoChar('*');
 
-        Button createNewUserButton = addButton(c, bottomPane, 4, "create user");
-        Button returnButton = addButton(c, bottomPane, 5, "return");
+        Button createNewUserButton = addButton(c, bottomPane, 4, viewModel.get("Create New User"));
+        Button returnButton = addButton(c, bottomPane, 5, viewModel.get("return"));
 
         createNewUserButton.addActionListener(new ActionListener() {
             @Override
