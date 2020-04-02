@@ -85,7 +85,7 @@ public class EventsControllerTemp extends CalendarController{
     }
 
     public void createEvent(){
-        presenter.createEvent();
+        //presenter.createEvent();
     }
 }
 

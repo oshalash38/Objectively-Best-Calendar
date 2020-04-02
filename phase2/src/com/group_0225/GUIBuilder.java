@@ -13,6 +13,9 @@ public class GUIBuilder {
     public Map<String, CalendarLayoutPanel> buildPanels(UIPresenter presenter, CalendarData calendarData, ControllerFacade controllerFacade) {
         Map<String, CalendarLayoutPanel> panels = new Hashtable<>();
 
+        //IMPORTANT
+        //THE KEYS TO THE MAP SHOULD BE THE SAME AS THE PANEL THAT THEY MAP TO
+
         panels.put("StartupPanel", new StartupPanel(controllerFacade));
         panels.put("CreateUserPanel", new CreateUserPanel(controllerFacade));
         panels.put("CreateSeriesScratchPanel", new CreateSeriesScratchPanel(controllerFacade));

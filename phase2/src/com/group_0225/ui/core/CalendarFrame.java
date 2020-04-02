@@ -20,7 +20,6 @@ public class CalendarFrame extends JFrame implements Observer {
     public CalendarFrame(UIPresenter presenter, CalendarData calendarData, ControllerFacade controllerFacade) {
         super();
         guiBuilder = new GUIBuilder();
-
         panelBuilder(presenter, calendarData, controllerFacade);
     }
 
@@ -46,12 +45,12 @@ public class CalendarFrame extends JFrame implements Observer {
 
         if(info.isDialog()) {
             JDialog dialog = new JDialog();
+            dialog.setSize(500,400);
             dialog.add(currP);
             dialog.setVisible(true);
         } else {
             if(currPanel != null)
                 this.remove(currPanel);
-
             currPanel = currP;
             this.add(currP);
             this.revalidate();

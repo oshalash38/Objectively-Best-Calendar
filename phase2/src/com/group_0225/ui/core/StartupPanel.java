@@ -7,10 +7,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.IOException;
 import java.util.List;
 
-public class StartupPanel extends CalendarLayoutPanel {
+public class StartupPanel extends CalendarLayoutPanel{// implements KeyListener {
 
     public StartupPanel(ControllerFacade controllerFacade) {
         super(new GridBagLayout(), controllerFacade);
@@ -54,6 +56,8 @@ public class StartupPanel extends CalendarLayoutPanel {
             }
         });
 
+
+
         c.gridy = 6;
         this.add(new Label(inputs.get(1)), c);
 
@@ -62,4 +66,29 @@ public class StartupPanel extends CalendarLayoutPanel {
         this.add(bottomPane, c);
     }
 
+
+
+
+
+
+//    /**
+//     * Got idea from https://stackoverflow.com/questions/13731710/allowing-the-enter-key-to-press-the-submit-button-as-opposed-to-only-using-mo
+//     *
+//     * Invoked when a key has been pressed.
+//     * See the class description for {@link KeyEvent} for a definition of
+//     * a key pressed event.
+//     *
+//     * @param e
+//     */
+//    @Override
+//    public void keyPressed(KeyEvent e) {
+//        if (e.getKeyCode()==KeyEvent.VK_ENTER){
+//
+//        }
+//    }
+//
+//    @Override
+//    public void keyTyped(KeyEvent e) {}
+//    @Override
+//    public void keyReleased(KeyEvent e) {}
 }

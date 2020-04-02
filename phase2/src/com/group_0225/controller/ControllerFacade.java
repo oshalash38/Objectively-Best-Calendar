@@ -13,7 +13,7 @@ public class ControllerFacade {
 
     private LoginController loginController;
     private SeriesController seriesController;
-    private EventsControllerTemp eventsController;
+    private EventController eventsController;
     private CalendarData calendarData;
     private CalendarGridController calendarGridController;
     private Timing localTime = new Timing();
@@ -24,7 +24,7 @@ public class ControllerFacade {
         this.calendarData = calendarData;
         loginController = new LoginController(calendarData, presenter, localTime);
         seriesController = new SeriesController(calendarData, presenter, localTime);
-        eventsController = new EventsControllerTemp(calendarData, presenter, localTime);
+        eventsController = new EventController(calendarData, presenter, localTime);
         calendarGridController = new CalendarGridController(calendarData, presenter, localTime);
         localTime = new Timing();
     }
@@ -48,18 +48,27 @@ public class ControllerFacade {
         loginController.startUp();
     }
 
-    public void createEvent(){
-        // TODO: Needs to be implemented once we implement date picker.
-        eventsController.createEvent();
+    public void pushCreateEvent(){
+        eventsController.pushCreateEvent();
     }
 
-    public void mainMenu(){
-        presenter.createCalendarPanel();
+    public void displayGrid(){
+        calendarGridController.displayGrid(currUser);
     }
 
     public void alterCalendarTime(int alter) { calendarGridController.alterMonth(alter); }
 
     public void run(){
         loginController.startUp();
+    }
+
+    /**
+     * Shows the user past events, current events, or future events
+     * @param status -1: past events
+     *                0: current events
+     *                1: future events
+     */
+    public void viewEventByStatus(int status){
+        eventsController.viewEventByStatus(status);
     }
 }

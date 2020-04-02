@@ -15,29 +15,8 @@ public class UIPresenter extends Observable {
         notifyObservers(info);
     }
 
-    public void displayDialog(PanelInfo info) {
-    }
-
-
-    public void createUserPanel(String triedUsername, String message){
-        setChanged();
-        notifyObservers(new PanelInfo("CreateUserPanel", Arrays.asList(triedUsername, message)));
-    }
-
     public void startUp(){
         setChanged();
         notifyObservers(new PanelInfo("StartupPanel", null));
     }
-
-    public void createCalendarPanel(){
-        setChanged();
-        notifyObservers(new PanelInfo("CalendarPanel", null));
-    }
-
-    public void createEvent(){
-        setChanged();
-        notifyObservers(new PanelInfo("CreateEventPanel", null));
-    }
-
-    
 }

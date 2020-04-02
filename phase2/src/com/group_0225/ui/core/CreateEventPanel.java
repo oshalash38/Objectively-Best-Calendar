@@ -29,13 +29,14 @@ public class CreateEventPanel extends CalendarLayoutPanel {
         TextField startDateField = addTextField(c,bottomPane,2, "Enter Start Date:","");
         TextField endDateField = addTextField(c,bottomPane,3, "Enter End Date:","");
 
-        Button goBack = addButton(c, bottomPane, 6, "Return");
         Button create = addButton(c, bottomPane, 5, "Create");
+        Button goBack = addButton(c, bottomPane, 6, "Cancel");
+
 
         goBack.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                controllerFacade.mainMenu();
+                //controllerFacade.mainMenu();
             }
         });
 
