@@ -24,8 +24,8 @@ public class CalendarPanel extends CalendarLayoutPanel {
     protected void buildPanel(List<String> inputs) {
 
         System.err.println(inputs.get(0));
-        int currMonth = Integer.parseInt(inputs.get(1));
-        int currYear = Integer.parseInt(inputs.get(2));
+        int currMonth = Integer.parseInt(inputs.get(2));
+        int currYear = Integer.parseInt(inputs.get(3));
 
         if (header != null)
             this.remove(header);
@@ -33,7 +33,8 @@ public class CalendarPanel extends CalendarLayoutPanel {
 
         if (component != null)
             this.remove(component);
-        component = new CalendarComponent(currMonth);
+        component = new CalendarComponent(controllerFacade);
+        component.updatePanel(inputs);
 
         if (footer != null)
             this.remove(footer);

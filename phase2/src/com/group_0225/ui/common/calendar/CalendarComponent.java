@@ -1,5 +1,7 @@
 package com.group_0225.ui.common.calendar;
 
+import com.group_0225.controller.ControllerFacade;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
@@ -8,22 +10,31 @@ import java.time.LocalDateTime;
 import java.time.YearMonth;
 import java.time.temporal.ChronoField;
 
-public class CalendarComponent extends JPanel {
+public class CalendarComponent extends CalendarLayoutPanel {
 
     List<JPanel> calendarComponent;
 
-    public CalendarComponent(int month) {
-        super(new GridBagLayout());
-
-        setUpCalendar(month);
+    public CalendarComponent(ControllerFacade controllerFacade) {
+        super(new GridBagLayout(), controllerFacade);
     }
 
-    private void setUpCalendar(int month) {
+    @Override
+    protected void buildPanel(List<String> inputs) {
+
+        int indexOfDisplay = inputs.indexOf("Display");
+        String displayDay = inputs.get(indexOfDisplay + 1);
+        String displayMonth = inputs.get(indexOfDisplay + 2);
+        String displayYear = inputs.get(indexOfDisplay + 3);
+
+        int indexOfCurrent = inputs.indexOf("Current");
+        String currentMonth = inputs.get(indexOfCurrent + 2);
+        String currentYear = inputs.get(indexOfCurrent + 3);
+
         calendarComponent = new ArrayList<>();
 
-        LocalDateTime tempLocal = LocalDateTime.of(2020, month,1,1,1);
+        LocalDateTime tempLocal = LocalDateTime.of(2020, Integer.parseInt(displayMonth),1,1,1);
         int weekDay = tempLocal.get(ChronoField.DAY_OF_WEEK) % 7;
-        YearMonth tempYearMonth = YearMonth.of(2020, month);
+        YearMonth tempYearMonth = YearMonth.of(2020, Integer.parseInt(displayMonth));
         int monthLength = tempYearMonth.lengthOfMonth();
 
         int currDay = 1;
@@ -51,7 +62,16 @@ public class CalendarComponent extends JPanel {
                     timeComponent = new JPanel();
                     timeComponent.setBorder(BorderFactory.createLineBorder(Color.GRAY));
                 } else {
-                    timeComponent = new CalendarTimeComponent(currDay);
+                    boolean isCurrentDay = displayMonth.equals(currentMonth) && displayYear.equals(currentYear) && Integer.parseInt(displayDay) == currDay;
+
+                    List<String> dayInfo = new ArrayList<>();
+                    dayInfo.add(currDay + "");
+                    dayInfo.add(isCurrentDay + "");
+
+                    CalendarTimeComponent timeComp = new CalendarTimeComponent(controllerFacade);
+                    timeComp.updatePanel(dayInfo);
+
+                    timeComponent = timeComp;
                     currDay++;
                 }
 
@@ -79,5 +99,4 @@ public class CalendarComponent extends JPanel {
             this.add(dayPanel, c);
         }
     }
-
 }

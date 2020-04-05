@@ -1,14 +1,20 @@
 package com.group_0225.ui.core;
 
+import com.group_0225.controller.ControllerFacade;
+import com.group_0225.ui.common.calendar.CalendarLayoutPanel;
+
 import javax.swing.*;
 import java.awt.*;
+import java.util.List;
 
-public class EventListDialog extends JDialog {
+public class EventListPanel extends CalendarLayoutPanel {
 
-    public EventListDialog() {
-        super();
-        this.setSize(400, 400);
-        this.setLocation(300, 200);
+    public EventListPanel(ControllerFacade controllerFacade) {
+        super(new GridBagLayout(), controllerFacade);
+    }
+
+    @Override
+    protected void buildPanel(List<String> inputs) {
 
         GridBagConstraints c = new GridBagConstraints();
         c.fill = GridBagConstraints.HORIZONTAL;
@@ -24,8 +30,10 @@ public class EventListDialog extends JDialog {
             parent.add(eventPreview, c);
         }
 
+        c.fill = GridBagConstraints.BOTH;
         JScrollPane panel = new JScrollPane(parent);
-        this.add(panel);
+        this.add(panel, c);
     }
+
 
 }

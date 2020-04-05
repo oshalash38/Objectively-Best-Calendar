@@ -16,6 +16,9 @@ public class EventController extends CalendarController {
     public void pushCreateEvent(){
         presenter.displayPanel(new PanelInfo("CreateEventPanel", null, true));
     }
+    public void viewEvents(){
+        presenter.displayPanel(new PanelInfo("EventListPanel", null, true));
+    }
 
     /**
      * Shows the user past events, current events, or future events

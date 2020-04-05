@@ -51,6 +51,7 @@ public class ControllerFacade {
     public void pushCreateEvent(){
         eventsController.pushCreateEvent();
     }
+    public void viewEvents() { eventsController.viewEvents();}
 
     public void displayGrid(){
         calendarGridController.displayGrid(currUser);

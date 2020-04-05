@@ -7,24 +7,28 @@ import java.util.List;
 
 public class CalendarGridController extends CalendarController{
 
+    Timing displayTime;
+
     public CalendarGridController(CalendarData data, UIPresenter presenter, Timing localTime) {
         super(data, presenter, localTime);
-        //int month =
 
-        //TODO THIS PART IS TEMP UNTIL MANAGERS WORK
+        displayTime = new Timing(localTime.getStart());
     }
 
     public void displayGrid(User user){
         List<String> outputs = new ArrayList<String>();
 
+        outputs.add("Display");
+        outputs.addAll(displayTime.getInfo());
+        outputs.add("Current");
         outputs.addAll(localTime.getInfo());
 
         presenter.displayPanel(new PanelInfo("CalendarPanel", outputs));
     }
 
     public void alterMonth(int alter) {
-        System.err.println("NEED MANAGERS" + localTime);
-        localTime.setStart(localTime.getStart().plusMonths(alter));
+        System.err.println("NEED MANAGERS : " + displayTime + " : " + localTime);
+        displayTime.setStart(displayTime.getStart().plusMonths(alter));
         displayGrid(null);
     }
 }

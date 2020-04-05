@@ -1,22 +1,22 @@
 package com.group_0225.ui.common.calendar;
 
-import com.group_0225.ui.core.EventListDialog;
-import com.group_0225.ui.core.TestDialog;
+import com.group_0225.controller.ControllerFacade;
+import com.group_0225.ui.core.EventListPanel;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.List;
 
-public class CalendarTimeComponent extends JPanel {
+public class CalendarTimeComponent extends CalendarLayoutPanel {
 
-    //TODO There has got to be a better way to do this
-    JPanel itself;
+    public CalendarTimeComponent(ControllerFacade controllerFacade) {
+        super(new GridBagLayout(), controllerFacade);
+    }
 
-    public CalendarTimeComponent(int day) {
-        super(new GridBagLayout());
-
-        itself = this;
+    @Override
+    protected void buildPanel(List<String> inputs) {
 
         this.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
@@ -25,16 +25,25 @@ public class CalendarTimeComponent extends JPanel {
         c.gridy = 0;
         c.weighty = 1;
         c.weightx = 1;
-        c.anchor = GridBagConstraints.FIRST_LINE_START;
+        c.anchor = GridBagConstraints.CENTER;
 
-        Label dayNumber = new Label(day + "");
-        this.add(dayNumber, c);
+
+        JPanel dayHolder = new JPanel();
+        Label dayNumber = new Label(inputs.get(0));
+        dayHolder.add(dayNumber, c);
+
+        if(inputs.get(1).equals("true")) {
+            dayHolder.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        }
+
+        c.anchor = GridBagConstraints.FIRST_LINE_START;
+        this.add(dayHolder, c);
+
 
         this.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                EventListDialog testdialog = new EventListDialog();
-                testdialog.setVisible(true);
+                controllerFacade.viewEvents();
             }
 
             @Override
@@ -58,5 +67,6 @@ public class CalendarTimeComponent extends JPanel {
             }
         });
     }
+
 
 }
