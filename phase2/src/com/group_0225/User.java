@@ -109,5 +109,8 @@ public class User implements Serializable{
         responses.add(response);
     }
 
+    public int hashCode(){
+        return username.hashCode();
+    }
 }
 
