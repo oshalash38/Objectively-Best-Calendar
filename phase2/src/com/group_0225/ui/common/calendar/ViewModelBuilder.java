@@ -6,13 +6,13 @@ import java.util.Map;
 public class ViewModelBuilder {
     public Map<String, String> build(){
         Map<String, String> temp = new HashMap<>();
-        temp.put("Event Name:", "Event Name:");
-        temp.put("Enter Start Date:", "Enter Start Date:");
-        temp.put("Enter End Date:", "Enter End Date:");
-        temp.put("Create", "Create");
-        temp.put("Cancel", "Cancel");
+        temp.put("EventNameString", "Event Name:");
+        temp.put("EnterStartDateString", "Enter Start Date:");
+        temp.put("EnterEndDateString", "Enter End Date:");
+        temp.put("CreateString", "Create");
+        temp.put("CancelString", "Cancel");
         temp.put("return", "return");
-        temp.put("Create Event", "Create Event");
+        temp.put("CreateEventString", "Create Event");
         temp.put("Create New User", "Create New User");
         temp.put("Repeat Password:", "Repeat Password:");
         temp.put("OBJECTIVELY BEST CALENDAR", "OBJECTIVELY BEST CALENDAR");
@@ -26,8 +26,8 @@ public class ViewModelBuilder {
         temp.put("Password:", "Password:");
         temp.put("Password:", "Password:");
         temp.put("Password:", "Password:");
-        temp.put("Enter Start Time:", "Enter Start Time:");
-        temp.put("Enter End Time:", "Enter End Time:");
+        temp.put("EnterStartTimeString", "Enter Start Time:");
+        temp.put("EnterEndTimeString", "Enter End Time:");
 
         return temp;
     }

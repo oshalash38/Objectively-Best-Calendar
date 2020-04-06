@@ -28,20 +28,20 @@ public class CreateEventPanel extends CalendarLayoutPanel {
         c.gridy = 0;
         c.anchor = GridBagConstraints.CENTER;
 
-        buildTitle(c, viewModel.get("Create Event"));
+        buildTitle(c, viewModel.get("CreateEventString"));
 
         JPanel bottomPane = new JPanel(new GridBagLayout());
-        TextField nameField = addTextField(c,bottomPane,1, viewModel.get("Event Name:"),"");
-        JLabel startDateFieldLabel = addLabel(c, bottomPane, 2, viewModel.get("Enter Start Date:"));
+        TextField nameField = addTextField(c,bottomPane,1, viewModel.get("EventNameString"),"");
+        JLabel startDateFieldLabel = addLabel(c, bottomPane, 2, viewModel.get("EnterStartDateString"));
         JDatePickerImpl startDateField = addCalendarPicker(c, bottomPane, 3);
-        JLabel startTimeFieldLabel = addLabel(c, bottomPane, 4, viewModel.get("Enter Start Time:"));
+        JLabel startTimeFieldLabel = addLabel(c, bottomPane, 4, viewModel.get("EnterStartTimeString"));
         JSpinner startTimeSpinner = addTimeSpinner(c, bottomPane, 5);
-        JLabel endDateFieldLabel = addLabel(c, bottomPane, 6, viewModel.get("Enter End Date:"));
+        JLabel endDateFieldLabel = addLabel(c, bottomPane, 6, viewModel.get("EnterEndDateString"));
         JDatePickerImpl endDateField = addCalendarPicker(c, bottomPane, 7);
-        JLabel endTimeFieldLabel = addLabel(c, bottomPane, 8, viewModel.get("Enter End Time:"));
+        JLabel endTimeFieldLabel = addLabel(c, bottomPane, 8, viewModel.get("EnterEndTimeString"));
         JSpinner endTimeSpinner = addTimeSpinner(c, bottomPane, 9);
-        Button create = addButton(c, bottomPane, 10, viewModel.get("Create"));
-        Button goBack = addButton(c, bottomPane, 11, viewModel.get("Cancel"));
+        Button create = addButton(c, bottomPane, 10, viewModel.get("CreateString"));
+        Button goBack = addButton(c, bottomPane, 11, viewModel.get("CancelString"));
 
 
         goBack.addActionListener(new ActionListener() {
