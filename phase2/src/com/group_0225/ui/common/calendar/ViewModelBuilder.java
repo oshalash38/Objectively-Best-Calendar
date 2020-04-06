@@ -26,6 +26,8 @@ public class ViewModelBuilder {
         temp.put("Password:", "Password:");
         temp.put("Password:", "Password:");
         temp.put("Password:", "Password:");
+        temp.put("Enter Start Time:", "Enter Start Time:");
+        temp.put("Enter End Time:", "Enter End Time:");
 
         return temp;
     }
