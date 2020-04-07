@@ -6,6 +6,7 @@ import com.group_0225.User;
 import com.group_0225.CalendarData;
 
 import java.io.IOException;
+import java.util.List;
 
 public class ControllerFacade {
 
@@ -71,5 +72,9 @@ public class ControllerFacade {
      */
     public void viewEventByStatus(int status){
         eventsController.viewEventByStatus(status);
+    }
+
+    public void createEvent(List<String> input) {
+        eventsController.createEvent(input);
     }
 }

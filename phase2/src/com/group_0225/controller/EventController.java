@@ -6,6 +6,7 @@ import com.group_0225.Timing;
 import com.group_0225.UIPresenter;
 
 import java.util.Calendar;
+import java.util.List;
 
 public class EventController extends CalendarController {
 
@@ -27,6 +28,10 @@ public class EventController extends CalendarController {
      *                1: future events
      */
     public void viewEventByStatus(int status){
+
+    }
+
+    public void createEvent(List<String> input) {
 
     }
 }

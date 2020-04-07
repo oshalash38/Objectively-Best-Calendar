@@ -47,7 +47,7 @@ public class CreateEventPanel extends CalendarLayoutPanel {
         goBack.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //controllerFacade.mainMenu();
+//                controllerFacade.mainMenu();
             }
         });
 
