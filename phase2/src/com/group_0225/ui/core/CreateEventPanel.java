@@ -12,6 +12,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
@@ -58,7 +59,13 @@ public class CreateEventPanel extends CalendarLayoutPanel {
                 System.out.println(endDateField.getJFormattedTextField().getText());
                 System.out.println(startTimeSpinner.getValue().toString().substring(11,19));
                 System.out.println(endTimeSpinner.getValue().toString().substring(11,19));
-
+                List<String> inputs = new ArrayList<>();
+                inputs.add(nameField.getName());
+                inputs.add(startDateField.getJFormattedTextField().getText());
+                inputs.add(endDateField.getJFormattedTextField().getText());
+                inputs.add(startTimeSpinner.getValue().toString().substring(11,19));
+                inputs.add(endTimeSpinner.getValue().toString().substring(11,19));
+                controllerFacade.createEvent(inputs);
             }
         });
 

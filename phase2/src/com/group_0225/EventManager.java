@@ -22,9 +22,10 @@ public class EventManager {
      * @param name Name of the event.
      * @param timing Timing of the event.
      */
-    public Event createEvent(User user, String name, Timing timing){
+    public Event createEvent(User user, String name, Timing timing, CalendarData calendarData){
         Event event = new Event(name, timing);
-        sortEvents(user, event);
+        int id = sortEvents(user, event);
+        calendarData.addEvent(id, event);
         return event;
     }
 

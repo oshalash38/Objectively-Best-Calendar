@@ -32,6 +32,10 @@ public class CalendarData {
         users.put(username, user);
     }
 
+    public void addEvent(int id, Event event){
+        events.put(id, event);
+    }
+
     public void setEvents(Map<Integer, Event> events){
         this.events = events;
     }
