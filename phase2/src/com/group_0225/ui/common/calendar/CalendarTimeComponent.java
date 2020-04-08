@@ -1,7 +1,8 @@
 package com.group_0225.ui.common.calendar;
 
-import com.group_0225.controller.ControllerFacade;
-import com.group_0225.ui.core.EventListPanel;
+import com.group_0225.controller.CalendarGridController;
+import com.group_0225.controller.ControllerContainer;
+import com.group_0225.controller.EventController;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,12 +12,14 @@ import java.util.List;
 
 public class CalendarTimeComponent extends CalendarLayoutPanel {
 
-    public CalendarTimeComponent(ControllerFacade controllerFacade) {
-        super(new GridBagLayout(), controllerFacade);
+    public CalendarTimeComponent(ControllerContainer controllerContainer) {
+        super(new GridBagLayout(), controllerContainer);
     }
 
     @Override
     protected void buildPanel(List<String> inputs) {
+
+        EventController eventsController = controllerContainer.getEventsController();
 
         this.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
@@ -43,7 +46,7 @@ public class CalendarTimeComponent extends CalendarLayoutPanel {
         this.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                controllerFacade.viewEvents();
+                eventsController.viewEvents();
             }
 
             @Override

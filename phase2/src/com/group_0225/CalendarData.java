@@ -10,6 +10,8 @@ import java.util.Map;
 public class CalendarData {
 
     //contains mappings of ids to events (across all users and calendars)
+    private User currUser;
+    private String currCalendar;
     private Map<Integer, Event> events = new HashMap<>();
     private Map<String, User> users = new HashMap<>();
 
@@ -27,6 +29,12 @@ public class CalendarData {
         }
         return null;
     }
+
+    public User getCurrUser() { return currUser; }
+    public void setCurrUser(User currUser) { this.currUser = currUser; }
+
+    public String getCurrCalendar() { return currCalendar; }
+    public void setCurrCalendar(String currCalendar) { this.currCalendar = currCalendar; }
 
     public void addUser(String username, User user){
         users.put(username, user);

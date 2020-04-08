@@ -1,6 +1,7 @@
 package com.group_0225.ui.core;
 
-import com.group_0225.controller.ControllerFacade;
+import com.group_0225.controller.ControllerContainer;
+import com.group_0225.controller.LoginController;
 import com.group_0225.ui.common.calendar.CalendarLayoutPanel;
 
 import javax.swing.*;
@@ -12,13 +13,16 @@ import java.util.List;
 
 public class CreateUserPanel extends CalendarLayoutPanel {
 
-    public CreateUserPanel(ControllerFacade controllerFacade) {
-        super(new GridBagLayout(), controllerFacade);
+    public CreateUserPanel(ControllerContainer controllerContainer) {
+        super(new GridBagLayout(), controllerContainer);
     }
 
 
     @Override
     protected void buildPanel(List<String> inputs) {
+
+        LoginController loginController = controllerContainer.getLoginController();
+
         GridBagConstraints c = new GridBagConstraints();
         c.fill = GridBagConstraints.BOTH;
         c.gridy = 0;
@@ -42,7 +46,7 @@ public class CreateUserPanel extends CalendarLayoutPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    controllerFacade.createNewUser(newUsername.getText(), newPassword.getText(), repeatNewPassword.getText());
+                    loginController.createNewUser(newUsername.getText(), newPassword.getText(), repeatNewPassword.getText());
                 } catch (IOException | ClassNotFoundException ex) {
                     ex.printStackTrace();
                 }
@@ -52,7 +56,7 @@ public class CreateUserPanel extends CalendarLayoutPanel {
         returnButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                controllerFacade.startUp();
+                loginController.startUp();
             }
         });
 

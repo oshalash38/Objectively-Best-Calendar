@@ -1,12 +1,11 @@
 package com.group_0225.ui.core;
 
-import com.group_0225.controller.ControllerFacade;
+import com.group_0225.controller.ControllerContainer;
 import com.group_0225.ui.common.calendar.CalendarComponent;
 import com.group_0225.ui.common.calendar.CalendarFooter;
 import com.group_0225.ui.common.calendar.CalendarHeader;
 import com.group_0225.ui.common.calendar.CalendarLayoutPanel;
 
-import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 
@@ -16,8 +15,8 @@ public class CalendarPanel extends CalendarLayoutPanel {
     CalendarComponent component;
     CalendarFooter footer;
 
-    public CalendarPanel(ControllerFacade controllerFacade) {
-        super(new GridBagLayout(), controllerFacade);
+    public CalendarPanel(ControllerContainer controllerContainer) {
+        super(new GridBagLayout(), controllerContainer);
     }
 
     @Override
@@ -33,12 +32,12 @@ public class CalendarPanel extends CalendarLayoutPanel {
 
         if (component != null)
             this.remove(component);
-        component = new CalendarComponent(controllerFacade);
+        component = new CalendarComponent(controllerContainer);
         component.updatePanel(inputs);
 
         if (footer != null)
             this.remove(footer);
-        footer = new CalendarFooter(new GridBagLayout(), controllerFacade);
+        footer = new CalendarFooter(new GridBagLayout(), controllerContainer);
         footer.updatePanel(inputs);
 
         displayCalendar();

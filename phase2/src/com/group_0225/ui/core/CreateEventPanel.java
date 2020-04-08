@@ -1,12 +1,9 @@
 package com.group_0225.ui.core;
 
-import com.group_0225.controller.ControllerFacade;
+import com.group_0225.controller.ControllerContainer;
+import com.group_0225.controller.EventController;
 import com.group_0225.ui.common.calendar.CalendarLayoutPanel;
-import org.jdatepicker.JDatePanel;
-import org.jdatepicker.impl.DateComponentFormatter;
-import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
-import org.jdatepicker.impl.UtilDateModel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,15 +11,17 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
 
 public class CreateEventPanel extends CalendarLayoutPanel {
-    public CreateEventPanel(ControllerFacade controllerFacade) {
-        super(new GridBagLayout(), controllerFacade);
+
+    public CreateEventPanel(ControllerContainer controllerContainer) {
+        super(new GridBagLayout(), controllerContainer);
     }
 
     @Override
     protected void buildPanel(List<String> inputs) {
+
+        EventController eventController = controllerContainer.getEventsController();
 
         GridBagConstraints c = new GridBagConstraints();
         c.fill = GridBagConstraints.BOTH;
@@ -65,7 +64,7 @@ public class CreateEventPanel extends CalendarLayoutPanel {
                 inputs.add(endDateField.getJFormattedTextField().getText());
                 inputs.add(startTimeSpinner.getValue().toString().substring(11,19));
                 inputs.add(endTimeSpinner.getValue().toString().substring(11,19));
-                controllerFacade.createEvent(inputs);
+                eventController.createEvent(inputs);
             }
         });
 

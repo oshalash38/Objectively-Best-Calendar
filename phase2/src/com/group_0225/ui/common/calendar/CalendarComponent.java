@@ -1,6 +1,6 @@
 package com.group_0225.ui.common.calendar;
 
-import com.group_0225.controller.ControllerFacade;
+import com.group_0225.controller.ControllerContainer;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,8 +14,8 @@ public class CalendarComponent extends CalendarLayoutPanel {
 
     List<JPanel> calendarComponent;
 
-    public CalendarComponent(ControllerFacade controllerFacade) {
-        super(new GridBagLayout(), controllerFacade);
+    public CalendarComponent(ControllerContainer controllerContainer) {
+        super(new GridBagLayout(), controllerContainer);
     }
 
     @Override
@@ -68,7 +68,7 @@ public class CalendarComponent extends CalendarLayoutPanel {
                     dayInfo.add(currDay + "");
                     dayInfo.add(isCurrentDay + "");
 
-                    CalendarTimeComponent timeComp = new CalendarTimeComponent(controllerFacade);
+                    CalendarTimeComponent timeComp = new CalendarTimeComponent(controllerContainer);
                     timeComp.updatePanel(dayInfo);
 
                     timeComponent = timeComp;

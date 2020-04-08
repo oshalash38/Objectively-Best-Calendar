@@ -1,6 +1,6 @@
 package com.group_0225.ui.common.calendar;
 
-import com.group_0225.controller.ControllerFacade;
+import com.group_0225.controller.ControllerContainer;
 import org.jdatepicker.impl.DateComponentFormatter;
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
@@ -13,12 +13,12 @@ import java.util.List;
 
 public abstract class CalendarLayoutPanel extends JPanel {
 
-    protected ControllerFacade controllerFacade;
+    protected ControllerContainer controllerContainer;
     protected Map<String, String> viewModel;
 
-    public CalendarLayoutPanel(LayoutManager2 layoutManager2, ControllerFacade controllerFacade) {
+    public CalendarLayoutPanel(LayoutManager2 layoutManager2, ControllerContainer controllerContainer) {
         super(layoutManager2);
-        this.controllerFacade = controllerFacade;
+        this.controllerContainer = controllerContainer;
         ViewModelBuilder vmb = new ViewModelBuilder();
         viewModel = vmb.build();
     }

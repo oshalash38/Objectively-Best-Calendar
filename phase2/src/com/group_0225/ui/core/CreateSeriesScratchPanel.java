@@ -1,6 +1,6 @@
 package com.group_0225.ui.core;
 
-import com.group_0225.controller.ControllerFacade;
+import com.group_0225.controller.ControllerContainer;
 import com.group_0225.ui.common.calendar.CalendarLayoutPanel;
 
 import java.awt.*;
@@ -27,7 +27,7 @@ public class CreateSeriesScratchPanel extends CalendarLayoutPanel {
             Enter number of minutes (0-59)
         the number of events in the series (min. 2)
      */
-    public CreateSeriesScratchPanel(ControllerFacade facade){
+    public CreateSeriesScratchPanel(ControllerContainer facade){
         super(new GridBagLayout(),facade);
     }
     @Override

@@ -1,7 +1,7 @@
 package com.group_0225.manager;
 
 import com.group_0225.*;
-import com.group_0225.controller.ControllerFacade;
+import com.group_0225.controller.ControllerContainer;
 import com.group_0225.ui.core.CalendarFrame;
 
 import java.awt.event.WindowAdapter;
@@ -28,10 +28,10 @@ public class Init {
 
 
         UIPresenter presenter = new UIPresenter();
-        ControllerFacade controllerFacade = new ControllerFacade(presenter, calendarData);
-        CalendarFrame frame = new CalendarFrame(presenter, calendarData, controllerFacade);
+        ControllerContainer controllerContainer = new ControllerContainer(presenter, calendarData);
+        CalendarFrame frame = new CalendarFrame(presenter, calendarData, controllerContainer);
         presenter.addObserver(frame);
-        controllerFacade.run();
+        controllerContainer.getLoginController().startUp();
 
         p = presenter;
 

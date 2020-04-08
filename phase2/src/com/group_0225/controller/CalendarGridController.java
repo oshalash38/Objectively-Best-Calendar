@@ -15,8 +15,12 @@ public class CalendarGridController extends CalendarController{
         displayTime = new Timing(localTime.getStart());
     }
 
+    public void displayGrid() {
+        displayGrid(data.getCurrUser());
+    }
+
     public void displayGrid(User user){
-        List<String> outputs = new ArrayList<String>();
+        List<String> outputs = new ArrayList<>();
 
         outputs.add("Display");
         outputs.addAll(displayTime.getInfo());

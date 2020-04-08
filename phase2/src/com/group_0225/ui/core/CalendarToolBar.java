@@ -1,6 +1,7 @@
 package com.group_0225.ui.core;
 
-import com.group_0225.controller.ControllerFacade;
+import com.group_0225.controller.ControllerContainer;
+import com.group_0225.controller.EventController;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -8,11 +9,13 @@ import java.awt.event.ActionListener;
 
 public class CalendarToolBar extends JMenuBar {
 
-    ControllerFacade controllerFacade;
+    ControllerContainer controllerContainer;
+    EventController eventController;
 
-    public CalendarToolBar(ControllerFacade controllerFacade) {
+    public CalendarToolBar(ControllerContainer controllerContainer) {
         super();
-        this.controllerFacade = controllerFacade;
+        this.controllerContainer = controllerContainer;
+        eventController = controllerContainer.getEventsController();
 
         JMenu createMenu = new JMenu("Create");
         JMenu viewMenu = new JMenu("View Events By:");
@@ -35,6 +38,7 @@ public class CalendarToolBar extends JMenuBar {
     }
 
     private void buildViewMenu(JMenu viewMenu){
+
         JMenuItem currentEvents = new JMenuItem("Current events");
         JMenuItem pastEvents = new JMenuItem("Past events");
         JMenuItem futureEvents = new JMenuItem("Future events");
@@ -57,19 +61,19 @@ public class CalendarToolBar extends JMenuBar {
         currentEvents.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                controllerFacade.viewEventByStatus(0);
+                eventController.viewEventByStatus(0);
             }
         });
         pastEvents.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                controllerFacade.viewEventByStatus(-1);
+                eventController.viewEventByStatus(-1);
             }
         });
         futureEvents.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                controllerFacade.viewEventByStatus(1);
+                eventController.viewEventByStatus(1);
             }
         });
         dateThreshold.addActionListener(new ActionListener() {
@@ -121,7 +125,7 @@ public class CalendarToolBar extends JMenuBar {
         createEvent.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                controllerFacade.pushCreateEvent();
+                eventController.pushCreateEvent();
             }
         });
 

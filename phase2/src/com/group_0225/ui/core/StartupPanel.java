@@ -1,25 +1,28 @@
 package com.group_0225.ui.core;
 
-import com.group_0225.controller.ControllerFacade;
+import com.group_0225.controller.CalendarGridController;
+import com.group_0225.controller.ControllerContainer;
+import com.group_0225.controller.LoginController;
 import com.group_0225.ui.common.calendar.CalendarLayoutPanel;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.io.IOException;
 import java.util.List;
 
 public class StartupPanel extends CalendarLayoutPanel{// implements KeyListener {
 
-    public StartupPanel(ControllerFacade controllerFacade) {
-        super(new GridBagLayout(), controllerFacade);
+    public StartupPanel(ControllerContainer controllerContainer) {
+        super(new GridBagLayout(), controllerContainer);
     }
 
     @Override
     protected void buildPanel(List<String> inputs) {
+
+        LoginController loginController = controllerContainer.getLoginController();
+        CalendarGridController gridController = controllerContainer.getCalendarGridController();
 
         GridBagConstraints c = new GridBagConstraints();
         c.fill = GridBagConstraints.BOTH;
@@ -42,7 +45,7 @@ public class StartupPanel extends CalendarLayoutPanel{// implements KeyListener 
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    controllerFacade.login(usernameField.getText(), passwordField.getText());
+                    loginController.login(usernameField.getText(), passwordField.getText(), gridController);
                 } catch (IOException | ClassNotFoundException ex) {
                     ex.printStackTrace();
                 }
@@ -52,7 +55,7 @@ public class StartupPanel extends CalendarLayoutPanel{// implements KeyListener 
         createNewUserButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                controllerFacade.createNewUser();
+                loginController.createNewUserScreen();
             }
         });
 
