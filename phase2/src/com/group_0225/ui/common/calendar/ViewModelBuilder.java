@@ -19,15 +19,39 @@ public class ViewModelBuilder {
         temp.put("Password:", "Password:");
         temp.put("Username:", "Username:");
         temp.put("Login", "Login");
-        temp.put("Password:", "Password:");
-        temp.put("Password:", "Password:");
-        temp.put("Password:", "Password:");
-        temp.put("Password:", "Password:");
-        temp.put("Password:", "Password:");
-        temp.put("Password:", "Password:");
-        temp.put("Password:", "Password:");
+
         temp.put("EnterStartTimeString", "Enter Start Time:");
         temp.put("EnterEndTimeString", "Enter End Time:");
+
+
+
+        //TOOLBAR HEADERS
+        temp.put("TOOLBARCreateMenuString", "Create:");
+        temp.put("TOOLBARViewMenuString", "View Events By:");
+        temp.put("TOOLBARMessagingFunctionsString", "Messaging Functions");
+        temp.put("TOOLBARUserString", "User");
+        temp.put("TOOLBARTimeMachineString", "Time Machine");
+
+        //TOOLBAR options for Create choice
+        temp.put("TOOLBARCreateMenuEventString", "Create Event");
+        temp.put("TOOLBARCreateMenuAlertString", "Create Alert");
+        temp.put("TOOLBARCreateMenuMemoString", "Create Memo");
+        temp.put("TOOLBARCreateMenuSeriesString", "Create Series");
+
+        //TOOLBAR options for View choice
+        temp.put("TOOLBARViewMenuCurrentEventsString", "Current events");
+        temp.put("TOOLBARViewMenuPastEventsString", "Past events");
+        temp.put("TOOLBARViewMenuFutureEventsString", "Future events");
+        temp.put("TOOLBARViewMenuDateThresholdString", "Date threshold");
+        temp.put("TOOLBARViewMenuMemoString", "Memo");
+        temp.put("TOOLBARViewMenuTagString", "Tag");
+        temp.put("TOOLBARViewMenuNameString", "Name");
+        temp.put("TOOLBARViewMenuSeriesString", "Series");
+
+        //TOOLBAR options for Messaging choice
+        temp.put("TOOLBARMessagingFunctionsSendMessageString", "Send new message");
+        temp.put("TOOLBARMessagingFunctionsInboxString", "Inbox");
+
 
         return temp;
     }

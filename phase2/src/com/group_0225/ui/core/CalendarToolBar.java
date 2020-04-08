@@ -2,26 +2,35 @@ package com.group_0225.ui.core;
 
 import com.group_0225.controller.ControllerContainer;
 import com.group_0225.controller.EventController;
+import com.group_0225.ui.common.calendar.ViewModelBuilder;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Map;
 
 public class CalendarToolBar extends JMenuBar {
 
-    ControllerContainer controllerContainer;
-    EventController eventController;
+    private ControllerContainer controllerContainer;
+    private EventController eventController;
+    private Map<String, String> viewModel;
+
 
     public CalendarToolBar(ControllerContainer controllerContainer) {
         super();
+        ViewModelBuilder vmb = new ViewModelBuilder();
+        viewModel = vmb.build();
+
         this.controllerContainer = controllerContainer;
         eventController = controllerContainer.getEventsController();
 
-        JMenu createMenu = new JMenu("Create");
-        JMenu viewMenu = new JMenu("View Events By:");
-        JMenu userSettings = new JMenu("User");
-        JMenu timeMachine = new JMenu("Time Machine");
+        JMenu createMenu = new JMenu(viewModel.get("TOOLBARCreateMenuString"));
+        JMenu viewMenu = new JMenu(viewModel.get("TOOLBARViewMenuString"));
+        JMenu messagingMenu = new JMenu(viewModel.get("TOOLBARMessagingFunctionsString"));
+        JMenu userSettings = new JMenu(viewModel.get("TOOLBARUserString"));
+        JMenu timeMachine = new JMenu(viewModel.get("TOOLBARTimeMachineString"));
 
+        buildMessagingMenu(messagingMenu);
         buildCreateMenu(createMenu);
         buildViewMenu(viewMenu);
 
@@ -32,21 +41,43 @@ public class CalendarToolBar extends JMenuBar {
 
 
 
-        JMenuItem speedUp = new JMenuItem("Speed Up Time");
-        JMenuItem resumeNormalTime = new JMenuItem("Resume Normal Time");
+
+
+    }
+
+    private void buildMessagingMenu(JMenu messagingMenu) {
+        JMenuItem sendNewMessage = new JMenuItem(viewModel.get("TOOLBARMessagingFunctionsSendMessageString"));
+        JMenuItem inbox = new JMenuItem(viewModel.get("TOOLBARMessagingFunctionsInboxString"));
+
+        messagingMenu.add(sendNewMessage);
+        messagingMenu.add(inbox);
+
+        sendNewMessage.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+
+        inbox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
 
     }
 
     private void buildViewMenu(JMenu viewMenu){
 
-        JMenuItem currentEvents = new JMenuItem("Current events");
-        JMenuItem pastEvents = new JMenuItem("Past events");
-        JMenuItem futureEvents = new JMenuItem("Future events");
-        JMenuItem dateThreshold = new JMenuItem("Date threshold");
-        JMenuItem memo = new JMenuItem("Memo");
-        JMenuItem tag = new JMenuItem("Tag");
-        JMenuItem name = new JMenuItem("Name");
-        JMenuItem series = new JMenuItem("Series");
+        JMenuItem currentEvents = new JMenuItem(viewModel.get("TOOLBARViewMenuCurrentEventsString"));
+        JMenuItem pastEvents = new JMenuItem(viewModel.get("TOOLBARViewMenuPastEventsString"));
+        JMenuItem futureEvents = new JMenuItem(viewModel.get("TOOLBARViewMenuFutureEventsString"));
+        JMenuItem dateThreshold = new JMenuItem(viewModel.get("TOOLBARViewMenuDateThresholdString"));
+        JMenuItem memo = new JMenuItem(viewModel.get("TOOLBARViewMenuMemoString"));
+        JMenuItem tag = new JMenuItem(viewModel.get("TOOLBARViewMenuTagString"));
+        JMenuItem name = new JMenuItem(viewModel.get("TOOLBARViewMenuNameString"));
+        JMenuItem series = new JMenuItem(viewModel.get("TOOLBARViewMenuSeriesString"));
 
 
         viewMenu.add(currentEvents);
@@ -112,10 +143,10 @@ public class CalendarToolBar extends JMenuBar {
     }
 
     private void buildCreateMenu(JMenu createMenu) {
-        JMenuItem createEvent = new JMenuItem("Create Event");
-        JMenuItem createAlert = new JMenuItem("Create Alert");
-        JMenuItem createMemo = new JMenuItem("Create Memo");
-        JMenuItem createSeries = new JMenuItem("Create Series");
+        JMenuItem createEvent = new JMenuItem(viewModel.get("TOOLBARCreateMenuEventString"));
+        JMenuItem createAlert = new JMenuItem(viewModel.get("TOOLBARCreateMenuAlertString"));
+        JMenuItem createMemo = new JMenuItem(viewModel.get("TOOLBARCreateMenuMemoString"));
+        JMenuItem createSeries = new JMenuItem(viewModel.get("TOOLBARCreateMenuSeriesString"));
 
         createMenu.add(createEvent);
         createMenu.add(createAlert);
