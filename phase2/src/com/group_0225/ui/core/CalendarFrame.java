@@ -15,11 +15,13 @@ public class CalendarFrame extends JFrame implements Observer {
     private UIPresenter presenter;
     private GUIBuilder guiBuilder;
     private Map<String,CalendarLayoutPanel> panels;
+    private CalendarData calendarData;
     JPanel currPanel;
 
     public CalendarFrame(UIPresenter presenter, CalendarData calendarData, ControllerContainer controllerContainer) {
         super();
         guiBuilder = new GUIBuilder();
+        this.calendarData = calendarData;
         panelBuilder(presenter, calendarData, controllerContainer);
     }
 
@@ -42,6 +44,12 @@ public class CalendarFrame extends JFrame implements Observer {
 
         CalendarLayoutPanel currP = panels.get(info.getPanelKey());
         currP.updatePanel(info.getPanelData());
+
+        if(calendarData.getCurrUser() == null){
+            this.getJMenuBar().setVisible(false);
+        }
+        else
+            this.getJMenuBar().setVisible(true);
 
         if(info.isDialog()) {
             JDialog dialog = new JDialog();

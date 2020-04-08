@@ -15,21 +15,18 @@ public class LoginController extends CalendarController{
         userManager = new UserManager();
     }
 
-    public User login(String username, String password, CalendarGridController calendarGridController) throws IOException, ClassNotFoundException {
+    public void login(String username, String password, CalendarGridController calendarGridController) throws IOException, ClassNotFoundException {
 
         User user = data.getUser(username);
         if(username.length() == 0 || password.length() == 0){
             presenter.displayPanel(new PanelInfo("StartupPanel", Arrays.asList(username, "Please enter all fields")));
-            return null;
         }
         else if(user == null || !userManager.validatePassword(user, password)){
             presenter.displayPanel(new PanelInfo("StartupPanel", Arrays.asList(username, "Sorry, username and password did not match.")));
-            return null;
         }
         System.out.println("Login successful ");
-        calendarGridController.displayGrid(user);
         data.setCurrUser(user);
-        return user;
+        calendarGridController.displayGrid(user);
     }
 
     public void createNewUserScreen(){
