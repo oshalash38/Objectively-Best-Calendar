@@ -30,7 +30,7 @@ public class DatabaseReader implements Serializable {
             return readFromFile(filePath);
         }
         file.createNewFile();
-        return null;
+        return readFromFile(filePath);
     }
 
 

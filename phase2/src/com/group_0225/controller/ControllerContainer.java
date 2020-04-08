@@ -16,6 +16,7 @@ public class ControllerContainer {
     private SeriesController seriesController;
     private EventController eventsController;
     private CalendarGridController calendarGridController;
+    private MessagingController messagingController;
 
     private CalendarData calendarData;
     private Timing localTime;
@@ -28,8 +29,10 @@ public class ControllerContainer {
         seriesController = new SeriesController(calendarData, presenter, localTime);
         eventsController = new EventController(calendarData, presenter, localTime);
         calendarGridController = new CalendarGridController(calendarData, presenter, localTime);
+        messagingController = new MessagingController(calendarData,presenter, localTime);
     }
 
+    public MessagingController getMessagingController(){return messagingController; }
     public LoginController getLoginController() { return loginController; }
     public SeriesController getSeriesController() { return seriesController; }
     public EventController getEventsController() { return eventsController; }

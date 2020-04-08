@@ -1,6 +1,7 @@
 package com.group_0225;
 
 import com.group_0225.controller.ControllerContainer;
+import com.group_0225.controller.MessagingController;
 import com.group_0225.ui.common.calendar.CalendarLayoutPanel;
 import com.group_0225.ui.core.*;
 

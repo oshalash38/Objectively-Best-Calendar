@@ -26,8 +26,8 @@ public class ViewModelBuilder {
 
 
         //TOOLBAR HEADERS
-        temp.put("TOOLBARCreateMenuString", "Create:");
-        temp.put("TOOLBARViewMenuString", "View Events By:");
+        temp.put("TOOLBARCreateMenuString", "Create");
+        temp.put("TOOLBARViewMenuString", "View Events By");
         temp.put("TOOLBARMessagingFunctionsString", "Messaging Functions");
         temp.put("TOOLBARUserString", "User");
         temp.put("TOOLBARTimeMachineString", "Time Machine");
@@ -51,6 +51,15 @@ public class ViewModelBuilder {
         //TOOLBAR options for Messaging choice
         temp.put("TOOLBARMessagingFunctionsSendMessageString", "Send new message");
         temp.put("TOOLBARMessagingFunctionsInboxString", "Inbox");
+
+        //TOOLBAR options for User choice
+        temp.put("TOOLBARUserChangeCalendarString", "Change Calendar");
+        temp.put("TOOLBARUserChangePasswordString", "Change Password");
+        temp.put("TOOLBARUserLogoutString", "Logout");
+
+        //TOOLBAR options for time machine choice
+        temp.put("TOOLBARTimeMachineReturnToPresentString", "Back to the present");
+        temp.put("TOOLBARTimeMachineTimeTravelString", "Activate time travel");
 
 
         return temp;

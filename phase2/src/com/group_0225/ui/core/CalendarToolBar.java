@@ -2,17 +2,23 @@ package com.group_0225.ui.core;
 
 import com.group_0225.controller.ControllerContainer;
 import com.group_0225.controller.EventController;
+import com.group_0225.controller.LoginController;
+import com.group_0225.controller.MessagingController;
 import com.group_0225.ui.common.calendar.ViewModelBuilder;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 public class CalendarToolBar extends JMenuBar {
 
-    private ControllerContainer controllerContainer;
+    private LoginController loginController;
     private EventController eventController;
+    private MessagingController messagingController;
     private Map<String, String> viewModel;
 
 
@@ -21,8 +27,9 @@ public class CalendarToolBar extends JMenuBar {
         ViewModelBuilder vmb = new ViewModelBuilder();
         viewModel = vmb.build();
 
-        this.controllerContainer = controllerContainer;
-        eventController = controllerContainer.getEventsController();
+        this.eventController = controllerContainer.getEventsController();
+        this.messagingController = controllerContainer.getMessagingController();
+        this.loginController = controllerContainer.getLoginController();
 
         JMenu createMenu = new JMenu(viewModel.get("TOOLBARCreateMenuString"));
         JMenu viewMenu = new JMenu(viewModel.get("TOOLBARViewMenuString"));
@@ -30,156 +37,105 @@ public class CalendarToolBar extends JMenuBar {
         JMenu userSettings = new JMenu(viewModel.get("TOOLBARUserString"));
         JMenu timeMachine = new JMenu(viewModel.get("TOOLBARTimeMachineString"));
 
-        buildMessagingMenu(messagingMenu);
         buildCreateMenu(createMenu);
         buildViewMenu(viewMenu);
+        buildMessagingMenu(messagingMenu);
+        buildUserSettingsMenu(userSettings);
+        buildTimeMachinesMenu(timeMachine);
 
+        this.add(userSettings);
         this.add(createMenu);
         this.add(viewMenu);
-
-
-
-
-
-
+        this.add(messagingMenu);
+        this.add(timeMachine);
 
     }
 
+    private void buildTimeMachinesMenu(JMenu timeMachine){
+        List<JMenuItem> subMenus = buildJMenuItems(timeMachine,
+                Arrays.asList("TOOLBARTimeMachineReturnToPresentString", "TOOLBARTimeMachineTimeTravelString"));
+
+        //Back to the present
+        subMenus.get(0).addActionListener(e -> messagingController.pushSendNewMessagePanel());
+        //Activate time travel
+        subMenus.get(1).addActionListener(e -> messagingController.pushInboxPanel());
+    }
+
+    private void buildUserSettingsMenu(JMenu userSettings){
+        List<JMenuItem> subMenus = buildJMenuItems(userSettings,
+                Arrays.asList("TOOLBARUserChangeCalendarString", "TOOLBARUserChangePasswordString", "TOOLBARUserLogoutString"));
+
+        //Change Calendar
+        subMenus.get(0).addActionListener(e -> {});
+        //Change Password
+        subMenus.get(1).addActionListener(e -> {});
+        //Logout
+        subMenus.get(2).addActionListener(e -> loginController.startUp());
+    }
+
     private void buildMessagingMenu(JMenu messagingMenu) {
-        JMenuItem sendNewMessage = new JMenuItem(viewModel.get("TOOLBARMessagingFunctionsSendMessageString"));
-        JMenuItem inbox = new JMenuItem(viewModel.get("TOOLBARMessagingFunctionsInboxString"));
+        List<JMenuItem> subMenus = buildJMenuItems(messagingMenu,
+                Arrays.asList("TOOLBARMessagingFunctionsSendMessageString", "TOOLBARMessagingFunctionsInboxString"));
 
-        messagingMenu.add(sendNewMessage);
-        messagingMenu.add(inbox);
-
-        sendNewMessage.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-            }
-        });
-
-        inbox.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-            }
-        });
+        //Send Message
+        subMenus.get(0).addActionListener(e -> messagingController.pushSendNewMessagePanel());
+        //Inbox
+        subMenus.get(1).addActionListener(e -> messagingController.pushInboxPanel());
 
     }
 
     private void buildViewMenu(JMenu viewMenu){
 
-        JMenuItem currentEvents = new JMenuItem(viewModel.get("TOOLBARViewMenuCurrentEventsString"));
-        JMenuItem pastEvents = new JMenuItem(viewModel.get("TOOLBARViewMenuPastEventsString"));
-        JMenuItem futureEvents = new JMenuItem(viewModel.get("TOOLBARViewMenuFutureEventsString"));
-        JMenuItem dateThreshold = new JMenuItem(viewModel.get("TOOLBARViewMenuDateThresholdString"));
-        JMenuItem memo = new JMenuItem(viewModel.get("TOOLBARViewMenuMemoString"));
-        JMenuItem tag = new JMenuItem(viewModel.get("TOOLBARViewMenuTagString"));
-        JMenuItem name = new JMenuItem(viewModel.get("TOOLBARViewMenuNameString"));
-        JMenuItem series = new JMenuItem(viewModel.get("TOOLBARViewMenuSeriesString"));
+        List<JMenuItem> subMenus = buildJMenuItems(viewMenu,
+                Arrays.asList("TOOLBARViewMenuCurrentEventsString", "TOOLBARViewMenuPastEventsString",
+                        "TOOLBARViewMenuFutureEventsString", "TOOLBARViewMenuDateThresholdString",
+                        "TOOLBARViewMenuMemoString","TOOLBARViewMenuTagString","TOOLBARViewMenuNameString",
+                        "TOOLBARViewMenuSeriesString"));
 
-
-        viewMenu.add(currentEvents);
-        viewMenu.add(pastEvents);
-        viewMenu.add(futureEvents);
-        viewMenu.add(dateThreshold);
-        viewMenu.add(memo);
-        viewMenu.add(tag);
-        viewMenu.add(name);
-        viewMenu.add(series);
-
-        currentEvents.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                eventController.viewEventByStatus(0);
-            }
-        });
-        pastEvents.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                eventController.viewEventByStatus(-1);
-            }
-        });
-        futureEvents.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                eventController.viewEventByStatus(1);
-            }
-        });
-        dateThreshold.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-            }
-        });
-        memo.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-            }
-        });
-        tag.addActionListener(new ActionListener() {
-            private ActionEvent e;
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-            }
-        });
-        name.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-            }
-        });
-        series.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-            }
-        });
+        //Current events
+        subMenus.get(0).addActionListener(e -> eventController.viewEventByStatus(0));
+        //Past events
+        subMenus.get(1).addActionListener(e -> eventController.viewEventByStatus(-1));
+        //Future events
+        subMenus.get(2).addActionListener(e -> eventController.viewEventByStatus(1));
+        //Date threshold
+        subMenus.get(3).addActionListener(e -> { });
+        //Memo
+        subMenus.get(4).addActionListener(e -> {});
+        //Tag
+        subMenus.get(5).addActionListener(e -> {});
+        //Name
+        subMenus.get(6).addActionListener(e -> {});
+        //Series
+        subMenus.get(7).addActionListener(e -> {});
 
 
     }
 
     private void buildCreateMenu(JMenu createMenu) {
-        JMenuItem createEvent = new JMenuItem(viewModel.get("TOOLBARCreateMenuEventString"));
-        JMenuItem createAlert = new JMenuItem(viewModel.get("TOOLBARCreateMenuAlertString"));
-        JMenuItem createMemo = new JMenuItem(viewModel.get("TOOLBARCreateMenuMemoString"));
-        JMenuItem createSeries = new JMenuItem(viewModel.get("TOOLBARCreateMenuSeriesString"));
+        List<JMenuItem> subMenus = buildJMenuItems(createMenu,
+                Arrays.asList("TOOLBARCreateMenuEventString", "TOOLBARCreateMenuAlertString",
+                        "TOOLBARCreateMenuMemoString", "TOOLBARCreateMenuSeriesString"));
 
-        createMenu.add(createEvent);
-        createMenu.add(createAlert);
-        createMenu.add(createMemo);
-        createMenu.add(createSeries);
+        //Create event
+        subMenus.get(0).addActionListener(e -> eventController.pushCreateEvent());
+        //Create Alert
+        subMenus.get(1).addActionListener(e -> { });
+        //Create Memo
+        subMenus.get(2).addActionListener(e -> {});
+        //Create Series
+        subMenus.get(3).addActionListener(e -> { });
 
-        createEvent.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                eventController.pushCreateEvent();
-            }
-        });
+    }
 
-        createAlert.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                //controllerFacade.pushCreateAlert();
-            }
-        });
+    private List<JMenuItem> buildJMenuItems(JMenu menu, List<String> subMenus){
+        List<JMenuItem> temp = new ArrayList<>();
 
-        createMemo.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                //controllerFacade.pushCreateMemo();
-            }
-        });
-
-        createSeries.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                //controllerFacade.pushCreateSeries();
-            }
-        });
-
+        for(String str: subMenus){
+            JMenuItem tempMenuItem = new JMenuItem(viewModel.get(str));
+            menu.add(tempMenuItem);
+            temp.add(tempMenuItem);
+        }
+        return temp;
     }
 }

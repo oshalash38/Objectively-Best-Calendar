@@ -10,7 +10,11 @@ public class MessagingController extends CalendarController{
         super(data, presenter, localTime);
     }
 
-    public void sendNewMessage(){
+    public void pushSendNewMessagePanel(){
+
+    }
+
+    public void pushInboxPanel(){
 
     }
 
