@@ -28,7 +28,7 @@ public class LoginController extends CalendarController{
         }
         System.out.println("Login successful ");
         calendarGridController.displayGrid(user);
-        super.currUser = user;
+        data.setCurrUser(user);
         return user;
     }
 
