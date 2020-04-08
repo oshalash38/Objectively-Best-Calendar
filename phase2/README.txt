@@ -10,16 +10,10 @@ Instructions:
    after it is scheduled. If there are new notifications, you will automatically receive a message at most 30 seconds later.
 
 
-Dependency:
+External Code:
 
-1. Download the jar file https://sourceforge.net/projects/jdatepicker/files/latest/download
+1. Using Java Swing package
 
-2. Locate it on your computer
+2. Using Google GSON. All code found within src/com/google. Source https://github.com/google/gson.
 
-3. In IntelliJ, go to File -> Project Structure -> Modules
-
-4. Click on dependencies
-
-5. Click the + button at the bottom and choose the jar file.
-
-6. Finally click apply and OK
+3. Using JDatePicker. All code found within src/org/jdatepicker. Source https://github.com/JDatePicker/JDatePicker.
