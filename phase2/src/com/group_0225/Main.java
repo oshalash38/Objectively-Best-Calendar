@@ -1,9 +1,14 @@
 package com.group_0225;
 
-import com.group_0225.api.WeatherRequester;
+import com.group_0225.entities.EventMessage;
 import com.group_0225.manager.Init;
 
 import java.io.IOException;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * The main class
@@ -15,4 +20,6 @@ public class Main {
         Init myCalendar = new Init();
         myCalendar.run();
     }
+
+
 }

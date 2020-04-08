@@ -1,12 +1,8 @@
 package com.group_0225.controller;
 
-import com.group_0225.Timing;
-import com.group_0225.UIPresenter;
-import com.group_0225.User;
-import com.group_0225.CalendarData;
-
-import java.io.IOException;
-import java.util.List;
+import com.group_0225.entities.Timing;
+import com.group_0225.ui.common.util.UIPresenter;
+import com.group_0225.entities.CalendarData;
 
 public class ControllerContainer {
 

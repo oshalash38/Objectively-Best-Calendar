@@ -1,6 +1,6 @@
 package com.group_0225.ui.core.tests;
 
-import com.group_0225.PanelInfo;
+import com.group_0225.ui.common.util.PanelInfo;
 import com.group_0225.manager.Init;
 
 import java.io.IOException;

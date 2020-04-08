@@ -44,11 +44,7 @@ public class StartupPanel extends CalendarLayoutPanel{// implements KeyListener 
         loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                try {
-                    loginController.login(usernameField.getText(), passwordField.getText(), gridController);
-                } catch (IOException | ClassNotFoundException ex) {
-                    ex.printStackTrace();
-                }
+                loginController.login(usernameField.getText(), passwordField.getText(), gridController);
             }
         });
 

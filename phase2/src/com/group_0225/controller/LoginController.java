@@ -1,7 +1,12 @@
 package com.group_0225.controller;
 
-import com.group_0225.*;
-import com.group_0225.CalendarData;
+import com.group_0225.Main;
+import com.group_0225.entities.CalendarData;
+import com.group_0225.entities.Timing;
+import com.group_0225.entities.User;
+import com.group_0225.manager.UserManager;
+import com.group_0225.ui.common.util.PanelInfo;
+import com.group_0225.ui.common.util.UIPresenter;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -15,18 +20,21 @@ public class LoginController extends CalendarController{
         userManager = new UserManager();
     }
 
-    public void login(String username, String password, CalendarGridController calendarGridController) throws IOException, ClassNotFoundException {
+    public void login(String username, String password, CalendarGridController calendarGridController){
 
         User user = data.getUser(username);
+        System.err.println(user);
         if(username.length() == 0 || password.length() == 0){
             presenter.displayPanel(new PanelInfo("StartupPanel", Arrays.asList(username, "Please enter all fields")));
         }
         else if(user == null || !userManager.validatePassword(user, password)){
             presenter.displayPanel(new PanelInfo("StartupPanel", Arrays.asList(username, "Sorry, username and password did not match.")));
+        } else {
+            System.out.println("Login successful ");
+            data.setCurrUser(user);
+            calendarGridController.displayGrid(user);
         }
-        System.out.println("Login successful ");
-        data.setCurrUser(user);
-        calendarGridController.displayGrid(user);
+
     }
 
     public void createNewUserScreen(){

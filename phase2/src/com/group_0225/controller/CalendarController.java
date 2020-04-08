@@ -1,6 +1,9 @@
 package com.group_0225.controller;
 
-import com.group_0225.*;
+import com.group_0225.entities.CalendarData;
+import com.group_0225.entities.Timing;
+import com.group_0225.entities.TimingFactory;
+import com.group_0225.ui.common.util.UIPresenter;
 
 public abstract class CalendarController {
     //TODO RENAME THIS CLASS TO CONTROLLER ONCE WE DELETE THE OLD STUFF

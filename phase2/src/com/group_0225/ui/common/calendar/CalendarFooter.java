@@ -20,20 +20,10 @@ public class CalendarFooter extends CalendarLayoutPanel {
         CalendarGridController gridController = controllerContainer.getCalendarGridController();
 
         Button nextButton = new Button("Next");
-        nextButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                gridController.alterMonth(1);
-            }
-        });
+        nextButton.addActionListener(e -> gridController.alterMonth(1));
 
         Button prevButton = new Button("Prev");
-        prevButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                gridController.alterMonth(-1);
-            }
-        });
+        prevButton.addActionListener(e -> gridController.alterMonth(-1));
 
         this.add(prevButton);
         this.add(nextButton);

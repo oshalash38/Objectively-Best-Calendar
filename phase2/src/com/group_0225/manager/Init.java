@@ -2,6 +2,10 @@ package com.group_0225.manager;
 
 import com.group_0225.*;
 import com.group_0225.controller.ControllerContainer;
+import com.group_0225.entities.CalendarData;
+import com.group_0225.entities.Event;
+import com.group_0225.entities.User;
+import com.group_0225.ui.common.util.UIPresenter;
 import com.group_0225.ui.core.CalendarFrame;
 
 import java.awt.event.WindowAdapter;
