@@ -8,6 +8,8 @@ import java.util.*;
 
 public class EventController extends CalendarController {
 
+    private EventManager eventManager;
+
     // TODO: Not sure if other classes will need this or not as well to avoid duplicate code.
     private Map<String, Integer> Months;
 
@@ -17,6 +19,7 @@ public class EventController extends CalendarController {
         super(data, presenter, localTime);
         Months = new HashMap<>();
         buildMonths();
+        eventManager = new EventManager();
     }
 
     private void buildMonths() {
@@ -66,7 +69,7 @@ public class EventController extends CalendarController {
         Timing timing = timingFactory.createTiming(startDateParsed.get(2), startDateParsed.get(1), startDateParsed.get(0),
            startTimeParsed.get(0), startTimeParsed.get(1), endDateParsed.get(2), endDateParsed.get(1), endDateParsed.get(0),
                 endTimeParsed.get(0), endTimeParsed.get(1));
-        eventManager.createEvent(currUser, input.get(1), timing, data);
+        eventManager.createEvent(data.getCurrUser(), input.get(1), timing, data);
     }
 
     /**
