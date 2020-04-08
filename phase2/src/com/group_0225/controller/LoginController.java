@@ -58,6 +58,7 @@ public class LoginController extends CalendarController{
     }
 
     public void startUp(){
+        data.setCurrUser(null);
         presenter.displayPanel(new PanelInfo("StartupPanel", Arrays.asList("", "")));
     }
 }
