@@ -34,8 +34,7 @@ public class LoginController extends CalendarController{
             data.setCurrUser(user);
             calendarGridController.displayGrid(user);
         }
-
-    }
+   }
 
     public void createNewUserScreen(){
         pushCreateNewUserScreen(Arrays.asList("", ""));

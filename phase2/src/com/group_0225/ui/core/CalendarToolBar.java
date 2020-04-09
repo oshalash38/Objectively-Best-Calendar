@@ -63,14 +63,12 @@ public class CalendarToolBar extends JMenuBar {
 
     private void buildUserSettingsMenu(JMenu userSettings){
         List<JMenuItem> subMenus = buildJMenuItems(userSettings,
-                Arrays.asList("TOOLBARUserChangeCalendarString", "TOOLBARUserChangePasswordString", "TOOLBARUserLogoutString"));
+                Arrays.asList("TOOLBARUserChangeCalendarString", "TOOLBARUserLogoutString"));
 
         //Change Calendar
         subMenus.get(0).addActionListener(e -> {});
-        //Change Password
-        subMenus.get(1).addActionListener(e -> {});
         //Logout
-        subMenus.get(2).addActionListener(e -> loginController.startUp());
+        subMenus.get(1).addActionListener(e -> loginController.startUp());
     }
 
     private void buildMessagingMenu(JMenu messagingMenu) {
