@@ -1,6 +1,7 @@
 package com.group_0225.controller;
 
 import com.group_0225.entities.CalendarData;
+import com.group_0225.entities.Event;
 import com.group_0225.entities.Timing;
 import com.group_0225.manager.EventManager;
 import com.group_0225.ui.common.util.PanelInfo;
@@ -55,6 +56,12 @@ public class EventController extends CalendarController {
      *                1: future events
      */
     public void viewEventByStatus(int status){
+        switch (status){
+            case 1:
+                List<Event> events = eventManager.getUpcomingEvents(data);
+                presenter.displayPanel(new PanelInfo("EventListPanel", getEventsName(events) , true));
+                break;
+        }
 
     }
 
@@ -71,7 +78,7 @@ public class EventController extends CalendarController {
         Timing timing = timingFactory.createTiming(startDateParsed.get(2), startDateParsed.get(1), startDateParsed.get(0),
            startTimeParsed.get(0), startTimeParsed.get(1), endDateParsed.get(2), endDateParsed.get(1), endDateParsed.get(0),
                 endTimeParsed.get(0), endTimeParsed.get(1));
-        eventManager.createEvent(data.getCurrUser(), input.get(1), timing, data);
+        eventManager.createEvent(data, input.get(0), timing);
     }
 
     /**
@@ -97,6 +104,17 @@ public class EventController extends CalendarController {
         result.add(Integer.parseInt(s.substring(0, 2)));
         result.add(Integer.parseInt(s.substring(3, 5)));
         result.add(Integer.parseInt(s.substring(6, 8)));
+        return result;
+    }
+
+
+    // TODO: Should this be here or in manager?
+    private List<String> getEventsName(List<Event> events){
+        List<String> result = new ArrayList<>();
+        for (Event e : events){
+            System.out.println(e.getEventName());
+            result.add(e.getEventName());
+        }
         return result;
     }
 }

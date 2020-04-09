@@ -114,4 +114,14 @@ public class User implements Serializable {
     public int hashCode(){
         return username.hashCode();
     }
+
+    public void addCalendar(String calendarName){
+        List<Integer> ids = new ArrayList<>();
+        calendars.put(calendarName, ids);
+    }
+
+    public void addIdToCalendars(String calendarName, int id){
+        calendars.get(calendarName).add(id);
+    }
+
 }

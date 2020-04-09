@@ -12,41 +12,41 @@ public class EventManager {
      */
 
     private static int idGen = 0;
-    private CalendarData cd;
 
 
     public EventManager(){
-        cd = new CalendarData(); //TODO CHANGE THIS
     }
 
     /**
      * Creates a new event and returns it.
-     * @param user The user that will store the new event.
+     * @param calendarData The user that will store the new event.
      * @param name Name of the event.
      * @param timing Timing of the event.
      */
-    public Event createEvent(User user, String name, Timing timing, CalendarData calendarData){
+    public Event createEvent(CalendarData calendarData, String name, Timing timing){
         Event event = new Event(name, timing);
-        int id = sortEvents(user, event);
+        int id = sortEvents(calendarData);
+        System.out.println(id);
+        event.setID(id);
         calendarData.addEvent(id, event);
         return event;
     }
 
     /**
      * Creates a new event and returns it.
-     * @param user The user that will store the new event.
+     * @param calendarData The user that will store the new event.
      * @param name Name of the event.
      * @param timing Timing of the event.
      * @param series series of the event.
      */
-    public Event createEvent(User user, String name, Timing timing, String series){
+    public Event createEvent(CalendarData calendarData, String name, Timing timing, String series){
         Event event = new Event(name, timing, series);
-        sortEvents(user,event);
+        sortEvents(calendarData);
         return event;
     }
 
-    private int sortEvents(User user, Event e){
-        Map<Integer,Event> events = cd.getEvents();
+    private int sortEvents(CalendarData calendarData){
+        Map<Integer,Event> events = calendarData.getEvents();
         int high = -1;
         for (Map.Entry<Integer, Event> entry: events.entrySet()){
             if(entry.getKey() > high){high = entry.getKey();}
@@ -134,10 +134,10 @@ public class EventManager {
 
     /**
      * Returns a list of upcoming events
-     * @param user the user that this method looks in
+     * @param data the calendar data
      * @return the list of upcoming events
      */
-    public ArrayList<Event> getUpcomingEvents(User user, List<Event> events){
+    public ArrayList<Event> getUpcomingEvents(CalendarData data){
 //        ArrayList<Event> upcomingEvents = new ArrayList<>();
 //        HashMap<Integer,Event> allEvents = (HashMap<Integer, Event>) user.getEvents();
 //        for (Map.Entry<Integer, Event> entry: allEvents.entrySet()){
@@ -146,9 +146,13 @@ public class EventManager {
 //            }
 //        }
         ArrayList<Event> upcomingEvents = new ArrayList<>();
-        for(Event e: events){
-            if(e.getStatus() == Status.UPCOMING)
-                upcomingEvents.add(e);
+        List<Integer> events = data.getCurrUser().getEvents(data.getCurrCalendar());
+        System.out.println("Event Size:" + events.size());
+        for(Map.Entry<Integer, Event> entry : data.getEvents().entrySet()){
+            System.out.println(entry.getValue().getID());
+            System.out.println(events.contains(entry.getValue().getID()));
+            if(entry.getValue().getStatus() == Status.UPCOMING && events.contains(entry.getValue().getID()))
+                upcomingEvents.add(entry.getValue());
         }
         return upcomingEvents;
     }
@@ -326,11 +330,11 @@ public class EventManager {
      * @param calendar a key-value entry in the User's calendars attribute
      * @return a sorted list of all events from the User's calendar
      */
-    public List<Event> getSortedEvents(Map.Entry<String,List<Integer>> calendar){
+    public List<Event> getSortedEvents(Map.Entry<String,List<Integer>> calendar, CalendarData calendarData){
         List<Integer> unsortedIDs = calendar.getValue();
         List<Event> unsortedEvents = new ArrayList<>();
         for (Integer i: unsortedIDs){
-            unsortedEvents.add(cd.getEvents().get(i));
+            unsortedEvents.add(calendarData.getEvents().get(i));
         }
         Collections.sort(unsortedEvents);
         return unsortedEvents;

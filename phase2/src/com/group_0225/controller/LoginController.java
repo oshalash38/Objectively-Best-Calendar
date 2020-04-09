@@ -32,6 +32,7 @@ public class LoginController extends CalendarController{
         } else {
             System.out.println("Login successful ");
             data.setCurrUser(user);
+            data.setCurrCalendar("default");
             calendarGridController.displayGrid(user);
         }
    }

@@ -22,11 +22,11 @@ public class EventListPanel extends CalendarLayoutPanel {
         c.weightx = 1;
 
         JPanel parent = new JPanel(new GridBagLayout());
-        parent.setBackground(Color.YELLOW);
+        parent.setBackground(Color.darkGray);
 
-        for (int i = 0; i < 30; i++) {
+        for (int i = 0; i < inputs.size(); i++) {
             c.gridy = i;
-            JButton eventPreview = new JButton("Event " + i);
+            JButton eventPreview = new JButton(inputs.get(i));
             parent.add(eventPreview, c);
         }
 

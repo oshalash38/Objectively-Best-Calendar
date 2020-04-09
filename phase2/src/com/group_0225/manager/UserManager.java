@@ -8,6 +8,7 @@ public class UserManager {
     public User createUser(String username, String password, CalendarData calendarData){
         User temp = new User(username, password);
         calendarData.addUser(username, temp);
+        temp.addCalendar("default");
         return temp;
     }
 

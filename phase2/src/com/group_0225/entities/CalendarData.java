@@ -43,6 +43,7 @@ public class CalendarData {
 
     public void addEvent(int id, Event event){
         events.put(id, event);
+        currUser.addIdToCalendars(currCalendar, id);
     }
 
     public void setEvents(Map<Integer, Event> events){
@@ -52,4 +53,5 @@ public class CalendarData {
     public void setUsers(Map<String, User> users) {
         this.users = users;
     }
+
 }
