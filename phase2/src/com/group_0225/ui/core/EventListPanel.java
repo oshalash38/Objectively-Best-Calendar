@@ -34,6 +34,4 @@ public class EventListPanel extends CalendarLayoutPanel {
         JScrollPane panel = new JScrollPane(parent);
         this.add(panel, c);
     }
-
-
 }

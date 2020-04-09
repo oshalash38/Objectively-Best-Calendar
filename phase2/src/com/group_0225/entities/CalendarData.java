@@ -1,7 +1,5 @@
 package com.group_0225.entities;
 
-import com.group_0225.Main;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,6 +8,7 @@ public class CalendarData {
     //contains mappings of ids to events (across all users and calendars)
     private User currUser;
     private String currCalendar;
+    private Timing localTime;
     private Map<Integer, Event> events = new HashMap<>();
     private Map<String, User> users = new HashMap<>();
 
@@ -28,6 +27,9 @@ public class CalendarData {
         }
         return null;
     }
+
+    public Timing getLocalTime(){ return localTime;}
+    public void setLocalTime(Timing localTime){this.localTime = localTime;}
 
     public User getCurrUser() { return currUser; }
     public void setCurrUser(User currUser) { this.currUser = currUser; }

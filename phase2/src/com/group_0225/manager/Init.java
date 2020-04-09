@@ -1,16 +1,15 @@
 package com.group_0225.manager;
 
-import com.group_0225.*;
+import com.group_0225.DatabaseReader;
 import com.group_0225.controller.ControllerContainer;
-import com.group_0225.entities.CalendarData;
-import com.group_0225.entities.Event;
-import com.group_0225.entities.User;
+import com.group_0225.entities.*;
 import com.group_0225.ui.common.util.UIPresenter;
 import com.group_0225.ui.core.CalendarFrame;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.Map;
 
 /**
@@ -25,8 +24,10 @@ public class Init {
     public static UIPresenter p;
 
     public void run() throws IOException, ClassNotFoundException {
+        TimingFactory timingFactory = new TimingFactory();
         DatabaseReader databaseReader = new DatabaseReader();
         CalendarData calendarData = new CalendarData();
+        calendarData.setLocalTime(timingFactory.createTiming(LocalDateTime.now()));
 
         populate(calendarData, databaseReader);
 
