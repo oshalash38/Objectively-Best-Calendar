@@ -1,15 +1,16 @@
 package com.group_0225.ui.core;
 
 import com.group_0225.controller.ControllerContainer;
+import com.group_0225.controller.EventController;
 import com.group_0225.entities.Event;
 import com.group_0225.ui.common.calendar.CalendarLayoutPanel;
+import com.group_0225.ui.common.util.PanelInfo;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.EventListener;
+import java.util.*;
 import java.util.List;
 
 public class EventListPanel extends CalendarLayoutPanel {
@@ -20,11 +21,13 @@ public class EventListPanel extends CalendarLayoutPanel {
 
     @Override
     protected void buildPanel(List<String> inputs) {
+        EventController eventController = controllerContainer.getEventsController();
 
         GridBagConstraints c = new GridBagConstraints();
         c.fill = GridBagConstraints.HORIZONTAL;
         c.weighty = 1;
         c.weightx = 1;
+
 
         JPanel parent = new JPanel(new GridBagLayout());
         parent.setBackground(Color.darkGray);
@@ -48,7 +51,7 @@ public class EventListPanel extends CalendarLayoutPanel {
             button.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-
+                    eventController.displayEvent(button.getText());
                 }
             });
         }

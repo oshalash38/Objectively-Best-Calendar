@@ -63,12 +63,12 @@ public class EventManager {
 
     /**
      * Changes the name of an event.
-     * @param user The user that contains the event to be altered
+     * @param calendarData Calendar metadata.
      * @param event The event to be altered
      * @param newName The new name.
      */
-    public void changeEventName(User user, Event event, String newName, List<Event> events){
-        Event currEvent = this.searchEventByName(user, event.getEventName(), events);
+    public void changeEventName(CalendarData calendarData, Event event, String newName, List<Event> events){
+        Event currEvent = this.searchEventByName(calendarData, event.getEventName());
         if (currEvent != null){
             currEvent.setEventName(newName);
         }
@@ -77,20 +77,20 @@ public class EventManager {
 
     /**
      *
-     * @param user the user that is being manipulated
+     * @param calendarData Calendar metadata.
      * @param name the name being searched
      * @return the Event matching the name
      */
-    public Event searchEventByName(User user, String name, List<Event> events){
+    public Event searchEventByName(CalendarData calendarData, String name){
 //        HashMap<Integer,Event> events = (HashMap<Integer, Event>) user.getEvents(currCalendar);
 //        for (Map.Entry<Integer, Event> entry: events.entrySet()){
 //            if (entry.getValue().getEventName().equals(name)){
 //                return entry.getValue();
 //            }
 //        }
-        for (Event e: events){
-            if (e.getEventName().equals(name))
-                 return e;
+        for (Map.Entry<Integer,Event> eventEntry: calendarData.getEvents().entrySet()){
+            if (eventEntry.getValue().getEventName().equals(name))
+                 return eventEntry.getValue();
         }
         return null;
     }
@@ -138,13 +138,6 @@ public class EventManager {
      * @return the list of upcoming events
      */
     public ArrayList<Event> getUpcomingEvents(CalendarData data){
-//        ArrayList<Event> upcomingEvents = new ArrayList<>();
-//        HashMap<Integer,Event> allEvents = (HashMap<Integer, Event>) user.getEvents();
-//        for (Map.Entry<Integer, Event> entry: allEvents.entrySet()){
-//            if (entry.getValue().getStatus() == Status.UPCOMING){
-//                upcomingEvents.add(entry.getValue());
-//            }
-//        }
         ArrayList<Event> upcomingEvents = new ArrayList<>();
         List<Integer> events = data.getCurrUser().getEvents(data.getCurrCalendar());
         System.out.println("Event Size:" + events.size());
@@ -159,22 +152,18 @@ public class EventManager {
 
     /**
      * Returns a list of events that are currently happening
-     * @param user the user that this method looks in
+     * @param calendarData Calendar metadata.
      * @return the list of current events
      */
-    public ArrayList<Event> getCurrentEvents(User user, List<Event> events){
-//        ArrayList<Event> currentEvents = new ArrayList<>();
-//        HashMap<Integer,Event> allEvents = (HashMap<Integer, Event>) user.getEvents();
-//        for (Map.Entry<Integer, Event> entry: allEvents.entrySet()){
-//            if (entry.getValue().getStatus() == Status.CURRENT){
-//                currentEvents.add(entry.getValue());
-//            }
-//        }
-//        return currentEvents;
+    public ArrayList<Event> getCurrentEvents(CalendarData calendarData){
         ArrayList<Event> currentEvents = new ArrayList<>();
-        for(Event e: events){
-            if(e.getStatus() == Status.CURRENT)
-                currentEvents.add(e);
+        List<Integer> events = calendarData.getCurrUser().getEvents(calendarData.getCurrCalendar());
+        System.out.println("Event Size:" + events.size());
+        for(Map.Entry<Integer, Event> entry : calendarData.getEvents().entrySet()){
+            System.out.println(entry.getValue().getID());
+            System.out.println(events.contains(entry.getValue().getID()));
+            if(entry.getValue().getStatus() == Status.CURRENT && events.contains(entry.getValue().getID()))
+                currentEvents.add(entry.getValue());
         }
         return currentEvents;
     }

@@ -153,7 +153,7 @@ public class Event implements Serializable, Comparable<Event> {
      * @return startTime of this event
      */
     public String getStartTimeString(){
-        return this.time.getStart().toString();
+        return this.time.getStart().toString().substring(11, 16);
     }
 
     /**
@@ -161,7 +161,21 @@ public class Event implements Serializable, Comparable<Event> {
      * @return endTime of this event
      */
     public String getEndTimeString(){
-        return this.time.getEnd().toString();
+        return this.time.getEnd().toString().substring(11, 16);
+    }
+
+    public String getStartDateString(){
+        String year = this.time.getStart().toString().substring(0, 4);
+        String month = this.time.getStart().toString().substring(5, 7);
+        String day = this.time.getStart().toString().substring(8, 10);
+        return day+"-"+month+"-"+year;
+    }
+
+    public String getEndDateString(){
+        String year = this.time.getEnd().toString().substring(0, 4);
+        String month = this.time.getEnd().toString().substring(5, 7);
+        String day = this.time.getEnd().toString().substring(8, 10);
+        return day+"-"+month+"-"+year;
     }
 
     /**

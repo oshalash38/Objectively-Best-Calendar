@@ -20,6 +20,11 @@ public class ViewModelBuilder {
         temp.put("Username:", "Username:");
         temp.put("Login", "Login");
         temp.put("EventCreated", "Event Created.");
+        temp.put("Start Date: ", "Start Date: ");
+        temp.put("End Date: ", "End Date: ");
+        temp.put("Start Time: ", "Start Time: ");
+        temp.put("End Time: ", "End Time: ");
+        temp.put("Memos:", "Memos:");
 
         temp.put("EnterStartTimeString", "Enter Start Time:");
         temp.put("EnterEndTimeString", "Enter End Time:");

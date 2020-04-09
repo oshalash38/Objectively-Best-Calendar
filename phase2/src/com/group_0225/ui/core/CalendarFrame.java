@@ -37,7 +37,7 @@ public class CalendarFrame extends JFrame implements Observer {
     @Override
     public void update(Observable o, Object arg) {
         PanelInfo info = (PanelInfo) arg;
-        this.displayCalendarPanel(info);
+            this.displayCalendarPanel(info);
     }
 
     private void displayCalendarPanel(PanelInfo info) {

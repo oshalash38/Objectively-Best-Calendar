@@ -65,7 +65,11 @@ public class EventController extends CalendarController {
             case -1:
                 List<Event> pastEvents = eventManager.getPastEvents(data);
                 presenter.displayPanel(new PanelInfo("EventListPanel", getEventsName(pastEvents) , true));
-
+                break;
+            case 0:
+                List<Event> currentEvents = eventManager.getCurrentEvents(data);
+                presenter.displayPanel(new PanelInfo("EventListPanel", getEventsName(currentEvents) , true));
+                break;
         }
 
     }
@@ -127,5 +131,17 @@ public class EventController extends CalendarController {
             result.add(e.getEventName());
         }
         return result;
+    }
+
+
+    public void displayEvent(String name){
+        Event event = eventManager.searchEventByName(data, name);
+        List<String> output = new ArrayList<>();
+        output.add(name);
+        output.add(event.getStartDateString());
+        output.add(event.getEndDateString());
+        output.add(event.getStartTimeString());
+        output.add(event.getEndTimeString());
+        presenter.displayPanel(new PanelInfo("EventPanel", output, true));
     }
 }
