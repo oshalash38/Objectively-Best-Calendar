@@ -120,15 +120,15 @@ public class EventManager {
 
     /**
      * Updates the status of every event stored in the user.
-     * @param user The user.
+     * @param calendarData The calendar metadata.
      */
-    public void updateStatus(User user, List<Event> events){
+    public void updateStatus(CalendarData calendarData){
 //        Map<Integer,Event> events = user.getEvents(currCalendar);
 //        for (Map.Entry<Integer, Event> entry: events.entrySet()){
 //            entry.getValue().updateStatus();
 //        }
-        for(Event e: events){
-            e.updateStatus();
+        for(Map.Entry<Integer, Event> entry : calendarData.getEvents().entrySet()){
+            entry.getValue().updateStatus();
         }
     }
 
@@ -181,22 +181,18 @@ public class EventManager {
 
     /**
      * Returns a list of past events
-     * @param user the user that this method looks in
+     * @param calendarData the calendar metadata.
      * @return the list of past events
      */
-    public ArrayList<Event> getPastEvents(User user, List<Event> events){
-//        ArrayList<Event> pastEvents = new ArrayList<>();
-//        HashMap<Integer,Event> allEvents = (HashMap<Integer, Event>) user.getEvents();
-//        for (Map.Entry<Integer, Event> entry: allEvents.entrySet()){
-//            if (entry.getValue().getStatus() == Status.PAST){
-//                pastEvents.add(entry.getValue());
-//            }
-//        }
-//        return pastEvents;
+    public ArrayList<Event> getPastEvents(CalendarData calendarData){
         ArrayList<Event> pastEvents = new ArrayList<>();
-        for(Event e: events){
-            if(e.getStatus() == Status.PAST)
-                pastEvents.add(e);
+        List<Integer> events = calendarData.getCurrUser().getEvents(calendarData.getCurrCalendar());
+        System.out.println("Event Size:" + events.size());
+        for(Map.Entry<Integer, Event> entry : calendarData.getEvents().entrySet()){
+            System.out.println(entry.getValue().getID());
+            System.out.println(events.contains(entry.getValue().getID()));
+            if(entry.getValue().getStatus() == Status.PAST && events.contains(entry.getValue().getID()))
+                pastEvents.add(entry.getValue());
         }
         return pastEvents;
     }

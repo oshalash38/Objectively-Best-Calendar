@@ -19,9 +19,11 @@ public class ViewModelBuilder {
         temp.put("Password:", "Password:");
         temp.put("Username:", "Username:");
         temp.put("Login", "Login");
+        temp.put("EventCreated", "Event Created.");
 
         temp.put("EnterStartTimeString", "Enter Start Time:");
         temp.put("EnterEndTimeString", "Enter End Time:");
+        temp.put("NoEvents", "There are no events to be displayed.");
 
 
 

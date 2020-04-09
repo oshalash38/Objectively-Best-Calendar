@@ -42,15 +42,16 @@ public class CreateEventPanel extends CalendarLayoutPanel {
         JLabel endTimeFieldLabel = addLabel(c, bottomPane, 8, viewModel.get("EnterEndTimeString"));
         JSpinner endTimeSpinner = addTimeSpinner(c, bottomPane, 9);
         Button create = addButton(c, bottomPane, 10, viewModel.get("CreateString"));
-        Button goBack = addButton(c, bottomPane, 11, viewModel.get("CancelString"));
+//        Button goBack = addButton(c, bottomPane, 11, viewModel.get("CancelString"));
 
 
-        goBack.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-//                controllerFacade.mainMenu();
-            }
-        });
+
+//        goBack.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+////                controllerFacade.mainMenu();
+//            }
+//        });
 
         create.addActionListener(new ActionListener() {
             @Override

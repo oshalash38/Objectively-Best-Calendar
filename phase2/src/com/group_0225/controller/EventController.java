@@ -56,11 +56,16 @@ public class EventController extends CalendarController {
      *                1: future events
      */
     public void viewEventByStatus(int status){
+        eventManager.updateStatus(data);
         switch (status){
             case 1:
-                List<Event> events = eventManager.getUpcomingEvents(data);
-                presenter.displayPanel(new PanelInfo("EventListPanel", getEventsName(events) , true));
+                List<Event> upcomingEvents = eventManager.getUpcomingEvents(data);
+                presenter.displayPanel(new PanelInfo("EventListPanel", getEventsName(upcomingEvents) , true));
                 break;
+            case -1:
+                List<Event> pastEvents = eventManager.getPastEvents(data);
+                presenter.displayPanel(new PanelInfo("EventListPanel", getEventsName(pastEvents) , true));
+
         }
 
     }
@@ -88,9 +93,15 @@ public class EventController extends CalendarController {
      */
     private List<Integer> parseDate(String s) {
         List<Integer> result = new ArrayList<>();
-        result.add(Integer.parseInt(s.substring(0, 2)));
-        result.add(Months.get(s.substring(3, 6)));
-        result.add(Integer.parseInt(s.substring(7, 11)));
+        if (s.length() == 11){
+            result.add(Integer.parseInt(s.substring(0, 2)));
+            result.add(Months.get(s.substring(3, 6)));
+            result.add(Integer.parseInt(s.substring(7, 11)));
+        } else {
+            result.add(Integer.parseInt(s.substring(0, 1)));
+            result.add(Months.get(s.substring(2, 5)));
+            result.add(Integer.parseInt(s.substring(6, 10)));
+        }
         return result;
     }
 
