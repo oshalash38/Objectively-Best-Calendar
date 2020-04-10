@@ -61,6 +61,7 @@ public class ViewModelBuilder {
 
         //TOOLBAR options for User choice
         temp.put("TOOLBARUserChangeCalendarString", "Change Calendar");
+        temp.put("TOOLBARUserAddNewCalendarString", "Add New Calendar");
         temp.put("TOOLBARUserLogoutString", "Logout");
 
         //TOOLBAR options for time machine choice

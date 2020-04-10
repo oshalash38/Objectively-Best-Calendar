@@ -9,4 +9,9 @@ public class LocalTimeController extends CalendarController{
     public LocalTimeController(CalendarData data, UIPresenter presenter) {
         super(data, presenter);
     }
+
+    //3 methods
+    //      back to the present
+    //      pushChangeTime
+    //      Take in input from the dialog, parse it, change Timing inside CalendarData
 }

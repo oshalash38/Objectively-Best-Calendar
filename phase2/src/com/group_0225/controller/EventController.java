@@ -93,6 +93,17 @@ public class EventController extends CalendarController {
         eventManager.createEvent(data, input.get(0), timing);
     }
 
+    public void pushViewEventsByDateThreshold(){
+        //Display a dialog that asks user to type in the date threshold that they want
+    }
+
+    public void viewEventsByDateThreshold(List<String> input){
+        // parse it
+        // get the events you need from the EventManager
+        // parse the events into string format
+        // push a dialog with the corresponding events  presenter.displayPanel( new PanelInfo(PanelKey, List of string representation of the events (probably just their names), true)
+    }
+
     /**
      * Parses an input date from panel
      * @param s

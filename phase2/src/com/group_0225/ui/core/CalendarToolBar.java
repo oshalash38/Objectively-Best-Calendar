@@ -20,6 +20,7 @@ public class CalendarToolBar extends JMenuBar {
     private EventController eventController;
     private MessagingController messagingController;
     private Map<String, String> viewModel;
+    private List<String> calendars;
 
 
     public CalendarToolBar(ControllerContainer controllerContainer) {
@@ -51,6 +52,11 @@ public class CalendarToolBar extends JMenuBar {
 
     }
 
+    public void updateCalendars(List<String> calendars){
+        this.calendars = calendars;
+
+    }
+
     private void buildTimeMachinesMenu(JMenu timeMachine){
         List<JMenuItem> subMenus = buildJMenuItems(timeMachine,
                 Arrays.asList("TOOLBARTimeMachineReturnToPresentString", "TOOLBARTimeMachineTimeTravelString"));
@@ -62,11 +68,22 @@ public class CalendarToolBar extends JMenuBar {
     }
 
     private void buildUserSettingsMenu(JMenu userSettings){
-        List<JMenuItem> subMenus = buildJMenuItems(userSettings,
-                Arrays.asList("TOOLBARUserChangeCalendarString", "TOOLBARUserLogoutString"));
+        JMenu submenu = new JMenu(viewModel.get("TOOLBARUserChangeCalendarString"));
 
-        //Change Calendar
+        List<JMenuItem> subMenus = buildJMenuItems(userSettings,
+                Arrays.asList("TOOLBARUserAddNewCalendarString", "TOOLBARUserLogoutString"));
+
+        //JMenu submenu = subMenus.get(0);
+
+        JMenuItem menuItem = new JMenuItem("An item in the submenu");
+        submenu.add(menuItem);
+
+        userSettings.add(submenu);
+
+
+        //Add new Calendar
         subMenus.get(0).addActionListener(e -> {});
+
         //Logout
         subMenus.get(1).addActionListener(e -> loginController.startUp());
     }
@@ -97,7 +114,7 @@ public class CalendarToolBar extends JMenuBar {
         //Future events
         subMenus.get(2).addActionListener(e -> eventController.viewEventByStatus(1));
         //Date threshold
-        subMenus.get(3).addActionListener(e -> { });
+        subMenus.get(3).addActionListener(e -> {});
         //Memo
         subMenus.get(4).addActionListener(e -> {});
         //Tag
@@ -126,7 +143,7 @@ public class CalendarToolBar extends JMenuBar {
 
     }
 
-    private List<JMenuItem> buildJMenuItems(JMenu menu, List<String> subMenus){
+    private List<JMenuItem> buildJMenuItems(JMenuItem menu, List<String> subMenus){
         List<JMenuItem> temp = new ArrayList<>();
 
         for(String str: subMenus){
@@ -136,4 +153,9 @@ public class CalendarToolBar extends JMenuBar {
         }
         return temp;
     }
+
+
+//    private List<JMenuItem> buildJMenuItems(JMenuItem menu){
+//
+//    }
 }
