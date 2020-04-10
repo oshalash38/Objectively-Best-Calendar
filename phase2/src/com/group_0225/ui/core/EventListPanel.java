@@ -32,7 +32,7 @@ public class EventListPanel extends CalendarLayoutPanel {
         JPanel parent = new JPanel(new GridBagLayout());
         parent.setBackground(Color.darkGray);
 
-        if (inputs.size() == 0){
+        if (inputs == null){
             JLabel label = new JLabel(viewModel.get("NoEvents"));
             parent.add(label);
         }

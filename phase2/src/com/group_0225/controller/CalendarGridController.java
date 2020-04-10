@@ -14,10 +14,10 @@ public class CalendarGridController extends CalendarController{
 
     Timing displayTime;
 
-    public CalendarGridController(CalendarData data, UIPresenter presenter, Timing localTime) {
-        super(data, presenter, localTime);
+    public CalendarGridController(CalendarData data, UIPresenter presenter) {
+        super(data, presenter);
 
-        displayTime = new Timing(localTime.getStart());
+        displayTime = new Timing(data.getLocalTime().getStart());
     }
 
     public void displayGrid() {
@@ -30,13 +30,13 @@ public class CalendarGridController extends CalendarController{
         outputs.add("Display");
         outputs.addAll(displayTime.getInfo());
         outputs.add("Current");
-        outputs.addAll(localTime.getInfo());
+        outputs.addAll(data.getLocalTime().getInfo());
 
         presenter.displayPanel(new PanelInfo("CalendarPanel", outputs));
     }
 
     public void alterMonth(int alter) {
-        System.err.println("NEED MANAGERS : " + displayTime + " : " + localTime);
+        System.err.println("NEED MANAGERS : " + displayTime + " : " + data.getLocalTime());
         displayTime.setStart(displayTime.getStart().plusMonths(alter));
         displayGrid(null);
     }

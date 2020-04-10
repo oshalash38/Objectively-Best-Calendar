@@ -6,7 +6,7 @@ import com.group_0225.ui.common.util.UIPresenter;
 
 public class LocalTimeController extends CalendarController{
 
-    public LocalTimeController(CalendarData data, UIPresenter presenter, Timing localTime) {
-        super(data, presenter, localTime);
+    public LocalTimeController(CalendarData data, UIPresenter presenter) {
+        super(data, presenter);
     }
 }

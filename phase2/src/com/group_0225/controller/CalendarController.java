@@ -9,13 +9,9 @@ public abstract class CalendarController {
     //TODO RENAME THIS CLASS TO CONTROLLER ONCE WE DELETE THE OLD STUFF
     protected CalendarData data;
     protected UIPresenter presenter;
-    protected Timing localTime;
-    protected TimingFactory timingFactory;
 
-    public CalendarController(CalendarData data, UIPresenter presenter, Timing localTime) {
+    public CalendarController(CalendarData data, UIPresenter presenter) {
         this.data = data;
         this.presenter = presenter;
-        this.localTime = localTime;
-        this.timingFactory = new TimingFactory();
     }
 }

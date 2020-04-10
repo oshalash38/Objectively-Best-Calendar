@@ -6,8 +6,8 @@ import com.group_0225.ui.common.util.UIPresenter;
 
 public class MessagingController extends CalendarController{
 
-    public MessagingController(CalendarData data, UIPresenter presenter, Timing localTime) {
-        super(data, presenter, localTime);
+    public MessagingController(CalendarData data, UIPresenter presenter) {
+        super(data, presenter);
     }
 
     public void pushSendNewMessagePanel(){

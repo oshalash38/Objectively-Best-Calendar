@@ -3,6 +3,7 @@ package com.group_0225.controller;
 import com.group_0225.entities.CalendarData;
 import com.group_0225.entities.Event;
 import com.group_0225.entities.Timing;
+import com.group_0225.entities.TimingFactory;
 import com.group_0225.manager.EventManager;
 import com.group_0225.ui.common.util.PanelInfo;
 import com.group_0225.ui.common.util.UIPresenter;
@@ -18,8 +19,8 @@ public class EventController extends CalendarController {
 
 
 
-    public EventController(CalendarData data, UIPresenter presenter, Timing localTime) {
-        super(data, presenter, localTime);
+    public EventController(CalendarData data, UIPresenter presenter) {
+        super(data, presenter);
         Months = new HashMap<>();
         buildMonths();
         eventManager = new EventManager();
@@ -46,7 +47,7 @@ public class EventController extends CalendarController {
         presenter.displayPanel(new PanelInfo("CreateEventPanel", null, true));
     }
     public void viewEvents(){
-        presenter.displayPanel(new PanelInfo("EventListPanel", null, true));
+        presenter.displayPanel(new PanelInfo("EventListPanel", new ArrayList<>(), true));
     }
 
     /**
@@ -80,6 +81,8 @@ public class EventController extends CalendarController {
      *              index 3: Start Time, index 4: End Time
      */
     public void createEvent(List<String> input) {
+        TimingFactory timingFactory = new TimingFactory();
+
         List<Integer> startDateParsed = parseDate(input.get(1));
         List<Integer> endDateParsed = parseDate(input.get(2));
         List<Integer> startTimeParsed = parseTime(input.get(3));

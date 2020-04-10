@@ -18,18 +18,16 @@ public class ControllerContainer {
     private LocalTimeController localTimeController;
 
     private CalendarData calendarData;
-    private Timing localTime;
 
     public ControllerContainer(UIPresenter presenter, CalendarData calendarData) {
         this.presenter = presenter;
         this.calendarData = calendarData;
-        localTime = new Timing();
-        loginController = new LoginController(calendarData, presenter, localTime);
-        seriesController = new SeriesController(calendarData, presenter, localTime);
-        eventsController = new EventController(calendarData, presenter, localTime);
-        calendarGridController = new CalendarGridController(calendarData, presenter, localTime);
-        messagingController = new MessagingController(calendarData,presenter, localTime);
-        localTimeController = new LocalTimeController(calendarData,presenter,localTime);
+        loginController = new LoginController(calendarData, presenter);
+        seriesController = new SeriesController(calendarData, presenter);
+        eventsController = new EventController(calendarData, presenter);
+        calendarGridController = new CalendarGridController(calendarData, presenter);
+        messagingController = new MessagingController(calendarData,presenter);
+        localTimeController = new LocalTimeController(calendarData,presenter);
     }
 
     public MessagingController getMessagingController(){return messagingController; }

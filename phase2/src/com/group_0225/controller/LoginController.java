@@ -15,8 +15,8 @@ import java.util.List;
 public class LoginController extends CalendarController{
     UserManager userManager;
 
-    public LoginController(CalendarData data, UIPresenter presenter, Timing localTime) {
-        super(data, presenter, localTime);
+    public LoginController(CalendarData data, UIPresenter presenter) {
+        super(data, presenter);
         userManager = new UserManager();
     }
 
