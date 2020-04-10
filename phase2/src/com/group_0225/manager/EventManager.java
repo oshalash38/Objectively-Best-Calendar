@@ -3,6 +3,7 @@ package com.group_0225.manager;
 import com.group_0225.Main;
 import com.group_0225.entities.*;
 
+import java.time.LocalDateTime;
 import java.util.*;
 
 public class EventManager {
@@ -13,8 +14,11 @@ public class EventManager {
 
     private static int idGen = 0;
 
+    TimingFactory timingFactory;
+
 
     public EventManager(){
+        timingFactory = new TimingFactory();
     }
 
     /**
@@ -59,7 +63,6 @@ public class EventManager {
 //        userEvents.add(idGen);
         return idGen;
     }
-
 
     /**
      * Changes the name of an event.
@@ -271,12 +274,11 @@ public class EventManager {
 
     /**Return a list of user's events between two dates
      *
-     * @param currUser user passed
-     * @param date1 the first date
-     * @param date2 the second date
+     * @param data the calendar data
+     * @param date the first date
      * @return a list of events between date1 and date2
      */
-    public List<Event> getEventsBetween(User currUser, Timing date1, Timing date2, List<Event> events) {
+    public List<Event> getEventsBetween(CalendarData data, Timing date) {
 //        List<Event> out = new ArrayList<>();
 //        HashMap<Integer,Event> events = (HashMap<Integer, Event>) currUser.getEvents();
 //        for (Map.Entry<Integer, Event> entry: events.entrySet()){
@@ -285,12 +287,38 @@ public class EventManager {
 //            }
 //        }
 //        return out;
+
+        List<Event> events = getUserCalendarEvents(data.getEvents(), data.getCurrUser(), data.getCurrCalendar());
+
         List<Event> out = new ArrayList<>();
         for(Event e: events){
-            if (e.compareTo(date1) == 1 || e.compareTo(date1) == 1)
+            if (e.getTime().intersect(date))
                 out.add(e);
         }
         return out;
+    }
+
+    public List<String> getNumEventsPerDay(CalendarData data, Timing threshold) {
+        List<String> numOfEvents = new ArrayList<>();
+
+        LocalDateTime startingDisplay = threshold.getStart();
+        LocalDateTime currStartTime = LocalDateTime.of(startingDisplay.getYear(), startingDisplay.getMonth(), 1, 0, 0);
+
+        LocalDateTime thresholdEnd = threshold.getEnd() == null ? threshold.getStart() : threshold.getEnd();
+
+        while(currStartTime.compareTo(thresholdEnd) < 0) {
+            LocalDateTime currEndTime = LocalDateTime.of(startingDisplay.getYear(), startingDisplay.getMonth(), currStartTime.getDayOfMonth(), 23, 59);
+
+            Timing timingOfDay = timingFactory.createTiming(currStartTime);
+            timingOfDay.setEnd(currEndTime);
+
+            List<Event> eventsOfDay = getEventsBetween(data, timingOfDay);
+            numOfEvents.add(eventsOfDay.size() + "");
+
+            currStartTime = currStartTime.plusDays(1);
+        }
+
+        return numOfEvents;
     }
 
     /**
@@ -323,5 +351,15 @@ public class EventManager {
         }
         Collections.sort(unsortedEvents);
         return unsortedEvents;
+    }
+
+    public List<Event> getUserCalendarEvents(Map<Integer, Event> eventMap, User user, String calendarName) {
+        List<Event> events = new ArrayList<>();
+
+        for(int id : user.getEvents(calendarName))
+            if(eventMap.containsKey(id))
+                events.add(eventMap.get(id));
+
+        return events;
     }
 }

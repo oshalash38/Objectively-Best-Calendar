@@ -89,6 +89,17 @@ public class Timing implements Serializable{
         return this.start.compareTo(o.start);
     }
 
+    public boolean intersect(Timing o) {
+
+        LocalDateTime thisStart = this.start;
+        LocalDateTime thisEnd = this.end == null ? this.start : this.end;
+
+        LocalDateTime otherStart = o.start;
+        LocalDateTime otherEnd = o.end == null ? o.start : o.end;
+
+        return (thisStart.compareTo(otherEnd) <= 0) && (thisEnd.compareTo(otherStart) >= 0);
+    }
+
     /** Compare events based on their end times
      * @param o the event with which this is being compared
      * @return -1 if this event begins earlier than o, 0 if this event begins at the same time as o, 1 if the event

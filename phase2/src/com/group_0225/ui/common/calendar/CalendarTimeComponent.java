@@ -35,15 +35,14 @@ public class CalendarTimeComponent extends CalendarLayoutPanel {
         Label dayNumber = new Label(inputs.get(0));
         dayHolder.add(dayNumber, c);
 
-        if(inputs.get(1).equals("true")) {
+        if(inputs.get(3).equals("true")) {
             dayHolder.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         }
 
         c.anchor = GridBagConstraints.FIRST_LINE_START;
         this.add(dayHolder, c);
 
-
-        this.addMouseListener(new MouseListener() {
+        MouseListener viewEventListener = new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 eventsController.viewEvents();
@@ -68,7 +67,19 @@ public class CalendarTimeComponent extends CalendarLayoutPanel {
             public void mouseExited(MouseEvent e) {
 
             }
-        });
+        };
+
+        if (!inputs.get(4).equals("0")) {
+            c.anchor = GridBagConstraints.CENTER;
+            Label eventNumber = new Label("Events: " + inputs.get(4));
+            this.add(eventNumber, c);
+            eventNumber.addMouseListener(viewEventListener);
+        }
+
+
+        this.addMouseListener(viewEventListener);
+        dayHolder.addMouseListener(viewEventListener);
+        dayNumber.addMouseListener(viewEventListener);
     }
 
 
