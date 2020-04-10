@@ -76,6 +76,13 @@ public class CalendarTimeComponent extends CalendarLayoutPanel {
             eventNumber.addMouseListener(viewEventListener);
         }
 
+        if (!inputs.get(5).equals("0")) {
+            c.anchor = GridBagConstraints.CENTER;
+            Label eventNumber = new Label("Alerts: " + inputs.get(5));
+            this.add(eventNumber, c);
+            eventNumber.addMouseListener(viewEventListener);
+        }
+
 
         this.addMouseListener(viewEventListener);
         dayHolder.addMouseListener(viewEventListener);

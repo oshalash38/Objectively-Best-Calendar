@@ -298,8 +298,8 @@ public class EventManager {
         return out;
     }
 
-    public List<String> getNumEventsPerDay(CalendarData data, Timing threshold) {
-        List<String> numOfEvents = new ArrayList<>();
+    public List<List<Event>> getEventsPerDay(CalendarData data, Timing threshold) {
+        List<List<Event>> numOfEvents = new ArrayList<>();
 
         LocalDateTime startingDisplay = threshold.getStart();
         LocalDateTime currStartTime = LocalDateTime.of(startingDisplay.getYear(), startingDisplay.getMonth(), 1, 0, 0);
@@ -313,12 +313,40 @@ public class EventManager {
             timingOfDay.setEnd(currEndTime);
 
             List<Event> eventsOfDay = getEventsBetween(data, timingOfDay);
-            numOfEvents.add(eventsOfDay.size() + "");
+            numOfEvents.add(eventsOfDay);
 
             currStartTime = currStartTime.plusDays(1);
         }
 
         return numOfEvents;
+    }
+
+    public List<String> getNumEventsPerDay(CalendarData data, Timing threshold) {
+        List<String> numPerDay = new ArrayList<>();
+
+        for(List<Event> eventsOfDay : getEventsPerDay(data, threshold))
+            numPerDay.add(eventsOfDay.size() + "");
+
+        return numPerDay;
+    }
+
+    public List<String> getNumAlertsPerDay(CalendarData data, Timing threshold) {
+        List<String> numPerDay = new ArrayList<>();
+
+        for(List<Event> eventsOfDay : getEventsPerDay(data, threshold)){
+            int alertsForDay = 0;
+
+            for(Event e : eventsOfDay) {
+                for(Alert alert : e.getAlerts()){
+                    if(alert.getNextTime().intersect(threshold))
+                        alertsForDay++;
+                }
+            }
+
+            numPerDay.add(alertsForDay + "");
+        }
+
+        return numPerDay;
     }
 
     /**

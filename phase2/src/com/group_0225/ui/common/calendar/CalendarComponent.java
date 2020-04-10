@@ -32,6 +32,7 @@ public class CalendarComponent extends CalendarLayoutPanel {
         String currentYear = inputs.get(indexOfCurrent + 3);
 
         int indexOfEvents = inputs.indexOf("Events");
+        int indexOfAlerts = inputs.indexOf("Alerts");
 
         calendarComponent = new ArrayList<>();
 
@@ -73,6 +74,7 @@ public class CalendarComponent extends CalendarLayoutPanel {
                     dayInfo.add(currentYear);
                     dayInfo.add(isCurrentDay + "");
                     dayInfo.add(inputs.get(indexOfEvents + currDay));
+                    dayInfo.add(inputs.get(indexOfAlerts + currDay));
 
 
                     CalendarTimeComponent timeComp = new CalendarTimeComponent(controllerContainer);
