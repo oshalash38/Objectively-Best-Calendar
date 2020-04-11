@@ -1,5 +1,6 @@
 package com.group_0225.ui.core;
 
+import com.group_0225.controller.CalendarGridController;
 import com.group_0225.controller.ControllerContainer;
 import com.group_0225.controller.EventController;
 import com.group_0225.ui.common.calendar.CalendarLayoutPanel;
@@ -23,6 +24,7 @@ public class CreateEventPanel extends CalendarLayoutPanel {
     protected void buildPanel(List<String> inputs) {
 
         EventController eventController = controllerContainer.getEventsController();
+        CalendarGridController gridController = controllerContainer.getCalendarGridController();
 
         GridBagConstraints c = new GridBagConstraints();
         c.fill = GridBagConstraints.BOTH;
@@ -68,6 +70,7 @@ public class CreateEventPanel extends CalendarLayoutPanel {
                     inputs.add(startTimeSpinner.getValue().toString().substring(11,19));
                     inputs.add(endTimeSpinner.getValue().toString().substring(11,19));
                     eventController.createEvent(inputs);
+                    gridController.displayGrid();
                 } catch (StringIndexOutOfBoundsException ex){
                     System.err.println("Invalid Input");
                 }
