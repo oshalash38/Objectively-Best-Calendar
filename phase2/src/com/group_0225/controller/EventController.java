@@ -5,7 +5,7 @@ import com.group_0225.entities.Event;
 import com.group_0225.entities.Timing;
 import com.group_0225.entities.TimingFactory;
 import com.group_0225.manager.EventManager;
-import com.group_0225.ui.common.util.PanelInfo;
+import com.group_0225.ui.common.util.UIUpdateInfo;
 import com.group_0225.ui.common.util.UIPresenter;
 
 import java.util.*;
@@ -44,10 +44,10 @@ public class EventController extends CalendarController {
 
 
     public void pushCreateEvent(){
-        presenter.displayPanel(new PanelInfo("CreateEventPanel", null, true));
+        presenter.updateUI(new UIUpdateInfo("dialog", null, "CreateEventPanel"));
     }
     public void viewEvents(){
-        presenter.displayPanel(new PanelInfo("EventListPanel", new ArrayList<>(), true));
+        presenter.updateUI(new UIUpdateInfo("dialog", new ArrayList<>(), "EventListPanel"));
     }
 
     /**
@@ -58,20 +58,21 @@ public class EventController extends CalendarController {
      */
     public void viewEventByStatus(int status){
         eventManager.updateStatus(data);
+        List<Event> events;
         switch (status){
             case 1:
-                List<Event> upcomingEvents = eventManager.getUpcomingEvents(data);
-                presenter.displayPanel(new PanelInfo("EventListPanel", getEventsName(upcomingEvents) , true));
+                events = eventManager.getUpcomingEvents(data);
                 break;
             case -1:
-                List<Event> pastEvents = eventManager.getPastEvents(data);
-                presenter.displayPanel(new PanelInfo("EventListPanel", getEventsName(pastEvents) , true));
+                events = eventManager.getPastEvents(data);
                 break;
             case 0:
-                List<Event> currentEvents = eventManager.getCurrentEvents(data);
-                presenter.displayPanel(new PanelInfo("EventListPanel", getEventsName(currentEvents) , true));
+                events = eventManager.getCurrentEvents(data);
                 break;
+            default:
+                events = new ArrayList<>();
         }
+        presenter.updateUI(new UIUpdateInfo("dialog", getEventsName(events) , "EventListPanel"));
 
     }
 
@@ -156,6 +157,10 @@ public class EventController extends CalendarController {
         output.add(event.getEndDateString());
         output.add(event.getStartTimeString());
         output.add(event.getEndTimeString());
-        presenter.displayPanel(new PanelInfo("EventPanel", output, true));
+        presenter.updateUI(new UIUpdateInfo("dialog", output, "EventPanel"));
+    }
+
+    public void changeCalendar(String newCalendar){
+        data.setCurrCalendar(newCalendar);
     }
 }

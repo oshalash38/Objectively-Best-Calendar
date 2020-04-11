@@ -1,9 +1,8 @@
 package com.group_0225.controller;
 
-import com.group_0225.Main;
 import com.group_0225.entities.*;
 import com.group_0225.manager.EventManager;
-import com.group_0225.ui.common.util.PanelInfo;
+import com.group_0225.ui.common.util.UIUpdateInfo;
 import com.group_0225.ui.common.util.UIPresenter;
 
 import java.time.LocalDateTime;
@@ -40,7 +39,7 @@ public class CalendarGridController extends CalendarController{
         outputs.add("Alerts");
         outputs.addAll(getNumAlertsPerDayOfMonth());
 
-        presenter.displayPanel(new PanelInfo("CalendarPanel", outputs));
+        presenter.updateUI(new UIUpdateInfo("panel", outputs, "CalendarPanel"));
     }
 
     public void alterMonth(int alter) {

@@ -2,9 +2,7 @@ package com.group_0225.ui.core;
 
 import com.group_0225.controller.ControllerContainer;
 import com.group_0225.controller.EventController;
-import com.group_0225.entities.Event;
 import com.group_0225.ui.common.calendar.CalendarLayoutPanel;
-import com.group_0225.ui.common.util.PanelInfo;
 
 import javax.swing.*;
 import java.awt.*;

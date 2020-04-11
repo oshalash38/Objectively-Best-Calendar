@@ -5,6 +5,7 @@ import com.group_0225.controller.ControllerContainer;
 import com.group_0225.entities.*;
 import com.group_0225.ui.common.util.UIPresenter;
 import com.group_0225.ui.core.CalendarFrame;
+import com.group_0225.ui.core.CalendarToolBar;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -34,7 +35,9 @@ public class Init {
 
         UIPresenter presenter = new UIPresenter();
         ControllerContainer controllerContainer = new ControllerContainer(presenter, calendarData);
-        CalendarFrame frame = new CalendarFrame(presenter, calendarData, controllerContainer);
+        CalendarToolBar calendarToolBar = new CalendarToolBar(controllerContainer);
+        CalendarFrame frame = new CalendarFrame(presenter, calendarData, controllerContainer, calendarToolBar);
+        presenter.addObserver(calendarToolBar);
         presenter.addObserver(frame);
         controllerContainer.getLoginController().startUp();
 

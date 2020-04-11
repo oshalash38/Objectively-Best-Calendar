@@ -32,6 +32,8 @@ public class User implements Serializable {
         this.username = username;
         this.password = password;
         requests = new ArrayList<EventMessage>();
+        calendars.put("default", new ArrayList<>());
+        calendars.put("test", new ArrayList<>());
     }
 
     /**

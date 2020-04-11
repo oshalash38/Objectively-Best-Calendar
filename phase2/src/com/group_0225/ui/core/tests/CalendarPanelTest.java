@@ -1,6 +1,6 @@
 package com.group_0225.ui.core.tests;
 
-import com.group_0225.ui.common.util.PanelInfo;
+import com.group_0225.ui.common.util.UIUpdateInfo;
 import com.group_0225.manager.Init;
 
 import java.io.IOException;
@@ -16,6 +16,6 @@ public class CalendarPanelTest {
         inputs.add("Poggers");
         inputs.add("4");
         inputs.add("2020");
-        Init.p.displayPanel(new PanelInfo("CalendarPanel", inputs));
+        Init.p.updateUI(new UIUpdateInfo("CalendarPanel", inputs));
     }
 }

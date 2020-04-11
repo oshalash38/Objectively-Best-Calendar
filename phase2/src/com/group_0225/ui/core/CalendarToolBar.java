@@ -2,23 +2,27 @@ package com.group_0225.ui.core;
 
 import com.group_0225.controller.*;
 import com.group_0225.ui.common.calendar.ViewModelBuilder;
+import com.group_0225.ui.common.util.UIUpdateInfo;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
-public class CalendarToolBar extends JMenuBar {
+public class CalendarToolBar extends JMenuBar implements Observer{
 
     private LoginController loginController;
     private EventController eventController;
     private MessagingController messagingController;
     private SeriesController seriesController;
     private Map<String, String> viewModel;
-    private List<String> calendars;
+
+    private JMenu createMenu;
+    private JMenu viewMenu;
+    private JMenu messagingMenu;
+    private JMenu userSettings;
+    private JMenu timeMachine;
+
 
 
     public CalendarToolBar(ControllerContainer controllerContainer) {
@@ -31,33 +35,42 @@ public class CalendarToolBar extends JMenuBar {
         this.loginController = controllerContainer.getLoginController();
         this.seriesController = controllerContainer.getSeriesController();
 
-        JMenu createMenu = new JMenu(viewModel.get("TOOLBARCreateMenuString"));
-        JMenu viewMenu = new JMenu(viewModel.get("TOOLBARViewMenuString"));
-        JMenu messagingMenu = new JMenu(viewModel.get("TOOLBARMessagingFunctionsString"));
-        JMenu userSettings = new JMenu(viewModel.get("TOOLBARUserString"));
-        JMenu timeMachine = new JMenu(viewModel.get("TOOLBARTimeMachineString"));
+        toolBarBuilder();
+    }
 
-        buildCreateMenu(createMenu);
-        buildViewMenu(viewMenu);
-        buildMessagingMenu(messagingMenu);
-        buildUserSettingsMenu(userSettings);
-        buildTimeMachinesMenu(timeMachine);
+
+    private void loadCalendars(List<String> calendars){
+        JMenu submenu = new JMenu(viewModel.get("TOOLBARUserChangeCalendarString"));
+        List<JMenuItem> calendarItems = buildJMenuItems(submenu, false, calendars);
+        userSettings.insert(submenu, 0);
+
+        for(JMenuItem menu: calendarItems){
+            menu.addActionListener(e -> eventController.changeCalendar(menu.getText()));
+        }
+    }
+
+    private void toolBarBuilder(){
+        this.createMenu = new JMenu(viewModel.get("TOOLBARCreateMenuString"));
+        this.viewMenu = new JMenu(viewModel.get("TOOLBARViewMenuString"));
+        this.messagingMenu = new JMenu(viewModel.get("TOOLBARMessagingFunctionsString"));
+        this.userSettings = new JMenu(viewModel.get("TOOLBARUserString"));
+        this.timeMachine = new JMenu(viewModel.get("TOOLBARTimeMachineString"));
+
+        buildCreateMenu();
+        buildViewMenu();
+        buildMessagingMenu();
+        buildUserSettingsMenu();
+        buildTimeMachinesMenu();
 
         this.add(userSettings);
         this.add(createMenu);
         this.add(viewMenu);
         this.add(messagingMenu);
         this.add(timeMachine);
-
     }
 
-    public void updateCalendars(List<String> calendars){
-        this.calendars = calendars;
-
-    }
-
-    private void buildTimeMachinesMenu(JMenu timeMachine){
-        List<JMenuItem> subMenus = buildJMenuItems(timeMachine,
+    private void buildTimeMachinesMenu(){
+        List<JMenuItem> subMenus = buildJMenuItems(timeMachine, true,
                 Arrays.asList("TOOLBARTimeMachineReturnToPresentString", "TOOLBARTimeMachineTimeTravelString"));
 
         //Back to the present
@@ -66,18 +79,10 @@ public class CalendarToolBar extends JMenuBar {
         subMenus.get(1).addActionListener(e -> messagingController.pushInboxPanel());
     }
 
-    private void buildUserSettingsMenu(JMenu userSettings){
-        JMenu submenu = new JMenu(viewModel.get("TOOLBARUserChangeCalendarString"));
+    private void buildUserSettingsMenu(){
 
-        List<JMenuItem> subMenus = buildJMenuItems(userSettings,
+        List<JMenuItem> subMenus = buildJMenuItems(userSettings, true,
                 Arrays.asList("TOOLBARUserAddNewCalendarString", "TOOLBARUserLogoutString"));
-
-        //JMenu submenu = subMenus.get(0);
-
-        JMenuItem menuItem = new JMenuItem("An item in the submenu");
-        submenu.add(menuItem);
-
-        userSettings.add(submenu);
 
 
         //Add new Calendar
@@ -87,8 +92,8 @@ public class CalendarToolBar extends JMenuBar {
         subMenus.get(1).addActionListener(e -> loginController.startUp());
     }
 
-    private void buildMessagingMenu(JMenu messagingMenu) {
-        List<JMenuItem> subMenus = buildJMenuItems(messagingMenu,
+    private void buildMessagingMenu() {
+        List<JMenuItem> subMenus = buildJMenuItems(messagingMenu, true,
                 Arrays.asList("TOOLBARMessagingFunctionsSendMessageString", "TOOLBARMessagingFunctionsInboxString"));
 
         //Send Message
@@ -98,9 +103,9 @@ public class CalendarToolBar extends JMenuBar {
 
     }
 
-    private void buildViewMenu(JMenu viewMenu){
+    private void buildViewMenu(){
 
-        List<JMenuItem> subMenus = buildJMenuItems(viewMenu,
+        List<JMenuItem> subMenus = buildJMenuItems(viewMenu, true,
                 Arrays.asList("TOOLBARViewMenuCurrentEventsString", "TOOLBARViewMenuPastEventsString",
                         "TOOLBARViewMenuFutureEventsString", "TOOLBARViewMenuDateThresholdString",
                         "TOOLBARViewMenuMemoString","TOOLBARViewMenuTagString","TOOLBARViewMenuNameString",
@@ -126,8 +131,8 @@ public class CalendarToolBar extends JMenuBar {
 
     }
 
-    private void buildCreateMenu(JMenu createMenu) {
-        List<JMenuItem> subMenus = buildJMenuItems(createMenu,
+    private void buildCreateMenu() {
+        List<JMenuItem> subMenus = buildJMenuItems(createMenu, true,
                 Arrays.asList("TOOLBARCreateMenuEventString", "TOOLBARCreateMenuAlertString",
                         "TOOLBARCreateMenuMemoString", "TOOLBARCreateMenuSeriesString"));
 
@@ -142,11 +147,17 @@ public class CalendarToolBar extends JMenuBar {
 
     }
 
-    private List<JMenuItem> buildJMenuItems(JMenuItem menu, List<String> subMenus){
+    private List<JMenuItem> buildJMenuItems(JMenuItem menu,  boolean fromViewModel, List<String> subMenus){
         List<JMenuItem> temp = new ArrayList<>();
 
         for(String str: subMenus){
-            JMenuItem tempMenuItem = new JMenuItem(viewModel.get(str));
+            JMenuItem tempMenuItem;
+            if(fromViewModel) {
+                tempMenuItem = new JMenuItem(viewModel.get(str));
+            }
+            else{
+                 tempMenuItem = new JMenuItem(str);
+            }
             menu.add(tempMenuItem);
             temp.add(tempMenuItem);
         }
@@ -154,7 +165,20 @@ public class CalendarToolBar extends JMenuBar {
     }
 
 
-//    private List<JMenuItem> buildJMenuItems(JMenuItem menu){
-//
-//    }
+    /**
+     * This method is called whenever the observed object is changed. An
+     * application calls an <tt>Observable</tt> object's
+     * <code>notifyObservers</code> method to have all the object's
+     * observers notified of the change.
+     *
+     * @param o   the observable object.
+     * @param arg an argument passed to the <code>notifyObservers</code>
+     */
+    @Override
+    public void update(Observable o, Object arg) {
+        UIUpdateInfo info = (UIUpdateInfo)arg;
+        if(info.getRecipient().equals("toolbar")){
+            loadCalendars(info.getData());
+        }
+    }
 }

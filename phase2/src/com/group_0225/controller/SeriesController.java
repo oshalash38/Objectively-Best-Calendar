@@ -2,7 +2,7 @@ package com.group_0225.controller;
 
 import com.group_0225.manager.SeriesManager;
 import com.group_0225.entities.Timing;
-import com.group_0225.ui.common.util.PanelInfo;
+import com.group_0225.ui.common.util.UIUpdateInfo;
 import com.group_0225.ui.common.util.UIPresenter;
 import com.group_0225.entities.CalendarData;
 
@@ -12,7 +12,7 @@ import java.util.List;
 public class SeriesController extends CalendarController{
     /**
      * Constructor that sets up references to required info and presenter rules
-     * @param data a CalendarData instance
+   Yea  * @param data a CalendarData instance
      * @param p a UIPresenter instance
      */
     private SeriesManager sm;
@@ -31,7 +31,7 @@ public class SeriesController extends CalendarController{
         //call sm method
     }
     private void pushCreateSeriesFromScratchScreen(List<String> args){
-        presenter.displayPanel(new PanelInfo("CreateSeriesFromScratchPanel",args, true));
+        presenter.updateUI(new UIUpdateInfo("dialog",args, "CreateSeriesFromScratchPanel"));
     }
     public void createSeriesFromScratchScreen(){
         pushCreateSeriesFromScratchScreen(Arrays.asList(""));

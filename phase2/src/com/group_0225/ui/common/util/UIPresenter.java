@@ -4,12 +4,12 @@ import java.util.Observable;
 
 public class UIPresenter extends Observable {
 
-    public void displayPanel(PanelInfo info) {
+    public void updateUI(UIUpdateInfo info) {
         setChanged();
         notifyObservers(info);
     }
     public void startUp(){
         setChanged();
-        notifyObservers(new PanelInfo("StartupPanel", null));
+        notifyObservers(new UIUpdateInfo("StartupPanel", null));
     }
 }

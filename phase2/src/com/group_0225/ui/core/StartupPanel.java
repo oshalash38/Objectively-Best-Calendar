@@ -3,6 +3,7 @@ package com.group_0225.ui.core;
 import com.group_0225.controller.CalendarGridController;
 import com.group_0225.controller.ControllerContainer;
 import com.group_0225.controller.LoginController;
+import com.group_0225.controller.UsersCalendarController;
 import com.group_0225.ui.common.calendar.CalendarLayoutPanel;
 
 import javax.swing.*;
@@ -22,6 +23,7 @@ public class StartupPanel extends CalendarLayoutPanel {// implements KeyListener
 
         LoginController loginController = controllerContainer.getLoginController();
         CalendarGridController gridController = controllerContainer.getCalendarGridController();
+        UsersCalendarController usersCalendarController = controllerContainer.getUsersCalendarController();
 
         GridBagConstraints c = new GridBagConstraints();
         c.fill = GridBagConstraints.BOTH;
@@ -40,7 +42,8 @@ public class StartupPanel extends CalendarLayoutPanel {// implements KeyListener
         Button loginButton = addButton(c, bottomPane, 3, viewModel.get("Login"));
         Button createNewUserButton = addButton(c, bottomPane, 4, viewModel.get("Create New User"));
 
-        loginButton.addActionListener(e -> loginController.login(usernameField.getText(), passwordField.getText(), gridController));
+        loginButton.addActionListener(e -> loginController.login(usernameField.getText(),
+                passwordField.getText(), gridController, usersCalendarController));
 
         createNewUserButton.addActionListener(e -> loginController.createNewUserScreen());
 
