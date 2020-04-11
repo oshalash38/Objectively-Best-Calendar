@@ -27,6 +27,7 @@ public class CalendarFrame extends JFrame implements Observer {
 
         guiBuilder = new GUIBuilder();
 
+        //Logo from https://freeiconshop.com/icon/calendar-icon-glyph/
         File image = new File("phase2/src/com/group_0225/ui/core/Model/logo.png");
         System.out.println(image.getAbsolutePath());
         ImageIcon imageIcon = new ImageIcon(image.getAbsolutePath());
