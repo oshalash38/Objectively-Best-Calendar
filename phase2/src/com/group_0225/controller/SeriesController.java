@@ -44,6 +44,7 @@ public class SeriesController extends CalendarController{
         else{
             String[] split = input.get(2).split("-");
             sm.createSeries(data,input.get(0),input.get(1),input.get(2),Months.get(split[1]),input.get(3),input.get(4),input.get(5), input.get(6),em);
+            pushCreateSeriesFromScratchScreen(Collections.singletonList("Series created!"));
         }
 
     }

@@ -39,7 +39,11 @@ public class ViewModelBuilder {
         temp.put("HMS:", "Hours/Minutes/Seconds:");
         temp.put("NE:", "Number of Events (min. 2):");
         temp.put("CREATESERIES", "CREATE SERIES");
-
+        temp.put("Create series exclamation", "Create a series!");
+        temp.put("SeriesDescription","A series is a group of events sharing a theme (ex. birthdays).");
+        temp.put("SeriesHow:", "How would you like to create your series?");
+        temp.put("From scratch:","From scratch");
+        temp.put("From events:", "From events in this calendar");
 
 
         //TOOLBAR HEADERS

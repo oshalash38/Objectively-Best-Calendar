@@ -43,7 +43,8 @@ public class SeriesManager {
 
         int ne = Integer.parseInt(numEvents);
         for (int i = 0; i< ne - 1; i++){
-            em.createEvent(calendarData,"",first.addToThis(frequency),seriesName);
+            first = first.addToThis(frequency);
+            em.createEvent(calendarData,"",first,seriesName);
         }
 
     }
