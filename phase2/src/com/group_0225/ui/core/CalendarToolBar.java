@@ -143,7 +143,7 @@ public class CalendarToolBar extends JMenuBar implements Observer{
         //Create Memo
         subMenus.get(2).addActionListener(e -> {});
         //Create Series
-        subMenus.get(3).addActionListener(e -> seriesController.createSeriesFromScratchScreen());
+        subMenus.get(3).addActionListener(e -> seriesController.createSeriesChoiceScreen());
 
     }
 

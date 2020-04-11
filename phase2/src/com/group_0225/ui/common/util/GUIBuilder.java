@@ -25,6 +25,7 @@ public class GUIBuilder {
         panels.put("CreateEventPanel", new CreateEventPanel(controllerContainer));
         panels.put("EventListPanel", new EventListPanel(controllerContainer));
         panels.put("EventPanel", new EventPanel(controllerContainer));
+        panels.put("SeriesChoicePanel", new SeriesChoicePanel(controllerContainer));
         return panels;
     }
 }

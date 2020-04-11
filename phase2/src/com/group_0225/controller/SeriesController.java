@@ -7,6 +7,7 @@ import com.group_0225.ui.common.util.UIUpdateInfo;
 import com.group_0225.ui.common.util.UIPresenter;
 import com.group_0225.entities.CalendarData;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -57,7 +58,7 @@ public class SeriesController extends CalendarController{
     public void createSeriesFromScratchScreen(){
         pushCreateSeriesFromScratchScreen(Collections.singletonList(""));
     }
-
+    public void createSeriesChoiceScreen(){presenter.updateUI(new UIUpdateInfo("dialog",new ArrayList<>(),"SeriesChoicePanel"));}
 
     private boolean verifyDurationLTFreq(String durationDays, String durationHMS, String freq) {
         int days = Integer.parseInt(durationDays);

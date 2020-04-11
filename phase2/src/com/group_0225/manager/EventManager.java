@@ -30,7 +30,7 @@ public class EventManager {
     public Event createEvent(CalendarData calendarData, String name, Timing timing){
         Event event = new Event(name, timing);
         int id = sortEvents(calendarData);
-        System.out.println(id);
+        //System.out.println(id);
         event.setID(id);
         calendarData.addEvent(id, event);
         //TODO:testing only
@@ -47,7 +47,11 @@ public class EventManager {
      */
     public Event createEvent(CalendarData calendarData, String name, Timing timing, String series){
         Event event = new Event(name, timing, series);
-        sortEvents(calendarData);
+        int id = sortEvents(calendarData);
+        event.setID(id);
+        calendarData.addEvent(id, event);
+        //TODO:testing only
+        System.out.println(id + "\nStart:" + timing.getStart() + "\nEnd:" + timing.getEnd());
         return event;
     }
 

@@ -98,7 +98,7 @@ public class CreateSeriesScratchPanel extends CalendarLayoutPanel {
         JSpinner durationField = addTimeSpinner(constraints,bottomPane, 14);
 
 
-        Button create = addButton(constraints,bottomPane, 15, viewModel.get("CREATESERIES"));
+        Button create = addButton(constraints,bottomPane, 20, viewModel.get("CREATESERIES"));
         create.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
