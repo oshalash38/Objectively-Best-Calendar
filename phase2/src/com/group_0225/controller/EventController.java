@@ -23,7 +23,6 @@ public class EventController extends CalendarController {
 
     public EventController(CalendarData data, UIPresenter presenter) {
         super(data, presenter);
-        Months = new HashMap<>();
         eventManager = new EventManager();
     }
 
