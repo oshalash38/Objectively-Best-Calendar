@@ -1,6 +1,7 @@
 package com.group_0225.ui.common.calendar;
 
 import com.group_0225.controller.ControllerContainer;
+import com.group_0225.manager.EventManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -29,6 +30,9 @@ public class CalendarComponent extends CalendarLayoutPanel {
         int indexOfCurrent = inputs.indexOf("Current");
         String currentMonth = inputs.get(indexOfCurrent + 2);
         String currentYear = inputs.get(indexOfCurrent + 3);
+
+        int indexOfEvents = inputs.indexOf("Events");
+        int indexOfAlerts = inputs.indexOf("Alerts");
 
         calendarComponent = new ArrayList<>();
 
@@ -66,7 +70,12 @@ public class CalendarComponent extends CalendarLayoutPanel {
 
                     List<String> dayInfo = new ArrayList<>();
                     dayInfo.add(currDay + "");
+                    dayInfo.add(currentMonth);
+                    dayInfo.add(currentYear);
                     dayInfo.add(isCurrentDay + "");
+                    dayInfo.add(inputs.get(indexOfEvents + currDay));
+                    dayInfo.add(inputs.get(indexOfAlerts + currDay));
+
 
                     CalendarTimeComponent timeComp = new CalendarTimeComponent(controllerContainer);
                     timeComp.updatePanel(dayInfo);
