@@ -351,6 +351,20 @@ public class EventManager {
         return numPerDay;
     }
 
+    public List<String> getEventNames(List<Event> events) {
+        List<String> names = new ArrayList<>();
+
+        for(Event e : events)
+            names.add(e.getEventName());
+
+        return names;
+    }
+
+    public List<String> getEventNamesOfThreshold(CalendarData data, Timing threshold) {
+        List<Event> events = getEventsBetween(data, threshold);
+        return getEventNames(events);
+    }
+
     /**
      *
      * @param e the event to add the tag to

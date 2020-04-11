@@ -45,7 +45,7 @@ public class CalendarTimeComponent extends CalendarLayoutPanel {
         MouseListener viewEventListener = new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                eventsController.viewEvents();
+                eventsController.viewEvents(inputs.get(0), inputs.get(1), inputs.get(2));
             }
 
             @Override

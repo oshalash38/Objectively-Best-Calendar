@@ -8,6 +8,7 @@ import com.group_0225.manager.EventManager;
 import com.group_0225.ui.common.util.UIUpdateInfo;
 import com.group_0225.ui.common.util.UIPresenter;
 
+import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.*;
 
@@ -32,8 +33,17 @@ public class EventController extends CalendarController {
     public void pushCreateEvent(){
         presenter.updateUI(new UIUpdateInfo("dialog", null, "CreateEventPanel"));
     }
-    public void viewEvents(){
-        presenter.updateUI(new UIUpdateInfo("dialog", new ArrayList<>(), "EventListPanel"));
+    public void viewEvents(String rawDay, String rawMonth, String rawYear){
+        int day = Integer.parseInt(rawDay);
+        int month = Integer.parseInt(rawMonth);
+        int year = Integer.parseInt(rawYear);
+
+        LocalDateTime start = LocalDateTime.of(year, month, day, 0, 0);
+        LocalDateTime end = LocalDateTime.of(year, month, day, 23, 59);
+
+        Timing threshold = new Timing(start, end);
+
+        presenter.updateUI(new UIUpdateInfo("dialog", eventManager.getEventNamesOfThreshold(data, threshold), "EventListPanel"));
     }
 
     /**
