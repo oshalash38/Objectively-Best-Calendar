@@ -8,6 +8,7 @@ import com.group_0225.manager.EventManager;
 import com.group_0225.ui.common.util.UIUpdateInfo;
 import com.group_0225.ui.common.util.UIPresenter;
 
+import java.time.Month;
 import java.util.*;
 
 public class EventController extends CalendarController {
@@ -15,32 +16,17 @@ public class EventController extends CalendarController {
     private EventManager eventManager;
 
     // TODO: Not sure if other classes will need this or not as well to avoid duplicate code.
-    private Map<String, Integer> Months;
+
 
 
 
     public EventController(CalendarData data, UIPresenter presenter) {
         super(data, presenter);
         Months = new HashMap<>();
-        buildMonths();
         eventManager = new EventManager();
     }
 
-    private void buildMonths() {
-        Months.put("Jan", 1);
-        Months.put("Feb", 2);
-        Months.put("Mar", 3);
-        Months.put("Apr", 4);
-        Months.put("May", 5);
-        Months.put("Jun", 6);
-        Months.put("Jul", 7);
-        Months.put("Aug", 8);
-        Months.put("Sep", 9);
-        Months.put("Oct", 10);
-        Months.put("Nov", 11);
-        Months.put("Dec", 12);
 
-    }
 
 
     public void pushCreateEvent(){
@@ -157,6 +143,7 @@ public class EventController extends CalendarController {
         output.add(event.getEndDateString());
         output.add(event.getStartTimeString());
         output.add(event.getEndTimeString());
+        output.add(event.getSeriesName());
         presenter.updateUI(new UIUpdateInfo("dialog", output, "EventPanel"));
     }
 

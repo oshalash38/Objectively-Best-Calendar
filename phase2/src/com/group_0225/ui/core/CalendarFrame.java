@@ -19,6 +19,7 @@ public class CalendarFrame extends JFrame implements Observer {
     private GUIBuilder guiBuilder;
     private Map<String,CalendarLayoutPanel> panels;
     private CalendarData calendarData;
+    JDialog openDialog;
     JPanel currPanel;
 
     public CalendarFrame(UIPresenter presenter, CalendarData calendarData,
@@ -63,9 +64,13 @@ public class CalendarFrame extends JFrame implements Observer {
         currP.updatePanel(info.getData());
 
         JDialog dialog = new JDialog();
-        dialog.setSize(500,400);
+        dialog.setSize(500,500);
         dialog.add(currP);
         dialog.setVisible(true);
+        if (openDialog != null){
+            openDialog.dispose();
+        }
+        openDialog = dialog;
     }
 
 

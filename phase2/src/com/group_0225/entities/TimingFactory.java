@@ -42,6 +42,16 @@ public class TimingFactory {
     }
 
     /**
+     * Creates a new Timing with a defined start and end from a LocalDateTime and Duration instance
+     * @param start LocalDateTime instance
+     * @param elapse how long the event lasts
+     * @return
+     */
+    public Timing createTiming(LocalDateTime start, Duration elapse){
+        LocalDateTime end = start.plus(elapse);
+        return new Timing(start, end);
+    }
+    /**
      * returns an instance of Timing with a start time and an end time. The first set of parameters is for start time
      * and the second set of parameters is for end time.
      *
@@ -57,8 +67,8 @@ public class TimingFactory {
      * @param minute2 the minute of the end of this timing
      * @return
      */
-    public Timing createTiming(int year1, int month1, int dayOfMonth1, int hour1, int minute1, int year2,
-                               int month2, int dayOfMonth2, int hour2, int minute2){
+    public Timing createTiming(int year1, int month1, int dayOfMonth1, int hour1, int minute1,
+                               int year2, int month2, int dayOfMonth2, int hour2, int minute2){
         YearMonth monthOfYear1 = YearMonth.of(year1, month1);
         YearMonth monthOfYear2 = YearMonth.of(year2, month2);
 
@@ -70,4 +80,5 @@ public class TimingFactory {
         return new Timing(LocalDateTime.of(year1, Month.of(month1), dayOfMonth1, hour1, minute1),
                 LocalDateTime.of(year2, Month.of(month2), dayOfMonth2, hour2, minute2));
     }
+    
 }

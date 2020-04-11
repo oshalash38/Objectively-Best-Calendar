@@ -97,7 +97,9 @@ public abstract class CalendarLayoutPanel extends JPanel {
 //        return bg;
 //    }
     protected JComboBox<String> addDropDown(List<String> args, JPanel bottomPane, int y, GridBagConstraints constraints){
-        JComboBox<String> comboBox = new JComboBox<>((String[])args.toArray());
+        Object[] s =  args.toArray();
+        String[] sArray = Arrays.copyOf(s,s.length,String[].class);
+        JComboBox<String> comboBox = new JComboBox<>(sArray);
         constraints.gridy = y;
         bottomPane.add(comboBox, constraints);
         return comboBox;

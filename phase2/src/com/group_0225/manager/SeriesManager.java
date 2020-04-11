@@ -3,6 +3,7 @@ package com.group_0225.manager;
 import com.group_0225.entities.*;
 
 import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,20 +17,38 @@ public class SeriesManager {
     private DurationFactory df = new DurationFactory();
 
     /**
-     * Creates a list of new Events that form a series
-     *
-     * @param seriesName the name of the new series
-     * @param dur        the duration of each event in the series
-     * @param start      the beginning of the series
-     * @return the list of events forming this series
+     * create a series from scratch
+     * @param calendarData a CalendarData instance, passed to the EventManager
+     * @param seriesName the name of the series
+     * @param fSelection the frequency of the events
+     * @param startDate the start date in Day-Month-Year form
+     * @param month the month of the startDate as an integer
+     * @param startTime the startTime in HH:MM:SS
+     * @param durationDays the number of days that each event lasts
+     * @param durationHMS the duration in HH:MM:SS form
+     * @param numEvents the number of events in the series
+     * @param em an EventManager instance
      */
-    public void createSeries(CalendarData calendarData, String seriesName, List<Integer> dur, List<Integer> start, int fSelection, int neSelection, EventManager eventManager) {
+    public void createSeries(CalendarData calendarData, String seriesName, String fSelection, String startDate, Integer month, String startTime, String durationDays, String durationHMS,String numEvents, EventManager em) {
         ArrayList<Event> lst = new ArrayList<>();
-        Timing temp = tf.createTiming(start.get(0), start.get(1), start.get(2), start.get(3), start.get(4),
-                start.get(0), start.get(1), dur.get(0) + start.get(2), dur.get(1) + start.get(3), dur.get(2) + start.get(4));
-        eventManager.createEvent(calendarData, seriesName, temp, seriesName);
-        Duration length;
-        switch (fSelection) {
+
+        //initialize frequency
+        Duration frequency = parseFrequency(fSelection);
+        //initialize startDate
+        LocalDateTime startLDT = parseStartLDT(startDate, month, startTime);
+        //initialize duration
+        Duration elapsed = parseDuration(durationDays,durationHMS);
+        Timing first = tf.createTiming(startLDT,elapsed);
+        em.createEvent(calendarData,"",first,seriesName);
+
+        int ne = Integer.parseInt(numEvents);
+        for (int i = 0; i< ne - 1; i++){
+            em.createEvent(calendarData,"",first.addToThis(frequency),seriesName);
+        }
+
+    }
+    private Duration parseFrequency(String fSelection){Duration length;
+        switch (Integer.parseInt(fSelection)) {
             case 1:
                 length = Duration.ofHours(1);
                 break;
@@ -46,13 +65,29 @@ public class SeriesManager {
                 length = Duration.ofDays(365);
                 break;
         }
-        for (int i = 0; i < neSelection; i++) {
-            temp = temp.addToThis(length);
-            eventManager.createEvent(calendarData, seriesName + i, temp, seriesName);
-        }
-
+        return length;
     }
-
+    private LocalDateTime parseStartLDT(String startDate, Integer month, String startTime){
+        String[] hms = startDate.split("-");
+        int day = Integer.parseInt(hms[0]);
+        int year = Integer.parseInt(hms[2]);
+        int hour = Integer.parseInt(startTime.substring(0,2));
+        int minute = Integer.parseInt(startTime.substring(3,5));
+        int second = Integer.parseInt(startTime.substring(6,8));
+        return LocalDateTime.of(year,month,day,hour,minute,second);
+    }
+    private Duration parseDuration(String durationDays, String durationHMS){
+        int days = Integer.parseInt(durationDays);
+        int hours = Integer.parseInt(durationHMS.substring(0,2));
+        int minutes = Integer.parseInt(durationHMS.substring(3,5));
+        int seconds = Integer.parseInt(durationHMS.substring(6,8));
+        Duration ret = Duration.ZERO;
+        ret = ret.plusDays(days);
+        ret = ret.plusHours(hours);
+        ret = ret.plusMinutes(minutes);
+        ret = ret.plusSeconds(seconds);
+        return ret;
+    }
     /**
      * Changes the seriesName of a bunch of events to link them together as a series
      *

@@ -11,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @author Peter
@@ -68,17 +69,21 @@ public class CreateSeriesScratchPanel extends CalendarLayoutPanel {
         fSelections.add("5: Yearly");
         JComboBox<String> frequency = addDropDown(fSelections,bottomPane,3,constraints);
 
+        //numEvents
+        addLabel(constraints, bottomPane, 4, viewModel.get("NE:"));
+        JSpinner numEventsField = addNumEventsSpinner(constraints,bottomPane, 5);
+
         //start date
-        addLabel(constraints,bottomPane, 4, viewModel.get("EnterStartDateString"));
-        JDatePickerImpl startDateField = addCalendarPicker(constraints,bottomPane, 5);
+        addLabel(constraints,bottomPane, 6, viewModel.get("EnterStartDateString"));
+        JDatePickerImpl startDateField = addCalendarPicker(constraints,bottomPane, 7);
 
         //start time
-        addLabel(constraints, bottomPane, 6, viewModel.get("EnterStartTimeString"));
-        JSpinner startTimeField = addTimeSpinner(constraints,bottomPane,7);
+        addLabel(constraints, bottomPane, 8, viewModel.get("EnterStartTimeString"));
+        JSpinner startTimeField = addTimeSpinner(constraints,bottomPane,9);
 
         //duration
-        addLabel(constraints, bottomPane, 8, viewModel.get("EnterDurationSeriesString"));
-        addLabel(constraints, bottomPane, 9, viewModel.get("Days:"));
+        addLabel(constraints, bottomPane, 10, viewModel.get("EnterDurationSeriesString"));
+        addLabel(constraints, bottomPane, 11, viewModel.get("Days:"));
         List<String> dSelections = new ArrayList<>();
         dSelections.add("0");
         dSelections.add("1");
@@ -87,38 +92,43 @@ public class CreateSeriesScratchPanel extends CalendarLayoutPanel {
         dSelections.add("4");
         dSelections.add("5");
         dSelections.add("6");
-        JComboBox<String> dayField = addDropDown(dSelections,bottomPane, 10,constraints);
+        JComboBox<String> dayField = addDropDown(dSelections,bottomPane, 12,constraints);
 
-        addLabel(constraints,bottomPane, 11, viewModel.get("HMS:"));
-        JSpinner durationField = addTimeSpinner(constraints,bottomPane, 12);
+        addLabel(constraints,bottomPane, 13, viewModel.get("HMS:"));
+        JSpinner durationField = addTimeSpinner(constraints,bottomPane, 14);
 
-        //numEvents
-        addLabel(constraints, bottomPane, 13, viewModel.get("NE:"));
-        JSpinner numEventsField = addNumEventsSpinner(constraints,bottomPane, 14);
+
         Button create = addButton(constraints,bottomPane, 15, viewModel.get("CREATESERIES"));
         create.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 List<String> inputs = new ArrayList<>();
+                //TODO: delete the following test print statements before submission
                 System.out.println(seriesName.getText());
-                System.out.println((String)frequency.getSelectedItem());
+                System.out.println(((String) Objects.requireNonNull(frequency.getSelectedItem())).substring(0,1));
                 System.out.println(startDateField.getJFormattedTextField().getText());
                 System.out.println(startTimeField.getValue().toString().substring(11,19));
-                System.out.println((String)dayField.getSelectedItem());
+                System.out.println(((String) Objects.requireNonNull(dayField.getSelectedItem())).substring(0,1));
                 System.out.println(durationField.getValue().toString().substring(11,19));
                 System.out.println(numEventsField.getValue().toString());
 
-//                try{
-//                    inputs.add(seriesName.getText());
-//                    inputs.add((String)frequency.getSelectedItem());
-//                    inputs.add(startDateField.getJFormattedTextField().getText());
-//                    inputs.add(startTimeField.getValue().toString().substring(11,19));
-//                    inputs.add((String)dayField.getSelectedItem());
-//                    inputs.add(durationField.getValue().toString().substring(11,19));
-//                    inputs.add(numEventsField.getValue().toString());
-//                }
+                try{
+                    inputs.add(seriesName.getText());
+                    inputs.add(((String) Objects.requireNonNull(frequency.getSelectedItem())).substring(0,1));
+                    inputs.add(startDateField.getJFormattedTextField().getText());
+                    inputs.add(startTimeField.getValue().toString().substring(11,19));
+                    inputs.add(((String) Objects.requireNonNull(dayField.getSelectedItem())).substring(0,1));
+                    inputs.add(durationField.getValue().toString().substring(11,19));
+                    inputs.add(numEventsField.getValue().toString());
+                    sc.createSeriesFromScratch(inputs);
+                }catch(Exception someE){
+                    System.err.println("Some input caused an exception");
+                }
             }
         });
+        addLabel(constraints,bottomPane,16,inputs.get(0));
+        constraints.gridy = 1;
+        this.add(bottomPane,constraints);
 
     }
 }

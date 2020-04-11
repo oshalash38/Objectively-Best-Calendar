@@ -1,5 +1,6 @@
 package com.group_0225.controller;
 
+import com.group_0225.manager.EventManager;
 import com.group_0225.manager.SeriesManager;
 import com.group_0225.entities.Timing;
 import com.group_0225.ui.common.util.UIUpdateInfo;
@@ -7,6 +8,7 @@ import com.group_0225.ui.common.util.UIPresenter;
 import com.group_0225.entities.CalendarData;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class SeriesController extends CalendarController{
@@ -16,14 +18,33 @@ public class SeriesController extends CalendarController{
      * @param p a UIPresenter instance
      */
     private SeriesManager sm;
+    private EventManager em;
     public SeriesController(CalendarData data, UIPresenter p){
         super(data, p);
         sm = new SeriesManager();
+        em = new EventManager();
     }
-    public void createSeriesFromScratch(/*parameters to be added when CreateSeriesFromScratchPanel is finalized*/){
-        //presenter method call
-        //call a method again if input is wrong
-        //call sm method
+    public void createSeriesFromScratch(List<String> input){
+
+        //0 series name must be non-empty string
+        //1 string int from 1-5 determining frequency
+        //2 start date (day-3ltrmonth-YYYY) (ex. 8-Apr-2020)
+        //3 start time (HH:MM:SS)
+        //4 string int from 0-6 of duration days
+        //5 duration time (HH:MM:SS)
+        //6 num events string int
+        if (input.get(0).equals("") || input.get(2).equals("")){
+            pushCreateSeriesFromScratchScreen(Collections.singletonList("All fields must be completed."));
+        }
+        else if (!verifyDurationLTFreq(input.get(4),input.get(5),input.get(1))){
+            pushCreateSeriesFromScratchScreen(Collections.singletonList("The duration you chose was longer than your frequency."));
+        }
+
+        else{
+            String[] split = input.get(2).split("-");
+            sm.createSeries(data,input.get(0),input.get(1),input.get(2),Months.get(split[1]),input.get(3),input.get(4),input.get(5), input.get(6),em);
+        }
+
     }
     public void createSeriesFromEvents(/*parameters to be added when CreateSeriesFromEvents is finalized*/){
         //presenter method
@@ -31,70 +52,26 @@ public class SeriesController extends CalendarController{
         //call sm method
     }
     private void pushCreateSeriesFromScratchScreen(List<String> args){
-        presenter.updateUI(new UIUpdateInfo("dialog",args, "CreateSeriesFromScratchPanel"));
+        presenter.updateUI(new UIUpdateInfo("dialog",args, "CreateSeriesScratchPanel"));
     }
     public void createSeriesFromScratchScreen(){
-        pushCreateSeriesFromScratchScreen(Arrays.asList(""));
-    }
-    private boolean parsable(List<String> lst) {
-        int i;
-        for (String s : lst) {
-            try {
-                i = Integer.parseInt(s);
-            } catch (NumberFormatException e) {
-                return false;
-            }
-        }
-        return true;
+        pushCreateSeriesFromScratchScreen(Collections.singletonList(""));
     }
 
-    private boolean verifyNumEvents(int i) {
-        return i >= 2;
-    }
-    private boolean verifyStartEnd(Timing t){
-        return t.getStart().isBefore(t.getEnd());   }
 
-    private boolean verifyFrequency(int i) {
-        if (!(i>=1 && i<=5)){
-            System.out.println("Your frequency selection was incorrect.");}
-        return i >= 1 && i <= 5;
-    }
-
-    private boolean verifyDuration(List<Integer> lst) {
-        if (!((0 <= lst.get(0)) && (6 >= lst.get(0)) && (lst.get(1) >= 0) && (lst.get(1) <= 23)
-                && (lst.get(2) >= 0) && (lst.get(2) <= 59))){
-            System.out.println("Your duration selection was incorrect.");
-        }
-        return (0 <= lst.get(0)) && (6 >= lst.get(0)) && (lst.get(1) >= 0) && (lst.get(1) <= 23)
-                && (lst.get(2) >= 0) && (lst.get(2) <= 59);
-    }
-
-    private boolean verifyStartDate(List<Integer> lst) {
-        if (!(lst.get(1) >= 1 && lst.get(1) <= 12 && lst.get(2) >= 1 && lst.get(2) <= 31
-                && lst.get(3) >= 0 && lst.get(3) <= 23 && lst.get(4) >= 0 && lst.get(4) <= 59)){
-            System.out.println("Your start date selection was incorrect.");
-        }
-        return lst.get(1) >= 1 && lst.get(1) <= 12 && lst.get(2) >= 1 && lst.get(2) <= 31
-                && lst.get(3) >= 0 && lst.get(3) <= 23 && lst.get(4) >= 0 && lst.get(4) <= 59;
-    }
-
-    private boolean verifyDurationLTFreq(List<Integer> lst) {
-        //lst contains 8 numbers (the selected duration appended to the selected frequency)
-        boolean ret;
-        switch (lst.get(0)) {
-            case 1:
-                ret =  lst.get(1) < 1 && lst.get(2) < 1;
-                break;
-            case 2:
-                ret =  lst.get(1) < 1;
-                break;
+    private boolean verifyDurationLTFreq(String durationDays, String durationHMS, String freq) {
+        int days = Integer.parseInt(durationDays);
+        int hours = Integer.parseInt(durationHMS.substring(0,2));
+        int minutes = Integer.parseInt(durationHMS.substring(3,5));
+        int seconds = Integer.parseInt(durationHMS.substring(6,8));
+        switch(Integer.parseInt(freq) ){
+            case 1: //hourly
+                return hours == 0 && days == 0;
+            case 2: //daily
+                return days == 0;
             default:
-                ret =  true;
-                break;
+                return true;
         }
-        if (!ret) {
-            System.out.println("The duration of each event is longer than the frequency.");
-        }  return ret;
     }
 
 }

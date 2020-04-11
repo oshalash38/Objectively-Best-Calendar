@@ -33,6 +33,8 @@ public class EventManager {
         System.out.println(id);
         event.setID(id);
         calendarData.addEvent(id, event);
+        //TODO:testing only
+        System.out.println(id + "\nStart:" + timing.getStart() + "\nEnd:" + timing.getEnd());
         return event;
     }
 
