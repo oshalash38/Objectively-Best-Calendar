@@ -2,11 +2,15 @@ package com.group_0225.manager;
 
 import com.group_0225.DatabaseReader;
 import com.group_0225.controller.ControllerContainer;
-import com.group_0225.entities.*;
+import com.group_0225.entities.CalendarData;
+import com.group_0225.entities.Event;
+import com.group_0225.entities.TimingFactory;
+import com.group_0225.entities.User;
 import com.group_0225.ui.common.util.UIPresenter;
 import com.group_0225.ui.core.CalendarFrame;
 import com.group_0225.ui.core.CalendarToolBar;
 
+import javax.swing.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
@@ -31,6 +35,14 @@ public class Init {
         calendarData.setLocalTime(timingFactory.createTiming(LocalDateTime.now()));
 
         populate(calendarData, databaseReader);
+
+
+        // From https://stackoverflow.com/questions/2592207/how-to-improve-look-and-feel-of-java-swing-gui
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
 
         UIPresenter presenter = new UIPresenter();
