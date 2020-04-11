@@ -87,7 +87,7 @@ public class CreateSeriesScratchPanel extends CalendarLayoutPanel {
         dSelections.add("4");
         dSelections.add("5");
         dSelections.add("6");
-        addDropDown(dSelections,bottomPane, 10,constraints);
+        JComboBox<String> dayField = addDropDown(dSelections,bottomPane, 10,constraints);
 
         addLabel(constraints,bottomPane, 11, viewModel.get("HMS:"));
         JSpinner durationField = addTimeSpinner(constraints,bottomPane, 12);
@@ -99,7 +99,24 @@ public class CreateSeriesScratchPanel extends CalendarLayoutPanel {
         create.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                List<String> inputs = new ArrayList<>();
+                System.out.println(seriesName.getText());
+                System.out.println((String)frequency.getSelectedItem());
+                System.out.println(startDateField.getJFormattedTextField().getText());
+                System.out.println(startTimeField.getValue().toString().substring(11,19));
+                System.out.println((String)dayField.getSelectedItem());
+                System.out.println(durationField.getValue().toString().substring(11,19));
+                System.out.println(numEventsField.getValue().toString());
 
+//                try{
+//                    inputs.add(seriesName.getText());
+//                    inputs.add((String)frequency.getSelectedItem());
+//                    inputs.add(startDateField.getJFormattedTextField().getText());
+//                    inputs.add(startTimeField.getValue().toString().substring(11,19));
+//                    inputs.add((String)dayField.getSelectedItem());
+//                    inputs.add(durationField.getValue().toString().substring(11,19));
+//                    inputs.add(numEventsField.getValue().toString());
+//                }
             }
         });
 

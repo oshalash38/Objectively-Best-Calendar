@@ -2,9 +2,11 @@ package com.group_0225.controller;
 
 import com.group_0225.manager.SeriesManager;
 import com.group_0225.entities.Timing;
+import com.group_0225.ui.common.util.PanelInfo;
 import com.group_0225.ui.common.util.UIPresenter;
 import com.group_0225.entities.CalendarData;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class SeriesController extends CalendarController{
@@ -28,7 +30,12 @@ public class SeriesController extends CalendarController{
         //call a method again if input is wrong
         //call sm method
     }
-
+    private void pushCreateSeriesFromScratchScreen(List<String> args){
+        presenter.displayPanel(new PanelInfo("CreateSeriesFromScratchPanel",args, true));
+    }
+    public void createSeriesFromScratchScreen(){
+        pushCreateSeriesFromScratchScreen(Arrays.asList(""));
+    }
     private boolean parsable(List<String> lst) {
         int i;
         for (String s : lst) {

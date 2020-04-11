@@ -1,9 +1,6 @@
 package com.group_0225.ui.core;
 
-import com.group_0225.controller.ControllerContainer;
-import com.group_0225.controller.EventController;
-import com.group_0225.controller.LoginController;
-import com.group_0225.controller.MessagingController;
+import com.group_0225.controller.*;
 import com.group_0225.ui.common.calendar.ViewModelBuilder;
 
 import javax.swing.*;
@@ -19,6 +16,7 @@ public class CalendarToolBar extends JMenuBar {
     private LoginController loginController;
     private EventController eventController;
     private MessagingController messagingController;
+    private SeriesController seriesController;
     private Map<String, String> viewModel;
     private List<String> calendars;
 
@@ -31,6 +29,7 @@ public class CalendarToolBar extends JMenuBar {
         this.eventController = controllerContainer.getEventsController();
         this.messagingController = controllerContainer.getMessagingController();
         this.loginController = controllerContainer.getLoginController();
+        this.seriesController = controllerContainer.getSeriesController();
 
         JMenu createMenu = new JMenu(viewModel.get("TOOLBARCreateMenuString"));
         JMenu viewMenu = new JMenu(viewModel.get("TOOLBARViewMenuString"));
@@ -139,7 +138,7 @@ public class CalendarToolBar extends JMenuBar {
         //Create Memo
         subMenus.get(2).addActionListener(e -> {});
         //Create Series
-        subMenus.get(3).addActionListener(e -> { });
+        subMenus.get(3).addActionListener(e -> seriesController.createSeriesFromScratchScreen());
 
     }
 
