@@ -25,10 +25,19 @@ public class ViewModelBuilder {
         temp.put("Start Time: ", "Start Time: ");
         temp.put("End Time: ", "End Time: ");
         temp.put("Memos:", "Memos:");
+        temp.put("CreateSeriesFromScratch", "Create a series from scratch:");
+        temp.put("seriesname", "Choose series name:");
+        //temp.put("CreateSeriesFromEvents", "Create a series from events");
+        temp.put("freq", "How often will events in this series occur?");
 
         temp.put("EnterStartTimeString", "Enter Start Time:");
         temp.put("EnterEndTimeString", "Enter End Time:");
+        temp.put("EnterDurationSeriesString", "Enter the duration of each event in this series:");
         temp.put("NoEvents", "There are no events to be displayed.");
+        temp.put("Days:", "Days:");
+        temp.put("HMS:", "Hours/Minutes/Seconds:");
+        temp.put("NE:", "Number of Events (min. 2):");
+        temp.put("CREATESERIES", "CREATE SERIES");
 
 
 

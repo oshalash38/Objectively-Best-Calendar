@@ -86,7 +86,29 @@ public abstract class CalendarLayoutPanel extends JPanel {
         bottomPane.add(timeSpinner, c);
         return timeSpinner;
     }
-
+//    protected ButtonGroup addButtonGroup(GridBagConstraints c, JPanel pane){
+//        JRadioButton hourly = new JRadioButton("Hourly");
+//        JRadioButton daily = new JRadioButton("daily");
+//        JRadioButton weekly = new JRadioButton("Weekly");
+//        JRadioButton monthly = new JRadioButton("Monthly");
+//        JRadioButton yearly = new JRadioButton("Yearly");
+//        ButtonGroup bg = new ButtonGroup();
+//        bg.add(hourly); bg.add(daily); bg.add(weekly); bg.add(monthly); bg.add(yearly);
+//        return bg;
+//    }
+    protected JComboBox<String> addDropDown(List<String> args, JPanel bottomPane, int y, GridBagConstraints constraints){
+        JComboBox<String> comboBox = new JComboBox<>((String[])args.toArray());
+        constraints.gridy = y;
+        bottomPane.add(comboBox, constraints);
+        return comboBox;
+    }
+    protected JSpinner addNumEventsSpinner(GridBagConstraints constraints, JPanel bottomPane, int y){
+        SpinnerModel numMod = new SpinnerNumberModel(2, 2, 99, 1);
+        JSpinner j = new JSpinner(numMod);
+        constraints.gridy = y;
+        bottomPane.add(j,constraints);
+        return j;
+    }
 
     protected abstract void buildPanel(List<String> inputs);
 }
