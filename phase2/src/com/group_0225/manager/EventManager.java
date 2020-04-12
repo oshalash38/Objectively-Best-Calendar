@@ -334,13 +334,22 @@ public class EventManager {
         return numPerDay;
     }
 
-    public List<String> getEventIDs(List<Event> events) {
+    public List<String> getNames(List<Event> events) {
         List<String> names = new ArrayList<>();
 
         for(Event e : events)
-            names.add(e.getID() + "");
+            names.add(e.getEventName() + "");
 
         return names;
+    }
+
+    public List<String> getEventIDs(List<Event> events) {
+        List<String> id = new ArrayList<>();
+
+        for(Event e : events)
+            id.add(e.getID() + "");
+
+        return id;
     }
 
     public List<String> getEventIDsOfThreshold(CalendarData data, Timing threshold) {

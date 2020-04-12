@@ -27,7 +27,10 @@ public class MessagingController extends CalendarController{
     public void pushSendNewMessagePanel(){
 
         //TODO the following line was previously eventManager.getEventNames(), but that didn't compile...
-        List<String> events = eventManager.getEventIDs(data.getCurrUserEvents());
+        List<String> events = new ArrayList<>();
+        events.add(eventManager.getEventIDs(data.getCurrUserEvents()).size() + "");
+        events.addAll(eventManager.getNames(data.getCurrUserEvents()));
+        events.addAll(eventManager.getEventIDs(data.getCurrUserEvents()));
         presenter.updateUI(new UIUpdateInfo("dialog", events, "SendMessage"));
     }
 
@@ -38,7 +41,7 @@ public class MessagingController extends CalendarController{
 
     public void sendMessage(List<String> input){
         try {
-            Event event = data.getEventByName(input.get(1));
+            Event event = eventManager.getEventByID(data, Integer.parseInt(input.get(1)));
             User user = data.getUser(input.get(0));
             messagingManager.sendRequest(data.getCurrUser(), user, event, input.get(2));
         } catch (NullPointerException e){
