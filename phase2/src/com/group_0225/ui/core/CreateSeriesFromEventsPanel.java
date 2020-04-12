@@ -39,11 +39,15 @@ public class CreateSeriesFromEventsPanel extends CalendarLayoutPanel {
         JPanel bottomPane = new JPanel(new GridBagLayout());
         List<JCheckBox> checkBoxes = new ArrayList<>();
         buildTitle(constraints, viewModel.get("CreateSeriesFromEvents"));
+        addLabel(constraints,bottomPane,0,viewModel.get("SeriesEventsInstructions"));
         for (int i = 0; i < inputs.size(); i+=5) {
 
-            label = new JLabel("<html>"+inputs.get(i)+"<br>"+inputs.get(i+1)+"<br>" + inputs.get(i+2)+"<br>" + inputs.get(i+3) + "</html>");
-            checkBox = addCheckBox(label, bottomPane, i, constraints);
-            label = new JLabel((Icon) new JTextArea());
+            checkBox = addCheckBox(inputs.get(i), bottomPane, i+1, constraints);
+            addLabel(constraints,bottomPane, i+2, inputs.get(i+1));
+            addLabel(constraints,bottomPane,i+3, inputs.get(i+2));
+            addLabel(constraints,bottomPane, i+4, inputs.get(i+3));
+            addLabel(constraints,bottomPane, i+4,"");
+
             checkBoxes.add(checkBox);
             //checkBoxes.add();
         }
@@ -51,11 +55,14 @@ public class CreateSeriesFromEventsPanel extends CalendarLayoutPanel {
         createSeries.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                //TODO finish this!
             }
         });
         constraints.gridy = 1;
         this.add(bottomPane, constraints);
+
+
     }
+
 }
 

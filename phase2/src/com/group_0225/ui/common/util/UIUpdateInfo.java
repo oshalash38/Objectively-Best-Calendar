@@ -25,6 +25,7 @@ public class UIUpdateInfo {
      *
      * @param recipient "panel" if update is intended for a new panel in CalendarFrame.
      *                  "dialog" if the update is intended to push a new dialog.
+     *                  "scrollable" if the update is intended to push a scrollable dialog
      *                  "toolbar" if update is intended for the toolbar.
      * @param data the data for the front end element
      * @param panelKey the key for the panel if the update is intended for a new p

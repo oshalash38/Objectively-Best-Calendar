@@ -56,9 +56,24 @@ public class CalendarFrame extends JFrame implements Observer {
         else if(info.getRecipient().equals("dialog")){
             displayDialog(info);
         }
+        else if (info.getRecipient().equals("scrollable")){
+            scrollableDialog(info);
+        }
     }
 
-
+    private void scrollableDialog(UIUpdateInfo info){
+        CalendarLayoutPanel currP = panels.get(info.getPanelKey());
+        currP.updatePanel(info.getData());
+        JScrollPane scrollPane = new JScrollPane(currP);
+        JDialog dialog = new JDialog();
+        dialog.setSize(500,500);
+        dialog.add(scrollPane);
+        dialog.setVisible(true);
+        if (openDialog != null){
+            openDialog.dispose();
+        }
+        openDialog = dialog;
+    }
     private void displayDialog(UIUpdateInfo info) {
         CalendarLayoutPanel currP = panels.get(info.getPanelKey());
         currP.updatePanel(info.getData());

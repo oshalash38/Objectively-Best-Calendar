@@ -45,6 +45,7 @@ public class ViewModelBuilder {
         temp.put("SeriesHow:", "How would you like to create your series?");
         temp.put("From scratch:","From scratch");
         temp.put("From events:", "From events in this calendar");
+        temp.put("SeriesEventsInstructions", "Select the events that you want to be in the new series.");
 
 
         //TOOLBAR HEADERS

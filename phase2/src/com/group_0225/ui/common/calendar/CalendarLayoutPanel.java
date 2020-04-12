@@ -104,9 +104,9 @@ public abstract class CalendarLayoutPanel extends JPanel {
         bottomPane.add(comboBox, constraints);
         return comboBox;
     }
-    protected JCheckBox addCheckBox(JLabel label, JPanel bottomPane, int y, GridBagConstraints constraints){
-        JCheckBox tick = new JCheckBox();
-        label.setLabelFor(tick);
+    protected JCheckBox addCheckBox(String message, JPanel bottomPane, int y, GridBagConstraints constraints){
+        JCheckBox tick = new JCheckBox(message);
+//        label.setLabelFor(tick);
         constraints.gridy = y;
         bottomPane.add(tick, constraints);
         return tick;

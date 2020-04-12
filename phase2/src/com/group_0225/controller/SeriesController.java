@@ -61,7 +61,7 @@ public class SeriesController extends CalendarController{
         pushCreateSeriesFromEventsScreen(inputs);
     }
     private void pushCreateSeriesFromEventsScreen(List<String> args){
-        presenter.updateUI(new UIUpdateInfo("dialog", args, "CreateSeriesFromEventsPanel"));
+        presenter.updateUI(new UIUpdateInfo("scrollable", args, "CreateSeriesFromEventsPanel"));
     }
     private void pushCreateSeriesFromScratchScreen(List<String> args){
         presenter.updateUI(new UIUpdateInfo("dialog",args, "CreateSeriesScratchPanel"));
