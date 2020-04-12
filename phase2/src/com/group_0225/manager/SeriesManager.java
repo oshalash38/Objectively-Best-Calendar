@@ -39,12 +39,12 @@ public class SeriesManager {
         //initialize duration
         Duration elapsed = parseDuration(durationDays,durationHMS);
         Timing first = tf.createTiming(startLDT,elapsed);
-        em.createEvent(calendarData,"",first,seriesName);
+        em.createEvent(calendarData,seriesName,first,seriesName);
 
         int ne = Integer.parseInt(numEvents);
         for (int i = 0; i< ne - 1; i++){
             first = first.addToThis(frequency);
-            em.createEvent(calendarData,"",first,seriesName);
+            em.createEvent(calendarData,seriesName,first,seriesName); //TODO: Do something about duplicate parameter
         }
 
     }
