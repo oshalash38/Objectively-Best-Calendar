@@ -25,9 +25,6 @@ import java.util.Map;
 
 public class Init {
 
-    //PURELY FOR TESTING
-    public static UIPresenter p;
-
     public void run() throws IOException, ClassNotFoundException {
         TimingFactory timingFactory = new TimingFactory();
         DatabaseReader databaseReader = new DatabaseReader();
@@ -52,8 +49,6 @@ public class Init {
         presenter.addObserver(calendarToolBar);
         presenter.addObserver(frame);
         controllerContainer.getLoginController().startUp();
-
-        p = presenter;
 
         frame.addWindowListener(new WindowAdapter() {
             /**

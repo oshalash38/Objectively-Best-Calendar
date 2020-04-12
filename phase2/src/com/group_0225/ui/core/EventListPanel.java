@@ -37,22 +37,18 @@ public class EventListPanel extends CalendarLayoutPanel {
         List<JButton> buttons = new ArrayList<>();
         for (int i = 0; i < inputs.size(); i++) {
             c.gridy = i;
-            JButton eventPreview = new JButton(inputs.get(i));
+
+            String eventRawID = inputs.get(i);
+
+            JButton eventPreview = new JButton(eventController.getEventName(eventRawID));
+            eventPreview.addActionListener(e -> eventController.displayEvent(eventRawID));
+
             parent.add(eventPreview, c);
             buttons.add(eventPreview);
         }
 
         c.fill = GridBagConstraints.BOTH;
         JScrollPane panel = new JScrollPane(parent);
-
-        for (JButton button : buttons){
-            button.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    eventController.displayEvent(button.getText());
-                }
-            });
-        }
 
         this.add(panel, c);
     }
