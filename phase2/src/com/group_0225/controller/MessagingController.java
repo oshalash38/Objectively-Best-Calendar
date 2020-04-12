@@ -25,7 +25,9 @@ public class MessagingController extends CalendarController{
     }
 
     public void pushSendNewMessagePanel(){
-        List<String> events = eventManager.getEventNames(data.getCurrUserEvents());
+
+        //TODO the following line was previously eventManager.getEventNames(), but that didn't compile...
+        List<String> events = eventManager.getEventIDs(data.getCurrUserEvents());
         presenter.updateUI(new UIUpdateInfo("dialog", events, "SendMessage"));
     }
 

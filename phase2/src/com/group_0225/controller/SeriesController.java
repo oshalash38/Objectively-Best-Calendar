@@ -13,22 +13,39 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class SeriesController extends CalendarController{
+/**
+ * Receives information from the GUI about user's choices regarding series, does some parsing, and gives commands to managers
+ */
+public class SeriesController extends CalendarController {
     /**
      * Constructor that sets up references to required info and presenter rules
-   Yea  * @param data a CalendarData instance
+     * Yea  * @param data a CalendarData instance
+     *
      * @param p a UIPresenter instance
      */
     private SeriesManager sm;
     private EventManager em;
     private UserManager um;
-    public SeriesController(CalendarData data, UIPresenter p){
+
+    /**
+     * constructor for SeriesController
+     *
+     * @param data a CalendarData instance
+     * @param p    a UIPresenter instance
+     */
+    public SeriesController(CalendarData data, UIPresenter p) {
         super(data, p);
         sm = new SeriesManager();
         em = new EventManager();
         um = new UserManager();
     }
-    public void createSeriesFromScratch(List<String> input){
+
+    /**
+     * Called by actionListener in CreateSeriesScratchPanel
+     *
+     * @param input list of strings including series name, frequency, duration, start date, number of events
+     */
+    public void createSeriesFromScratch(List<String> input) {
 
         //0 series name must be non-empty string
         //1 string int from 1-5 determining frequency
@@ -37,46 +54,67 @@ public class SeriesController extends CalendarController{
         //4 string int from 0-6 of duration days
         //5 duration time (HH:MM:SS)
         //6 num events string int
-        if (input.get(0).equals("") || input.get(2).equals("")){
+        if (input.get(0).equals("") || input.get(2).equals("")) {
             pushCreateSeriesFromScratchScreen(Collections.singletonList("All fields must be completed."));
-        }
-        else if (!verifyDurationLTFreq(input.get(4),input.get(5),input.get(1))){
+        } else if (!verifyDurationLTFreq(input.get(4), input.get(5), input.get(1))) {
             pushCreateSeriesFromScratchScreen(Collections.singletonList("The duration you chose was longer than your frequency."));
-        }
-
-        else{
+        } else {
             String[] split = input.get(2).split("-");
-            sm.createSeries(data,input.get(0),input.get(1),input.get(2),Months.get(split[1]),input.get(3),input.get(4),input.get(5), input.get(6),em);
-            pushCreateSeriesFromScratchScreen(Collections.singletonList("Series created!"));
+            sm.createSeries(data, input.get(0), input.get(1), input.get(2), Months.get(split[1]), input.get(3), input.get(4), input.get(5), input.get(6), em);
+            pushCreateSeriesFromScratchScreen(Collections.singletonList("Series created! You may return to the main menu."));
         }
 
     }
-    public void createSeriesFromEvents(/*parameters to be added when CreateSeriesFromEvents is finalized*/){
-        //presenter method
-        //call a method again if input is wrong
-        //call sm method
+
+    /**
+     * Called directly from CreateSeriesFromEventsPanel
+     *
+     * @param sName the name of the new series
+     * @param input a list of strings of ids that the user selected and the series name
+     */
+    public void createSeriesFromEvents(String sName, List<String> input) {
+        List<String> args = em.formatEventsForSeries(data, um);
+        if (sName.equals("")) {
+            args.add(0, "All fields must be completed.");
+            pushCreateSeriesFromEventsScreen(args);
+        } else if (input.size() < 2) {
+            args.add(0, "Series must have at least two events.");
+            pushCreateSeriesFromEventsScreen(args);
+        } else {
+            sm.createSeries(data, sName, input);
+            args.add(0,"Series created! You may return to the main menu.");
+            pushCreateSeriesFromEventsScreen(args);
+        }
     }
-    public void createSeriesFromEventsScreen(){
-        List<String> inputs = em.formatEventsForSeries(data,um);
+
+    public void createSeriesFromEventsScreen() {
+        List<String> inputs = em.formatEventsForSeries(data, um);
+        inputs.add(0, "");
         pushCreateSeriesFromEventsScreen(inputs);
     }
-    private void pushCreateSeriesFromEventsScreen(List<String> args){
+
+    private void pushCreateSeriesFromEventsScreen(List<String> args) {
         presenter.updateUI(new UIUpdateInfo("scrollable", args, "CreateSeriesFromEventsPanel"));
     }
-    private void pushCreateSeriesFromScratchScreen(List<String> args){
-        presenter.updateUI(new UIUpdateInfo("dialog",args, "CreateSeriesScratchPanel"));
+
+    private void pushCreateSeriesFromScratchScreen(List<String> args) {
+        presenter.updateUI(new UIUpdateInfo("dialog", args, "CreateSeriesScratchPanel"));
     }
-    public void createSeriesFromScratchScreen(){
+
+    public void createSeriesFromScratchScreen() {
         pushCreateSeriesFromScratchScreen(Collections.singletonList(""));
     }
-    public void createSeriesChoiceScreen(){presenter.updateUI(new UIUpdateInfo("dialog",new ArrayList<>(),"SeriesChoicePanel"));}
+
+    public void createSeriesChoiceScreen() {
+        presenter.updateUI(new UIUpdateInfo("dialog", new ArrayList<>(), "SeriesChoicePanel"));
+    }
 
     private boolean verifyDurationLTFreq(String durationDays, String durationHMS, String freq) {
         int days = Integer.parseInt(durationDays);
-        int hours = Integer.parseInt(durationHMS.substring(0,2));
-        int minutes = Integer.parseInt(durationHMS.substring(3,5));
-        int seconds = Integer.parseInt(durationHMS.substring(6,8));
-        switch(Integer.parseInt(freq) ){
+        int hours = Integer.parseInt(durationHMS.substring(0, 2));
+        int minutes = Integer.parseInt(durationHMS.substring(3, 5));
+        int seconds = Integer.parseInt(durationHMS.substring(6, 8));
+        switch (Integer.parseInt(freq)) {
             case 1: //hourly
                 return hours == 0 && days == 0;
             case 2: //daily

@@ -89,18 +89,25 @@ public class SeriesManager {
         ret = ret.plusSeconds(seconds);
         return ret;
     }
+
     /**
-     * Changes the seriesName of a bunch of events to link them together as a series
-     *
+     * Create a series from a list of events
+     * @param data a CalendarData instance
      * @param seriesName the name of the new series
-     * @param u          the user that is making this series
-     * @param events     the list of events that the user has requested to make into a series
+     * @param inputs the list of ids that the user has selected to form a new series
      */
-    public void createSeries(String seriesName, User u, List<Event> events) {
-        for (Event e : events) {
-            e.setSeriesName(seriesName);
+    public void createSeries(CalendarData data, String seriesName, List<String> inputs) {
+        List<Integer> lst = toIntegers(inputs);
+        for (Integer i: lst){
+            data.getEvents().get(i).setSeriesName(seriesName);
         }
 
+    }
+    private List<Integer> toIntegers(List<String> args){
+        List<Integer> output = new ArrayList<>();
+        for (String s: args){
+            output.add(Integer.parseInt(s));
+        }return output;
     }
 
     /**

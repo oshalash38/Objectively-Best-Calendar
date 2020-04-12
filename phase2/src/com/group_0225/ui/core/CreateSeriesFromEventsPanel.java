@@ -9,14 +9,17 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Peter
  */
 public class CreateSeriesFromEventsPanel extends CalendarLayoutPanel {
-    private JLabel label;
+    private Map<JCheckBox,String> map;
     private JCheckBox checkBox;
+    private List<JCheckBox> checkBoxes;
     /*
     Display all events and allow user to select (click?) events to form a new series
     Need:
@@ -26,6 +29,8 @@ public class CreateSeriesFromEventsPanel extends CalendarLayoutPanel {
      */
     public CreateSeriesFromEventsPanel(ControllerContainer facade) {
         super(new GridBagLayout(), facade);
+        map = new HashMap<>();
+        checkBoxes = new ArrayList<>();
     }
 
     @Override
@@ -37,27 +42,36 @@ public class CreateSeriesFromEventsPanel extends CalendarLayoutPanel {
         constraints.gridy = 0;
         constraints.anchor = GridBagConstraints.CENTER;
         JPanel bottomPane = new JPanel(new GridBagLayout());
-        List<JCheckBox> checkBoxes = new ArrayList<>();
         buildTitle(constraints, viewModel.get("CreateSeriesFromEvents"));
-        addLabel(constraints,bottomPane,0,viewModel.get("SeriesEventsInstructions"));
-        for (int i = 0; i < inputs.size(); i+=5) {
+        TextField seriesName = addTextField(constraints,bottomPane,0,viewModel.get("seriesname"),"");
+        addLabel(constraints,bottomPane,1,viewModel.get("SeriesEventsInstructions"));
 
-            checkBox = addCheckBox(inputs.get(i), bottomPane, i+1, constraints);
-            addLabel(constraints,bottomPane, i+2, inputs.get(i+1));
-            addLabel(constraints,bottomPane,i+3, inputs.get(i+2));
-            addLabel(constraints,bottomPane, i+4, inputs.get(i+3));
-            addLabel(constraints,bottomPane, i+4,"");
+        for (int i = 1; i < inputs.size(); i+=5) {
 
+            checkBox = addCheckBox(inputs.get(i), bottomPane, i+2, constraints);
+            addLabel(constraints,bottomPane, i+3, inputs.get(i+1));
+            addLabel(constraints,bottomPane,i+4, inputs.get(i+2));
+            addLabel(constraints,bottomPane, i+5, inputs.get(i+3));
+            addLabel(constraints,bottomPane, i+6,"");
+            map.put(checkBox,inputs.get(i+4));
             checkBoxes.add(checkBox);
-            //checkBoxes.add();
         }
-        Button createSeries = addButton(constraints, bottomPane, inputs.size() + 1, viewModel.get("CREATESERIES"));
+        Button createSeries = addButton(constraints, bottomPane, inputs.size() + 3, viewModel.get("CREATESERIES"));
         createSeries.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //TODO finish this!
+                List<String> ids = new ArrayList<>();
+                for (JCheckBox checkBox: checkBoxes){
+                    if (checkBox.isSelected()) {
+                        ids.add(map.get(checkBox));
+                    }
+                }
+                sc.createSeriesFromEvents(seriesName.getText(),ids);
+
             }
+
         });
+        addLabel(constraints,bottomPane,inputs.size()+4,inputs.get(0));
         constraints.gridy = 1;
         this.add(bottomPane, constraints);
 
