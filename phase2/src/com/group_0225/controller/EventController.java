@@ -161,8 +161,4 @@ public class EventController extends CalendarController {
         output.add(event.getSeriesName());
         presenter.updateUI(new UIUpdateInfo("dialog", output, "EventPanel"));
     }
-
-    public void changeCalendar(String newCalendar){
-        data.setCurrCalendar(newCalendar);
-    }
 }

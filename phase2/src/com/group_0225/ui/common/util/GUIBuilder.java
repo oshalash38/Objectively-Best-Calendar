@@ -27,6 +27,7 @@ public class GUIBuilder {
         panels.put("EventPanel", new EventPanel(controllerContainer));
         panels.put("SeriesChoicePanel", new SeriesChoicePanel(controllerContainer));
         panels.put("SendMessage", new SendMessagePanel(controllerContainer));
+        panels.put("CreateCalendarPanel", new CreateCalendarPanel(controllerContainer));
         panels.put("Inbox", new InboxPanel(controllerContainer));
 
         return panels;

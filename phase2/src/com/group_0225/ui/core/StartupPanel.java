@@ -12,7 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
-public class StartupPanel extends CalendarLayoutPanel {// implements KeyListener {
+public class StartupPanel extends CalendarLayoutPanel {
 
     public StartupPanel(ControllerContainer controllerContainer) {
         super(new GridBagLayout(), controllerContainer);

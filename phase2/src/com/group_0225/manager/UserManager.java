@@ -17,6 +17,24 @@ public class UserManager {
     public List<String> getCalendarNames(User user){
         return user.getCalendars();
     }
+
+    public boolean containsCalendar(User user, String calendar){
+        for(String str: user.getCalendars()){
+            if(str.equals(calendar)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean addCalendar(User user, String calendar){
+        if(containsCalendar(user, calendar)){
+            return false;
+        }
+        user.addCalendar(calendar);
+        return true;
+    }
+
     public List<Integer> getIDs(User user, String calendarName){
         return user.getMap().get(calendarName);
     }

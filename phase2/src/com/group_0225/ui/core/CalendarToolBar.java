@@ -1,12 +1,10 @@
 package com.group_0225.ui.core;
 
 import com.group_0225.controller.*;
-import com.group_0225.ui.common.calendar.ViewModelBuilder;
+import com.group_0225.ui.common.util.ViewModelBuilder;
 import com.group_0225.ui.common.util.UIUpdateInfo;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.*;
 
 public class CalendarToolBar extends JMenuBar implements Observer{
@@ -15,6 +13,7 @@ public class CalendarToolBar extends JMenuBar implements Observer{
     private EventController eventController;
     private MessagingController messagingController;
     private SeriesController seriesController;
+    private UsersCalendarController usersCalendarController;
     private Map<String, String> viewModel;
 
     private JMenu createMenu;
@@ -34,18 +33,20 @@ public class CalendarToolBar extends JMenuBar implements Observer{
         this.messagingController = controllerContainer.getMessagingController();
         this.loginController = controllerContainer.getLoginController();
         this.seriesController = controllerContainer.getSeriesController();
+        this.usersCalendarController = controllerContainer.getUsersCalendarController();
 
         toolBarBuilder();
     }
 
 
     private void loadCalendars(List<String> calendars){
-        JMenu submenu = new JMenu(viewModel.get("TOOLBARUserChangeCalendarString"));
-        List<JMenuItem> calendarItems = buildJMenuItems(submenu, false, calendars);
-        userSettings.insert(submenu, 0);
+        JMenu subCalendars = new JMenu(viewModel.get("TOOLBARUserChangeCalendarString"));
+        List<JMenuItem> calendarItems = buildJMenuItems(subCalendars, false, calendars);
+        userSettings.remove(0);
+        userSettings.insert(subCalendars, 0);
 
         for(JMenuItem menu: calendarItems){
-            menu.addActionListener(e -> eventController.changeCalendar(menu.getText()));
+            menu.addActionListener(e -> usersCalendarController.changeCalendar(menu.getText()));
         }
     }
 
@@ -84,9 +85,11 @@ public class CalendarToolBar extends JMenuBar implements Observer{
         List<JMenuItem> subMenus = buildJMenuItems(userSettings, true,
                 Arrays.asList("TOOLBARUserAddNewCalendarString", "TOOLBARUserLogoutString"));
 
+        JMenu subCalendars = new JMenu(viewModel.get("TOOLBARUserChangeCalendarString"));
+        userSettings.add(subCalendars, 0);
 
         //Add new Calendar
-        subMenus.get(0).addActionListener(e -> {});
+        subMenus.get(0).addActionListener(e -> usersCalendarController.pushAddNewCalendar());
 
         //Logout
         subMenus.get(1).addActionListener(e -> loginController.startUp());
