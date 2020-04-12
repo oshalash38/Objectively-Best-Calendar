@@ -46,6 +46,14 @@ public class ViewModelBuilder {
         temp.put("From scratch:","From scratch");
         temp.put("From events:", "From events in this calendar");
         temp.put("SeriesEventsInstructions", "Select the events that you want to be in the new series.");
+        temp.put("SendMessage", "Send Message To User");
+        temp.put("EnterUsername", "Enter Username: ");
+        temp.put("EnterEvent", "Pick Event: ");
+        temp.put("EnterMessage", "Enter Message: ");
+        temp.put("Send", "Send!");
+        temp.put("Inbox", "Inbox");
+        temp.put("Requests", "Requests: ");
+
 
 
         //TOOLBAR HEADERS

@@ -1,9 +1,13 @@
 package com.group_0225.manager;
 
 import com.group_0225.Main;
+import com.group_0225.entities.CalendarData;
 import com.group_0225.entities.Event;
 import com.group_0225.entities.EventMessage;
 import com.group_0225.entities.User;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MessagingManager {
 
@@ -54,5 +58,14 @@ public class MessagingManager {
     public void rejectRequest(EventMessage request){
         EventMessage response = new EventMessage(request.getEvent(), null, request.getTo(), request.getFrom());
         request.getFrom().addResponse(response);
+    }
+
+    public List<String> getRequests(CalendarData data){
+        List<EventMessage> requests = data.getCurrUser().getRequests();
+        List<String> output = new ArrayList<>();
+        for (EventMessage request: requests){
+            output.add(request.getFrom().getUsername());
+        }
+        return output;
     }
 }

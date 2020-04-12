@@ -120,4 +120,14 @@ public abstract class CalendarLayoutPanel extends JPanel {
     }
 
     protected abstract void buildPanel(List<String> inputs);
+
+    protected JTextArea addTextArea(GridBagConstraints c, JPanel bottomPane, int y){
+        c.fill = GridBagConstraints.NONE;
+        c.gridy = y;
+        JTextArea textArea = new JTextArea(5, 20);
+        JScrollPane scrollPane = new JScrollPane(textArea);
+        bottomPane.add(textArea, c);
+        bottomPane.add(scrollPane);
+        return textArea;
+    }
 }

@@ -1,6 +1,8 @@
 package com.group_0225.entities;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class CalendarData {
@@ -52,6 +54,27 @@ public class CalendarData {
 
     public void setUsers(Map<String, User> users) {
         this.users = users;
+    }
+
+    public List<Event> getCurrUserEvents(){
+        List<Event> result = new ArrayList<>();
+        List<Integer> ids =  currUser.getEvents(currCalendar);
+        for (Map.Entry<Integer, Event> entry: events.entrySet()){
+            if (ids.contains(entry.getKey())){
+                result.add(entry.getValue());
+            }
+        }
+        return result;
+    }
+
+    public Event getEventByName(String eventName){
+        List<Event> currUserEvents = getCurrUserEvents();
+        for (Event event : currUserEvents){
+            if (event.getEventName().equals(eventName)){
+                return event;
+            }
+        }
+        return null;
     }
 
 }
