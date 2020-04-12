@@ -148,58 +148,15 @@ public class EventManager {
         }
     }
 
-    /**
-     * Returns a list of upcoming events
-     * @param data the calendar data
-     * @return the list of upcoming events
-     */
-    public ArrayList<Event> getUpcomingEvents(CalendarData data){
-        ArrayList<Event> upcomingEvents = new ArrayList<>();
-        List<Integer> events = data.getCurrUser().getEvents(data.getCurrCalendar());
-        System.out.println("Event Size:" + events.size());
-        for(Map.Entry<Integer, Event> entry : data.getEvents().entrySet()){
-            System.out.println(entry.getValue().getID());
-            System.out.println(events.contains(entry.getValue().getID()));
-            if(entry.getValue().getStatus() == Status.UPCOMING && events.contains(entry.getValue().getID()))
-                upcomingEvents.add(entry.getValue());
-        }
-        return upcomingEvents;
-    }
+    public List<Event> getEventsByStatus(CalendarData data, Status status) {
+        List<Event> eventsOfStatus = new ArrayList<>();
 
-    /**
-     * Returns a list of events that are currently happening
-     * @param calendarData Calendar metadata.
-     * @return the list of current events
-     */
-    public ArrayList<Event> getCurrentEvents(CalendarData calendarData){
-        ArrayList<Event> currentEvents = new ArrayList<>();
-        List<Integer> events = calendarData.getCurrUser().getEvents(calendarData.getCurrCalendar());
-        System.out.println("Event Size:" + events.size());
-        for(Map.Entry<Integer, Event> entry : calendarData.getEvents().entrySet()){
-            System.out.println(entry.getValue().getID());
-            System.out.println(events.contains(entry.getValue().getID()));
-            if(entry.getValue().getStatus() == Status.CURRENT && events.contains(entry.getValue().getID()))
-                currentEvents.add(entry.getValue());
-        }
-        return currentEvents;
-    }
+        List<Event> userEvents = data.getCurrUserEvents();
+        for(Event e : userEvents)
+            if(e.getStatus() == status)
+                eventsOfStatus.add(e);
 
-    /**
-     * Returns a list of past events
-     * @param calendarData the calendar metadata.
-     * @return the list of past events
-     */
-    public ArrayList<Event> getPastEvents(CalendarData calendarData){
-        ArrayList<Event> pastEvents = new ArrayList<>();
-        List<Integer> events = calendarData.getCurrUser().getEvents(calendarData.getCurrCalendar());
-        System.out.println("Event Size:" + events.size());
-        for(Map.Entry<Integer, Event> entry : calendarData.getEvents().entrySet()){
-            System.out.println(entry.getValue().getID());
-            System.out.println(events.contains(entry.getValue().getID()));
-            if(entry.getValue().getStatus() == Status.PAST && events.contains(entry.getValue().getID()))
-                pastEvents.add(entry.getValue());
-        }
-        return pastEvents;
+        return eventsOfStatus;
     }
 
     /**

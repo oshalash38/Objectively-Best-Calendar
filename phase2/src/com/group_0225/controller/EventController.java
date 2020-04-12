@@ -1,9 +1,6 @@
 package com.group_0225.controller;
 
-import com.group_0225.entities.CalendarData;
-import com.group_0225.entities.Event;
-import com.group_0225.entities.Timing;
-import com.group_0225.entities.TimingFactory;
+import com.group_0225.entities.*;
 import com.group_0225.manager.EventManager;
 import com.group_0225.ui.common.util.UIUpdateInfo;
 import com.group_0225.ui.common.util.UIPresenter;
@@ -50,23 +47,10 @@ public class EventController extends CalendarController {
      *                0: current events
      *                1: future events
      */
-    public void viewEventByStatus(int status){
+    public void viewEventByStatus(Status status){
         eventManager.updateStatus(data);
-        List<Event> events;
-        switch (status){
-            case 1:
-                events = eventManager.getUpcomingEvents(data);
-                break;
-            case -1:
-                events = eventManager.getPastEvents(data);
-                break;
-            case 0:
-                events = eventManager.getCurrentEvents(data);
-                break;
-            default:
-                events = new ArrayList<>();
-        }
-        presenter.updateUI(new UIUpdateInfo("dialog", getEventsName(events) , "EventListPanel"));
+        List<Event> events = eventManager.getEventsByStatus(data, status);
+        presenter.updateUI(new UIUpdateInfo("dialog", eventManager.getEventIDs(events) , "EventListPanel"));
 
     }
 

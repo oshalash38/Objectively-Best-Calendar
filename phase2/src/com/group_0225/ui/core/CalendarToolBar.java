@@ -1,6 +1,7 @@
 package com.group_0225.ui.core;
 
 import com.group_0225.controller.*;
+import com.group_0225.entities.Status;
 import com.group_0225.ui.common.util.ViewModelBuilder;
 import com.group_0225.ui.common.util.UIUpdateInfo;
 
@@ -115,11 +116,11 @@ public class CalendarToolBar extends JMenuBar implements Observer{
                         "TOOLBARViewMenuSeriesString"));
 
         //Current events
-        subMenus.get(0).addActionListener(e -> eventController.viewEventByStatus(0));
+        subMenus.get(0).addActionListener(e -> eventController.viewEventByStatus(Status.UPCOMING));
         //Past events
-        subMenus.get(1).addActionListener(e -> eventController.viewEventByStatus(-1));
+        subMenus.get(1).addActionListener(e -> eventController.viewEventByStatus(Status.PAST));
         //Future events
-        subMenus.get(2).addActionListener(e -> eventController.viewEventByStatus(1));
+        subMenus.get(2).addActionListener(e -> eventController.viewEventByStatus(Status.CURRENT));
         //Date threshold
         subMenus.get(3).addActionListener(e -> {});
         //Memo
