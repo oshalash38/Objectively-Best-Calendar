@@ -10,7 +10,6 @@ import com.group_0225.ui.common.util.UIPresenter;
 import com.group_0225.ui.core.CalendarFrame;
 import com.group_0225.ui.core.CalendarToolBar;
 
-import javax.swing.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
@@ -36,7 +35,7 @@ public class Init {
 
         // From https://stackoverflow.com/questions/2592207/how-to-improve-look-and-feel-of-java-swing-gui
         try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -60,7 +59,6 @@ public class Init {
             @Override
             public void windowClosing(WindowEvent e) {
                 try {
-                    System.out.println("saving to file");
                     databaseReader.saveToFile("users.txt", calendarData.getUsers());
                     databaseReader.saveToFile("events.txt", calendarData.getEvents());
                 } catch (IOException ex) {
@@ -70,7 +68,7 @@ public class Init {
         });
     }
 
-    public void populate(CalendarData calendarData, DatabaseReader databaseReader) throws IOException, ClassNotFoundException {
+    private void populate(CalendarData calendarData, DatabaseReader databaseReader) throws IOException, ClassNotFoundException {
 
         Object users = databaseReader.readFile("users.txt");
         Object events = databaseReader.readFile("events.txt");

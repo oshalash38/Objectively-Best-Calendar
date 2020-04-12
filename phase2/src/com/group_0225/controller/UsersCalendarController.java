@@ -3,12 +3,10 @@ package com.group_0225.controller;
 import com.group_0225.entities.CalendarData;
 import com.group_0225.entities.User;
 import com.group_0225.manager.UserManager;
-import com.group_0225.ui.common.calendar.CalendarLayoutPanel;
 import com.group_0225.ui.common.util.UIPresenter;
 import com.group_0225.ui.common.util.UIUpdateInfo;
 
 import java.util.Arrays;
-import java.util.List;
 
 public class UsersCalendarController extends CalendarController {
 
@@ -46,8 +44,9 @@ public class UsersCalendarController extends CalendarController {
                     "This calendar already exists"), "CreateCalendarPanel"));
     }
 
-    public void changeCalendar(String newCalendar){
+    public void changeCalendar(String newCalendar, CalendarGridController calendarGridController){
         data.setCurrCalendar(newCalendar);
+        calendarGridController.displayGrid();
     }
 
 }

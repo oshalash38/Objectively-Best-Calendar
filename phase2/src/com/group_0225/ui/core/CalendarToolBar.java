@@ -15,6 +15,7 @@ public class CalendarToolBar extends JMenuBar implements Observer{
     private MessagingController messagingController;
     private SeriesController seriesController;
     private UsersCalendarController usersCalendarController;
+    private CalendarGridController calendarGridController;
     private Map<String, String> viewModel;
 
     private JMenu createMenu;
@@ -35,6 +36,7 @@ public class CalendarToolBar extends JMenuBar implements Observer{
         this.loginController = controllerContainer.getLoginController();
         this.seriesController = controllerContainer.getSeriesController();
         this.usersCalendarController = controllerContainer.getUsersCalendarController();
+        this.calendarGridController = controllerContainer.getCalendarGridController();
 
         toolBarBuilder();
     }
@@ -47,7 +49,7 @@ public class CalendarToolBar extends JMenuBar implements Observer{
         userSettings.insert(subCalendars, 0);
 
         for(JMenuItem menu: calendarItems){
-            menu.addActionListener(e -> usersCalendarController.changeCalendar(menu.getText()));
+            menu.addActionListener(e -> usersCalendarController.changeCalendar(menu.getText(), calendarGridController));
         }
     }
 
