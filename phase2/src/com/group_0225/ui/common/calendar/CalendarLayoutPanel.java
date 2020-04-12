@@ -104,6 +104,13 @@ public abstract class CalendarLayoutPanel extends JPanel {
         bottomPane.add(comboBox, constraints);
         return comboBox;
     }
+    protected JCheckBox addCheckBox(JLabel label, JPanel bottomPane, int y, GridBagConstraints constraints){
+        JCheckBox tick = new JCheckBox();
+        label.setLabelFor(tick);
+        constraints.gridy = y;
+        bottomPane.add(tick, constraints);
+        return tick;
+    }
     protected JSpinner addNumEventsSpinner(GridBagConstraints constraints, JPanel bottomPane, int y){
         SpinnerModel numMod = new SpinnerNumberModel(2, 2, 99, 1);
         JSpinner j = new JSpinner(numMod);

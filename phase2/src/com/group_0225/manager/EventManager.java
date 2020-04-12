@@ -246,7 +246,22 @@ public class EventManager {
         }
         return snEvents;
     }
-
+    public List<String> formatEventsForSeries(CalendarData data, UserManager um){
+        List<Integer> ids = um.getIDs(data.getCurrUser(),data.getCurrCalendar());
+        List<Event> events = new ArrayList<>();
+        for (Integer i: ids){
+            events.add(data.getEvents().get(i));
+        }
+        List<String> output = new ArrayList<>();
+        for (Event e: events){
+            output.add("Name: " + e.getEventName());
+            output.add("\nStart: " + e.getStartDateString() + " " + e.getStartTimeString());
+            output.add("\nEnd: " + e.getEndDateString() + " " + e.getEndTimeString());
+            output.add("\nSeries: " + e.getSeriesName());
+            output.add(e.getID().toString());
+        }
+        return output;
+    }
     /**
      * Returns a detailed view of this event
      * @param e the event

@@ -26,6 +26,7 @@ public class ViewModelBuilder {
         temp.put("End Time: ", "End Time: ");
         temp.put("Memos:", "Memos:");
         temp.put("CreateSeriesFromScratch", "Create a series from scratch:");
+        temp.put("CreateSeriesFromEvents", "Create a series from existing events:");
         temp.put("seriesname", "Choose series name:");
         temp.put("SeriesName:", "Series name:");
         //temp.put("CreateSeriesFromEvents", "Create a series from events");

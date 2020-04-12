@@ -3,6 +3,7 @@ package com.group_0225.controller;
 import com.group_0225.manager.EventManager;
 import com.group_0225.manager.SeriesManager;
 import com.group_0225.entities.Timing;
+import com.group_0225.manager.UserManager;
 import com.group_0225.ui.common.util.UIUpdateInfo;
 import com.group_0225.ui.common.util.UIPresenter;
 import com.group_0225.entities.CalendarData;
@@ -20,10 +21,12 @@ public class SeriesController extends CalendarController{
      */
     private SeriesManager sm;
     private EventManager em;
+    private UserManager um;
     public SeriesController(CalendarData data, UIPresenter p){
         super(data, p);
         sm = new SeriesManager();
         em = new EventManager();
+        um = new UserManager();
     }
     public void createSeriesFromScratch(List<String> input){
 
@@ -52,6 +55,13 @@ public class SeriesController extends CalendarController{
         //presenter method
         //call a method again if input is wrong
         //call sm method
+    }
+    public void createSeriesFromEventsScreen(){
+        List<String> inputs = em.formatEventsForSeries(data,um);
+        pushCreateSeriesFromEventsScreen(inputs);
+    }
+    private void pushCreateSeriesFromEventsScreen(List<String> args){
+        presenter.updateUI(new UIUpdateInfo("dialog", args, "CreateSeriesFromEventsPanel"));
     }
     private void pushCreateSeriesFromScratchScreen(List<String> args){
         presenter.updateUI(new UIUpdateInfo("dialog",args, "CreateSeriesScratchPanel"));

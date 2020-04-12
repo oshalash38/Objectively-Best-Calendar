@@ -17,7 +17,9 @@ public class UserManager {
     public List<String> getCalendarNames(User user){
         return user.getCalendars();
     }
-
+    public List<Integer> getIDs(User user, String calendarName){
+        return user.getMap().get(calendarName);
+    }
     public boolean validatePassword(User user, String password){
         return user.validatePassword(password);
     }

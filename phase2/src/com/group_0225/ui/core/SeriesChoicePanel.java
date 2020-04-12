@@ -35,11 +35,11 @@ public class SeriesChoicePanel extends CalendarLayoutPanel {
                 sc.createSeriesFromScratchScreen();
             }
         });
-        Button fromEvents = addButton(constraints,bottomPane,4,viewModel.get("From events"));
+        Button fromEvents = addButton(constraints,bottomPane,4,viewModel.get("From events:"));
         fromEvents.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                sc.createSeriesFromEventsScreen();
             }
         });
         constraints.gridy = 1;
