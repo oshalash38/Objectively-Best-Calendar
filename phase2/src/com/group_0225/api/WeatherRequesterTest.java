@@ -3,6 +3,7 @@ package com.group_0225.api;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.group_0225.manager.WeatherManager;
 
 import java.io.IOException;
 import java.util.List;
@@ -10,16 +11,11 @@ import java.util.List;
 public class WeatherRequesterTest {
 
     public static void main(String[] args) {
-
-        try {
-            WeatherRequester requester = new WeatherRequester();
-            List<Double> forecast = requester.getForecastHighs();
-            for(double high : forecast) {
-                System.err.println(high);
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
+        WeatherManager weather = new WeatherManager();
+        weather.setForecastHighs();
+        List<String> forecast = weather.getForecastHighs();
+        for(String high : forecast) {
+            System.err.println(high);
         }
     }
 }

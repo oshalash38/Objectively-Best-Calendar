@@ -1,5 +1,6 @@
 package com.group_0225.ui.common.calendar;
 
+import com.group_0225.controller.CalendarGridController;
 import com.group_0225.controller.ControllerContainer;
 import com.group_0225.manager.EventManager;
 
@@ -22,6 +23,8 @@ public class CalendarComponent extends CalendarLayoutPanel {
     @Override
     protected void buildPanel(List<String> inputs) {
 
+        CalendarGridController gridController = controllerContainer.getCalendarGridController();
+
         int indexOfDisplay = inputs.indexOf("Display");
         String displayDay = inputs.get(indexOfDisplay + 1);
         String displayMonth = inputs.get(indexOfDisplay + 2);
@@ -33,6 +36,9 @@ public class CalendarComponent extends CalendarLayoutPanel {
 
         int indexOfEvents = inputs.indexOf("Events");
         int indexOfAlerts = inputs.indexOf("Alerts");
+
+        int indexOfWeather = inputs.indexOf("Weather");
+        List<String> weatherInput = inputs.subList(indexOfWeather + 1, inputs.size());
 
         calendarComponent = new ArrayList<>();
 
@@ -75,6 +81,9 @@ public class CalendarComponent extends CalendarLayoutPanel {
                     dayInfo.add(isCurrentDay + "");
                     dayInfo.add(inputs.get(indexOfEvents + currDay));
                     dayInfo.add(inputs.get(indexOfAlerts + currDay));
+
+
+                    dayInfo.add(gridController.getTempForDay(weatherInput, currDay + "", displayMonth, displayYear));
 
 
                     CalendarTimeComponent timeComp = new CalendarTimeComponent(controllerContainer);

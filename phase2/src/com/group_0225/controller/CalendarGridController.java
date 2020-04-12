@@ -2,6 +2,7 @@ package com.group_0225.controller;
 
 import com.group_0225.entities.*;
 import com.group_0225.manager.EventManager;
+import com.group_0225.manager.WeatherManager;
 import com.group_0225.ui.common.util.UIUpdateInfo;
 import com.group_0225.ui.common.util.UIPresenter;
 
@@ -15,19 +16,20 @@ public class CalendarGridController extends CalendarController{
     EventManager eventManager;
     TimingFactory timingFactory;
 
+    WeatherManager weatherManager;
+
     public CalendarGridController(CalendarData data, UIPresenter presenter) {
         super(data, presenter);
 
         displayTime = new Timing(data.getLocalTime().getStart());
         eventManager = new EventManager();
         timingFactory = new TimingFactory();
+
+        weatherManager = new WeatherManager();
+        weatherManager.setForecastHighs();
     }
 
-    public void displayGrid() {
-        displayGrid(data.getCurrUser());
-    }
-
-    public void displayGrid(User user){
+    public void displayGrid(){
         List<String> outputs = new ArrayList<>();
 
         outputs.add("Display");
@@ -38,6 +40,8 @@ public class CalendarGridController extends CalendarController{
         outputs.addAll(getNumEventsPerDayOfMonth());
         outputs.add("Alerts");
         outputs.addAll(getNumAlertsPerDayOfMonth());
+        outputs.add("Weather");
+        outputs.addAll(weatherManager.getForecastHighs());
 
         presenter.updateUI(new UIUpdateInfo("panel", outputs, "CalendarPanel"));
     }
@@ -45,7 +49,25 @@ public class CalendarGridController extends CalendarController{
     public void alterMonth(int alter) {
         System.err.println("NEED MANAGERS : " + displayTime + " : " + data.getLocalTime());
         displayTime.setStart(displayTime.getStart().plusMonths(alter));
-        displayGrid(null);
+        displayGrid();
+    }
+
+    public String getTempForDay(List<String> formattedTemp, String day, String month, String year) {
+        String temp = "NONE";
+
+        for(String raw : formattedTemp) {
+            String[] rawInfo = raw.split(",");
+
+            String tempDay = rawInfo[0];
+            String tempMonth = rawInfo[1];
+            String tempYear = rawInfo[2];
+
+            if(tempDay.equals(day) && tempMonth.equals(month) && tempYear.equals(year)) {
+                return rawInfo[3];
+            }
+        }
+
+        return temp;
     }
 
     public List<String> getNumEventsPerDayOfMonth() {

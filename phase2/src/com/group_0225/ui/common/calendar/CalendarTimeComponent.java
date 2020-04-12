@@ -83,6 +83,15 @@ public class CalendarTimeComponent extends CalendarLayoutPanel {
             eventNumber.addMouseListener(viewEventListener);
         }
 
+        c.anchor = GridBagConstraints.FIRST_LINE_END;
+        JPanel weatherHolder = new JPanel();
+        if(!inputs.get(6).equals("NONE")) {
+            JLabel weatherLabel = new JLabel("");
+            weatherLabel.setText(inputs.get(6) + "°C");
+            weatherLabel.addMouseListener(viewEventListener);
+            weatherHolder.add(weatherLabel);
+        }
+        this.add(weatherHolder, c);
 
         this.addMouseListener(viewEventListener);
         dayHolder.addMouseListener(viewEventListener);

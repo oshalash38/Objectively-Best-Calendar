@@ -33,7 +33,7 @@ public class LoginController extends CalendarController{
             data.setCurrUser(user);
             data.setCurrCalendar("default");
             usersCalendarController.updateCalendars();
-            calendarGridController.displayGrid(user);
+            calendarGridController.displayGrid();
         }
    }
 
