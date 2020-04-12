@@ -9,7 +9,6 @@ import com.group_0225.ui.common.util.UIUpdateInfo;
 import com.group_0225.ui.common.util.UIPresenter;
 
 import java.time.LocalDateTime;
-import java.time.Month;
 import java.util.*;
 
 public class EventController extends CalendarController {
@@ -42,7 +41,7 @@ public class EventController extends CalendarController {
 
         Timing threshold = new Timing(start, end);
 
-        presenter.updateUI(new UIUpdateInfo("dialog", eventManager.getEventNamesOfThreshold(data, threshold), "EventListPanel"));
+        presenter.updateUI(new UIUpdateInfo("dialog", eventManager.getEventIDsOfThreshold(data, threshold), "EventListPanel"));
     }
 
     /**
@@ -143,11 +142,18 @@ public class EventController extends CalendarController {
         return result;
     }
 
+    public String getEventName(String rawId) {
+        int id = Integer.parseInt(rawId);
+        Event event = eventManager.getEventByID(data, id);
 
-    public void displayEvent(String name){
-        Event event = eventManager.searchEventByName(data, name);
+        return event.getEventName();
+    }
+
+    public void displayEvent(String rawID){
+        int id = Integer.parseInt(rawID);
+        Event event = eventManager.getEventByID(data, id);
         List<String> output = new ArrayList<>();
-        output.add(name);
+        output.add(event.getEventName());
         output.add(event.getStartDateString());
         output.add(event.getEndDateString());
         output.add(event.getStartTimeString());

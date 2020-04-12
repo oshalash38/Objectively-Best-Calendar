@@ -77,7 +77,7 @@ public class EventManager {
      * @param newName The new name.
      */
     public void changeEventName(CalendarData calendarData, Event event, String newName, List<Event> events){
-        Event currEvent = this.searchEventByName(calendarData, event.getEventName());
+        Event currEvent = this.getEventByID(calendarData, event.getID());
         if (currEvent != null){
             currEvent.setEventName(newName);
         }
@@ -101,6 +101,13 @@ public class EventManager {
             if (eventEntry.getValue().getEventName().equals(name))
                  return eventEntry.getValue();
         }
+        return null;
+    }
+
+    public Event getEventByID(CalendarData data, int id) {
+        if(data.getEvents().containsKey(id))
+            return data.getEvents().get(id);
+
         return null;
     }
 
@@ -370,18 +377,18 @@ public class EventManager {
         return numPerDay;
     }
 
-    public List<String> getEventNames(List<Event> events) {
+    public List<String> getEventIDs(List<Event> events) {
         List<String> names = new ArrayList<>();
 
         for(Event e : events)
-            names.add(e.getEventName());
+            names.add(e.getID() + "");
 
         return names;
     }
 
-    public List<String> getEventNamesOfThreshold(CalendarData data, Timing threshold) {
+    public List<String> getEventIDsOfThreshold(CalendarData data, Timing threshold) {
         List<Event> events = getEventsBetween(data, threshold);
-        return getEventNames(events);
+        return getEventIDs(events);
     }
 
     /**
