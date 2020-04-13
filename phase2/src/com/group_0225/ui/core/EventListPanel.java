@@ -14,7 +14,7 @@ import java.util.List;
 public class EventListPanel extends CalendarLayoutPanel {
 
     public EventListPanel(ControllerContainer controllerContainer) {
-        super(new GridBagLayout(), controllerContainer);
+        super(controllerContainer);
     }
 
     @Override

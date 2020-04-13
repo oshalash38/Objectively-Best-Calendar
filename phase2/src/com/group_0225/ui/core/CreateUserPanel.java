@@ -14,7 +14,7 @@ import java.util.List;
 public class CreateUserPanel extends CalendarLayoutPanel {
 
     public CreateUserPanel(ControllerContainer controllerContainer) {
-        super(new GridBagLayout(), controllerContainer);
+        super(controllerContainer);
     }
 
 

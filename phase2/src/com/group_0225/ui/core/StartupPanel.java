@@ -15,7 +15,7 @@ import java.util.List;
 public class StartupPanel extends CalendarLayoutPanel {
 
     public StartupPanel(ControllerContainer controllerContainer) {
-        super(new GridBagLayout(), controllerContainer);
+        super(controllerContainer);
     }
 
     @Override

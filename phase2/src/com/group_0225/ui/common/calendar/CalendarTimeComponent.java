@@ -13,7 +13,7 @@ import java.util.List;
 public class CalendarTimeComponent extends CalendarLayoutPanel {
 
     public CalendarTimeComponent(ControllerContainer controllerContainer) {
-        super(new GridBagLayout(), controllerContainer);
+        super(controllerContainer);
     }
 
     @Override

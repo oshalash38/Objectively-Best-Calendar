@@ -58,6 +58,12 @@ public class ViewModelBuilder {
         viewModel.put("CalendarNameString", "New Calendar Name:");
         viewModel.put("ConfirmString", "Confirm");
 
+        viewModel.put("ChangeTimeTitleString", "Time Machine");
+        viewModel.put("TimeTravelString", "Time travel!");
+        viewModel.put("SelectDateString", "Select Date:");
+        viewModel.put("SelectTimeString", "Select Time:");
+        viewModel.put("TimeChangeSuccessfulString", "Time travel successful. Local date and time: ");
+
 
 
         //TOOLBAR HEADERS

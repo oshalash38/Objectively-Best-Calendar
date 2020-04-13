@@ -17,6 +17,13 @@ public abstract class CalendarLayoutPanel extends JPanel {
     protected ControllerContainer controllerContainer;
     protected Map<String, String> viewModel;
 
+    public CalendarLayoutPanel(ControllerContainer controllerContainer) {
+        super(new GridBagLayout());
+        this.controllerContainer = controllerContainer;
+        ViewModelBuilder vmb = new ViewModelBuilder();
+        viewModel = vmb.build();
+    }
+
     public CalendarLayoutPanel(LayoutManager2 layoutManager2, ControllerContainer controllerContainer) {
         super(layoutManager2);
         this.controllerContainer = controllerContainer;

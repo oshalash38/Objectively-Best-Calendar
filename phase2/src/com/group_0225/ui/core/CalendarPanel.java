@@ -16,7 +16,7 @@ public class CalendarPanel extends CalendarLayoutPanel {
     CalendarFooter footer;
 
     public CalendarPanel(ControllerContainer controllerContainer) {
-        super(new GridBagLayout(), controllerContainer);
+        super(controllerContainer);
     }
 
     @Override

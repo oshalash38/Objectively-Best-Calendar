@@ -9,7 +9,7 @@ import java.util.List;
 
 public class EventPanel extends CalendarLayoutPanel {
     public EventPanel(ControllerContainer controllerContainer) {
-        super(new GridBagLayout(), controllerContainer);
+        super(controllerContainer);
     }
 
     @Override

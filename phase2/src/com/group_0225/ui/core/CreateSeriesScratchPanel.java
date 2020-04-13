@@ -39,7 +39,7 @@ public class CreateSeriesScratchPanel extends CalendarLayoutPanel {
         the number of events in the series (min. 2)
      */
     public CreateSeriesScratchPanel(ControllerContainer controllerContainer){
-        super(new GridBagLayout(),controllerContainer);
+        super(controllerContainer);
     }
     @Override
     protected void buildPanel(List<String> inputs) {

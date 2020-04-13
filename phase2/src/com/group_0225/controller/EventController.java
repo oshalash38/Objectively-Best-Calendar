@@ -83,37 +83,7 @@ public class EventController extends CalendarController {
         // push a dialog with the corresponding events  presenter.displayPanel( new PanelInfo(PanelKey, List of string representation of the events (probably just their names), true)
     }
 
-    /**
-     * Parses an input date from panel
-     * @param s
-     * @return index 0: Day, index 1: Month, index 2: Year
-     */
-    private List<Integer> parseDate(String s) {
-        List<Integer> result = new ArrayList<>();
-        if (s.length() == 11){
-            result.add(Integer.parseInt(s.substring(0, 2)));
-            result.add(Months.get(s.substring(3, 6)));
-            result.add(Integer.parseInt(s.substring(7, 11)));
-        } else {
-            result.add(Integer.parseInt(s.substring(0, 1)));
-            result.add(Months.get(s.substring(2, 5)));
-            result.add(Integer.parseInt(s.substring(6, 10)));
-        }
-        return result;
-    }
 
-    /**
-     * Parses an input time from panel
-     * @param s
-     * @return index 0: Hour, index 1: Minute, index 3: Second
-     */
-    private List<Integer> parseTime(String s){
-        List<Integer> result = new ArrayList<>();
-        result.add(Integer.parseInt(s.substring(0, 2)));
-        result.add(Integer.parseInt(s.substring(3, 5)));
-        result.add(Integer.parseInt(s.substring(6, 8)));
-        return result;
-    }
 
 
     // TODO: Should this be here or in manager?

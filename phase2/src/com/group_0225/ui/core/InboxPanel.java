@@ -10,7 +10,7 @@ import java.util.List;
 
 public class InboxPanel extends CalendarLayoutPanel {
     public InboxPanel(ControllerContainer controllerContainer) {
-        super(new GridBagLayout(), controllerContainer);
+        super(controllerContainer);
     }
 
     @Override

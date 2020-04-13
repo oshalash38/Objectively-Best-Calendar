@@ -12,7 +12,7 @@ import java.util.Map;
 
 public class CreateCalendarPanel extends CalendarLayoutPanel {
     public CreateCalendarPanel(ControllerContainer controllerContainer) {
-        super(new GridBagLayout(), controllerContainer);
+        super(controllerContainer);
     }
 
     @Override

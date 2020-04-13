@@ -38,4 +38,5 @@ public class ControllerContainer {
     public SeriesController getSeriesController() { return seriesController; }
     public EventController getEventsController() { return eventsController; }
     public CalendarGridController getCalendarGridController() { return calendarGridController; }
+    public LocalTimeController getLocalTimeController(){return localTimeController; }
 }

@@ -14,7 +14,7 @@ import java.util.List;
 public class SendMessagePanel extends CalendarLayoutPanel {
 
     public SendMessagePanel(ControllerContainer controllerContainer) {
-        super(new GridBagLayout(), controllerContainer);
+        super(controllerContainer);
     }
 
 

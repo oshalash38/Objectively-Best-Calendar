@@ -16,6 +16,8 @@ public class CalendarToolBar extends JMenuBar {
     private SeriesController seriesController;
     private UsersCalendarController usersCalendarController;
     private CalendarGridController calendarGridController;
+    private LocalTimeController localTimeController;
+
     private Map<String, String> viewModel;
 
     private JMenu createMenu;
@@ -37,6 +39,7 @@ public class CalendarToolBar extends JMenuBar {
         this.seriesController = controllerContainer.getSeriesController();
         this.usersCalendarController = controllerContainer.getUsersCalendarController();
         this.calendarGridController = controllerContainer.getCalendarGridController();
+        this.localTimeController = controllerContainer.getLocalTimeController();
 
         toolBarBuilder();
     }
@@ -78,9 +81,9 @@ public class CalendarToolBar extends JMenuBar {
                 Arrays.asList("TOOLBARTimeMachineReturnToPresentString", "TOOLBARTimeMachineTimeTravelString"));
 
         //Back to the present
-        subMenus.get(0).addActionListener(e -> messagingController.pushSendNewMessagePanel());
+        subMenus.get(0).addActionListener(e -> localTimeController.backToThePresent(calendarGridController));
         //Activate time travel
-        subMenus.get(1).addActionListener(e -> messagingController.pushInboxPanel());
+        subMenus.get(1).addActionListener(e -> localTimeController.pushChangeTimePanel());
     }
 
     private void buildUserSettingsMenu(){

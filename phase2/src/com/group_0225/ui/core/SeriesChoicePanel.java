@@ -12,7 +12,7 @@ import java.util.List;
 
 public class SeriesChoicePanel extends CalendarLayoutPanel {
     public SeriesChoicePanel(ControllerContainer controllerContainer) {
-        super(new GridBagLayout(), controllerContainer);
+        super(controllerContainer);
     }
 
     @Override

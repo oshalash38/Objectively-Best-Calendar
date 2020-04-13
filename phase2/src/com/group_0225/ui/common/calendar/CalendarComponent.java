@@ -17,7 +17,7 @@ public class CalendarComponent extends CalendarLayoutPanel {
     List<JPanel> calendarComponent;
 
     public CalendarComponent(ControllerContainer controllerContainer) {
-        super(new GridBagLayout(), controllerContainer);
+        super(controllerContainer);
     }
 
     @Override

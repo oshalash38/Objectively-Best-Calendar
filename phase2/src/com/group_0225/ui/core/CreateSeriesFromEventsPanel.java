@@ -27,8 +27,8 @@ public class CreateSeriesFromEventsPanel extends CalendarLayoutPanel {
         -can be a list of ids selected, a string of ids separated by commas (preferred), etc
         -let me know which one you have chosen so i can adjust controller accordingly
      */
-    public CreateSeriesFromEventsPanel(ControllerContainer facade) {
-        super(new GridBagLayout(), facade);
+    public CreateSeriesFromEventsPanel(ControllerContainer controllerContainer) {
+        super(controllerContainer);
         map = new HashMap<>();
         checkBoxes = new ArrayList<>();
     }
