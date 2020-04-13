@@ -28,7 +28,7 @@ public class ViewModelBuilder {
         viewModel.put("CreateSeriesFromScratch", "Create a series from scratch:");
         viewModel.put("CreateSeriesFromEvents", "Create a series from existing events:");
         viewModel.put("seriesname", "Choose series name:");
-        viewModel.put("SeriesName:", "Series name:");
+        viewModel.put("SeriesName:", "Series name: ");
         //viewModel.put("CreateSeriesFromEvents", "Create a series from events");
         viewModel.put("freq", "How often will events in this series occur?");
 

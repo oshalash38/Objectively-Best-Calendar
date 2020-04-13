@@ -118,11 +118,11 @@ public class CalendarToolBar extends JMenuBar {
                         "TOOLBARViewMenuSeriesString"));
 
         //Current events
-        subMenus.get(0).addActionListener(e -> eventController.viewEventByStatus(Status.UPCOMING));
+        subMenus.get(0).addActionListener(e -> eventController.viewEventByStatus(Status.CURRENT));
         //Past events
         subMenus.get(1).addActionListener(e -> eventController.viewEventByStatus(Status.PAST));
         //Future events
-        subMenus.get(2).addActionListener(e -> eventController.viewEventByStatus(Status.CURRENT));
+        subMenus.get(2).addActionListener(e -> eventController.viewEventByStatus(Status.UPCOMING));
         //Date threshold
         subMenus.get(3).addActionListener(e -> {});
         //Memo
