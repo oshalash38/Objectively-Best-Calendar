@@ -131,8 +131,8 @@ public class Event implements Serializable, Comparable<Event> {
     /**
      * Checks the time of the event relative to the current time and updates the status accordingly.
      */
-    public void updateStatus(){
-        int status = time.getStatus(LocalDateTime.now());
+    public void updateStatus(CalendarData calendarData){
+        int status = time.getStatus(calendarData.getLocalTime().getStart());
         if (status == 0){
                 this.status = Status.CURRENT;}
         else if ( status == 1){

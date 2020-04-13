@@ -144,7 +144,7 @@ public class EventManager {
 //            entry.getValue().updateStatus();
 //        }
         for(Map.Entry<Integer, Event> entry : calendarData.getEvents().entrySet()){
-            entry.getValue().updateStatus();
+            entry.getValue().updateStatus(calendarData);
         }
     }
 
