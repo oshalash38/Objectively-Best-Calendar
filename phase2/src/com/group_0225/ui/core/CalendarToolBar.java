@@ -8,7 +8,7 @@ import com.group_0225.ui.common.util.UIUpdateInfo;
 import javax.swing.*;
 import java.util.*;
 
-public class CalendarToolBar extends JMenuBar implements Observer{
+public class CalendarToolBar extends JMenuBar {
 
     private LoginController loginController;
     private EventController eventController;
@@ -42,7 +42,7 @@ public class CalendarToolBar extends JMenuBar implements Observer{
     }
 
 
-    private void loadCalendars(List<String> calendars){
+    public void loadCalendars(List<String> calendars){
         JMenu subCalendars = new JMenu(viewModel.get("TOOLBARUserChangeCalendarString"));
         List<JMenuItem> calendarItems = buildJMenuItems(subCalendars, false, calendars);
         userSettings.remove(0);
@@ -171,20 +171,4 @@ public class CalendarToolBar extends JMenuBar implements Observer{
     }
 
 
-    /**
-     * This method is called whenever the observed object is changed. An
-     * application calls an <tt>Observable</tt> object's
-     * <code>notifyObservers</code> method to have all the object's
-     * observers notified of the change.
-     *
-     * @param o   the observable object.
-     * @param arg an argument passed to the <code>notifyObservers</code>
-     */
-    @Override
-    public void update(Observable o, Object arg) {
-        UIUpdateInfo info = (UIUpdateInfo)arg;
-        if(info.getRecipient().equals("toolbar")){
-            loadCalendars(info.getData());
-        }
-    }
 }

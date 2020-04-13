@@ -11,7 +11,7 @@ import java.util.Map;
 
 public class GUIBuilder {
 
-    public Map<String, CalendarLayoutPanel> buildPanels(UIPresenter presenter, CalendarData calendarData, ControllerContainer controllerContainer) {
+    public Map<String, CalendarLayoutPanel> buildPanels(ControllerContainer controllerContainer) {
         Map<String, CalendarLayoutPanel> panels = new Hashtable<>();
 
         //IMPORTANT
