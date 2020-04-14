@@ -13,11 +13,23 @@ import java.util.List;
 public class LoginController extends CalendarController{
     UserManager userManager;
 
+    /**
+     * Creates  an instance of loginController
+     * @param data All entities required for runtime
+     * @param presenter sends commands to change UI
+     */
     public LoginController(CalendarData data, UIPresenter presenter) {
         super(data, presenter);
         userManager = new UserManager();
     }
 
+    /**
+     * Logs in the user with the given username and password and changes the UI to the calendar grid
+     * @param username the username of the user trying to login
+     * @param password the password of the user trying to login
+     * @param calendarGridController changes the view if the user successfully logged in
+     * @param usersCalendarController changes the calendars available to the logged in user
+     */
     public void login(String username, String password,
                       CalendarGridController calendarGridController, UsersCalendarController usersCalendarController){
 
@@ -37,11 +49,22 @@ public class LoginController extends CalendarController{
         }
    }
 
+    /**
+     * Pushes the screen to create a new User
+     */
     public void createNewUserScreen(){
         pushCreateNewUserScreen(Arrays.asList("", ""));
     }
 
 
+    /**
+     * Creates a new user with the given username and password
+     * @param username the username of the new user
+     * @param password the password of the new user
+     * @param repeatPassword the password of the new user repeated
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
     public void createNewUser(String username, String password, String repeatPassword) throws IOException, ClassNotFoundException {
         if(username.length() == 0 || password.length() == 0 || repeatPassword.length() == 0){
             pushCreateNewUserScreen( Arrays.asList(username, "Please enter all fields."));//TODO I'm not sure if a controller is allowed to have string messages

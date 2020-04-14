@@ -6,6 +6,9 @@ import com.group_0225.entities.CalendarData;
 
 import java.time.LocalDateTime;
 
+/**
+ * This class stores all the Controllers used in the program and provides a required controller upon request
+ */
 public class ControllerContainer {
 
     protected UIPresenter presenter;
@@ -20,6 +23,11 @@ public class ControllerContainer {
 
     private CalendarData calendarData;
 
+    /**
+     * Creates a new ControllerCreator with the required controllers
+     * @param presenter the presenter required to change the UI
+     * @param calendarData All entities required for runtime
+     */
     public ControllerContainer(UIPresenter presenter, CalendarData calendarData) {
         this.presenter = presenter;
         this.calendarData = calendarData;
@@ -32,11 +40,45 @@ public class ControllerContainer {
         usersCalendarController = new UsersCalendarController(calendarData,presenter);
     }
 
+    /**
+     * Getter method for UsersCalendarController
+     * @return the UsersCalendarController
+     */
     public UsersCalendarController getUsersCalendarController(){return usersCalendarController; }
+
+    /**
+     * Getter method for MessagingController
+     * @return the MessagingController
+     */
     public MessagingController getMessagingController(){return messagingController; }
+
+    /**
+     * Getter method for LoginController
+     * @return the LoginController
+     */
     public LoginController getLoginController() { return loginController; }
+
+    /**
+     * Getter method for SeriesController
+     * @return the SeriesController
+     */
     public SeriesController getSeriesController() { return seriesController; }
+
+    /**
+     * Getter method for EventController
+     * @return the EventController
+     */
     public EventController getEventsController() { return eventsController; }
+
+    /**
+     * Getter method for CalendarGridController
+     * @return the CalendarGridController
+     */
     public CalendarGridController getCalendarGridController() { return calendarGridController; }
+
+    /**
+     * Getter method for LocalTimeController
+     * @return the LocalTimeController
+     */
     public LocalTimeController getLocalTimeController(){return localTimeController; }
 }

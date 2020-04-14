@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Map;
 
 public abstract class CalendarController {
-    //TODO RENAME THIS CLASS TO CONTROLLER ONCE WE DELETE THE OLD STUFF
     protected CalendarData data;
     protected UIPresenter presenter;
     protected Map<String, Integer> Months;

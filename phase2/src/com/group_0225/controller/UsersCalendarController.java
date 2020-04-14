@@ -20,6 +20,9 @@ public class UsersCalendarController extends CalendarController {
         presenter.updateUI(new UIUpdateInfo("toolbar", userManager.getCalendarNames(user)));
     }
 
+    /**
+     * Pushes the add new calendar view to the UI
+     */
     public void pushAddNewCalendar(){
         presenter.updateUI(new UIUpdateInfo("dialog", Arrays.asList("", ""), "CreateCalendarPanel"));
     }
