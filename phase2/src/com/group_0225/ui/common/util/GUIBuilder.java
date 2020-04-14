@@ -30,6 +30,7 @@ public class GUIBuilder {
         panels.put("CreateCalendarPanel", new CreateCalendarPanel(controllerContainer));
         panels.put("Inbox", new InboxPanel(controllerContainer));
         panels.put("ChangeTimePanel", new ChangeTimePanel(controllerContainer));
+        panels.put("AcceptDeclineMessagePanel", new AcceptDeclineMessagePanel(controllerContainer));
 
         return panels;
     }

@@ -178,6 +178,7 @@ public class Event implements Serializable, Comparable<Event> {
         return day+"-"+month+"-"+year;
     }
 
+
     /**
      * Adds a memo to the list of memos for this event
      * @param memoID the ID of the memo

@@ -53,6 +53,10 @@ public class ViewModelBuilder {
         viewModel.put("Send", "Send!");
         viewModel.put("Inbox", "Inbox");
         viewModel.put("Requests", "Requests: ");
+        viewModel.put("Event information: ", "Event information: ");
+        viewModel.put("Accept invitation: ", "Accept invitation: ");
+        viewModel.put("Decline invitation: ", "Decline invitation: ");
+        viewModel.put("Optional reply: ","Optional reply: ");
 
         viewModel.put("CreateCalendarPanelTitle", "Create New Calendar");
         viewModel.put("CalendarNameString", "New Calendar Name:");

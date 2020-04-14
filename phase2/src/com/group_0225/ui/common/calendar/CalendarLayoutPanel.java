@@ -119,6 +119,13 @@ public abstract class CalendarLayoutPanel extends JPanel {
         bottomPane.add(tick, constraints);
         return tick;
     }
+    protected JTextArea addTextArea(String text, JPanel bottomPane, int y, GridBagConstraints constraints){
+        JTextArea area = new JTextArea(text);
+        constraints.gridy = y;
+        bottomPane.add(area, constraints);
+        return area;
+
+    }
     protected JSpinner addNumEventsSpinner(GridBagConstraints constraints, JPanel bottomPane, int y){
         SpinnerModel numMod = new SpinnerNumberModel(2, 2, 99, 1);
         JSpinner j = new JSpinner(numMod);

@@ -19,8 +19,10 @@ public class User implements Serializable {
     private Map<Integer, String> memos = new HashMap<>();
     private String password;
     private String username;
-    private List<EventMessage> requests;
-    private List<EventMessage> responses;
+
+
+    private Map<String,EventMessage> requests;
+    private Map<String,EventMessage> responses;
 
 
     /**
@@ -31,7 +33,8 @@ public class User implements Serializable {
     public User(String username, String password){
         this.username = username;
         this.password = password;
-        requests = new ArrayList<EventMessage>();
+        requests = new HashMap<>();
+        responses = new HashMap<>();
         calendars.put("default", new ArrayList<>());
         calendars.put("test", new ArrayList<>());
     }
@@ -98,7 +101,7 @@ public class User implements Serializable {
     }
 
     public void addRequest(EventMessage request){
-        requests.add(request);
+        requests.put(request.getMessage(),request);
     }
 
     public boolean hasRequests(){
@@ -106,11 +109,19 @@ public class User implements Serializable {
     }
 
     public List<EventMessage> getRequests(){
+        return new ArrayList<>(requests.values());
+    }
+    public EventMessage getRequest(String message){
+        return requests.get(message);
+    }
+    public Map<String, EventMessage> getMapRequests(){
         return requests;
     }
-
+    public Map<String, EventMessage> getMapResponses(){
+        return responses;
+    }
     public void addResponse(EventMessage response){
-        responses.add(response);
+        responses.put(response.getMessage(),response);
     }
 
     public int hashCode(){

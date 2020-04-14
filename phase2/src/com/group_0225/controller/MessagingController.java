@@ -36,7 +36,15 @@ public class MessagingController extends CalendarController{
 
     public void pushInboxPanel(){
         List<String> requests = messagingManager.getRequests(data);
+        requests.addAll(messagingManager.getText(data));
         presenter.updateUI(new UIUpdateInfo("dialog", requests, "Inbox"));
+    }
+    public void pushAcceptDeclinePanel(List<String> message){
+        List<String> input = new ArrayList<>(message);
+        input.add(messagingManager.messageToEvent(data.getCurrUser(),message.get(0)));
+        //index 0 -> the message
+        //index 1 -> the event formatted as string
+        presenter.updateUI(new UIUpdateInfo("scrollable",input,"AcceptDeclineMessagePanel"));
     }
 
     public void sendMessage(List<String> input){
@@ -48,6 +56,14 @@ public class MessagingController extends CalendarController{
             System.err.println("Needs Validation");
         }
 
+    }
+    public void acceptMessage(List<String> input){
+        messagingManager.acceptRequest(data,messagingManager.getEventMessage(data,input.get(0)),input.get(1));
+        pushInboxPanel();
+    }
+    public void declineMessage(List<String> input){
+        messagingManager.rejectRequest(messagingManager.getEventMessage(data,input.get(0)),input.get(1));
+        pushInboxPanel();
     }
 
 }
