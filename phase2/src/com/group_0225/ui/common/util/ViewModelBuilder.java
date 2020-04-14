@@ -68,6 +68,10 @@ public class ViewModelBuilder {
         viewModel.put("SelectTimeString", "Select Time:");
         viewModel.put("TimeChangeSuccessfulString", "Time travel successful. Local date and time: ");
 
+        viewModel.put("CreateAlertTitleString", "Create Alert");
+        viewModel.put("RecurringAlertOrNot", "Is this a recurring alert or a one time alert?");
+        viewModel.put("OneTimeButtonString", "One time alert");
+        viewModel.put("RepeatingButtonString", "Repeating alert");
 
 
         //TOOLBAR HEADERS

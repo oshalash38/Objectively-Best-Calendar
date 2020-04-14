@@ -1,6 +1,5 @@
 package com.group_0225.ui.common.util;
 
-import com.group_0225.entities.CalendarData;
 import com.group_0225.controller.ControllerContainer;
 import com.group_0225.ui.common.calendar.CalendarLayoutPanel;
 import com.group_0225.ui.core.*;
@@ -31,6 +30,7 @@ public class GUIBuilder {
         panels.put("Inbox", new InboxPanel(controllerContainer));
         panels.put("ChangeTimePanel", new ChangeTimePanel(controllerContainer));
         panels.put("AcceptDeclineMessagePanel", new AcceptDeclineMessagePanel(controllerContainer));
+        panels.put("CreateAlertPromptPanel", new CreateAlertPromptPanel(controllerContainer));
 
         return panels;
     }

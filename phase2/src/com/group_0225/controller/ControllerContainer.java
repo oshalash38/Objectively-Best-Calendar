@@ -20,6 +20,8 @@ public class ControllerContainer {
     private MessagingController messagingController;
     private LocalTimeController localTimeController;
     private UsersCalendarController usersCalendarController;
+    private AlertController alertController;
+
 
     private CalendarData calendarData;
 
@@ -38,6 +40,7 @@ public class ControllerContainer {
         messagingController = new MessagingController(calendarData,presenter);
         localTimeController = new LocalTimeController(calendarData,presenter);
         usersCalendarController = new UsersCalendarController(calendarData,presenter);
+        alertController = new AlertController(calendarData, presenter);
     }
 
     /**
@@ -81,4 +84,6 @@ public class ControllerContainer {
      * @return the LocalTimeController
      */
     public LocalTimeController getLocalTimeController(){return localTimeController; }
+
+    public AlertController getAlertController(){return alertController;}
 }

@@ -99,31 +99,28 @@ public class CreateSeriesScratchPanel extends CalendarLayoutPanel {
 
 
         Button create = addButton(constraints,bottomPane, 20, viewModel.get("CREATESERIES"));
-        create.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                List<String> inputs = new ArrayList<>();
-                //TODO: delete the following test print statements before submission
-                System.out.println(seriesName.getText());
-                System.out.println(((String) Objects.requireNonNull(frequency.getSelectedItem())).substring(0,1));
-                System.out.println(startDateField.getJFormattedTextField().getText());
-                System.out.println(startTimeField.getValue().toString().substring(11,19));
-                System.out.println(((String) Objects.requireNonNull(dayField.getSelectedItem())).substring(0,1));
-                System.out.println(durationField.getValue().toString().substring(11,19));
-                System.out.println(numEventsField.getValue().toString());
+        create.addActionListener(e -> {
+            List<String> inputs1 = new ArrayList<>();
+            //TODO: delete the following test print statements before submission
+            System.out.println(seriesName.getText());
+            System.out.println(((String) Objects.requireNonNull(frequency.getSelectedItem())).substring(0,1));
+            System.out.println(startDateField.getJFormattedTextField().getText());
+            System.out.println(startTimeField.getValue().toString().substring(11,19));
+            System.out.println(((String) Objects.requireNonNull(dayField.getSelectedItem())).substring(0,1));
+            System.out.println(durationField.getValue().toString().substring(11,19));
+            System.out.println(numEventsField.getValue().toString());
 
-                try{
-                    inputs.add(seriesName.getText());
-                    inputs.add(((String) Objects.requireNonNull(frequency.getSelectedItem())).substring(0,1));
-                    inputs.add(startDateField.getJFormattedTextField().getText());
-                    inputs.add(startTimeField.getValue().toString().substring(11,19));
-                    inputs.add(((String) Objects.requireNonNull(dayField.getSelectedItem())).substring(0,1));
-                    inputs.add(durationField.getValue().toString().substring(11,19));
-                    inputs.add(numEventsField.getValue().toString());
-                    sc.createSeriesFromScratch(inputs);
-                }catch(Exception someE){
-                    System.err.println("Some input caused an exception");
-                }
+            try{
+                inputs1.add(seriesName.getText());
+                inputs1.add(((String) Objects.requireNonNull(frequency.getSelectedItem())).substring(0,1));
+                inputs1.add(startDateField.getJFormattedTextField().getText());
+                inputs1.add(startTimeField.getValue().toString().substring(11,19));
+                inputs1.add(((String) Objects.requireNonNull(dayField.getSelectedItem())).substring(0,1));
+                inputs1.add(durationField.getValue().toString().substring(11,19));
+                inputs1.add(numEventsField.getValue().toString());
+                sc.createSeriesFromScratch(inputs1);
+            }catch(Exception someE){
+                System.err.println("Some input caused an exception");
             }
         });
         addLabel(constraints,bottomPane,16,inputs.get(0));
