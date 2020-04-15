@@ -1,6 +1,5 @@
 package com.group_0225.manager;
 
-import com.group_0225.Main;
 import com.group_0225.entities.CalendarData;
 import com.group_0225.entities.User;
 

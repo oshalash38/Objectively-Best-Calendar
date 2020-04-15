@@ -1,7 +1,5 @@
 package com.group_0225.entities;
 
-import com.group_0225.entities.EventMessage;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -36,7 +34,6 @@ public class User implements Serializable {
         requests = new HashMap<>();
         responses = new HashMap<>();
         calendars.put("default", new ArrayList<>());
-        calendars.put("test", new ArrayList<>());
     }
 
     /**

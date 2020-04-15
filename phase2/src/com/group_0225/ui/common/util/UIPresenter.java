@@ -8,8 +8,4 @@ public class UIPresenter extends Observable {
         setChanged();
         notifyObservers(info);
     }
-    public void startUp(){
-        setChanged();
-        notifyObservers(new UIUpdateInfo("StartupPanel", null));
-    }
 }

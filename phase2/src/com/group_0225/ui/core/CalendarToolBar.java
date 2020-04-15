@@ -3,10 +3,12 @@ package com.group_0225.ui.core;
 import com.group_0225.controller.*;
 import com.group_0225.entities.Status;
 import com.group_0225.ui.common.util.ViewModelBuilder;
-import com.group_0225.ui.common.util.UIUpdateInfo;
 
 import javax.swing.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 
 public class CalendarToolBar extends JMenuBar {
 
@@ -18,6 +20,7 @@ public class CalendarToolBar extends JMenuBar {
     private CalendarGridController calendarGridController;
     private LocalTimeController localTimeController;
     private MemoController memoController;
+    private AlertController alertController;
 
     private Map<String, String> viewModel;
 
@@ -42,6 +45,7 @@ public class CalendarToolBar extends JMenuBar {
         this.calendarGridController = controllerContainer.getCalendarGridController();
         this.localTimeController = controllerContainer.getLocalTimeController();
         this.memoController = controllerContainer.getMemoController();
+        this.alertController = controllerContainer.getAlertController();
 
         toolBarBuilder();
     }
@@ -150,7 +154,7 @@ public class CalendarToolBar extends JMenuBar {
         //Create event
         subMenus.get(0).addActionListener(e -> eventController.pushCreateEvent());
         //Create Alert
-        subMenus.get(1).addActionListener(e -> { });
+        subMenus.get(1).addActionListener(e -> alertController.pushCreateNewAlert());
         //Create Memo
         subMenus.get(2).addActionListener(e -> memoController.pushCreateMemo());
         //Create Series

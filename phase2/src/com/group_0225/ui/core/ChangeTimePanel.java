@@ -2,7 +2,6 @@ package com.group_0225.ui.core;
 
 import com.group_0225.controller.CalendarGridController;
 import com.group_0225.controller.ControllerContainer;
-import com.group_0225.controller.EventController;
 import com.group_0225.controller.LocalTimeController;
 import com.group_0225.ui.common.calendar.CalendarLayoutPanel;
 import org.jdatepicker.impl.JDatePickerImpl;
@@ -46,9 +45,6 @@ public class ChangeTimePanel extends CalendarLayoutPanel {
             userInputs.add(timeSelection.getValue().toString().substring(11,19));
             localTimeController.changeTime(userInputs);
             gridController.displayGrid();
-
-
-
         });
 
 
