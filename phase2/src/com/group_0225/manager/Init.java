@@ -61,6 +61,7 @@ public class Init {
                 try {
                     databaseReader.saveToFile("users.txt", calendarData.getUsers());
                     databaseReader.saveToFile("events.txt", calendarData.getEvents());
+                    databaseReader.saveToFile("memos.txt", calendarData.getMemos());
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
@@ -74,6 +75,7 @@ public class Init {
 
         Object users = databaseReader.readFile("users.txt");
         Object events = databaseReader.readFile("events.txt");
+        Object memos = databaseReader.readFile("memos.txt");
         if(users != null){
             System.out.println(((Map<String, User>)users).size());
             calendarData.setUsers((Map<String, User>)users);
@@ -81,6 +83,10 @@ public class Init {
         if(events != null){
             System.out.println(((Map<Integer, Event>)events).size());
             calendarData.setEvents((Map<Integer, Event>)events);
+        }
+        if (memos != null){
+            System.out.println(((Map<Integer, String>)memos).size());
+            calendarData.setMemos((Map<Integer, String>)memos);
         }
     }
 

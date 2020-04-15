@@ -20,6 +20,8 @@ public class ViewModelBuilder {
         viewModel.put("Username:", "Username:");
         viewModel.put("Login", "Login");
         viewModel.put("EventCreated", "Event Created.");
+        viewModel.put("EventError1", "Please enter all fields");
+        viewModel.put("EventError2", "Please enter valid dates/times");
         viewModel.put("Start Date: ", "Start Date: ");
         viewModel.put("End Date: ", "End Date: ");
         viewModel.put("Start Time: ", "Start Time: ");
@@ -33,6 +35,10 @@ public class ViewModelBuilder {
         viewModel.put("freq", "How often will events in this series occur?");
         viewModel.put("CreateMemo", "Create New Memo");
         viewModel.put("EnterMemo", "Enter Memo: ");
+        viewModel.put("Separator", "-------------------------------");
+        viewModel.put("MemoError1", "Please select at least one event");
+        viewModel.put("MemoError2", "Please enter a valid memo");
+        viewModel.put("MemoCreated", "Memo Created.");
 
         viewModel.put("EnterStartTimeString", "Enter Start Time: (hh:mm:ss)");
         viewModel.put("EnterEndTimeString", "Enter End Time:");

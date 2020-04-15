@@ -34,17 +34,29 @@ public class CreateMemoPanel extends CalendarLayoutPanel {
 
         List<JCheckBox> events = new ArrayList<>();
 
-        addLabel(c, bottomPane, 1, viewModel.get("EnterEvent"));
+        addLabel(c, bottomPane, 0, viewModel.get("EnterEvent"));
 
-        int i = 0;
+        int i = 1;
         while (i < inputs.size()){
-            JCheckBox checkBox = addCheckBox(inputs.get(i), bottomPane, 2 + i, c);
+            JCheckBox checkBox = addCheckBox(inputs.get(i), bottomPane, i, c);
             events.add(checkBox);
             i++;
         }
-        addLabel(c, bottomPane, 2 + i, viewModel.get("EnterMemo"));
-        JTextArea memo = addTextArea(c, bottomPane, i+3);
-        Button create = addButton(c, bottomPane, i+4, viewModel.get("CreateString"));
+        addLabel(c, bottomPane, i, viewModel.get("EnterMemo"));
+        JTextArea memo = addTextArea(c, bottomPane, i + 1);
+        Button create = addButton(c, bottomPane, i + 2, viewModel.get("CreateString"));
+
+        if (inputs.get(0).equals("Error1")){
+            addLabel(c, bottomPane, i + 3, viewModel.get("MemoError1"));
+        }
+
+        if (inputs.get(0).equals("Error2")){
+            addLabel(c, bottomPane, i + 3, viewModel.get("MemoError2"));
+        }
+
+        if (inputs.get(0).equals("Created")){
+            addLabel(c, bottomPane, i + 3, viewModel.get("MemoCreated"));
+        }
 
 
         create.addActionListener(new ActionListener() {

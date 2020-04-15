@@ -27,8 +27,20 @@ public class EventPanel extends CalendarLayoutPanel {
         addLabel(c, bottomPane, 4, viewModel.get("End Date: ") + inputs.get(2));
         addLabel(c, bottomPane, 6, viewModel.get("Start Time: ") + inputs.get(3));
         addLabel(c, bottomPane, 8, viewModel.get("End Time: ") + inputs.get(4));
-        addLabel(c, bottomPane, 10, viewModel.get("Memos:") + inputs.get(5));
-        addLabel(c, bottomPane, 12, viewModel.get("SeriesName:") + inputs.get(6));
+        addLabel(c, bottomPane, 10, viewModel.get("SeriesName:") + inputs.get(5));
+        addLabel(c, bottomPane, 12, viewModel.get("Memos:"));
+        List<String> memos = inputs.subList(6, inputs.size());
+        int i = 0;
+        int j = 0;
+        while (i < memos.size()){
+            JTextArea memo = addTextArea(memos.get(i), bottomPane, 13 + j, c);
+            memo.setEditable(false);
+            addLabel(c, bottomPane, 14 + j, viewModel.get("Separator"));
+            i++;
+            j = j + 2;
+        }
+
+
 
         c.gridy = 1;
         this.add(bottomPane, c);

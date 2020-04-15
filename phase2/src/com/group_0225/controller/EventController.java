@@ -2,6 +2,7 @@ package com.group_0225.controller;
 
 import com.group_0225.entities.*;
 import com.group_0225.manager.EventManager;
+import com.group_0225.manager.MemoManager;
 import com.group_0225.ui.common.util.UIUpdateInfo;
 import com.group_0225.ui.common.util.UIPresenter;
 
@@ -11,6 +12,7 @@ import java.util.*;
 public class EventController extends CalendarController {
 
     private EventManager eventManager;
+    private MemoManager memoManager;
 
     // TODO: Not sure if other classes will need this or not as well to avoid duplicate code.
 
@@ -20,6 +22,7 @@ public class EventController extends CalendarController {
     public EventController(CalendarData data, UIPresenter presenter) {
         super(data, presenter);
         eventManager = new EventManager();
+        memoManager = new MemoManager();
     }
 
 
@@ -60,16 +63,28 @@ public class EventController extends CalendarController {
      *              index 3: Start Time, index 4: End Time
      */
     public void createEvent(List<String> input) {
-        TimingFactory timingFactory = new TimingFactory();
+        List<String> output = new ArrayList<>();
+        if (input.get(0).equals("Error1")){
+            output.add("Error1");
+        } else {
+            TimingFactory timingFactory = new TimingFactory();
 
-        List<Integer> startDateParsed = parseDate(input.get(1));
-        List<Integer> endDateParsed = parseDate(input.get(2));
-        List<Integer> startTimeParsed = parseTime(input.get(3));
-        List<Integer> endTimeParsed = parseTime(input.get(4));
-        Timing timing = timingFactory.createTiming(startDateParsed.get(2), startDateParsed.get(1), startDateParsed.get(0),
-           startTimeParsed.get(0), startTimeParsed.get(1), endDateParsed.get(2), endDateParsed.get(1), endDateParsed.get(0),
-                endTimeParsed.get(0), endTimeParsed.get(1));
-        eventManager.createEvent(data, input.get(0), timing);
+            List<Integer> startDateParsed = parseDate(input.get(1));
+            List<Integer> endDateParsed = parseDate(input.get(2));
+            List<Integer> startTimeParsed = parseTime(input.get(3));
+            List<Integer> endTimeParsed = parseTime(input.get(4));
+            Timing timing = timingFactory.createTiming(startDateParsed.get(2), startDateParsed.get(1), startDateParsed.get(0),
+                    startTimeParsed.get(0), startTimeParsed.get(1), endDateParsed.get(2), endDateParsed.get(1), endDateParsed.get(0),
+                    endTimeParsed.get(0), endTimeParsed.get(1));
+            if (timing == null){
+                output.add("Error2");
+            }
+            else {
+                eventManager.createEvent(data, input.get(0), timing);
+                output.add("Created");
+            }
+        }
+        presenter.updateUI(new UIUpdateInfo("dialog", output, "CreateEventPanel"));
     }
 
     public void pushViewEventsByDateThreshold(){
@@ -106,14 +121,15 @@ public class EventController extends CalendarController {
     public void displayEvent(String rawID){
         int id = Integer.parseInt(rawID);
         Event event = eventManager.getEventByID(data, id);
+        List<String> memos = memoManager.getMemos(event, data);
         List<String> output = new ArrayList<>();
         output.add(event.getEventName());
         output.add(event.getStartDateString());
         output.add(event.getEndDateString());
         output.add(event.getStartTimeString());
         output.add(event.getEndTimeString());
-        output.add("SHOULD BE THE MEMO HEREEEEEEEEEEE");
         output.add(event.getSeriesName());
+        output.addAll(memos);
         presenter.updateUI(new UIUpdateInfo("dialog", output, "EventPanel"));
     }
 }
