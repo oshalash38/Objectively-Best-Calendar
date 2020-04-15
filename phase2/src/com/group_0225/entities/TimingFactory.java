@@ -76,9 +76,15 @@ public class TimingFactory {
             dayOfMonth1 = monthOfYear1.lengthOfMonth();
         if(dayOfMonth2 > monthOfYear2.lengthOfMonth())
             dayOfMonth2 = monthOfYear2.lengthOfMonth();
-        
-        return new Timing(LocalDateTime.of(year1, Month.of(month1), dayOfMonth1, hour1, minute1),
-                LocalDateTime.of(year2, Month.of(month2), dayOfMonth2, hour2, minute2));
+
+        LocalDateTime start = LocalDateTime.of(year1, Month.of(month1), dayOfMonth1, hour1, minute1);
+        LocalDateTime end = LocalDateTime.of(year2, Month.of(month2), dayOfMonth2, hour2, minute2);
+
+        if (start.isAfter(end)){
+            return null;
+        } else {
+            return new Timing(start, end);
+        }
     }
     
 }

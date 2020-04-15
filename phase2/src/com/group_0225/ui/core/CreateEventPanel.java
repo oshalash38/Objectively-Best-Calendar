@@ -44,6 +44,16 @@ public class CreateEventPanel extends CalendarLayoutPanel {
         addLabel(c, bottomPane, 8, viewModel.get("EnterEndTimeString"));
         JSpinner endTimeSpinner = addTimeSpinner(c, bottomPane, 9);
         Button create = addButton(c, bottomPane, 10, viewModel.get("CreateString"));
+
+        if (inputs != null && inputs.size() > 0) {
+            if (inputs.get(0).equals("Error1")){
+                addLabel(c, bottomPane, 12, viewModel.get("EventError1"));
+            } else if (inputs.get(0).equals("Created")){
+                addLabel(c, bottomPane, 12, viewModel.get("EventCreated"));
+            } else if (inputs.get(0).equals("Error2")){
+                addLabel(c, bottomPane, 12, viewModel.get("EventError2"));
+            }
+        }
 //        Button goBack = addButton(c, bottomPane, 11, viewModel.get("CancelString"));
 
 
@@ -67,10 +77,19 @@ public class CreateEventPanel extends CalendarLayoutPanel {
                 inputs1.add(endDateField.getJFormattedTextField().getText());
                 inputs1.add(startTimeSpinner.getValue().toString().substring(11,19));
                 inputs1.add(endTimeSpinner.getValue().toString().substring(11,19));
-                eventController.createEvent(inputs1);
-                gridController.displayGrid();
+                if (inputs1.get(0).equals("")){
+                    List<String> errList = new ArrayList<>();
+                    errList.add("Error1");
+                    eventController.createEvent(errList);
+                }
+                else {
+                    eventController.createEvent(inputs1);
+                    gridController.displayGrid();
+                }
             } catch (StringIndexOutOfBoundsException ex){
-                System.err.println("Invalid Input");
+                List<String> errList = new ArrayList<>();
+                errList.add("Error1");
+                eventController.createEvent(errList);
             }
 
         });

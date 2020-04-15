@@ -20,12 +20,24 @@ public class MemoController extends CalendarController{
     }
 
     public void createMemo(String memo, List<String> eventNames){
-        memoManager.CreateMemo(data, memo, data.getEventsByNames(eventNames));
+        List<String> events = new ArrayList<>();
+        if (eventNames.size() == 0){
+            events.add("Error1");
+        } else if (memo.equals("")){
+            events.add("Error2");
+        }
+        else{
+            memoManager.CreateMemo(data, memo, data.getEventsByNames(eventNames));
+            events.add("Created");
+        }
+        events.addAll(eventManager.getNames(data.getCurrUserEvents()));
+        presenter.updateUI(new UIUpdateInfo("dialog", events, "CreateMemoPanel"));
     }
 
     public void pushCreateMemo(){
         // TODO: This is duplicate code from MessagingManager, should eliminate duplicates.
         List<String> events = new ArrayList<>();
+        events.add(" ");
         events.addAll(eventManager.getNames(data.getCurrUserEvents()));
         presenter.updateUI(new UIUpdateInfo("dialog", events, "CreateMemoPanel"));
     }

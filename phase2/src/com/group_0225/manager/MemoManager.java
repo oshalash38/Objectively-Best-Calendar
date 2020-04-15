@@ -100,4 +100,14 @@ public class MemoManager {
     public void DeleteMemo(Map<Integer, String> memos, int memoId) {
         memos.remove(memoId);
     }
+
+    public List<String> getMemos(Event event, CalendarData data){
+        List<Integer> ids = event.getMemoIDs();
+        List<String> result = new ArrayList<>();
+        for (int id : ids){
+            result.add(data.getMemoByID(id));
+        }
+        return result;
+    }
 }
+
