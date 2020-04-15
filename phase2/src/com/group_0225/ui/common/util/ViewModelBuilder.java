@@ -74,7 +74,7 @@ public class ViewModelBuilder {
         viewModel.put("TimeTravelString", "Time travel!");
         viewModel.put("SelectDateString", "Select Date:");
         viewModel.put("SelectTimeString", "Select Time: (hh:mm:ss)");
-        viewModel.put("SelectTimeFrequencyString", "Select Frequency: (ddd:hh:mm)");
+        viewModel.put("SelectTimeFrequencyString", "Select Frequency:");
         viewModel.put("TimeChangeSuccessfulString", "Time travel successful. Local date and time: ");
 
         viewModel.put("CreateAlertTitleString", "Create Alert");
@@ -83,6 +83,10 @@ public class ViewModelBuilder {
         viewModel.put("RecurringAlertOrNot", "Is this a recurring alert or a one time alert?");
         viewModel.put("OneTimeButtonString", "One time alert");
         viewModel.put("RepeatingButtonString", "Repeating alert");
+
+        viewModel.put("DaysFrequencyString", "Enter day frequency");
+        viewModel.put("HourFrequencyString", "Enter hour frequency");
+        viewModel.put("MinuteFrequencyString", "Enter minute frequency");
 
         viewModel.put("AlertNamePromptString", "Enter alert message:");
 
