@@ -11,6 +11,7 @@ import com.group_0225.ui.common.util.UIUpdateInfo;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class MessagingController extends CalendarController{
@@ -25,9 +26,11 @@ public class MessagingController extends CalendarController{
     }
 
     public void pushSendNewMessagePanel(){
+        sendNewMessagePanel(Collections.singletonList(""));
 
-        //TODO the following line was previously eventManager.getEventNames(), but that didn't compile...
-        List<String> events = new ArrayList<>();
+    }
+    private void sendNewMessagePanel(List<String> input){
+        List<String> events = new ArrayList<>(input);
         events.add(eventManager.getEventIDs(data.getCurrUserEvents()).size() + "");
         events.addAll(eventManager.getNames(data.getCurrUserEvents()));
         events.addAll(eventManager.getEventIDs(data.getCurrUserEvents()));
@@ -48,16 +51,22 @@ public class MessagingController extends CalendarController{
     }
 
     public void sendMessage(List<String> input){
-        try {
-            Event event = eventManager.getEventByID(data, Integer.parseInt(input.get(1)));
-            User user = data.getUser(input.get(0));
-            if (user.equals(data.getCurrUser())){
-                pushSendNewMessagePanel();
-            }
+        User user = data.getUser(input.get(0));
+        Event event = eventManager.getEventByID(data, Integer.parseInt(input.get(1)));
+        if (user != null && event != null){
+//            User user = data.getUser(input.get(0));
             messagingManager.sendRequest(data.getCurrUser(), user, event, input.get(2));
-        } catch (NullPointerException e){
-            System.err.println("Needs Validation");
         }
+        else {
+            if (user == null){
+            sendNewMessagePanel(Arrays.asList("This user does not exist."));
+
+            }
+            else if (event == null){
+                sendNewMessagePanel(Arrays.asList("No events to choose from"));
+            }
+        }
+
 
     }
     public void acceptMessage(List<String> input){
