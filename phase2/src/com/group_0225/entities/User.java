@@ -19,8 +19,8 @@ public class User implements Serializable {
     private String username;
 
 
-    private Map<String,EventMessage> requests;
-    private Map<String,EventMessage> responses;
+    private Map<String,EventMessage> requests = new HashMap<>();
+    private Map<String,EventMessage> responses = new HashMap<>();
 
 
     /**
@@ -31,8 +31,8 @@ public class User implements Serializable {
     public User(String username, String password){
         this.username = username;
         this.password = password;
-        requests = new HashMap<>();
-        responses = new HashMap<>();
+//        requests = new HashMap<>();
+//        responses = new HashMap<>();
         calendars.put("default", new ArrayList<>());
     }
 
@@ -134,4 +134,13 @@ public class User implements Serializable {
         calendars.get(calendarName).add(id);
     }
 
+//    public static void main(String[] args) {
+//        User billy = new User("billy", "oof");
+//        User charles = new User("charles", "foo");
+//        System.out.println(billy.getMapResponses());
+//        TimingFactory tf = new TimingFactory();
+//        Timing t = tf.createTiming(2002,12,2,2,2);
+//        EventMessage e = new EventMessage(new Event("lecture",t),"hi", billy, charles);
+//        billy.addResponse(e);
+//    }
 }

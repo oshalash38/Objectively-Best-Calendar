@@ -33,8 +33,8 @@ public class SendMessagePanel extends CalendarLayoutPanel {
         JPanel bottomPane = new JPanel(new GridBagLayout());
         TextField username = addTextField(c, bottomPane, 1, viewModel.get("EnterUsername"), "");
         addLabel(c, bottomPane, 2, viewModel.get("EnterEvent"));
-        int numOfEvents = Integer.parseInt(inputs.get(0));
-        JComboBox<String> choice = addDropDown(inputs.subList(1, numOfEvents + 1), bottomPane, 3, c);
+        int numOfEvents = Integer.parseInt(inputs.get(1));
+        JComboBox<String> choice = addDropDown(inputs.subList(2, numOfEvents + 2), bottomPane, 3, c);
         addLabel(c, bottomPane, 4, viewModel.get("EnterMessage"));
         JTextArea message = addTextArea(c, bottomPane, 5);
         Button send = addButton(c, bottomPane, 6, viewModel.get("Send"));
@@ -45,12 +45,12 @@ public class SendMessagePanel extends CalendarLayoutPanel {
             public void actionPerformed(ActionEvent e) {
                 List<String> input = new ArrayList<>();
                 input.add(username.getText());
-                input.add(inputs.get(choice.getSelectedIndex() + numOfEvents + 1));
+                input.add(inputs.get(choice.getSelectedIndex() + numOfEvents + 2));
                 input.add(message.getText());
                 messagingController.sendMessage(input);
             }
         });
-
+        addLabel(c,bottomPane,8,inputs.get(0));
 
         c.gridy = 1;
         this.add(bottomPane, c);
