@@ -36,15 +36,25 @@ public class CreateRepeatingAlertPanel extends CalendarLayoutPanel {
         JSpinner timeSelection = addTimeSpinner(c, panel, 3);
 
         addLabel(c, panel, 4, viewModel.get("SelectTimeFrequencyString"));
-        TextField days = addCustomTextField(c, panel, 5, " ","");
-        TextField hours = addCustomTextField(c, panel, 5, ":","");
-        TextField minutes = addCustomTextField(c, panel, 5, ":","");
+        TextField days = addTextField(c, panel, 5, viewModel.get("DaysFrequencyString"),"0");
+        TextField hours = addTextField(c, panel, 6, viewModel.get("HourFrequencyString"),"0");
+        TextField minutes = addTextField(c, panel, 7, viewModel.get("MinuteFrequencyString"),"0");
 
-        Button confirmButton = addButton(c, panel, 6, viewModel.get("ConfirmString"));
+        Button confirmButton = addButton(c, panel, 8, viewModel.get("ConfirmString"));
 
         confirmButton.addActionListener(e->{
             List<String> userInputs = new ArrayList<>();
-            String freq = days.getText()+":"+hours.getText()+":"+minutes.getText() ;
+
+            userInputs.add(header.getAlertNameUserInput());
+            userInputs.add(header.getEventChoice());
+
+            userInputs.add(dateSelection.getJFormattedTextField().getText());
+            userInputs.add(timeSelection.getValue().toString().substring(11,19));
+
+            userInputs.add(days.getText());
+            userInputs.add(hours.getText());
+            userInputs.add(minutes.getText());
+            alertController.createRepeatingAlert(userInputs);
 
         });
 
@@ -55,27 +65,5 @@ public class CreateRepeatingAlertPanel extends CalendarLayoutPanel {
         c.gridy = 1;
         this.add(panel, c);
 
-    }
-
-    private JSpinner buildFrequencySpinner(GridBagConstraints c, JPanel panel, int yPosition){
-        JSpinner timeSpinner = new JSpinner( new SpinnerDateModel() );
-        JSpinner.DateEditor timeEditor = new JSpinner.DateEditor(timeSpinner, "ddd:HH:mm");
-        timeSpinner.setEditor(timeEditor);
-        timeSpinner.setValue(new Date());
-        c.gridy = yPosition;
-        panel.add(timeSpinner, c);
-        return timeSpinner;
-    }
-
-    private TextField addCustomTextField(GridBagConstraints c, JPanel bottomPane, int yPosition, String label, String text){
-        c.fill = GridBagConstraints.NONE;
-        c.gridy = yPosition;
-        JPanel UserText = new JPanel();
-        TextField field = new TextField(text);
-        field.setColumns(4);
-        UserText.add(new Label(label));
-        UserText.add(field);
-        bottomPane.add(UserText, c);
-        return field;
     }
 }
