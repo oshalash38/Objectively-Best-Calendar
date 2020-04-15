@@ -94,6 +94,7 @@ public class AlertController extends CalendarController {
             return;
         }
 
+        pushCreateOneTimeAlert(message, "Alert not created. Still waiting on why alerts have IDs");
         //TODO FIGURE OUt WHY ALERT HAVE IDs AD UNCOMMENT
         //alertManager.createNewAlert(event,)
 
@@ -116,7 +117,7 @@ public class AlertController extends CalendarController {
         String eventString = inputs.get(1);
 
         if(inputs.get(2).equals("")){
-            pushCreateRepeatingAlert(message, "A date MUST selected.");
+            pushCreateRepeatingAlert(message, "A date MUST be selected.");
             return;
         }
 
@@ -148,12 +149,14 @@ public class AlertController extends CalendarController {
         Timing timing = timingFactory.createTiming(date.get(2), date.get(1), date.get(0), time.get(0), time.get(1));
 
         if(timing.compareStartTime(event.getTime()) > 0){
-            pushCreateOneTimeAlert(message, "The alert must occur before the event.");
+            pushCreateRepeatingAlert(message, "The alert must occur before the event.");
             return;
         }
 
         //TODO FIGURE OUt WHY ALERT HAVE IDs AD UNCOMMENT
         //alertManager.createNewAlert(event,)
+        pushCreateRepeatingAlert(message, "Alert not created. Still waiting on why alerts have IDs");
+
 
 
     }
