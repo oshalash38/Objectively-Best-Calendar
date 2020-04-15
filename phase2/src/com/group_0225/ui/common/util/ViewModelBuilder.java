@@ -39,6 +39,8 @@ public class ViewModelBuilder {
         viewModel.put("MemoError1", "Please select at least one event");
         viewModel.put("MemoError2", "Please enter a valid memo");
         viewModel.put("MemoCreated", "Memo Created.");
+        viewModel.put("GET_EVENTS_BY_THRESHOLD", "Get Events By Date Threshold");
+        viewModel.put("Find", "Find");
 
         viewModel.put("EnterStartTimeString", "Enter Start Time: (hh:mm:ss)");
         viewModel.put("EnterEndTimeString", "Enter End Time:");

@@ -57,6 +57,11 @@ public class EventController extends CalendarController {
 
     }
 
+    public void viewEventByDateThreshold(){
+        eventManager.updateStatus(data);
+        presenter.updateUI(new UIUpdateInfo("dialog", null, "DateThresholdPanel"));
+    }
+
     /**
      * Creates a new event.
      * @param input : index 0: Name, index 1: Start Date, index 2: End Date,
@@ -131,5 +136,35 @@ public class EventController extends CalendarController {
         output.add(event.getSeriesName());
         output.addAll(memos);
         presenter.updateUI(new UIUpdateInfo("dialog", output, "EventPanel"));
+    }
+
+    public void getEventsByDateThreshold(List<String> input) {
+        List<String> output = new ArrayList<>();
+        if (input.get(0).equals("Error1")){
+            output.add("Error1");
+            presenter.updateUI(new UIUpdateInfo("dialog", output, "DateThresholdPanel"));
+        }else if (input.get(0).equals("Error2")){
+            output.add("Error2");
+            presenter.updateUI(new UIUpdateInfo("dialog", output, "DateThresholdPanel"));
+        }
+        else {
+            TimingFactory timingFactory = new TimingFactory();
+
+            List<Integer> startDateParsed = parseDate(input.get(0));
+            List<Integer> endDateParsed = parseDate(input.get(1));
+            List<Integer> startTimeParsed = parseTime(input.get(2));
+            List<Integer> endTimeParsed = parseTime(input.get(3));
+            Timing timing = timingFactory.createTiming(startDateParsed.get(2), startDateParsed.get(1), startDateParsed.get(0),
+                    startTimeParsed.get(0), startTimeParsed.get(1), endDateParsed.get(2), endDateParsed.get(1), endDateParsed.get(0),
+                    endTimeParsed.get(0), endTimeParsed.get(1));
+            if (timing == null){
+                output.add("Error2");
+                presenter.updateUI(new UIUpdateInfo("dialog", output, "DateThresholdPanel"));
+            }
+            else {
+                output = eventManager.getEventIDsOfThreshold(data, timing);
+                presenter.updateUI(new UIUpdateInfo("dialog", output, "EventListPanel"));
+            }
+        }
     }
 }

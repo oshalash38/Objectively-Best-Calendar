@@ -133,7 +133,7 @@ public class CalendarToolBar extends JMenuBar {
         //Future events
         subMenus.get(2).addActionListener(e -> eventController.viewEventByStatus(Status.UPCOMING));
         //Date threshold
-        subMenus.get(3).addActionListener(e -> {});
+        subMenus.get(3).addActionListener(e -> eventController.viewEventByDateThreshold());
         //Memo
         subMenus.get(4).addActionListener(e -> {});
         //Tag

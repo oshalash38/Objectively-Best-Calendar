@@ -47,6 +47,7 @@ public class MessagingManager {
     public void acceptRequest(CalendarData data, EventMessage request, String message){
         EventMessage response = new EventMessage(request.getEvent(), message, request.getTo(), request.getFrom());
         request.getFrom().addResponse(response);
+        data.getCurrUser().removeRequest(request);
         // TODO: Important, fix this to accommodate new constructor.
         ev.createEvent(data, request.getEvent().getEventName(), request.getEvent().getTime());
     }
@@ -55,9 +56,10 @@ public class MessagingManager {
      * Rejects the request.
      * @param request The request
      */
-    public void rejectRequest(EventMessage request){
+    public void rejectRequest(CalendarData data, EventMessage request){
         EventMessage response = new EventMessage(request.getEvent(), null, request.getTo(), request.getFrom());
         request.getFrom().addResponse(response);
+        data.getCurrUser().removeRequest(request);
     }
     /**
      * Rejects the request, adds a reply.

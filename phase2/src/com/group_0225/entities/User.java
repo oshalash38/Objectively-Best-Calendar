@@ -134,6 +134,10 @@ public class User implements Serializable {
         calendars.get(calendarName).add(id);
     }
 
+    public void removeRequest(EventMessage request) {
+        requests.remove(request.getMessage());
+    }
+
 //    public static void main(String[] args) {
 //        User billy = new User("billy", "oof");
 //        User charles = new User("charles", "foo");
