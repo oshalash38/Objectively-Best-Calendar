@@ -74,6 +74,10 @@ public class CalendarData {
         return result;
     }
 
+    public void setMemos(Map<Integer, String> memos){
+        this.memos = memos;
+    }
+
     public Event getEventByName(String eventName){
         List<Event> currUserEvents = getCurrUserEvents();
         for (Event event : currUserEvents){
