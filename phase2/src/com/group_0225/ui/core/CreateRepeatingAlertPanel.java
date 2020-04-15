@@ -44,7 +44,7 @@ public class CreateRepeatingAlertPanel extends CalendarLayoutPanel {
 
         confirmButton.addActionListener(e->{
             List<String> userInputs = new ArrayList<>();
-            String freq = days.getText()+":"+hours.getText()+":"+minutes.getText();
+            String freq = days.getText()+":"+hours.getText()+":"+minutes.getText() ;
 
         });
 
