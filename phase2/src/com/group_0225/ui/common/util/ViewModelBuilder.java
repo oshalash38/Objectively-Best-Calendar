@@ -31,6 +31,8 @@ public class ViewModelBuilder {
         viewModel.put("SeriesName:", "Series name: ");
         //viewModel.put("CreateSeriesFromEvents", "Create a series from events");
         viewModel.put("freq", "How often will events in this series occur?");
+        viewModel.put("CreateMemo", "Create New Memo");
+        viewModel.put("EnterMemo", "Enter Memo: ");
 
         viewModel.put("EnterStartTimeString", "Enter Start Time:");
         viewModel.put("EnterEndTimeString", "Enter End Time:");

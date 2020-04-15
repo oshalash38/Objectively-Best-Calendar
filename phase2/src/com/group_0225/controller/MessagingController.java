@@ -51,6 +51,9 @@ public class MessagingController extends CalendarController{
         try {
             Event event = eventManager.getEventByID(data, Integer.parseInt(input.get(1)));
             User user = data.getUser(input.get(0));
+            if (user.equals(data.getCurrUser())){
+                pushSendNewMessagePanel();
+            }
             messagingManager.sendRequest(data.getCurrUser(), user, event, input.get(2));
         } catch (NullPointerException e){
             System.err.println("Needs Validation");

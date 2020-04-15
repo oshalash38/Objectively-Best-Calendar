@@ -31,6 +31,7 @@ public class GUIBuilder {
         panels.put("ChangeTimePanel", new ChangeTimePanel(controllerContainer));
         panels.put("AcceptDeclineMessagePanel", new AcceptDeclineMessagePanel(controllerContainer));
         panels.put("CreateAlertPromptPanel", new CreateAlertPromptPanel(controllerContainer));
+        panels.put("CreateMemoPanel", new CreateMemoPanel(controllerContainer));
 
         return panels;
     }

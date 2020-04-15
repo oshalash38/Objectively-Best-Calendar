@@ -13,6 +13,7 @@ public class CalendarData {
     private Timing localTime;
     private Map<Integer, Event> events = new HashMap<>();
     private Map<String, User> users = new HashMap<>();
+    private Map<Integer, String> memos = new HashMap<>();
 
     public Map<Integer, Event> getEvents() {
         return events;
@@ -21,6 +22,8 @@ public class CalendarData {
     public Map<String, User> getUsers(){
         return users;
     }
+
+    public Map<Integer, String> getMemos() {return memos;}
 
     public User getUser(String username){
         System.err.println(users.containsKey(username));
@@ -46,6 +49,10 @@ public class CalendarData {
     public void addEvent(int id, Event event){
         events.put(id, event);
         currUser.addIdToCalendars(currCalendar, id);
+    }
+
+    public void addMemo(int id, String memo){
+        memos.put(id, memo);
     }
 
     public void setEvents(Map<Integer, Event> events){
@@ -75,6 +82,20 @@ public class CalendarData {
             }
         }
         return null;
+    }
+
+    public List<Event> getEventsByNames(List<String> events){
+        List<Event> result = new ArrayList<>();
+        for (String event : events){
+            if (getEventByName(event) != null){
+                result.add(getEventByName(event));
+            }
+        }
+        return result;
+    }
+
+    public String getMemoByID(int id){
+        return memos.get(id);
     }
 
 }

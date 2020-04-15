@@ -27,8 +27,8 @@ public class EventPanel extends CalendarLayoutPanel {
         addLabel(c, bottomPane, 4, viewModel.get("End Date: ") + inputs.get(2));
         addLabel(c, bottomPane, 6, viewModel.get("Start Time: ") + inputs.get(3));
         addLabel(c, bottomPane, 8, viewModel.get("End Time: ") + inputs.get(4));
-        addLabel(c, bottomPane, 10, viewModel.get("Memos:"));
-        addLabel(c, bottomPane, 12, viewModel.get("SeriesName:") + inputs.get(5));
+        addLabel(c, bottomPane, 10, viewModel.get("Memos:") + inputs.get(5));
+        addLabel(c, bottomPane, 12, viewModel.get("SeriesName:") + inputs.get(6));
 
         c.gridy = 1;
         this.add(bottomPane, c);

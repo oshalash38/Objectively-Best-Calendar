@@ -17,6 +17,7 @@ public class CalendarToolBar extends JMenuBar {
     private UsersCalendarController usersCalendarController;
     private CalendarGridController calendarGridController;
     private LocalTimeController localTimeController;
+    private MemoController memoController;
 
     private Map<String, String> viewModel;
 
@@ -40,6 +41,7 @@ public class CalendarToolBar extends JMenuBar {
         this.usersCalendarController = controllerContainer.getUsersCalendarController();
         this.calendarGridController = controllerContainer.getCalendarGridController();
         this.localTimeController = controllerContainer.getLocalTimeController();
+        this.memoController = controllerContainer.getMemoController();
 
         toolBarBuilder();
     }
@@ -150,7 +152,7 @@ public class CalendarToolBar extends JMenuBar {
         //Create Alert
         subMenus.get(1).addActionListener(e -> { });
         //Create Memo
-        subMenus.get(2).addActionListener(e -> {});
+        subMenus.get(2).addActionListener(e -> memoController.pushCreateMemo());
         //Create Series
         subMenus.get(3).addActionListener(e -> seriesController.createSeriesChoiceScreen());
 

@@ -112,6 +112,7 @@ public class EventController extends CalendarController {
         output.add(event.getEndDateString());
         output.add(event.getStartTimeString());
         output.add(event.getEndTimeString());
+        output.add("SHOULD BE THE MEMO HEREEEEEEEEEEE");
         output.add(event.getSeriesName());
         presenter.updateUI(new UIUpdateInfo("dialog", output, "EventPanel"));
     }

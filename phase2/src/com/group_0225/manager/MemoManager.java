@@ -1,5 +1,6 @@
 package com.group_0225.manager;
 
+import com.group_0225.entities.CalendarData;
 import com.group_0225.entities.Event;
 
 import java.util.ArrayList;
@@ -16,18 +17,18 @@ public class MemoManager {
 
     /**
      * Creates and adds a memo to an memo map
-     * @param memos The memo map from User
+     * @param data metadata of calendar
      * @param memoValue The value of the memo
      * @return The id of the created memo
      */
-    public int CreateMemo(Map<Integer, String> memos, String memoValue, List<Event> events){
+    public int CreateMemo(CalendarData data, String memoValue, List<Event> events){
 
         int high = -1;
-        for (Map.Entry<Integer, String> entry: memos.entrySet()){
+        for (Map.Entry<Integer, String> entry: data.getMemos().entrySet()){
             if(entry.getKey() > high){high = entry.getKey();}
         }
         idGen = high + 1;
-        memos.put(idGen, memoValue);
+        data.addMemo(idGen, memoValue);
         for (Event event : events){
             event.addMemoID(idGen);
         }
