@@ -34,7 +34,7 @@ public class ViewModelBuilder {
         viewModel.put("CreateMemo", "Create New Memo");
         viewModel.put("EnterMemo", "Enter Memo: ");
 
-        viewModel.put("EnterStartTimeString", "Enter Start Time:");
+        viewModel.put("EnterStartTimeString", "Enter Start Time: (hh:mm:ss)");
         viewModel.put("EnterEndTimeString", "Enter End Time:");
         viewModel.put("EnterDurationSeriesString", "Enter the duration of each event in this series:");
         viewModel.put("NoEvents", "There are no events to be displayed.");
@@ -67,7 +67,8 @@ public class ViewModelBuilder {
         viewModel.put("ChangeTimeTitleString", "Time Machine");
         viewModel.put("TimeTravelString", "Time travel!");
         viewModel.put("SelectDateString", "Select Date:");
-        viewModel.put("SelectTimeString", "Select Time:");
+        viewModel.put("SelectTimeString", "Select Time: (hh:mm:ss)");
+        viewModel.put("SelectTimeFrequencyString", "Select Frequency: (ddd:hh:mm)");
         viewModel.put("TimeChangeSuccessfulString", "Time travel successful. Local date and time: ");
 
         viewModel.put("CreateAlertTitleString", "Create Alert");
@@ -77,7 +78,7 @@ public class ViewModelBuilder {
         viewModel.put("OneTimeButtonString", "One time alert");
         viewModel.put("RepeatingButtonString", "Repeating alert");
 
-        viewModel.put("AlertNamePromptString", "Enter alert name:");
+        viewModel.put("AlertNamePromptString", "Enter alert message:");
 
 
         //TOOLBAR HEADERS
