@@ -3,10 +3,7 @@ package com.group_0225.manager;
 import com.group_0225.entities.*;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class EventManager {
     /**
@@ -375,6 +372,18 @@ public class EventManager {
 //            sm.checkAlone(u.getEvents().get(i).getSeriesName(), u);
 //        }
 //    }
+
+    public void deleteEvent(CalendarData data, int id) {
+        for(User u : data.getUsers().values()){
+            for(String calendar : u.getCalendars()){
+                List<Integer> events = u.getEvents(calendar);
+                if(events.contains(id))
+                    events.remove(id);
+            }
+        }
+
+        data.getEvents().remove(id);
+    }
 
     /**
      * Required since Maps aren't sorted and events must be returned from earliest to latest

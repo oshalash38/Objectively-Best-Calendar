@@ -103,8 +103,13 @@ public class EventController extends CalendarController {
         // push a dialog with the corresponding events  presenter.displayPanel( new PanelInfo(PanelKey, List of string representation of the events (probably just their names), true)
     }
 
+    public void deleteEvent(String rawId, CalendarGridController gridController) {
+        int id = Integer.parseInt(rawId);
 
+        eventManager.deleteEvent(data, id);
 
+        gridController.displayGrid();
+    }
 
     // TODO: Should this be here or in manager?
     private List<String> getEventsName(List<Event> events){
@@ -128,6 +133,7 @@ public class EventController extends CalendarController {
         Event event = eventManager.getEventByID(data, id);
         List<String> memos = memoManager.getMemos(event, data);
         List<String> output = new ArrayList<>();
+        output.add(rawID);
         output.add(event.getEventName());
         output.add(event.getStartDateString());
         output.add(event.getEndDateString());
