@@ -120,12 +120,21 @@ public abstract class CalendarLayoutPanel extends JPanel {
         return tick;
     }
     protected JTextArea addTextArea(String text, JPanel bottomPane, int y, GridBagConstraints constraints){
-        JTextArea area = new JTextArea(text);
+        constraints.fill = GridBagConstraints.NONE;
         constraints.gridy = y;
-        bottomPane.add(area, constraints);
-        return area;
+        JTextArea textArea = new JTextArea(5, 20);
+        textArea.setText(text);
+
+        JScrollPane scrollPane = new JScrollPane(textArea);
+        bottomPane.add(scrollPane, constraints);
+        return textArea;
 
     }
+
+    protected JTextArea addTextArea(GridBagConstraints c, JPanel bottomPane, int y){
+        return addTextArea("", bottomPane, y, c);
+    }
+
     protected JSpinner addNumEventsSpinner(GridBagConstraints constraints, JPanel bottomPane, int y){
         SpinnerModel numMod = new SpinnerNumberModel(2, 2, 99, 1);
         JSpinner j = new JSpinner(numMod);
@@ -136,13 +145,5 @@ public abstract class CalendarLayoutPanel extends JPanel {
 
     protected abstract void buildPanel(List<String> inputs);
 
-    protected JTextArea addTextArea(GridBagConstraints c, JPanel bottomPane, int y){
-        c.fill = GridBagConstraints.NONE;
-        c.gridy = y;
-        JTextArea textArea = new JTextArea(5, 20);
-        JScrollPane scrollPane = new JScrollPane(textArea);
-        bottomPane.add(textArea, c);
-        bottomPane.add(scrollPane);
-        return textArea;
-    }
+
 }

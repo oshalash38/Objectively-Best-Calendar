@@ -41,7 +41,7 @@ public class EventController extends CalendarController {
 
         Timing threshold = new Timing(start, end);
 
-        presenter.updateUI(new UIUpdateInfo("dialog", eventManager.getEventIDsOfThreshold(data, threshold), "EventListPanel"));
+        presenter.updateUI(new UIUpdateInfo("scrollable", eventManager.getEventIDsOfThreshold(data, threshold), "EventListPanel"));
     }
 
     /**
@@ -135,7 +135,7 @@ public class EventController extends CalendarController {
         output.add(event.getEndTimeString());
         output.add(event.getSeriesName());
         output.addAll(memos);
-        presenter.updateUI(new UIUpdateInfo("dialog", output, "EventPanel"));
+        presenter.updateUI(new UIUpdateInfo("scrollable", output, "EventPanel"));
     }
 
     public void getEventsByDateThreshold(List<String> input) {
