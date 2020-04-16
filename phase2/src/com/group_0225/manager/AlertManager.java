@@ -172,8 +172,8 @@ public class AlertManager extends Observable{
      * @param message the message associated with the alert
      * @return returns 1, when the new alert is successfuly added to the list of alerts of the event.
      */
-    public int createNewAlert(Event e, Timing T, String message, Integer id){
-        Alert newAlert = new OneTimeAlert(T, message, id);
+    public int createNewAlert(Event e, Timing T, String message){
+        Alert newAlert = new OneTimeAlert(T, message);
         sortAdd(e.getAlerts(), newAlert);
         return 1;
     }
@@ -184,8 +184,8 @@ public class AlertManager extends Observable{
      * @param T the timing of the alert
      * @return returns 1, when the new alert is successfuly added to the list of alerts of the event.
      */
-    public int createNewAlert(Event e, Timing T, Integer id){
-        Alert newAlert = new OneTimeAlert(T, id);
+    public int createNewAlert(Event e, Timing T){
+        Alert newAlert = new OneTimeAlert(T);
         sortAdd(e.getAlerts(), newAlert);
         return 1;
     }
@@ -199,8 +199,8 @@ public class AlertManager extends Observable{
      * @param freq the duration after which the alert is repeated.
      * @return returns 1, when the new alert is successfuly added to the list of alerts of the event.
      */
-    public int createNewAlert(Event e, Timing T, String message, Duration freq, Integer id){
-        Alert newAlert = new RecurringAlert(T, message, freq, id);
+    public int createNewAlert(Event e, Timing T, String message, Duration freq){
+        Alert newAlert = new RecurringAlert(T, message, freq);
         sortAdd(e.getAlerts(), newAlert);
         return 1;
     }
@@ -211,8 +211,8 @@ public class AlertManager extends Observable{
      * @param T the timing of the alert
      * @return returns 1, when the new alert is successfuly added to the list of alerts of the event.
      */
-    public int createNewAlert(Event e, Timing T, Duration freq, Integer id){
-        Alert newAlert = new RecurringAlert(T, freq, id);
+    public int createNewAlert(Event e, Timing T, Duration freq){
+        Alert newAlert = new RecurringAlert(T, freq);
         sortAdd(e.getAlerts(), newAlert);
         return 1;
     }

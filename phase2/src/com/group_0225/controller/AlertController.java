@@ -94,9 +94,12 @@ public class AlertController extends CalendarController {
             return;
         }
 
-        pushCreateOneTimeAlert(message, "Alert not created. Still waiting on why alerts have IDs");
-        //TODO FIGURE OUt WHY ALERT HAVE IDs AD UNCOMMENT
-        //alertManager.createNewAlert(event,)
+        if(message.equals("")){
+            alertManager.createNewAlert(event,timing);
+        }
+        else {
+            alertManager.createNewAlert(event, timing, message);
+        }
 
 
 
@@ -153,9 +156,13 @@ public class AlertController extends CalendarController {
             return;
         }
 
-        //TODO FIGURE OUt WHY ALERT HAVE IDs AD UNCOMMENT
-        //alertManager.createNewAlert(event,)
-        pushCreateRepeatingAlert(message, "Alert not created. Still waiting on why alerts have IDs");
+        if(message.equals("")){
+            alertManager.createNewAlert(event,timing, freq);
+        }
+        else {
+            alertManager.createNewAlert(event, timing, message, freq);
+        }
+
 
 
 
