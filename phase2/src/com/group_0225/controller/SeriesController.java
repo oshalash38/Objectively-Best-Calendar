@@ -1,16 +1,14 @@
 package com.group_0225.controller;
 
+import com.group_0225.entities.CalendarData;
 import com.group_0225.entities.Event;
 import com.group_0225.manager.EventManager;
 import com.group_0225.manager.SeriesManager;
-import com.group_0225.entities.Timing;
 import com.group_0225.manager.UserManager;
-import com.group_0225.ui.common.util.UIUpdateInfo;
 import com.group_0225.ui.common.util.UIPresenter;
-import com.group_0225.entities.CalendarData;
+import com.group_0225.ui.common.util.UIUpdateInfo;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -147,8 +145,7 @@ public class SeriesController extends CalendarController {
      * @param selectedName a one-element list containing the chosen series name
      */
     public void pushViewSNameScreen(List<String> selectedName) {
-        List<Event> seriesEvents = em.getEventsBySeriesName(data.getCurrUser(),selectedName.get(0),
-                em.getUserCalendarEvents(data.getEvents(),data.getCurrUser(),data.getCurrCalendar()));
+        List<Event> seriesEvents = em.getEventsBySeriesName(selectedName.get(0), em.getUserCalendarEvents(data.getEvents(),data.getCurrUser(),data.getCurrCalendar()));
         List<String> output = em.getEventIDs(seriesEvents);
 //        List<String> formattedEvents = em.formatEventsForSeries(seriesEvents);
 //        formattedEvents.add(0,selectedName.get(0));
