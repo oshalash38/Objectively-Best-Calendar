@@ -44,7 +44,7 @@ public class CreateOneTimeAlertPanel extends CalendarLayoutPanel {
 
             userInputs.add(dateSelection.getJFormattedTextField().getText());
             userInputs.add(timeSelection.getValue().toString().substring(11,19));
-            alertController.createOneTimeAlert(userInputs);
+            alertController.createOneTimeAlert(userInputs, controllerContainer.getCalendarGridController());
         });
 
         c.gridy = 6;

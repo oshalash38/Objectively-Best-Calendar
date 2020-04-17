@@ -59,4 +59,9 @@ public class OneTimeAlert extends Alert {
     public int getStatus(LocalDateTime dt) {
         return time.getStatus(dt);
     }
+
+    @Override
+    public String getType() {
+        return "One time alert";
+    }
 }

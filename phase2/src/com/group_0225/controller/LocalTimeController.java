@@ -1,6 +1,5 @@
 package com.group_0225.controller;
 
-import com.group_0225.DatabaseReader;
 import com.group_0225.entities.CalendarData;
 import com.group_0225.entities.Timing;
 import com.group_0225.entities.TimingFactory;
@@ -8,7 +7,6 @@ import com.group_0225.manager.EventManager;
 import com.group_0225.ui.common.util.UIPresenter;
 import com.group_0225.ui.common.util.UIUpdateInfo;
 import com.group_0225.ui.common.util.ViewModelBuilder;
-import com.group_0225.ui.core.CalendarFrame;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;

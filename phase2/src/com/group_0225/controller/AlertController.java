@@ -6,13 +6,15 @@ import com.group_0225.manager.EventManager;
 import com.group_0225.ui.common.util.UIPresenter;
 import com.group_0225.ui.common.util.UIUpdateInfo;
 
-import java.text.ParseException;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class AlertController extends CalendarController {
+    private List<Alert> currAlerts = new ArrayList<>();
+
     public AlertController(CalendarData data, UIPresenter presenter) {
         super(data, presenter);
     }
@@ -64,10 +66,10 @@ public class AlertController extends CalendarController {
     }
 
 
-    public void createOneTimeAlert(List<String> inputs){
+    public void createOneTimeAlert(List<String> inputs, CalendarGridController calendarGridController){
         TimingFactory timingFactory = new TimingFactory();
         EventManager eventManager = new EventManager();
-        AlertManager alertManager = new AlertManager(data.getCurrUserEvents());
+        AlertManager alertManager = new AlertManager();
 
         String message = inputs.get(0);
         String eventString = inputs.get(1);
@@ -96,19 +98,23 @@ public class AlertController extends CalendarController {
 
         if(message.equals("")){
             alertManager.createNewAlert(event,timing);
+            pushCreateOneTimeAlert(message, "Alert created successfully.");
+            calendarGridController.displayGrid();
         }
         else {
             alertManager.createNewAlert(event, timing, message);
+            pushCreateOneTimeAlert(message, "Alert created successfully.");
+            calendarGridController.displayGrid();
         }
 
 
 
     }
 
-    public void createRepeatingAlert(List<String> inputs){
+    public void createRepeatingAlert(List<String> inputs, CalendarGridController calendarGridController){
         TimingFactory timingFactory = new TimingFactory();
         EventManager eventManager = new EventManager();
-        AlertManager alertManager = new AlertManager(data.getCurrUserEvents());
+        AlertManager alertManager = new AlertManager();
         DurationFactory durationFactory = new DurationFactory();
 
         int days;
@@ -158,13 +164,60 @@ public class AlertController extends CalendarController {
 
         if(message.equals("")){
             alertManager.createNewAlert(event,timing, freq);
+            pushCreateRepeatingAlert(message, "Alert created successfully.");
+            calendarGridController.displayGrid();
         }
         else {
             alertManager.createNewAlert(event, timing, message, freq);
+            pushCreateRepeatingAlert(message, "Alert created successfully.");
+            calendarGridController.displayGrid();
         }
 
 
 
 
+    }
+
+    public void pushViewAlertsPanel(String rawEvent){
+        EventManager eventManager = new EventManager();
+        int id = Integer.parseInt(rawEvent);
+
+        Event event = eventManager.getEventByID(data, id);
+        pushViewAlertsByEvent(event);
+    }
+
+    private void pushViewAlertsByEvent(Event event){
+        EventManager eventManager = new EventManager();
+        AlertManager alertManager = new AlertManager();
+
+        List<Alert> alerts = eventManager.getAlerts(event);
+        Collections.reverse(alerts);
+        currAlerts = alerts;
+
+
+        List<String> toUpload = new ArrayList<>();
+        toUpload.add(event.getID().toString());
+        for(Alert alert: alerts){
+            toUpload.addAll(alertManager.getStringRepresentation(alert));
+        }
+
+
+        presenter.updateUI(new UIUpdateInfo("scrollable", toUpload, "AlertListPanel"));
+    }
+
+    public void editAlert(int index, int eventID){
+
+    }
+
+    public void deleteAlert(int index, int eventID, CalendarGridController calendarGridController){
+        System.out.println(index);
+
+        EventManager eventManager = new EventManager();
+        Alert toRemove = currAlerts.get(0);
+        Event event = eventManager.getEventByID(data, eventID);
+        eventManager.removeAlert(event, toRemove);
+
+        pushViewAlertsByEvent(event);
+        calendarGridController.displayGrid();
     }
 }

@@ -55,6 +55,7 @@ public abstract class Alert implements Serializable, Comparable<Alert>{
             return message;
         }
         return "no message";
-
     }
+
+    public abstract String getType();
 }

@@ -89,6 +89,10 @@ public class ViewModelBuilder {
         viewModel.put("RecurringAlertOrNot", "Is this a recurring alert or a one time alert?");
         viewModel.put("OneTimeButtonString", "One time alert");
         viewModel.put("RepeatingButtonString", "Repeating alert");
+        viewModel.put("ViewAlertsButtonString", "View Alerts");
+        viewModel.put("AlertString", "Alerts");
+        viewModel.put("EditAlertButton", "Edit this alert");
+        viewModel.put("DeleteAlertButton", "Delete this alert");
 
         viewModel.put("DaysFrequencyString", "Enter day frequency");
         viewModel.put("HourFrequencyString", "Enter hour frequency");

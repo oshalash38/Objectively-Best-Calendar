@@ -8,7 +8,6 @@ import org.jdatepicker.impl.JDatePickerImpl;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class CreateRepeatingAlertPanel extends CalendarLayoutPanel {
@@ -54,7 +53,7 @@ public class CreateRepeatingAlertPanel extends CalendarLayoutPanel {
             userInputs.add(days.getText());
             userInputs.add(hours.getText());
             userInputs.add(minutes.getText());
-            alertController.createRepeatingAlert(userInputs);
+            alertController.createRepeatingAlert(userInputs, controllerContainer.getCalendarGridController());
 
         });
 

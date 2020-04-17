@@ -417,4 +417,12 @@ public class EventManager {
 
         return events;
     }
+
+    public List<Alert> getAlerts(Event event){
+        return event.getAlerts();
+    }
+
+    public void removeAlert(Event event, Alert alert){
+        event.getAlerts().remove(alert);
+    }
 }

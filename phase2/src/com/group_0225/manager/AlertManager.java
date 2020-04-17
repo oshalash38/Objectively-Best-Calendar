@@ -19,32 +19,24 @@ public class AlertManager extends Observable{
     private List<List<String>> printableUpcomingAlerts = new ArrayList<>(0);
     private Timer t = new Timer();
     private final int CHECKDURATION = 30;
-    private List<Event> UserEvents;
     private TimerTask timerTask = new TimerTask() {
 
         @Override
         public void run() {
-            AlertManager.this.run();
+            //AlertManager.this.run();
         }
     };
 
-    private void run(){
+    private void run(List<Event> events){
         try {
-            List<List<String>> displayAlerts = runUpcomingAlerts();
+            List<List<String>> displayAlerts = runUpcomingAlerts(events);
             setChanged();
             notifyObservers(displayAlerts);
         } catch (ConcurrentModificationException ex) {
-            run();
+            run(events);
         }
     }
 
-    /**
-     *
-     * @param events initialises alertManager with the events of the logged in user
-     */
-    public AlertManager (List<Event> events){
-        this.UserEvents = events;
-    }
 
     /**
      * Checks for any alerts which have passed while the program was not running.
@@ -52,7 +44,7 @@ public class AlertManager extends Observable{
      *
      * @return Returns an ArrayList of Alert which have passed.
      */
-    public List<List<String>> checkNewAlerts(){
+    public List<List<String>> checkNewAlerts(List<Event> UserEvents){
         currentTime = LocalDateTime.now();
         List<List<String>> retList =  new ArrayList<>(0);
             for (Event e : UserEvents) {
@@ -60,7 +52,7 @@ public class AlertManager extends Observable{
 
         }
         if(upcomingAlerts!= null) {
-            retList.addAll(runUpcomingAlerts());
+            retList.addAll(runUpcomingAlerts(UserEvents));
         }
         return retList;
     }
@@ -104,7 +96,7 @@ public class AlertManager extends Observable{
     private ArrayList<Alert> checkPassedAlertsEvent(Event e, List<List<String>> retList, LocalDateTime T){
         ArrayList<Alert> alerts = e.getAlerts();
         ArrayList<Alert> retAlerts = new ArrayList<>();
-        List<Alert> temp = new ArrayList<Alert>();
+        List<Alert> temp = new ArrayList<>();
 
         //Iterates over each alert
         for(Alert a: alerts) {
@@ -152,10 +144,10 @@ public class AlertManager extends Observable{
      * This method compiles a list of a list of alerts in string format
      * @return the upcoming alerts
      */
-    public List<List<String>> checkUpcomingAlerts ()
+    public List<List<String>> checkUpcomingAlerts (List<Event> UserEvents)
     {
        List<List<String>> retList = new ArrayList<>();
-       for(Event e: this.UserEvents) {
+       for(Event e: UserEvents) {
            if (e.getAlerts().size() > 0) {
                retList.add(formatAlertDisplay(e, e.getAlerts().get(0)));
            }
@@ -217,20 +209,20 @@ public class AlertManager extends Observable{
         return 1;
     }
 
-    private void getUpcomingAlerts(){
+    private void getUpcomingAlerts(List<Event> UserEvents){
         for (Event e: UserEvents){
             LocalDateTime nextUpdateTime = currentTime.plusSeconds(CHECKDURATION);
             upcomingAlerts = checkPassedAlertsEvent(e, printableUpcomingAlerts, nextUpdateTime);
         }
     }
 
-    private List<List<String>> runUpcomingAlerts(){
+    private List<List<String>> runUpcomingAlerts(List<Event> events){
         List<List<String>> tempPrint= new ArrayList<>();
         tempPrint.addAll(printableUpcomingAlerts);
         upcomingAlerts.clear();
         printableUpcomingAlerts.clear();
         currentTime = LocalDateTime.now();
-        getUpcomingAlerts();
+        getUpcomingAlerts(events);
 
         return tempPrint;
     }
@@ -253,6 +245,14 @@ public class AlertManager extends Observable{
             counter++;
         }
         return toDisplay;
+    }
+
+    public List<String> getStringRepresentation(Alert alert){
+        List<String> info = new ArrayList<>();
+        info.add("Message: " + alert.pushReminder());
+        info.add("Time: " + alert.getNextTime());
+        info.add("Type: " + alert.getType());
+        return info;
     }
 
 }

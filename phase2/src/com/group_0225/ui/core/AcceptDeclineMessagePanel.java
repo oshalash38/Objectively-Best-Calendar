@@ -6,8 +6,6 @@ import com.group_0225.ui.common.calendar.CalendarLayoutPanel;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Arrays;
 import java.util.List;
 
@@ -44,19 +42,11 @@ public class AcceptDeclineMessagePanel extends CalendarLayoutPanel {
 
         //accept/decline
         Button accept = addButton(constraints,bottomPane,7, viewModel.get("Accept invitation: "));
-        accept.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                messagingController.acceptMessage(Arrays.asList(inputs.get(0),reply.getText()));
-            }
-        });
+        accept.addActionListener(e -> messagingController.acceptMessage(Arrays.asList(inputs.get(0),reply.getText())));
         Button decline = addButton(constraints,bottomPane,8,viewModel.get("Decline invitation: "));
-        decline.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                //pass the message and the reply
-                messagingController.declineMessage(Arrays.asList(inputs.get(0),reply.getText()));
-            }
+        decline.addActionListener(e -> {
+            //pass the message and the reply
+            messagingController.declineMessage(Arrays.asList(inputs.get(0),reply.getText()));
         });
         constraints.gridy = 1;
         this.add(bottomPane, constraints);

@@ -1,5 +1,6 @@
 package com.group_0225.ui.core;
 
+import com.group_0225.controller.AlertController;
 import com.group_0225.controller.CalendarGridController;
 import com.group_0225.controller.ControllerContainer;
 import com.group_0225.controller.EventController;
@@ -19,6 +20,7 @@ public class EventPanel extends CalendarLayoutPanel {
 
         EventController eventController = controllerContainer.getEventsController();
         CalendarGridController gridController = controllerContainer.getCalendarGridController();
+        AlertController alertController = controllerContainer.getAlertController();
 
         GridBagConstraints c = new GridBagConstraints();
         c.fill = GridBagConstraints.BOTH;
@@ -30,7 +32,11 @@ public class EventPanel extends CalendarLayoutPanel {
         Button editButton = this.addButton(c, optionsHolder, 1, "Edit");
         editButton.addActionListener(e -> eventController.pushEditEvent(inputs.get(0)));
         Button deleteButton = this.addButton(c, optionsHolder, 1, "Delete");
+
+        Button viewAlerts = this.addButton(c, optionsHolder, 2, viewModel.get("ViewAlertsButtonString"));
+
         deleteButton.addActionListener(e -> eventController.deleteEvent(inputs.get(0), gridController));
+        viewAlerts.addActionListener(e-> alertController.pushViewAlertsPanel(inputs.get(0)));
 
         this.add(optionsHolder, c);
 
