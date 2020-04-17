@@ -15,17 +15,31 @@ public class AlertListPanel extends CalendarLayoutPanel {
     @Override
     protected void buildPanel(List<String> inputs) {
         GridBagConstraints c = new GridBagConstraints();
+        int eventID;
 
         c.fill = GridBagConstraints.BOTH;
         c.gridy = 0;
         c.anchor = GridBagConstraints.CENTER;
 
         JPanel panel = new JPanel(new GridBagLayout());
+        buildTitle(c, viewModel.get("AlertString"));
 
-        int eventID = Integer.parseInt(inputs.remove(0));
+        for(String str: inputs){
+            System.out.println(str);
+        }
+
+        System.out.println(inputs.size());
+
+
+        String error = inputs.get(0);
+
+        try {
+            eventID = Integer.parseInt(inputs.get(1));
+        }catch (NumberFormatException e){eventID = 0;}
 
         buildTitle(c, viewModel.get(viewModel.get("AlertString")));
 
+        inputs = inputs.subList(2, inputs.size());
 
         c.gridy = 1;
         for(int i = 0; i < inputs.size(); i += 3){
@@ -37,6 +51,7 @@ public class AlertListPanel extends CalendarLayoutPanel {
             c.gridy++;
         }
 
+        addLabel(c,panel, c.gridy, error);
         //Adds bottom pane
         c.gridy = 1;
         this.add(panel, c);

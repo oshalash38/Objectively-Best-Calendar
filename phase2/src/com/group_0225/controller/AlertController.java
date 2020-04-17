@@ -9,7 +9,6 @@ import com.group_0225.ui.common.util.UIUpdateInfo;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 public class AlertController extends CalendarController {
@@ -90,7 +89,6 @@ public class AlertController extends CalendarController {
         Event event= data.getEventByName(eventString);
 
         Timing timing = timingFactory.createTiming(date.get(2), date.get(1), date.get(0), time.get(0), time.get(1));
-
         if(timing.compareStartTime(event.getTime()) > 0){
             pushCreateOneTimeAlert(message, "The alert must occur before the event.");
             return;
@@ -98,17 +96,12 @@ public class AlertController extends CalendarController {
 
         if(message.equals("")){
             alertManager.createNewAlert(event,timing);
-            pushCreateOneTimeAlert(message, "Alert created successfully.");
-            calendarGridController.displayGrid();
         }
         else {
             alertManager.createNewAlert(event, timing, message);
-            pushCreateOneTimeAlert(message, "Alert created successfully.");
-            calendarGridController.displayGrid();
         }
-
-
-
+        pushCreateOneTimeAlert(message, "Alert created successfully.");
+        calendarGridController.displayGrid();
     }
 
     public void createRepeatingAlert(List<String> inputs, CalendarGridController calendarGridController){
@@ -169,13 +162,9 @@ public class AlertController extends CalendarController {
         }
         else {
             alertManager.createNewAlert(event, timing, message, freq);
-            pushCreateRepeatingAlert(message, "Alert created successfully.");
-            calendarGridController.displayGrid();
         }
-
-
-
-
+        pushCreateRepeatingAlert(message, "Alert created successfully.");
+        calendarGridController.displayGrid();
     }
 
     public void pushViewAlertsPanel(String rawEvent){
@@ -183,25 +172,28 @@ public class AlertController extends CalendarController {
         int id = Integer.parseInt(rawEvent);
 
         Event event = eventManager.getEventByID(data, id);
-        pushViewAlertsByEvent(event);
+        pushViewAlertsByEvent(event, "");
     }
 
-    private void pushViewAlertsByEvent(Event event){
+    private void pushViewAlertsByEvent(Event event, String error){
         EventManager eventManager = new EventManager();
         AlertManager alertManager = new AlertManager();
 
         List<Alert> alerts = eventManager.getAlerts(event);
-        Collections.reverse(alerts);
         currAlerts = alerts;
 
 
+        if(alerts.size() == 0){
+            List<String> temp = Arrays.asList("No alerts for this event.", "");
+            presenter.updateUI(new UIUpdateInfo("scrollable", temp, "AlertListPanel"));
+            return;
+        }
         List<String> toUpload = new ArrayList<>();
+        toUpload.add(error);
         toUpload.add(event.getID().toString());
         for(Alert alert: alerts){
             toUpload.addAll(alertManager.getStringRepresentation(alert));
         }
-
-
         presenter.updateUI(new UIUpdateInfo("scrollable", toUpload, "AlertListPanel"));
     }
 
@@ -213,11 +205,11 @@ public class AlertController extends CalendarController {
         System.out.println(index);
 
         EventManager eventManager = new EventManager();
-        Alert toRemove = currAlerts.get(0);
+        Alert toRemove = currAlerts.remove(index);
         Event event = eventManager.getEventByID(data, eventID);
         eventManager.removeAlert(event, toRemove);
 
-        pushViewAlertsByEvent(event);
+        pushViewAlertsByEvent(event, "Alert deleted successfully.");
         calendarGridController.displayGrid();
     }
 }
