@@ -205,9 +205,10 @@ public class EventController extends CalendarController {
 
     public void viewEventsByTag(String tag) {
         List<Event> events = eventManager.getEventsByTag(tag, data);
-        List<String> formattedEvents = eventManager.formatEventsForSeries(events);
-        formattedEvents.add(0, tag);
-        presenter.updateUI(new UIUpdateInfo("scrollable", formattedEvents, "ViewByTagPanel"));
+        List<String> output = eventManager.getEventIDs(events);
+//        List<String> formattedEvents = eventManager.formatEventsForSeries(events);
+//        formattedEvents.add(0, tag);
+        presenter.updateUI(new UIUpdateInfo("dialog", output, "EventListPanel"));
     }
 
     public void getEventsByDateThreshold(List<String> input) {

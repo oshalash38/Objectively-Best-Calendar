@@ -149,8 +149,9 @@ public class SeriesController extends CalendarController {
     public void pushViewSNameScreen(List<String> selectedName) {
         List<Event> seriesEvents = em.getEventsBySeriesName(data.getCurrUser(),selectedName.get(0),
                 em.getUserCalendarEvents(data.getEvents(),data.getCurrUser(),data.getCurrCalendar()));
-        List<String> formattedEvents = em.formatEventsForSeries(seriesEvents);
-        formattedEvents.add(0,selectedName.get(0));
-        presenter.updateUI(new UIUpdateInfo("scrollable", formattedEvents,"ViewSNamePanel"));
+        List<String> output = em.getEventIDs(seriesEvents);
+//        List<String> formattedEvents = em.formatEventsForSeries(seriesEvents);
+//        formattedEvents.add(0,selectedName.get(0));
+        presenter.updateUI(new UIUpdateInfo("scrollable", output,"EventListPanel"));
     }
 }
