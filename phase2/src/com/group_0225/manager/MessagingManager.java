@@ -7,11 +7,14 @@ import com.group_0225.entities.EventMessage;
 import com.group_0225.entities.User;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 public class MessagingManager {
 
     private EventManager ev;
+    private List<EventMessage> previousMessages = new ArrayList<>();
 
     public MessagingManager(){
        ev = new EventManager();
@@ -45,7 +48,13 @@ public class MessagingManager {
      * @param request The request
      */
     public void acceptRequest(CalendarData data, EventMessage request, String message){
-        EventMessage response = new EventMessage(request.getEvent(), message, request.getTo(), request.getFrom());
+        previousMessages.add(request);
+        EventMessage response;
+        if (message.equals("")){
+            response  = new EventMessage(request.getEvent(), null, request.getTo(), request.getFrom());
+        } else {
+            response = new EventMessage(request.getEvent(), message, request.getTo(), request.getFrom());
+        }
         request.getFrom().addResponse(response);
         data.getCurrUser().removeRequest(request);
         // TODO: Important, fix this to accommodate new constructor.
@@ -56,8 +65,14 @@ public class MessagingManager {
      * Rejects the request.
      * @param request The request
      */
-    public void rejectRequest(CalendarData data, EventMessage request){
-        EventMessage response = new EventMessage(request.getEvent(), null, request.getTo(), request.getFrom());
+    public void rejectRequest(CalendarData data, EventMessage request, String message){
+        previousMessages.add(request);
+        EventMessage response;
+        if (message.equals("")){
+             response = new EventMessage(request.getEvent(), null, request.getTo(), request.getFrom());
+        } else {
+             response = new EventMessage(request.getEvent(), message, request.getTo(), request.getFrom());
+        }
         request.getFrom().addResponse(response);
         data.getCurrUser().removeRequest(request);
     }
@@ -124,4 +139,36 @@ public class MessagingManager {
         return data.getCurrUser().getMapRequests().get(message);
     }
 
+    public List<String> getResponses(CalendarData data) {
+        List<String> result = new ArrayList<>();
+        Map<String, EventMessage> responses = data.getCurrUser().getMapResponses();
+        for (Map.Entry<String, EventMessage> entry : responses.entrySet()){
+            result.add(entry.getValue().getTo().getUsername());
+        }
+        return result;
+    }
+
+    public List<String> getResponsesText(CalendarData data){
+        List<String> result = new ArrayList<>();
+        Map<String, EventMessage> responses = data.getCurrUser().getMapResponses();
+        for (Map.Entry<String, EventMessage> entry : responses.entrySet()){
+            result.add(entry.getValue().getMessage());
+        }
+        return result;
+    }
+
+//    public List<String> getPreviousRequests(List<String> users) {
+//        List<String> result = new ArrayList<>();
+//        // Getting list of previous usernames
+//        List<String> previousMessages = new ArrayList<>();
+//        for (EventMessage message : this.previousMessages){
+//            previousMessages.add(message.getFrom().getUsername());
+//        }
+//        for (String user : users){
+//            if (previousMessages.contains(user)){
+//                result.add(previousMessages.g)
+//            }
+//        }
+//
+//    }
 }

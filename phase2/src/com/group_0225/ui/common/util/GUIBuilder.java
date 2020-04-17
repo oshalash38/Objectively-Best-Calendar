@@ -43,6 +43,7 @@ public class GUIBuilder {
         panels.put("ViewByTagPanel", new ViewByTagPanel(controllerContainer));
         panels.put("ViewByTagChoicePanel", new ViewByTagChoicePanel(controllerContainer));
         panels.put("NoTagsPanel", new NoTagsPanel(controllerContainer));
+        panels.put("ResponsePanel", new ResponsePanel(controllerContainer));
 
         return panels;
     }

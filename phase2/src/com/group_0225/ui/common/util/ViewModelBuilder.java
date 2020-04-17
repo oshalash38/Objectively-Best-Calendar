@@ -44,6 +44,7 @@ public class ViewModelBuilder {
         viewModel.put("NoMemos", "There are no memos to be displayed.");
         viewModel.put("MemoList", "Memo List");
         viewModel.put("EventList", "Event List");
+        viewModel.put("From", "From: ");
 
         viewModel.put("EnterStartTimeString", "Enter Start Time: (hh:mm:ss)");
         viewModel.put("EnterEndTimeString", "Enter End Time:");
@@ -79,6 +80,9 @@ public class ViewModelBuilder {
         viewModel.put("VIEW EVENTS", "VIEW EVENTS");
         viewModel.put("No tags:", "You have no tags on any events.");
         viewModel.put("AddTags", "Optional: tags (put each tag on separate lines)");
+        viewModel.put("Responses", "Responses: ");
+        viewModel.put("OriginalRequest", "Original Request: ");
+        viewModel.put("Response", "Response: ");
 
         viewModel.put("CreateCalendarPanelTitle", "Create New Calendar");
         viewModel.put("CalendarNameString", "New Calendar Name:");

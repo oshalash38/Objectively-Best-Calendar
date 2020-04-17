@@ -1,9 +1,6 @@
 package com.group_0225.controller;
 
-import com.group_0225.entities.CalendarData;
-import com.group_0225.entities.Event;
-import com.group_0225.entities.Timing;
-import com.group_0225.entities.User;
+import com.group_0225.entities.*;
 import com.group_0225.manager.EventManager;
 import com.group_0225.manager.MessagingManager;
 import com.group_0225.ui.common.util.UIPresenter;
@@ -54,11 +51,25 @@ public class MessagingController extends CalendarController{
     }
 
     public void pushInboxPanel(){
+        List<String> output = new ArrayList<>();
+        output.add("RequestUsers");
         List<String> requests = messagingManager.getRequests(data);
+        output.addAll(requests);
+        output.add("RequestMessages");
+        List<String> requestMessages = messagingManager.getText(data);
+        output.addAll(requestMessages);
+        List<String> responses = messagingManager.getResponses(data);
+        output.add("ResponseUsers");
+        output.addAll(responses);
+        output.add("ResponseMessages");
+        output.addAll(messagingManager.getResponsesText(data));
+//        output.add("ResponseExMessages");
+//        output.addAll(messagingManager.getPreviousRequests(responses));
         requests.addAll(messagingManager.getText(data));
-        presenter.updateUI(new UIUpdateInfo("dialog", requests, "Inbox"));
+        presenter.updateUI(new UIUpdateInfo("dialog", output, "Inbox"));
     }
     public void pushAcceptDeclinePanel(List<String> message){
+        System.out.println(message);
         List<String> input = new ArrayList<>(message);
         input.add(messagingManager.messageToEvent(data.getCurrUser(),message.get(0)));
         //index 0 -> the message
@@ -90,8 +101,14 @@ public class MessagingController extends CalendarController{
         pushInboxPanel();
     }
     public void declineMessage(List<String> input){
-        messagingManager.rejectRequest(messagingManager.getEventMessage(data,input.get(0)),input.get(1));
+        messagingManager.rejectRequest(data, messagingManager.getEventMessage(data,input.get(0)), input.get(1));
         pushInboxPanel();
+    }
+
+    public void pushResponsePanel(List<String> message){
+        //index 0 -> from
+        //index 1 -> the message
+        presenter.updateUI(new UIUpdateInfo("dialog", message, "ResponsePanel"));
     }
 
 }
