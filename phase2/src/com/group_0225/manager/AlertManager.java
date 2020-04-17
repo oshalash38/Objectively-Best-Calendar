@@ -112,7 +112,7 @@ public class AlertManager extends Observable{
 
     private List<String> formatAlertDisplay(Event e, Alert a){
         List<String> retList = new ArrayList<>();
-        retList.add("New Alert for:" + e.getEventName());
+        retList.add("New Alert For: " + e.getEventName());
         retList.add("Event name: " + e.getEventName());
         retList.add("Event Start time: " + e.getTime().toString());
         retList.add("Alert message: " + a.pushReminder());
