@@ -21,6 +21,8 @@ public class NoSeriesPanel extends CalendarLayoutPanel {
         constraints.gridy = 0;
         constraints.anchor = GridBagConstraints.CENTER;
         JPanel bottomPane = new JPanel(new GridBagLayout());
+        bottomPane.setBackground(Color.darkGray);
+        setBackground(Color.darkGray);
 
         addLabel(constraints, bottomPane, 2, viewModel.get("You have no series."));
 
