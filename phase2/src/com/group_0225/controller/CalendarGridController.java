@@ -10,6 +10,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Controls high-level logic for the calendar display in the "home screen" of the calendar
+ */
 public class CalendarGridController extends CalendarController{
 
     Timing displayTime;
@@ -18,6 +21,11 @@ public class CalendarGridController extends CalendarController{
 
     WeatherManager weatherManager;
 
+    /**
+     * Constructs a CalendarGridController instance
+     * @param data a CalendarData instance
+     * @param presenter a UIPresenter instance
+     */
     public CalendarGridController(CalendarData data, UIPresenter presenter) {
         super(data, presenter);
 
@@ -29,6 +37,9 @@ public class CalendarGridController extends CalendarController{
         weatherManager.setForecastHighs();
     }
 
+    /**
+     * Displays the calendar grid
+     */
     public void displayGrid(){
         List<String> outputs = new ArrayList<>();
 
@@ -46,12 +57,24 @@ public class CalendarGridController extends CalendarController{
         presenter.updateUI(new UIUpdateInfo("panel", outputs, "CalendarPanel"));
     }
 
+    /**
+     * Changes the month on the calendar grid
+     * @param alter the indicator of the new month in the calendar grid
+     */
     public void alterMonth(int alter) {
         System.err.println("NEED MANAGERS : " + displayTime + " : " + data.getLocalTime());
         displayTime.setStart(displayTime.getStart().plusMonths(alter));
         displayGrid();
     }
 
+    /**
+     * Gets the temperature for a particular day
+     * @param formattedTemp temperatures formatted as Strings
+     * @param day the day in question
+     * @param month the month the day belongs to
+     * @param year the year the month belongs to
+     * @return the correct temperature for the day
+     */
     public String getTempForDay(List<String> formattedTemp, String day, String month, String year) {
         String temp = "NONE";
 
@@ -70,6 +93,10 @@ public class CalendarGridController extends CalendarController{
         return temp;
     }
 
+    /**
+     * Get number of events per day of month
+     * @return number of events per day of month
+     */
     public List<String> getNumEventsPerDayOfMonth() {
 
         LocalDateTime displayStart = displayTime.getStart();
@@ -81,6 +108,10 @@ public class CalendarGridController extends CalendarController{
         return eventManager.getNumEventsPerDay(data, threshold);
     }
 
+    /**
+     * Get the number of alerts per day of month
+     * @return the number of alerts per day of month, as a list of Strings
+     */
     public List<String> getNumAlertsPerDayOfMonth() {
         LocalDateTime displayStart = displayTime.getStart();
         LocalDateTime startTime = LocalDateTime.of(displayStart.getYear(), displayStart.getMonth(), 1, 0, 0);
@@ -91,6 +122,9 @@ public class CalendarGridController extends CalendarController{
         return eventManager.getNumAlertsPerDay(data, threshold);
     }
 
+    /**
+     * Update the displayed time
+     */
     public void updateDisplayTime(){
         displayTime = new Timing(data.getLocalTime().getStart());
     }

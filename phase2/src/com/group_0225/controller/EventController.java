@@ -299,13 +299,17 @@ public class EventController extends CalendarController {
         }
     }
 
+    /**
+     * Displays a dialog that allows the user to view events by a specific name
+     */
     public void viewEventByNameChoicePanel() {
-//        List<String> ids = eventManager.getEventIDs(eventManager.getUserCalendarEvents(data.getEvents(),data.getCurrUser(),data.getCurrCalendar()));
-//        List<String> eventNames = eventManager.getEventNames(eventManager.getUserCalendarEvents(data.getEvents(), data.getCurrUser(),data.getCurrCalendar()));
-//        ids.addAll(eventNames);
         presenter.updateUI(new UIUpdateInfo("scrollable", Collections.singletonList(""), "ViewByENameChoicePanel"));
     }
 
+    /**
+     * Displays a panel that allows the user to inspect events with a particular name
+     * @param eventName the name selected by the user
+     */
     public void viewEventByNamePanel(String eventName) {
         List<String> ids = eventManager.getEventsCurrUserByName(data, eventName);
         if (ids.size() == 0) {
