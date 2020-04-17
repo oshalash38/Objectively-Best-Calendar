@@ -47,18 +47,6 @@ public class AlertManager extends Observable{
         }
     }
 
-//    /**
-//     *
-//     * @param eventIDs initialises alertManager with the events of the logged in user
-//     */
-//    public AlertManager (CalendarData calendarData, List<Integer> eventIDs){
-//        this.UserEvents.clear();
-//        for(Map.Entry<Integer, Event> entry: calendarData.getEvents().entrySet()){
-//            if(eventIDs.contains(entry.getKey())){
-//                UserEvents.add(entry.getValue());
-//            }
-//        }
-//    }
 
     /**
      * Checks for any alerts which have passed while the program was not running.
@@ -285,6 +273,11 @@ public class AlertManager extends Observable{
         return toDisplay;
     }
 
+    /**
+     * Getter method for the String representation of an alert
+     * @param alert the alert being formatted
+     * @return the String representation of an alert as a list of strings
+     */
     public List<String> getStringRepresentation(Alert alert){
         List<String> info = new ArrayList<>();
         info.add("Message: " + alert.pushReminder());
@@ -293,21 +286,42 @@ public class AlertManager extends Observable{
         return info;
     }
 
+
     public void setCurrentTime(LocalDateTime time){
         this.currentTime = time;
         //checkNewAlerts();
     }
+    /**
+     * Getter method for the parameters of an alert
+     * @param alert the alert being accessed
+     * @return the parameters as a list of strings
+     */
     public List<String> getParameters(Alert alert){
         return alert.getParameters();
     }
 
+    /**
+     * Setter for the timing of the alert
+     * @param alert the alert being modified
+     * @param timing the new Timing object for the alert
+     */
     public void setTiming(Alert alert, Timing timing){
         alert.setTime(timing);
     }
 
+    /**
+     * Setter for the message of the alert
+     * @param alert the alert being modified
+     * @param message the new message for this alert
+     */
     public void setMessage(Alert alert, String message){
         alert.setMessage(message);
     }
 
+    /**
+     * Setter for the frequency for a recurring alert
+     * @param alert the alert being modified
+     * @param freq the new frequency for this recurring alert
+     */
     public void setFreq(RecurringAlert alert, Duration freq){alert.setFreq(freq);}
 }

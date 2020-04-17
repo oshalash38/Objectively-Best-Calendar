@@ -23,7 +23,11 @@ import java.util.Map;
  */
 
 public class Init {
-
+    /**
+     * Runs the program
+     * @throws IOException for saving/loading issues
+     * @throws ClassNotFoundException if needed class isn't found
+     */
     public void run() throws IOException, ClassNotFoundException {
         TimingFactory timingFactory = new TimingFactory();
         CalendarFrame calendarFrame = new CalendarFrame();

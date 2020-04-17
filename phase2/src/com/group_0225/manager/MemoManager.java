@@ -109,10 +109,10 @@ public class MemoManager {
     }
 
     /**
-     * Getter method for the
-     * @param data
-     * @param event
-     * @return
+     * Getter method for the entries in the calendarData memo hashmap that correspond to the given event
+     * @param data a CalendarData instance
+     * @param event an event
+     * @return a HashMap of memoids to memo messages for the given event
      */
     public Map<Integer, String> getMemoMapByEvent(CalendarData data, Event event) {
         Map<Integer, String> result = new HashMap<>();
@@ -127,6 +127,11 @@ public class MemoManager {
 
     }
 
+    /**
+     * Remove the given event's affiliation with a given memo
+     * @param key a memo id
+     * @param event the event
+     */
     public void unassociateMemoWithEvent(Integer key, Event event) {
         event.removeMemoID(key);
     }
