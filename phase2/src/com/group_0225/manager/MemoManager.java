@@ -3,16 +3,15 @@ package com.group_0225.manager;
 import com.group_0225.entities.CalendarData;
 import com.group_0225.entities.Event;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class MemoManager {
 
     private static int idGen = 0;
+    private EventManager eventManager;
 
     public MemoManager(){
+        eventManager = new EventManager();
 
     }
 
@@ -135,6 +134,23 @@ public class MemoManager {
             }
         }
         return ids;
+    }
+
+    public Map<Integer, String> getMemoMapByEvent(CalendarData data, Event event) {
+        Map<Integer, String> result = new HashMap<>();
+        List<Integer> memoIDs = event.getMemoIDs();
+        Map<Integer, String> allMemos = data.getMemos();
+        for (Map.Entry<Integer, String> entry : allMemos.entrySet()){
+            if (memoIDs.contains(entry.getKey())){
+                result.put(entry.getKey(), entry.getValue());
+            }
+        }
+        return result;
+
+    }
+
+    public void unassociateMemoWithEvent(Integer key, Event event) {
+        event.removeMemoID(key);
     }
 }
 

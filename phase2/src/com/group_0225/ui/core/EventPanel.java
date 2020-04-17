@@ -1,9 +1,6 @@
 package com.group_0225.ui.core;
 
-import com.group_0225.controller.AlertController;
-import com.group_0225.controller.CalendarGridController;
-import com.group_0225.controller.ControllerContainer;
-import com.group_0225.controller.EventController;
+import com.group_0225.controller.*;
 import com.group_0225.ui.common.calendar.CalendarLayoutPanel;
 
 import javax.swing.*;
@@ -21,6 +18,7 @@ public class EventPanel extends CalendarLayoutPanel {
         EventController eventController = controllerContainer.getEventsController();
         CalendarGridController gridController = controllerContainer.getCalendarGridController();
         AlertController alertController = controllerContainer.getAlertController();
+        MemoController memoController = controllerContainer.getMemoController();
 
         GridBagConstraints c = new GridBagConstraints();
         c.fill = GridBagConstraints.BOTH;
@@ -34,6 +32,9 @@ public class EventPanel extends CalendarLayoutPanel {
         Button deleteButton = this.addButton(c, optionsHolder, 1, "Delete");
 
         Button viewAlerts = this.addButton(c, optionsHolder, 2, viewModel.get("ViewAlertsButtonString"));
+        Button memoOptions = addButton(c, optionsHolder, 2, viewModel.get("memoOptions"));
+
+        memoOptions.addActionListener(e -> memoController.pushMemoOptions(inputs.get(0)));
 
         deleteButton.addActionListener(e -> eventController.deleteEvent(inputs.get(0), gridController));
         viewAlerts.addActionListener(e-> alertController.pushViewAlertsPanel(inputs.get(0)));

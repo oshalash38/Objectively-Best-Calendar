@@ -45,6 +45,12 @@ public class ViewModelBuilder {
         viewModel.put("MemoList", "Memo List");
         viewModel.put("EventList", "Event List");
         viewModel.put("From", "From: ");
+        viewModel.put("memoOptions", "Memo Options");
+        viewModel.put("editMemoCurrentEvent", "Edit memos only for this event");
+        viewModel.put("description1", "(Changes will only happen to this event)");
+        viewModel.put("editMemosAllEvents", "Edit memos for all associated events");
+        viewModel.put("description2", "(Changes will happen for all associated events)");
+        viewModel.put("editMemos", "Edit Memos:");
 
         viewModel.put("EnterStartTimeString", "Enter Start Time: (hh:mm:ss)");
         viewModel.put("EnterEndTimeString", "Enter End Time:");
@@ -83,6 +89,8 @@ public class ViewModelBuilder {
         viewModel.put("Responses", "Responses: ");
         viewModel.put("OriginalRequest", "Original Request: ");
         viewModel.put("Response", "Response: ");
+        viewModel.put("eventOptions", "Event Options");
+        viewModel.put("Save", "Save");
 
         viewModel.put("CreateCalendarPanelTitle", "Create New Calendar");
         viewModel.put("CalendarNameString", "New Calendar Name:");

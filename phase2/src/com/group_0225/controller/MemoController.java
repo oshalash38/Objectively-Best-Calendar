@@ -1,13 +1,13 @@
 package com.group_0225.controller;
 
 import com.group_0225.entities.CalendarData;
+import com.group_0225.entities.Event;
 import com.group_0225.manager.EventManager;
 import com.group_0225.manager.MemoManager;
 import com.group_0225.ui.common.util.UIPresenter;
 import com.group_0225.ui.common.util.UIUpdateInfo;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class MemoController extends CalendarController{
 
@@ -55,5 +55,46 @@ public class MemoController extends CalendarController{
 
     public String getMemo(String s) {
         return data.getMemoByID(Integer.parseInt(s));
+    }
+
+    public void pushMemoOptions(String rawID){
+        List<String> output = new ArrayList<>();
+        output.add(rawID);
+        presenter.updateUI(new UIUpdateInfo("dialog", output, "MemoOptionsPanel"));
+    }
+
+    public void pushEditCurrentEvent(List<String> input){
+        Event event = eventManager.getEventByID(data, Integer.parseInt(input.get(0)));
+        Map<Integer, String> memos = memoManager.getMemoMapByEvent(data, event);
+        List<String> output = new ArrayList<>();
+        output.add("Current");
+        output.add(input.get(0));
+        output.add("MemoStrings");
+        output.addAll(memos.values());
+        output.add("MemoIDs");
+        output.addAll(getKeys(memos));
+        presenter.updateUI(new UIUpdateInfo("scrollable", output, "ChangeMemoPanel"));
+    }
+
+    private List<String> getKeys(Map<Integer, String> memos) {
+        List<String> result = new ArrayList<>();
+        for (Map.Entry<Integer, String> entry : memos.entrySet()){
+            result.add(entry.getKey().toString());
+        }
+        return result;
+    }
+
+    public void pushEditAll(List<String> input){
+
+    }
+
+    public void editMemosCurrEvent(String eventID, Map<Integer, String> newMemos) {
+        Event event = eventManager.getEventByID(data, Integer.parseInt(eventID));
+        List<Event> eventList = new ArrayList<>();
+        eventList.add(event);
+        for (Map.Entry<Integer, String> entry : newMemos.entrySet()){
+            memoManager.unassociateMemoWithEvent(entry.getKey(), event);
+            memoManager.CreateMemo(data, entry.getValue(), eventList);
+        }
     }
 }
