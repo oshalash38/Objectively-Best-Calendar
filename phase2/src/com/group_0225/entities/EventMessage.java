@@ -22,18 +22,34 @@ public class EventMessage {
         this.to = to;
     }
 
+    /**
+     * Getter for the event
+     * @return the event
+     */
     public Event getEvent() {
         return event;
     }
 
+    /**
+     * Getter for the from user
+     * @return  the from user
+     */
     public User getFrom() {
         return from;
     }
 
+    /**
+     * Getter for the to user
+     * @return  the to user
+     */
     public User getTo() {
         return to;
     }
 
+    /**
+     * Getter for the message
+     * @return  the message
+     */
     public String getMessage() {
         return message;
     }
