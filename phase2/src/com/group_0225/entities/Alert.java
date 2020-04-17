@@ -2,6 +2,7 @@ package com.group_0225.entities;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * An abstract class that sets parameters required by different types of alerts.
@@ -59,7 +60,27 @@ public abstract class Alert implements Serializable, Comparable<Alert>{
 
     /**
      *
+     * @param message the new message for this alert.
+     */
+    public void setMessage(String message){
+        this.message = message;
+    }
+
+    /**
+     *
      * @return the type of this alert
      */
     public abstract String getType();
+
+    /**
+     *
+     * @return a list of parameters that this alert stores
+     */
+    public abstract List<String> getParameters();
+
+    /**
+     *
+     * @param t the new time of this reminder
+     */
+    public abstract void setTime(Timing t);
 }

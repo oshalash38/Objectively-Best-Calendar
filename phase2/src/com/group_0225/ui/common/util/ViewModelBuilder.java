@@ -107,7 +107,9 @@ public class ViewModelBuilder {
         viewModel.put("MinuteFrequencyString", "Enter minute frequency");
 
         viewModel.put("AlertNamePromptString", "Enter alert message:");
-
+        viewModel.put("EditAlertString", "Edit Alert");
+        viewModel.put("ChangeAlertDateAndTimeString", "Change Alert Date and Time");
+        viewModel.put("ChangeAlertMessageString", "Change Alert Message");
 
         //TOOLBAR HEADERS
         viewModel.put("TOOLBARCreateMenuString", "Create");

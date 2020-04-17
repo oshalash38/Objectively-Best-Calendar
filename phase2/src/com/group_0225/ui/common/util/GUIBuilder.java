@@ -3,6 +3,7 @@ package com.group_0225.ui.common.util;
 import com.group_0225.controller.ControllerContainer;
 import com.group_0225.ui.common.calendar.CalendarLayoutPanel;
 import com.group_0225.ui.core.*;
+import com.group_0225.ui.core.Alert.*;
 
 
 import java.util.Hashtable;
@@ -43,6 +44,9 @@ public class GUIBuilder {
         panels.put("ViewByTagPanel", new ViewByTagPanel(controllerContainer));
         panels.put("ViewByTagChoicePanel", new ViewByTagChoicePanel(controllerContainer));
         panels.put("NoTagsPanel", new NoTagsPanel(controllerContainer));
+        panels.put("EditAlertButtonsPanel", new EditAlertButtonsPanel(controllerContainer));
+        panels.put("AlertChangeTimePanel", new AlertChangeTimePanel(controllerContainer));
+        panels.put("AlertChangeMessagePanel", new AlertChangeMessagePanel(controllerContainer));
 
         return panels;
     }

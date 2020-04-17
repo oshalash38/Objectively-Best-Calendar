@@ -1,4 +1,4 @@
-package com.group_0225.ui.core;
+package com.group_0225.ui.core.Alert;
 
 import com.group_0225.controller.AlertController;
 import com.group_0225.controller.ControllerContainer;
@@ -32,7 +32,7 @@ public class AlertPanel extends CalendarLayoutPanel {
         Button editButton = addButton(c, this, 4, viewModel.get("EditAlertButton"));
         Button deleteButton = addButton(c, this, 4, viewModel.get("DeleteAlertButton"));
 
-        editButton.addActionListener(e -> alertController.editAlert(index, eventID, inputs.get(2)));
+        editButton.addActionListener(e -> alertController.pushEditAlert(index, eventID));
         deleteButton.addActionListener(e -> alertController.deleteAlert(index, eventID, controllerContainer.getCalendarGridController()));
     }
 }

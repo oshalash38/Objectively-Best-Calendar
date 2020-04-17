@@ -13,6 +13,8 @@ import java.util.List;
 
 public class AlertController extends CalendarController {
     private List<Alert> currAlerts = new ArrayList<>();
+    private Alert currAlert;
+    private Event currEvent;
 
     public AlertController(CalendarData data, UIPresenter presenter) {
         super(data, presenter);
@@ -73,13 +75,6 @@ public class AlertController extends CalendarController {
         String message = inputs.get(0);
         String eventString = inputs.get(1);
 
-        if(inputs.get(2).equals("")){
-            pushCreateOneTimeAlert(message, "A date MUST selected.");
-            return;
-        }
-
-        List<Integer> date = parseDate(inputs.get(2));
-        List<Integer> time = parseTime(inputs.get(3));
         message = message.trim();
 
         if(eventString == null){
@@ -88,11 +83,13 @@ public class AlertController extends CalendarController {
         }
         Event event= data.getEventByName(eventString);
 
-        Timing timing = timingFactory.createTiming(date.get(2), date.get(1), date.get(0), time.get(0), time.get(1));
-        if(timing.compareStartTime(event.getTime()) > 0){
-            pushCreateOneTimeAlert(message, "The alert must occur before the event.");
+        String feedback = dateVerification(inputs.get(2), inputs.get(3), event);
+
+        if(feedback != null){
+            pushCreateOneTimeAlert(message, feedback);
             return;
         }
+        Timing timing = buildTiming(inputs.get(2), inputs.get(3));
 
         if(message.equals("")){
             alertManager.createNewAlert(event,timing);
@@ -114,17 +111,9 @@ public class AlertController extends CalendarController {
         int hours;
         int minutes;
 
-
         String message = inputs.get(0);
         String eventString = inputs.get(1);
 
-        if(inputs.get(2).equals("")){
-            pushCreateRepeatingAlert(message, "A date MUST be selected.");
-            return;
-        }
-
-        List<Integer> date = parseDate(inputs.get(2));
-        List<Integer> time = parseTime(inputs.get(3));
         message = message.trim();
 
         if(eventString == null){
@@ -146,25 +135,45 @@ public class AlertController extends CalendarController {
             pushCreateRepeatingAlert(message, "Frequencies MUST be positive.");
             return;
         }
-
         Duration freq = durationFactory.createDuration(days, hours, minutes);
-        Timing timing = timingFactory.createTiming(date.get(2), date.get(1), date.get(0), time.get(0), time.get(1));
 
-        if(timing.compareStartTime(event.getTime()) > 0){
-            pushCreateRepeatingAlert(message, "The alert must occur before the event.");
+        String feedback = dateVerification(inputs.get(2), inputs.get(3), event);
+
+        if(feedback != null){
+            pushCreateRepeatingAlert(message, feedback);
             return;
         }
+        Timing timing = buildTiming(inputs.get(2), inputs.get(3));
 
         if(message.equals("")){
             alertManager.createNewAlert(event,timing, freq);
-            pushCreateRepeatingAlert(message, "Alert created successfully.");
-            calendarGridController.displayGrid();
         }
         else {
             alertManager.createNewAlert(event, timing, message, freq);
         }
         pushCreateRepeatingAlert(message, "Alert created successfully.");
         calendarGridController.displayGrid();
+    }
+
+    private String dateVerification(String date, String time, Event event){
+        if(time.equals("")){
+            return "A date MUST be selected.";
+        }
+
+        Timing timing = buildTiming(date, time);
+        if(timing.compareStartTime(event.getTime()) > 0){
+            return "The alert must occur before the event.";
+        }
+        return null;
+    }
+
+    private Timing buildTiming(String date, String time){
+        TimingFactory timingFactory = new TimingFactory();
+        List<Integer> dateList = parseDate(date);
+        List<Integer> timeList = parseTime(time);
+        Timing timing = timingFactory.createTiming(dateList.get(2), dateList.get(1), dateList.get(0), timeList.get(0), timeList.get(1));
+
+        return timing;
     }
 
     public void pushViewAlertsPanel(String rawEvent){
@@ -197,10 +206,16 @@ public class AlertController extends CalendarController {
         presenter.updateUI(new UIUpdateInfo("scrollable", toUpload, "AlertListPanel"));
     }
 
-    public void editAlert(int index, int eventID, String info){
-        if(info.equals("One time alert")){
+    public void pushEditAlert(int index, int eventID){
+        AlertManager alertManager = new AlertManager();
+        currAlert = currAlerts.get(index);
+        List<String> outputs = alertManager.getParameters(currAlert);
 
-        }
+        EventManager eventManager = new EventManager();
+        currEvent = eventManager.getEventByID(data, eventID);
+
+        presenter.updateUI(new UIUpdateInfo("dialog", outputs, "EditAlertButtonsPanel"));
+
     }
 
     public void deleteAlert(int index, int eventID, CalendarGridController calendarGridController){
@@ -214,4 +229,67 @@ public class AlertController extends CalendarController {
         pushViewAlertsByEvent(event, "Alert deleted successfully.");
         calendarGridController.displayGrid();
     }
+
+    /**
+     * Called by JPanel to see what parameter the user wants to change
+     * @param chosenParameter "time" or
+     *                        "message" or
+     *                        "frequency"
+     *
+     */
+    public void editAlert(String chosenParameter){
+        switch (chosenParameter){
+            case "time":
+                pushChangeTime("");
+                break;
+            case "message":
+                pushChangeMessage("");
+                break;
+            case "frequency":
+                pushChangeFrequency("");
+                break;
+
+        }
+    }
+
+    private void pushChangeTime(String error){
+        presenter.updateUI(new UIUpdateInfo("dialog", Arrays.asList(error), "AlertChangeTimePanel"));
+    }
+
+    private void pushChangeMessage(String error){
+        presenter.updateUI(new UIUpdateInfo("dialog", Arrays.asList(error), "AlertChangeMessagePanel"));
+    }
+
+    private void pushChangeFrequency(String error)
+    {
+
+    }
+
+    public void editTime(List<String> inputs, CalendarGridController calendarGridController){
+        String feedback = dateVerification(inputs.get(0), inputs.get(1), currEvent);
+        AlertManager alertManager = new AlertManager();
+
+        if(feedback != null){
+            pushChangeTime(feedback);
+            return;
+        }
+        Timing timing = buildTiming(inputs.get(0), inputs.get(1));
+
+        alertManager.setTiming(currAlert, timing);
+        pushChangeTime("Time changed successfully");
+        calendarGridController.displayGrid();
+    }
+
+    public void editMessage(List<String> inputs){
+        AlertManager alertManager = new AlertManager();
+        String message = inputs.get(0);
+
+        message = message.trim();
+
+        alertManager.setMessage(currAlert, message);
+        pushChangeMessage("Alert message successfully changed");
+    }
+
+
+
 }
