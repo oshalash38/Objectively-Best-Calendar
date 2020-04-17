@@ -267,4 +267,5 @@ public class AlertManager extends Observable{
         alert.setMessage(message);
     }
 
+    public void setFreq(RecurringAlert alert, Duration freq){alert.setFreq(freq);}
 }

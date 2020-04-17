@@ -89,4 +89,12 @@ public class RecurringAlert extends Alert {
     public void setTime(Timing t) {
         this.nextTime = t;
     }
+
+    /**
+     * Changes the frequency of this alert
+     * @param freq the new frequency
+     */
+    public void setFreq(Duration freq){
+        this.freq = freq;
+    }
 }

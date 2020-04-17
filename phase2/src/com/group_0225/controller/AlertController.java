@@ -82,14 +82,12 @@ public class AlertController extends CalendarController {
 
     private void pushCreateOneTimeAlertHelper(String alertName, String error){
         EventManager eventManager = new EventManager();
-
         List<String> outputs = new ArrayList<String>() {{
             addAll(Arrays.asList(error, alertName));
             addAll(eventManager.getNames(data.getCurrUserEvents()));
         }};
 
         presenter.updateUI(new UIUpdateInfo("dialog", outputs, "CreateOneTimeAlertPanel"));
-
     }
 
     /**
@@ -98,10 +96,7 @@ public class AlertController extends CalendarController {
      * @param calendarGridController a CalendarGridController instance
      */
     public void createOneTimeAlert(List<String> inputs, CalendarGridController calendarGridController){
-        TimingFactory timingFactory = new TimingFactory();
-        EventManager eventManager = new EventManager();
         AlertManager alertManager = new AlertManager();
-
         String message = inputs.get(0);
         String eventString = inputs.get(1);
 
@@ -137,18 +132,10 @@ public class AlertController extends CalendarController {
      * @param calendarGridController a CalendarGridController
      */
     public void createRepeatingAlert(List<String> inputs, CalendarGridController calendarGridController){
-        TimingFactory timingFactory = new TimingFactory();
-        EventManager eventManager = new EventManager();
         AlertManager alertManager = new AlertManager();
         DurationFactory durationFactory = new DurationFactory();
-
-        int days;
-        int hours;
-        int minutes;
-
         String message = inputs.get(0);
         String eventString = inputs.get(1);
-
         message = message.trim();
 
         if(eventString == null){
@@ -157,23 +144,15 @@ public class AlertController extends CalendarController {
         }
         Event event= data.getEventByName(eventString);
 
-        try{
-            days = Integer.parseInt(inputs.get(4));
-            hours = Integer.parseInt(inputs.get(5));
-            minutes = Integer.parseInt(inputs.get(6));
-        }catch (NumberFormatException e){
-            pushCreateRepeatingAlert(message, "Frequencies MUST be integers.");
+        String freqFeedback = freqVerification(inputs.get(4), inputs.get(5), inputs.get(6));
+
+        if(freqFeedback != null){
+            pushCreateRepeatingAlert(message, freqFeedback);
             return;
         }
-
-        if((days == 0 && hours == 0  && minutes == 0) ||  (days < 0 || hours < 0  || minutes < 0)){
-            pushCreateRepeatingAlert(message, "Frequencies MUST be positive.");
-            return;
-        }
-        Duration freq = durationFactory.createDuration(days, hours, minutes);
-
+        Duration freq = durationFactory.createDuration(Integer.parseInt(inputs.get(4)),
+                Integer.parseInt(inputs.get(5)), Integer.parseInt(inputs.get(6)));
         String feedback = dateVerification(inputs.get(2), inputs.get(3), event);
-
         if(feedback != null){
             pushCreateRepeatingAlert(message, feedback);
             return;
@@ -188,6 +167,23 @@ public class AlertController extends CalendarController {
         }
         pushCreateRepeatingAlert(message, "Alert created successfully.");
         calendarGridController.displayGrid();
+    }
+
+    private String freqVerification(String input1, String input2, String input3){
+        int freq1;
+        int freq2;
+        int freq3;
+        try{
+            freq1 = Integer.parseInt(input1);
+            freq2 = Integer.parseInt(input2);
+            freq3 = Integer.parseInt(input3);
+        }catch (NumberFormatException e){
+            return "Frequencies MUST be integers.";
+        }
+        if((freq1 == 0 && freq2 == 0 && freq3 == 0 ) ||  (freq1 < 0 || freq2 < 0 || freq3 < 0)){
+            return "Frequencies MUST be positive.";
+        }
+        return null;
     }
 
     private String dateVerification(String date, String time, Event event){
@@ -298,7 +294,6 @@ public class AlertController extends CalendarController {
             case "frequency":
                 pushChangeFrequency("");
                 break;
-
         }
     }
 
@@ -312,7 +307,7 @@ public class AlertController extends CalendarController {
 
     private void pushChangeFrequency(String error)
     {
-
+        presenter.updateUI(new UIUpdateInfo("dialog", Arrays.asList(error), "AlertChangeFrequencyPanel"));
     }
 
     /**
@@ -349,6 +344,29 @@ public class AlertController extends CalendarController {
         pushChangeMessage("Alert message successfully changed");
     }
 
+    /**
+     * Changes the frequency of a repeating alert
+     * @param inputs relevant input as Strings
+     */
+    public void editFrequency(List<String> inputs){
+        DurationFactory durationFactory= new DurationFactory();
+        AlertManager alertManager = new AlertManager();
 
+        String rawDay = inputs.get(0);
+        String rawHour = inputs.get(1);
+        String rawMinute = inputs.get(2);
+        String freqFeedback = freqVerification(rawDay, rawHour, rawMinute);
+        if(freqFeedback!= null){
+            pushChangeFrequency(freqFeedback);
+            return;
+        }
+        Duration freq = durationFactory.createDuration(Integer.parseInt(rawDay),
+                Integer.parseInt(rawHour), Integer.parseInt(rawMinute));
+
+        RecurringAlert temp = (RecurringAlert)currAlert;
+        alertManager.setFreq(temp, freq);
+
+        pushChangeFrequency("Frequency changed successfully.");
+    }
 
 }

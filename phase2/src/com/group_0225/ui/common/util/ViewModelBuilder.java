@@ -114,6 +114,7 @@ public class ViewModelBuilder {
         viewModel.put("EditAlertString", "Edit Alert");
         viewModel.put("ChangeAlertDateAndTimeString", "Change Alert Date and Time");
         viewModel.put("ChangeAlertMessageString", "Change Alert Message");
+        viewModel.put("ChangeAlertFrequencyString", "Change Alert Frequency");
 
         //TOOLBAR HEADERS
         viewModel.put("TOOLBARCreateMenuString", "Create");
