@@ -143,7 +143,7 @@ public class MessagingManager {
         List<String> result = new ArrayList<>();
         Map<String, EventMessage> responses = data.getCurrUser().getMapResponses();
         for (Map.Entry<String, EventMessage> entry : responses.entrySet()){
-            result.add(entry.getValue().getTo().getUsername());
+            result.add(entry.getValue().getFrom().getUsername());
         }
         return result;
     }

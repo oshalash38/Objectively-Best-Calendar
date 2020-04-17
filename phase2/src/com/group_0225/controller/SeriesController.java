@@ -114,7 +114,7 @@ public class SeriesController extends CalendarController {
     }
     public void viewSNameChoiceScreen(){
         List<String> sNames = sm.getAllSeriesNames(data,em);
-        if (sNames.size() == 0){
+        if (sNames.size() == 0 || (sNames.size() == 1 && sNames.get(0).equals(""))){
             presenter.updateUI(new UIUpdateInfo("dialog",new ArrayList<>(),"NoSeriesPanel"));
         }
         else{presenter.updateUI(new UIUpdateInfo("dialog",sNames,"ViewSNameChoicePanel"));}

@@ -22,16 +22,19 @@ public class ViewByTagChoicePanel extends CalendarLayoutPanel {
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.fill = GridBagConstraints.BOTH;
         constraints.gridy = 0;
-        constraints.anchor = GridBagConstraints.CENTER;
+        //constraints.anchor = GridBagConstraints.CENTER;
         JPanel bottomPane = new JPanel(new GridBagLayout());
 
         buildTitle(constraints, viewModel.get("View events by tag"));
 
-        addLabel(constraints, bottomPane, 2, viewModel.get("Select a tag:"));
+        addLabel(constraints, bottomPane, 1, viewModel.get("Select a tag:"));
 
-        JComboBox<String> selection = addDropDown(inputs, bottomPane, 4, constraints);
+        JComboBox<String> selection = addDropDown(inputs, bottomPane, 2, constraints);
+        for (int i = 0; i <= inputs.size(); i++) {
+            addLabel(constraints, bottomPane, i+4, "    ");
+        }
 
-        Button view = addButton(constraints, bottomPane, 5, viewModel.get("VIEW EVENTS"));
+        Button view = addButton(constraints, bottomPane, inputs.size()+5, viewModel.get("VIEW EVENTS"));
         view.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

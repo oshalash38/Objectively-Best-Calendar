@@ -50,6 +50,9 @@ public class MessagingController extends CalendarController{
         presenter.updateUI(new UIUpdateInfo("dialog", events, "SendMessage"));
     }
 
+    /**
+     * Displays a dialog that allows the user to view the invitations they've received as well as replies to the invitations they've sent
+     */
     public void pushInboxPanel(){
         List<String> output = new ArrayList<>();
         output.add("RequestUsers");
@@ -68,6 +71,11 @@ public class MessagingController extends CalendarController{
         requests.addAll(messagingManager.getText(data));
         presenter.updateUI(new UIUpdateInfo("dialog", output, "Inbox"));
     }
+
+    /**
+     * Displays the message that the user has selected along with an option to accept/decline
+     * @param message the message that the user has selected
+     */
     public void pushAcceptDeclinePanel(List<String> message){
         System.out.println(message);
         List<String> input = new ArrayList<>(message);
@@ -77,6 +85,10 @@ public class MessagingController extends CalendarController{
         presenter.updateUI(new UIUpdateInfo("scrollable",input,"AcceptDeclineMessagePanel"));
     }
 
+    /**
+     * Sends a message to a user unless input is incorrect, in that case, display the send message panel again
+     * @param input relevant user input
+     */
     public void sendMessage(List<String> input){
         User user = data.getUser(input.get(0));
         Event event = eventManager.getEventByID(data, Integer.parseInt(input.get(1)));
@@ -96,15 +108,29 @@ public class MessagingController extends CalendarController{
 
 
     }
+
+    /**
+     * Accepts an invitation from another user
+     * @param input relevant input
+     */
     public void acceptMessage(List<String> input){
         messagingManager.acceptRequest(data,messagingManager.getEventMessage(data,input.get(0)),input.get(1));
         pushInboxPanel();
     }
+
+    /**
+     * Declines an invitation from another user
+     * @param input relevant input
+     */
     public void declineMessage(List<String> input){
         messagingManager.rejectRequest(data, messagingManager.getEventMessage(data,input.get(0)), input.get(1));
         pushInboxPanel();
     }
 
+    /**
+     * Displays a dialog that allows the user to view responses to the invitations they've sent
+     * @param message
+     */
     public void pushResponsePanel(List<String> message){
         //index 0 -> from
         //index 1 -> the message

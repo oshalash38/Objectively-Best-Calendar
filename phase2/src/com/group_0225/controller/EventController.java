@@ -9,6 +9,9 @@ import com.group_0225.ui.common.util.UIPresenter;
 import java.time.LocalDateTime;
 import java.util.*;
 
+/**
+ * Controls high-level logic with respect to events
+ */
 public class EventController extends CalendarController {
 
     private EventManager eventManager;
@@ -16,18 +19,28 @@ public class EventController extends CalendarController {
 
     // TODO: Not sure if other classes will need this or not as well to avoid duplicate code.
 
-
+    /**
+     * Constructs an EventController instance
+     * @param data a CalendarData instance
+     * @param presenter a UIPresenter instance
+     */
     public EventController(CalendarData data, UIPresenter presenter) {
         super(data, presenter);
         eventManager = new EventManager();
         memoManager = new MemoManager();
     }
 
-
+    /**
+     * Displays a dialog that allows the user to create a new event
+     */
     public void pushCreateEvent() {
         presenter.updateUI(new UIUpdateInfo("dialog", null, "CreateEventPanel"));
     }
 
+    /**
+     * Display a dialog that allows the user to edit one of their events
+     * @param rawId the id of the event being edited
+     */
     public void pushEditEvent(String rawId) {
         Event e = data.getEvents().get(Integer.parseInt(rawId));
 
@@ -59,6 +72,11 @@ public class EventController extends CalendarController {
         presenter.updateUI(new UIUpdateInfo("dialog", input, "CreateEventPanel"));
     }
 
+    /**
+     * Edits an event
+     * @param inputs includes any error messages and info required to create the event
+     * @param gridController a CalendarGridController instance
+     */
     public void editEvent(List<String> inputs, CalendarGridController gridController) {
         List<String> output = new ArrayList<>();
         if (inputs.get(0).equals("Error1")) {
@@ -86,6 +104,12 @@ public class EventController extends CalendarController {
         gridController.displayGrid();
     }
 
+    /**
+     * Displays events for the specific point in time given (all input is within the correct bounds)
+     * @param rawDay a day
+     * @param rawMonth a month
+     * @param rawYear a year
+     */
     public void viewEvents(String rawDay, String rawMonth, String rawYear) {
         int day = Integer.parseInt(rawDay);
         int month = Integer.parseInt(rawMonth);
@@ -113,6 +137,9 @@ public class EventController extends CalendarController {
 
     }
 
+    /**
+     * Displays a dialog that allows the user to view events by a particular date threshold
+     */
     public void viewEventByDateThreshold() {
         eventManager.updateStatus(data);
         presenter.updateUI(new UIUpdateInfo("dialog", null, "DateThresholdPanel"));
@@ -149,10 +176,11 @@ public class EventController extends CalendarController {
         presenter.updateUI(new UIUpdateInfo("dialog", output, "CreateEventPanel"));
     }
 
-    public void pushViewEventsByDateThreshold() {
-        //Display a dialog that asks user to type in the date threshold that they want
-    }
-
+    /**
+     * Controls the high-level logic for deleting an event
+     * @param rawId the id of an event as a String
+     * @param gridController a CalendarGridController instance
+     */
     public void deleteEvent(String rawId, CalendarGridController gridController) {
         int id = Integer.parseInt(rawId);
 
@@ -171,6 +199,11 @@ public class EventController extends CalendarController {
         return result;
     }
 
+    /**
+     * Get the name of an event given its id
+     * @param rawId the id of the event, as a String
+     * @return the name of the event
+     */
     public String getEventName(String rawId) {
         int id = Integer.parseInt(rawId);
         Event event = eventManager.getEventByID(data, id);
@@ -178,6 +211,10 @@ public class EventController extends CalendarController {
         return event.getEventName();
     }
 
+    /**
+     * Displays a dialog containing the info of the event of the id given
+     * @param rawID given id as a String
+     */
     public void displayEvent(String rawID) {
         int id = Integer.parseInt(rawID);
         Event event = eventManager.getEventByID(data, id);
@@ -194,6 +231,10 @@ public class EventController extends CalendarController {
         presenter.updateUI(new UIUpdateInfo("scrollable", output, "EventPanel"));
     }
 
+    /**
+     * Displays a dialog that allows the user  to select a tag to view events by
+     * Displays a separate dialog if the user has no tags
+     */
     public void viewEventsByTagChoice() {
         List<String> tags = eventManager.getAllTags(eventManager.getUserCalendarEvents(data.getEvents(), data.getCurrUser(), data.getCurrCalendar()));
         if (tags.size() == 0) {
@@ -203,6 +244,10 @@ public class EventController extends CalendarController {
         }
     }
 
+    /**
+     * Displays a dialog that has all the info of the events that contain the given tag
+     * @param tag the tag by which the user wants to categorize their view of events
+     */
     public void viewEventsByTag(String tag) {
         List<Event> events = eventManager.getEventsByTag(tag, data);
         List<String> output = eventManager.getEventIDs(events);
@@ -211,6 +256,10 @@ public class EventController extends CalendarController {
         presenter.updateUI(new UIUpdateInfo("dialog", output, "EventListPanel"));
     }
 
+    /**
+     * Displays a dialog that shows events by a particular date threshold
+     * @param input relevant input
+     */
     public void getEventsByDateThreshold(List<String> input) {
         List<String> output = new ArrayList<>();
         if (input.get(0).equals("Error1")) {

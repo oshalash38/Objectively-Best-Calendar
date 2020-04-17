@@ -11,30 +11,48 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Controls high-level logic with respect to alerts
+ */
 public class AlertController extends CalendarController {
     private List<Alert> currAlerts = new ArrayList<>();
     private Alert currAlert;
     private Event currEvent;
 
+    /**
+     * Creates an AlertController instance
+     * @param data a CalendarData instance
+     * @param presenter a UIPresenter instance
+     */
     public AlertController(CalendarData data, UIPresenter presenter) {
         super(data, presenter);
     }
 
+    /**
+     * Displays a dialog that allows the user to enter info to create a new alert
+     */
     public void pushCreateNewAlert(){
         presenter.updateUI(new UIUpdateInfo("dialog", Arrays.asList(""), "CreateAlertPromptPanel"));
     }
 
 
-
+    /**
+     * Displays a dialog that allows the user to create a new repeating alert
+     */
     public void pushCreateRepeatingAlert(){
         pushCreateRepeatingAlertHelper("", "");
     }
 
+    /**
+     * Displays a dialog that informs the user of their error in creating a new alert
+     * @param alertName name of the alert
+     * @param error information about the input error
+     */
     public void pushCreateRepeatingAlert(String alertName, String error){
         pushCreateRepeatingAlertHelper(alertName, error);
     }
 
-    public void pushCreateRepeatingAlertHelper(String alertName, String error){
+    private void pushCreateRepeatingAlertHelper(String alertName, String error){
         EventManager eventManager = new EventManager();
 
         List<String> outputs = new ArrayList<String>() {{
@@ -46,10 +64,18 @@ public class AlertController extends CalendarController {
 
     }
 
+    /**
+     * Displays a dialog that allows the user to create a one-time alert
+     */
     public void pushCreateOneTimeAlert(){
         pushCreateOneTimeAlertHelper("", "");
     }
 
+    /**
+     * Displays a dialog that informs the user of the error in creating a one-time alert
+     * @param alertName name of the alert
+     * @param error info about the error
+     */
     public void pushCreateOneTimeAlert(String alertName, String error){
         pushCreateOneTimeAlertHelper(alertName, error);
     }
@@ -66,7 +92,11 @@ public class AlertController extends CalendarController {
 
     }
 
-
+    /**
+     * Parses user input and delegates to AlertManager one-time alert creation
+     * @param inputs user input
+     * @param calendarGridController a CalendarGridController instance
+     */
     public void createOneTimeAlert(List<String> inputs, CalendarGridController calendarGridController){
         TimingFactory timingFactory = new TimingFactory();
         EventManager eventManager = new EventManager();
@@ -101,6 +131,11 @@ public class AlertController extends CalendarController {
         calendarGridController.displayGrid();
     }
 
+    /**
+     * Parses user input and delegates to managers the task of creating a repeating alert, recognizes errors
+     * @param inputs user input
+     * @param calendarGridController a CalendarGridController
+     */
     public void createRepeatingAlert(List<String> inputs, CalendarGridController calendarGridController){
         TimingFactory timingFactory = new TimingFactory();
         EventManager eventManager = new EventManager();
@@ -176,6 +211,10 @@ public class AlertController extends CalendarController {
         return timing;
     }
 
+    /**
+     * Displays a dialog that allows the user to view all the alerts for the event given
+     * @param rawEvent the event formatted as a String
+     */
     public void pushViewAlertsPanel(String rawEvent){
         EventManager eventManager = new EventManager();
         int id = Integer.parseInt(rawEvent);
@@ -206,6 +245,11 @@ public class AlertController extends CalendarController {
         presenter.updateUI(new UIUpdateInfo("scrollable", toUpload, "AlertListPanel"));
     }
 
+    /**
+     * Displays a dialog that allows the user to edit an alert
+     * @param index the index of the relevant alert
+     * @param eventID the id of the event that the user is inspecting
+     */
     public void pushEditAlert(int index, int eventID){
         AlertManager alertManager = new AlertManager();
         currAlert = currAlerts.get(index);
@@ -218,6 +262,12 @@ public class AlertController extends CalendarController {
 
     }
 
+    /**
+     * Deletes an alert
+     * @param index the index corresponding the alert to be deleted
+     * @param eventID the id of the event corresponding to the alert to be deleted
+     * @param calendarGridController a CalendarGridController instance
+     */
     public void deleteAlert(int index, int eventID, CalendarGridController calendarGridController){
         System.out.println(index);
 
@@ -265,6 +315,11 @@ public class AlertController extends CalendarController {
 
     }
 
+    /**
+     * Allows the user to change the time of their alert
+     * @param inputs relevant input
+     * @param calendarGridController a CalendarGridController instance
+     */
     public void editTime(List<String> inputs, CalendarGridController calendarGridController){
         String feedback = dateVerification(inputs.get(0), inputs.get(1), currEvent);
         AlertManager alertManager = new AlertManager();
@@ -280,6 +335,10 @@ public class AlertController extends CalendarController {
         calendarGridController.displayGrid();
     }
 
+    /**
+     * Changes the message of an alert
+     * @param inputs relevant input as Strings
+     */
     public void editMessage(List<String> inputs){
         AlertManager alertManager = new AlertManager();
         String message = inputs.get(0);
