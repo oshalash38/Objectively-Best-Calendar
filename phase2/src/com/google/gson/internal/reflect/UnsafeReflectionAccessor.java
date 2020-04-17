@@ -15,11 +15,11 @@
  */
 package com.google.gson.internal.reflect;
 
-import com.google.gson.JsonIOException;
-
 import java.lang.reflect.AccessibleObject;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+
+import com.google.gson.JsonIOException;
 
 /**
  * An implementation of {@link ReflectionAccessor} based on {@link Unsafe}.

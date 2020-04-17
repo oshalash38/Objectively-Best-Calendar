@@ -16,9 +16,12 @@
 
 package com.google.gson.internal.bind;
 
-import com.google.gson.*;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonNull;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonPrimitive;
 import com.google.gson.stream.JsonWriter;
-
 import java.io.IOException;
 import java.io.Writer;
 import java.util.ArrayList;
@@ -127,6 +130,9 @@ public final class JsonTreeWriter extends JsonWriter {
   }
 
   @Override public JsonWriter name(String name) throws IOException {
+    if (name == null) {
+      throw new NullPointerException("name == null");
+    }
     if (stack.isEmpty() || pendingName != null) {
       throw new IllegalStateException();
     }

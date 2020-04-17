@@ -16,7 +16,11 @@
 
 package com.google.gson.annotations;
 
-import java.lang.annotation.*;
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
  * An annotation that indicates this member should be exposed for JSON
@@ -30,9 +34,9 @@ import java.lang.annotation.*;
  * <p>Here is an example of how this annotation is meant to be used:
  * <p><pre>
  * public class User {
- *   &#64Expose private String firstName;
- *   &#64Expose(serialize = false) private String lastName;
- *   &#64Expose (serialize = false, deserialize = false) private String emailAddress;
+ *   &#64;Expose private String firstName;
+ *   &#64;Expose(serialize = false) private String lastName;
+ *   &#64;Expose (serialize = false, deserialize = false) private String emailAddress;
  *   private String password;
  * }
  * </pre></p>
@@ -65,7 +69,7 @@ public @interface Expose {
    * serialized output. Defaults to {@code true}.
    * @since 1.4
    */
-  boolean serialize() default true;
+  public boolean serialize() default true;
 
   /**
    * If {@code true}, the field marked with this annotation is deserialized from the JSON.
@@ -73,5 +77,5 @@ public @interface Expose {
    * Defaults to {@code true}.
    * @since 1.4
    */
-  boolean deserialize() default true;
+  public boolean deserialize() default true;
 }

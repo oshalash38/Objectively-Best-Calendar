@@ -16,7 +16,10 @@
 
 package com.google.gson;
 
-import com.google.gson.internal.*;
+import com.google.gson.internal.ConstructorConstructor;
+import com.google.gson.internal.Excluder;
+import com.google.gson.internal.Primitives;
+import com.google.gson.internal.Streams;
 import com.google.gson.internal.bind.*;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
@@ -160,12 +163,12 @@ public final class Gson {
    */
   public Gson() {
     this(Excluder.DEFAULT, FieldNamingPolicy.IDENTITY,
-        Collections.emptyMap(), DEFAULT_SERIALIZE_NULLS,
+        Collections.<Type, InstanceCreator<?>>emptyMap(), DEFAULT_SERIALIZE_NULLS,
         DEFAULT_COMPLEX_MAP_KEYS, DEFAULT_JSON_NON_EXECUTABLE, DEFAULT_ESCAPE_HTML,
         DEFAULT_PRETTY_PRINT, DEFAULT_LENIENT, DEFAULT_SPECIALIZE_FLOAT_VALUES,
         LongSerializationPolicy.DEFAULT, null, DateFormat.DEFAULT, DateFormat.DEFAULT,
-        Collections.emptyList(), Collections.emptyList(),
-        Collections.emptyList());
+        Collections.<TypeAdapterFactory>emptyList(), Collections.<TypeAdapterFactory>emptyList(),
+        Collections.<TypeAdapterFactory>emptyList());
   }
 
   Gson(Excluder excluder, FieldNamingStrategy fieldNamingStrategy,
@@ -438,7 +441,7 @@ public final class Gson {
           return candidate;
         }
       }
-      throw new IllegalArgumentException("GSON (" + GsonBuildConfig.VERSION + ") cannot handle " + type);
+      throw new IllegalArgumentException("GSON () cannot handle " + type);
     } finally {
       threadCalls.remove(type);
 
@@ -681,7 +684,8 @@ public final class Gson {
     } catch (IOException e) {
       throw new JsonIOException(e);
     } catch (AssertionError e) {
-      AssertionError error = new AssertionError("AssertionError (GSON " + GsonBuildConfig.VERSION + "): " + e.getMessage(), e);
+      AssertionError error = new AssertionError("AssertionError (GSON ): " + e.getMessage());
+      error.initCause(e);
       throw error;
     } finally {
       writer.setLenient(oldLenient);
@@ -760,7 +764,8 @@ public final class Gson {
     } catch (IOException e) {
       throw new JsonIOException(e);
     } catch (AssertionError e) {
-      AssertionError error = new AssertionError("AssertionError (GSON " + GsonBuildConfig.VERSION + "): " + e.getMessage(), e);
+      AssertionError error = new AssertionError("AssertionError (GSON ): " + e.getMessage());
+      error.initCause(e);
       throw error;
     } finally {
       writer.setLenient(oldLenient);
@@ -817,7 +822,7 @@ public final class Gson {
       return null;
     }
     StringReader reader = new StringReader(json);
-    T target = fromJson(reader, typeOfT);
+    T target = (T) fromJson(reader, typeOfT);
     return target;
   }
 
@@ -868,7 +873,7 @@ public final class Gson {
   @SuppressWarnings("unchecked")
   public <T> T fromJson(Reader json, Type typeOfT) throws JsonIOException, JsonSyntaxException {
     JsonReader jsonReader = newJsonReader(json);
-    T object = fromJson(jsonReader, typeOfT);
+    T object = (T) fromJson(jsonReader, typeOfT);
     assertFullConsumption(object, jsonReader);
     return object;
   }
@@ -920,7 +925,8 @@ public final class Gson {
       // TODO(inder): Figure out whether it is indeed right to rethrow this as JsonSyntaxException
       throw new JsonSyntaxException(e);
     } catch (AssertionError e) {
-      AssertionError error = new AssertionError("AssertionError (GSON " + GsonBuildConfig.VERSION + "): " + e.getMessage(), e);
+      AssertionError error = new AssertionError("AssertionError (GSON ): " + e.getMessage());
+      error.initCause(e);
       throw error;
     } finally {
       reader.setLenient(oldLenient);

@@ -16,7 +16,11 @@
 
 package com.google.gson.annotations;
 
-import java.lang.annotation.*;
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
  * An annotation that indicates the version number until a member or a type should be present.
@@ -34,8 +38,8 @@ import java.lang.annotation.*;
  * public class User {
  *   private String firstName;
  *   private String lastName;
- *   &#64Until(1.1) private String emailAddress;
- *   &#64Until(1.1) private String password;
+ *   &#64;Until(1.1) private String emailAddress;
+ *   &#64;Until(1.1) private String password;
  * }
  * </pre>
  *

@@ -8,6 +8,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * An abstract calendar Controller. All other controllers extend this
+ */
 public abstract class CalendarController {
     protected CalendarData data;
     protected UIPresenter presenter;

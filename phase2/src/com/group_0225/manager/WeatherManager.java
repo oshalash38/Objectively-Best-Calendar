@@ -1,6 +1,6 @@
 package com.group_0225.manager;
 
-import com.google.gson.JsonArray;
+import com.google.gson.*;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.group_0225.api.WeatherRequester;

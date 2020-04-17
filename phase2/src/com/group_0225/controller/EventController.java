@@ -20,8 +20,6 @@ public class EventController extends CalendarController {
     private EventManager eventManager;
     private MemoManager memoManager;
 
-    // TODO: Not sure if other classes will need this or not as well to avoid duplicate code.
-
     /**
      * Constructs an EventController instance
      *
