@@ -31,7 +31,6 @@ public class CalendarToolBar extends JMenuBar {
     private JMenu timeMachine;
 
 
-
     public CalendarToolBar(ControllerContainer controllerContainer) {
         super();
         ViewModelBuilder vmb = new ViewModelBuilder();
@@ -51,18 +50,18 @@ public class CalendarToolBar extends JMenuBar {
     }
 
 
-    public void loadCalendars(List<String> calendars){
+    public void loadCalendars(List<String> calendars) {
         JMenu subCalendars = new JMenu(viewModel.get("TOOLBARUserChangeCalendarString"));
         List<JMenuItem> calendarItems = buildJMenuItems(subCalendars, false, calendars);
         userSettings.remove(0);
         userSettings.insert(subCalendars, 0);
 
-        for(JMenuItem menu: calendarItems){
+        for (JMenuItem menu : calendarItems) {
             menu.addActionListener(e -> usersCalendarController.changeCalendar(menu.getText(), calendarGridController));
         }
     }
 
-    private void toolBarBuilder(){
+    private void toolBarBuilder() {
         this.createMenu = new JMenu(viewModel.get("TOOLBARCreateMenuString"));
         this.viewMenu = new JMenu(viewModel.get("TOOLBARViewMenuString"));
         this.messagingMenu = new JMenu(viewModel.get("TOOLBARMessagingFunctionsString"));
@@ -82,7 +81,7 @@ public class CalendarToolBar extends JMenuBar {
         this.add(timeMachine);
     }
 
-    private void buildTimeMachinesMenu(){
+    private void buildTimeMachinesMenu() {
         List<JMenuItem> subMenus = buildJMenuItems(timeMachine, true,
                 Arrays.asList("TOOLBARTimeMachineReturnToPresentString", "TOOLBARTimeMachineTimeTravelString"));
 
@@ -92,7 +91,7 @@ public class CalendarToolBar extends JMenuBar {
         subMenus.get(1).addActionListener(e -> localTimeController.pushChangeTimePanel());
     }
 
-    private void buildUserSettingsMenu(){
+    private void buildUserSettingsMenu() {
 
         List<JMenuItem> subMenus = buildJMenuItems(userSettings, true,
                 Arrays.asList("TOOLBARUserAddNewCalendarString", "TOOLBARUserLogoutString"));
@@ -118,12 +117,12 @@ public class CalendarToolBar extends JMenuBar {
 
     }
 
-    private void buildViewMenu(){
+    private void buildViewMenu() {
 
         List<JMenuItem> subMenus = buildJMenuItems(viewMenu, true,
                 Arrays.asList("TOOLBARViewMenuCurrentEventsString", "TOOLBARViewMenuPastEventsString",
                         "TOOLBARViewMenuFutureEventsString", "TOOLBARViewMenuDateThresholdString",
-                        "TOOLBARViewMenuMemoString","TOOLBARViewMenuTagString","TOOLBARViewMenuNameString",
+                        "TOOLBARViewMenuMemoString", "TOOLBARViewMenuTagString", "TOOLBARViewMenuNameString",
                         "TOOLBARViewMenuSeriesString"));
 
         //Current events
@@ -137,9 +136,10 @@ public class CalendarToolBar extends JMenuBar {
         //Memo
         subMenus.get(4).addActionListener(e -> memoController.pushDisplayMemos());
         //Tag
-        subMenus.get(5).addActionListener(e -> {});
+        subMenus.get(5).addActionListener(e -> eventController.viewEventsByTagChoice());
         //Name
-        subMenus.get(6).addActionListener(e -> {});
+        subMenus.get(6).addActionListener(e -> {
+        });
         //Series
         subMenus.get(7).addActionListener(e -> seriesController.viewSNameChoiceScreen());
 
@@ -162,16 +162,15 @@ public class CalendarToolBar extends JMenuBar {
 
     }
 
-    private List<JMenuItem> buildJMenuItems(JMenuItem menu,  boolean fromViewModel, List<String> subMenus){
+    private List<JMenuItem> buildJMenuItems(JMenuItem menu, boolean fromViewModel, List<String> subMenus) {
         List<JMenuItem> temp = new ArrayList<>();
 
-        for(String str: subMenus){
+        for (String str : subMenus) {
             JMenuItem tempMenuItem;
-            if(fromViewModel) {
+            if (fromViewModel) {
                 tempMenuItem = new JMenuItem(viewModel.get(str));
-            }
-            else{
-                 tempMenuItem = new JMenuItem(str);
+            } else {
+                tempMenuItem = new JMenuItem(str);
             }
             menu.add(tempMenuItem);
             temp.add(tempMenuItem);

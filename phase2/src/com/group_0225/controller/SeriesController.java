@@ -142,6 +142,10 @@ public class SeriesController extends CalendarController {
         presenter.updateUI(new UIUpdateInfo("dialog", args, "CreateSeriesScratchPanel"));
     }
 
+    /**
+     * Presents a scrollable dialog that lets the user view the events in the series they have selected
+     * @param selectedName a one-element list containing the chosen series name
+     */
     public void pushViewSNameScreen(List<String> selectedName) {
         List<Event> seriesEvents = em.getEventsBySeriesName(data.getCurrUser(),selectedName.get(0),
                 em.getUserCalendarEvents(data.getEvents(),data.getCurrUser(),data.getCurrCalendar()));

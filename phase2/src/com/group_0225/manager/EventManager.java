@@ -177,9 +177,18 @@ public class EventManager {
      * @param tag the tag being searched for
      * @return
      */
-    public List<Event> getEventsByTag(User user, String tag, List<Event> events){
+    public List<Event> getEventsByTag(String tag, CalendarData data){
+//        HashMap<Integer,Event> events = (HashMap<Integer, Event>) user.getEvents();
+//        List<Event> eventsByTag = new ArrayList<Event>();
+//        for (Map.Entry<Integer, Event> entry: events.entrySet()){
+//            if (entry.getValue().getTags().contains(tag)){
+//                eventsByTag.add(entry.getValue());
+//            }
+//        }
+//        return eventsByTag;
           List<Event> eventsByTag = new ArrayList<Event>();
-          for(Event e: events){
+          List<Event> userEvents = getUserCalendarEvents(data.getEvents(),data.getCurrUser(),data.getCurrCalendar());
+          for(Event e: userEvents){
               if(e.getTags().contains(tag))
                   eventsByTag.add(e);
           }
@@ -337,6 +346,17 @@ public class EventManager {
             id.add(e.getID() + "");
 
         return id;
+    }
+    public List<String> getAllTags(List<Event> events){
+        List<String> tags = new ArrayList<>();
+        for (Event e: events){
+            for (String tag: e.getTags()){
+                if (!tags.contains(tag)){
+                    tags.add(tag);
+                }
+            }
+        }
+        return tags;
     }
 
     public List<String> getEventIDsOfThreshold(CalendarData data, Timing threshold) {

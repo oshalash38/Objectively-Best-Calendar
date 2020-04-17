@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ViewModelBuilder {
-    public Map<String, String> build(){
+    public Map<String, String> build() {
         Map<String, String> viewModel = new HashMap<>();
         viewModel.put("EventNameString", "Event Name:");
         viewModel.put("EnterStartDateString", "Enter Start Date:");
@@ -54,15 +54,15 @@ public class ViewModelBuilder {
         viewModel.put("NE:", "Number of Events (min. 2):");
         viewModel.put("CREATESERIES", "CREATE SERIES");
         viewModel.put("Create series exclamation", "Create a series!");
-        viewModel.put("SeriesDescription","A series is a group of events sharing a theme (ex. birthdays).");
+        viewModel.put("SeriesDescription", "A series is a group of events sharing a theme (ex. birthdays).");
         viewModel.put("SeriesHow:", "How would you like to create your series?");
-        viewModel.put("From scratch:","From scratch");
+        viewModel.put("From scratch:", "From scratch");
         viewModel.put("From events:", "From events in this calendar");
         viewModel.put("SeriesEventsInstructions", "Select the events that you want to be in the new series.");
         viewModel.put("View Events by Series Name: ", "View Events by Series Name: ");
         viewModel.put("Which series would you like to view?", "Which series would you like to view?");
         viewModel.put("VIEW SERIES", "VIEW SERIES");
-        viewModel.put("You have no series.","You have no series.");
+        viewModel.put("You have no series.", "You have no series.");
         viewModel.put("SendMessage", "Send Message To User");
         viewModel.put("EnterUsername", "Enter Username: ");
         viewModel.put("EnterEvent", "Pick Event: ");
@@ -73,7 +73,11 @@ public class ViewModelBuilder {
         viewModel.put("Event information: ", "Event information: ");
         viewModel.put("Accept invitation: ", "Accept invitation: ");
         viewModel.put("Decline invitation: ", "Decline invitation: ");
-        viewModel.put("Optional reply: ","Optional reply: ");
+        viewModel.put("Optional reply: ", "Optional reply: ");
+        viewModel.put("View events by tag", "View events by tag");
+        viewModel.put("Select a tag:", "Select a tag:");
+        viewModel.put("VIEW EVENTS", "VIEW EVENTS");
+        viewModel.put("No tags:", "You have no tags on any events.");
 
         viewModel.put("CreateCalendarPanelTitle", "Create New Calendar");
         viewModel.put("CalendarNameString", "New Calendar Name:");

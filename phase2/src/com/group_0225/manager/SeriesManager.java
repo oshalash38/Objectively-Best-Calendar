@@ -120,74 +120,7 @@ public class SeriesManager {
         }return output;
     }
 
-    /**
-     * Removes the given seriesName from its corresponding events
-     *
-     * @param seriesName the name of the series to be disbanded
-     * @param u          the user
-     */
-    public void deleteSeriesAffiliation(String seriesName, User u, List<Event> events) {
-//        Map<Integer, Event> events = u.getEvents();
-//        for (Map.Entry<Integer, Event> e: events.entrySet()){
-//            if (e.getValue().getSeriesName().equals(seriesName)){
-//                e.getValue().setSeriesName("");
-//            }
-//        }
-        for (Event e : events) {
-            if (e.getSeriesName().equals(seriesName))
-                e.setSeriesName("");
-        }
-    }
 
-    /**
-     * Removes all the events with the given seriesName
-     *
-     * @param seriesName the name of the series to be completely deleted
-     * @param u          the user
-     * @param em         an EventManager instance to delete each event
-     */
-    public void deleteSeries(String seriesName, User u, EventManager em, List<Event> events) {
-//        for (Map.Entry<Integer, Event> e: u.getEvents().entrySet()){
-//            if (e.getValue().getSeriesName().equals(seriesName)){
-//                em.deleteEvent(e.getKey(),u,this);
-//            }
-//        }
-        for (Event e : events) {
-            if (e.getSeriesName().equals(seriesName))
-                em.deleteEvent(e.getID(), u, this);
-        }
-    }
-    //To be used in changeFrequency, changeDuration
-//    private List<Event> collectSeriesFromUser(String seriesName, User u){
-//        ArrayList<Event> lst = new ArrayList<>();
-//        for (Event e: u.getEvents()){
-//            if (e.getSeriesName().equals(seriesName)){
-//                lst.add(e);
-//            }
-//        }
-//        return lst;
-//    }
 
-    /**
-     * If there is one event in a series, then remove that affiliation
-     *
-     * @param seriesName the series in question
-     * @param u          the user
-     */
-    public void checkAlone(String seriesName, User u, List<Event> events) {
-        int count = 0;
-//        for (Map.Entry<Integer, Event> e: u.getEvents().entrySet()){
-//            if (e.getValue().getSeriesName().equals(seriesName)){
-//                count ++;
-//            }
-//        }
-        for (Event e : events) {
-            if (e.getSeriesName().equals(seriesName)) {
-                count++;
-            }
-            if (count == 1) {
-                deleteSeriesAffiliation(seriesName, u, events);
-            }
-        }
-    }
+
 }

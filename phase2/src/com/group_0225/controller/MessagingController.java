@@ -14,21 +14,37 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Performs high-level logic with respect to messages, delegates to managers and receives arguments from GUI
+ */
 public class MessagingController extends CalendarController{
 
     private EventManager eventManager;
     private MessagingManager messagingManager;
 
+    /**
+     * Makes a MessagingController instance
+     * @param data a CalendarData instance
+     * @param presenter a UIPresenter instance
+     */
     public MessagingController(CalendarData data, UIPresenter presenter) {
         super(data, presenter);
         eventManager = new EventManager();
         messagingManager = new MessagingManager();
     }
 
+    /**
+     * Display a panel that allows the user to send a new message, with no error message
+     */
     public void pushSendNewMessagePanel(){
         sendNewMessagePanel(Collections.singletonList(""));
 
     }
+
+    /**
+     * Display a panel that allows the user to send a message
+     * @param input
+     */
     private void sendNewMessagePanel(List<String> input){
         List<String> events = new ArrayList<>(input);
         events.add(eventManager.getEventIDs(data.getCurrUserEvents()).size() + "");
@@ -59,10 +75,10 @@ public class MessagingController extends CalendarController{
         }
         else {
             if (user == null){
-            sendNewMessagePanel(Arrays.asList("This user does not exist."));
+            sendNewMessagePanel(Collections.singletonList("This user does not exist."));
 
             }
-            else if (event == null){
+            else {
                 sendNewMessagePanel(Arrays.asList("No events to choose from"));
             }
         }

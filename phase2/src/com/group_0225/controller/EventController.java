@@ -17,8 +17,6 @@ public class EventController extends CalendarController {
     // TODO: Not sure if other classes will need this or not as well to avoid duplicate code.
 
 
-
-
     public EventController(CalendarData data, UIPresenter presenter) {
         super(data, presenter);
         eventManager = new EventManager();
@@ -26,9 +24,7 @@ public class EventController extends CalendarController {
     }
 
 
-
-
-    public void pushCreateEvent(){
+    public void pushCreateEvent() {
         presenter.updateUI(new UIUpdateInfo("dialog", null, "CreateEventPanel"));
     }
 
@@ -60,7 +56,7 @@ public class EventController extends CalendarController {
 
     public void editEvent(List<String> inputs, CalendarGridController gridController) {
         List<String> output = new ArrayList<>();
-        if (inputs.get(0).equals("Error1")){
+        if (inputs.get(0).equals("Error1")) {
             output.add("Error1");
         } else {
             TimingFactory timingFactory = new TimingFactory();
@@ -72,10 +68,9 @@ public class EventController extends CalendarController {
             Timing timing = timingFactory.createTiming(startDateParsed.get(2), startDateParsed.get(1), startDateParsed.get(0),
                     startTimeParsed.get(0), startTimeParsed.get(1), endDateParsed.get(2), endDateParsed.get(1), endDateParsed.get(0),
                     endTimeParsed.get(0), endTimeParsed.get(1));
-            if (timing == null){
+            if (timing == null) {
                 output.add("Error2");
-            }
-            else {
+            } else {
                 int id = Integer.parseInt(inputs.get(inputs.size() - 1));
                 eventManager.editEvent(data, id, inputs.get(0), timing);
                 output.add("Edited");
@@ -85,7 +80,7 @@ public class EventController extends CalendarController {
         gridController.displayGrid();
     }
 
-    public void viewEvents(String rawDay, String rawMonth, String rawYear){
+    public void viewEvents(String rawDay, String rawMonth, String rawYear) {
         int day = Integer.parseInt(rawDay);
         int month = Integer.parseInt(rawMonth);
         int year = Integer.parseInt(rawYear);
@@ -100,30 +95,32 @@ public class EventController extends CalendarController {
 
     /**
      * Shows the user past events, current events, or future events
+     *
      * @param status -1: past events
-     *                0: current events
-     *                1: future events
+     *               0: current events
+     *               1: future events
      */
-    public void viewEventByStatus(Status status){
+    public void viewEventByStatus(Status status) {
         eventManager.updateStatus(data);
         List<Event> events = eventManager.getEventsByStatus(data, status);
-        presenter.updateUI(new UIUpdateInfo("dialog", eventManager.getEventIDs(events) , "EventListPanel"));
+        presenter.updateUI(new UIUpdateInfo("dialog", eventManager.getEventIDs(events), "EventListPanel"));
 
     }
 
-    public void viewEventByDateThreshold(){
+    public void viewEventByDateThreshold() {
         eventManager.updateStatus(data);
         presenter.updateUI(new UIUpdateInfo("dialog", null, "DateThresholdPanel"));
     }
 
     /**
      * Creates a new event.
+     *
      * @param input : index 0: Name, index 1: Start Date, index 2: End Date,
      *              index 3: Start Time, index 4: End Time
      */
     public void createEvent(List<String> input) {
         List<String> output = new ArrayList<>();
-        if (input.get(0).equals("Error1")){
+        if (input.get(0).equals("Error1")) {
             output.add("Error1");
         } else {
             TimingFactory timingFactory = new TimingFactory();
@@ -135,10 +132,9 @@ public class EventController extends CalendarController {
             Timing timing = timingFactory.createTiming(startDateParsed.get(2), startDateParsed.get(1), startDateParsed.get(0),
                     startTimeParsed.get(0), startTimeParsed.get(1), endDateParsed.get(2), endDateParsed.get(1), endDateParsed.get(0),
                     endTimeParsed.get(0), endTimeParsed.get(1));
-            if (timing == null){
+            if (timing == null) {
                 output.add("Error2");
-            }
-            else {
+            } else {
                 eventManager.createEvent(data, input.get(0), timing);
                 output.add("Created");
             }
@@ -146,11 +142,11 @@ public class EventController extends CalendarController {
         presenter.updateUI(new UIUpdateInfo("dialog", output, "CreateEventPanel"));
     }
 
-    public void pushViewEventsByDateThreshold(){
+    public void pushViewEventsByDateThreshold() {
         //Display a dialog that asks user to type in the date threshold that they want
     }
 
-    public void viewEventsByDateThreshold(List<String> input){
+    public void viewEventsByDateThreshold(List<String> input) {
         // parse it
         // get the events you need from the EventManager
         // parse the events into string format
@@ -166,9 +162,9 @@ public class EventController extends CalendarController {
     }
 
     // TODO: Should this be here or in manager?
-    private List<String> getEventsName(List<Event> events){
+    private List<String> getEventsName(List<Event> events) {
         List<String> result = new ArrayList<>();
-        for (Event e : events){
+        for (Event e : events) {
             System.out.println(e.getEventName());
             result.add(e.getEventName());
         }
@@ -182,7 +178,7 @@ public class EventController extends CalendarController {
         return event.getEventName();
     }
 
-    public void displayEvent(String rawID){
+    public void displayEvent(String rawID) {
         int id = Integer.parseInt(rawID);
         Event event = eventManager.getEventByID(data, id);
         List<String> memos = memoManager.getMemos(event, data);
@@ -198,16 +194,31 @@ public class EventController extends CalendarController {
         presenter.updateUI(new UIUpdateInfo("scrollable", output, "EventPanel"));
     }
 
+    public void viewEventsByTagChoice() {
+        List<String> tags = eventManager.getAllTags(eventManager.getUserCalendarEvents(data.getEvents(), data.getCurrUser(), data.getCurrCalendar()));
+        if (tags.size() == 0) {
+            presenter.updateUI(new UIUpdateInfo("scrollable", new ArrayList<>(), "NoTagsPanel"));
+        } else {
+            presenter.updateUI(new UIUpdateInfo("scrollable", tags, "ViewByTagChoicePanel"));
+        }
+    }
+
+    public void viewEventsByTag(String tag) {
+        List<Event> events = eventManager.getEventsByTag(tag, data);
+        List<String> formattedEvents = eventManager.formatEventsForSeries(events);
+        formattedEvents.add(0, tag);
+        presenter.updateUI(new UIUpdateInfo("scrollable", formattedEvents, "ViewByTagPanel"));
+    }
+
     public void getEventsByDateThreshold(List<String> input) {
         List<String> output = new ArrayList<>();
-        if (input.get(0).equals("Error1")){
+        if (input.get(0).equals("Error1")) {
             output.add("Error1");
             presenter.updateUI(new UIUpdateInfo("dialog", output, "DateThresholdPanel"));
-        }else if (input.get(0).equals("Error2")){
+        } else if (input.get(0).equals("Error2")) {
             output.add("Error2");
             presenter.updateUI(new UIUpdateInfo("dialog", output, "DateThresholdPanel"));
-        }
-        else {
+        } else {
             TimingFactory timingFactory = new TimingFactory();
 
             List<Integer> startDateParsed = parseDate(input.get(0));
@@ -217,11 +228,10 @@ public class EventController extends CalendarController {
             Timing timing = timingFactory.createTiming(startDateParsed.get(2), startDateParsed.get(1), startDateParsed.get(0),
                     startTimeParsed.get(0), startTimeParsed.get(1), endDateParsed.get(2), endDateParsed.get(1), endDateParsed.get(0),
                     endTimeParsed.get(0), endTimeParsed.get(1));
-            if (timing == null){
+            if (timing == null) {
                 output.add("Error2");
                 presenter.updateUI(new UIUpdateInfo("dialog", output, "DateThresholdPanel"));
-            }
-            else {
+            } else {
                 output = eventManager.getEventIDsOfThreshold(data, timing);
                 presenter.updateUI(new UIUpdateInfo("dialog", output, "EventListPanel"));
             }
