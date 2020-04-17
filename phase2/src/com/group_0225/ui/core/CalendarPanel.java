@@ -21,8 +21,6 @@ public class CalendarPanel extends CalendarLayoutPanel {
 
     @Override
     protected void buildPanel(List<String> inputs) {
-
-        System.err.println(inputs.get(0));
         int currMonth = Integer.parseInt(inputs.get(2));
         int currYear = Integer.parseInt(inputs.get(3));
 

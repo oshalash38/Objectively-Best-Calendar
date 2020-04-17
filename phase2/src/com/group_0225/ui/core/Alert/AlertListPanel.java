@@ -28,12 +28,6 @@ public class AlertListPanel extends CalendarLayoutPanel {
         JPanel panel = new JPanel(new GridBagLayout());
         buildTitle(c, viewModel.get("AlertString"));
 
-        for(String str: inputs){
-            System.out.println(str);
-        }
-
-        System.out.println(inputs.size());
-
 
         String error = inputs.get(0);
 

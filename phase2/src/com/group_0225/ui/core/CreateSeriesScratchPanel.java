@@ -100,13 +100,6 @@ public class CreateSeriesScratchPanel extends CalendarLayoutPanel {
         create.addActionListener(e -> {
             List<String> inputs1 = new ArrayList<>();
             //TODO: delete the following test print statements before submission
-            System.out.println(seriesName.getText());
-            System.out.println(((String) Objects.requireNonNull(frequency.getSelectedItem())).substring(0,1));
-            System.out.println(startDateField.getJFormattedTextField().getText());
-            System.out.println(startTimeField.getValue().toString().substring(11,19));
-            System.out.println(((String) Objects.requireNonNull(dayField.getSelectedItem())).substring(0,1));
-            System.out.println(durationField.getValue().toString().substring(11,19));
-            System.out.println(numEventsField.getValue().toString());
 
             try{
                 inputs1.add(seriesName.getText());
@@ -117,9 +110,7 @@ public class CreateSeriesScratchPanel extends CalendarLayoutPanel {
                 inputs1.add(durationField.getValue().toString().substring(11,19));
                 inputs1.add(numEventsField.getValue().toString());
                 sc.createSeriesFromScratch(inputs1);
-            }catch(Exception someE){
-                System.err.println("Some input caused an exception");
-            }
+            }catch(Exception someE){}
         });
         addLabel(constraints,bottomPane,16,inputs.get(0));
         constraints.gridy = 1;

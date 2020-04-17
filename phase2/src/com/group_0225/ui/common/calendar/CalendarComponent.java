@@ -83,7 +83,6 @@ public class CalendarComponent extends CalendarLayoutPanel {
 
 
                     dayInfo.add(gridController.getTempForDay(weatherInput, currDay + "", displayMonth, displayYear));
-                    System.err.println(displayMonth + "POGGERS");
 
 
                     CalendarTimeComponent timeComp = new CalendarTimeComponent(controllerContainer);

@@ -65,7 +65,6 @@ public class MemoController extends CalendarController{
      */
     public void pushDisplayMemos() {
         List<String> output = new ArrayList<>(memoManager.getCurrUserMemos(data));
-        System.out.println(output.size());
         presenter.updateUI(new UIUpdateInfo("dialog", output, "MemoListPanel"));
     }
 

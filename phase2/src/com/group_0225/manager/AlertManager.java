@@ -74,7 +74,6 @@ public class AlertManager extends Observable{
         this.data = data;
         updateUserEvents(data, currUser);
         getUpcomingAlerts();
-        System.out.println(upcomingAlerts.size());
         t.scheduleAtFixedRate(timerTask, CHECKDURATION*1000, CHECKDURATION*1000);
 
     }
