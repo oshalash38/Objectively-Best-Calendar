@@ -72,13 +72,13 @@ public class CreateEventPanel extends CalendarLayoutPanel {
 
         if (inputs != null && inputs.size() > 0) {
             if (inputs.get(0).equals("Error1")){
-                addLabel(c, bottomPane, 12, viewModel.get("EventError1"));
+                addLabel(c, bottomPane, 13, viewModel.get("EventError1"));
             } else if (inputs.get(0).equals("Created")){
-                addLabel(c, bottomPane, 12, viewModel.get("EventCreated"));
+                addLabel(c, bottomPane, 13, viewModel.get("EventCreated"));
             } else if (inputs.get(0).equals("Error2")){
-                addLabel(c, bottomPane, 12, viewModel.get("EventError2"));
+                addLabel(c, bottomPane, 13, viewModel.get("EventError2"));
             } else if (inputs.get(0).equals("Edited")) {
-                addLabel(c, bottomPane, 12, "Event Edited");
+                addLabel(c, bottomPane, 13, "Event Edited");
             }
         }
 //        Button goBack = addButton(c, bottomPane, 11, viewModel.get("CancelString"));

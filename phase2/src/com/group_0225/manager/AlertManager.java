@@ -255,4 +255,16 @@ public class AlertManager extends Observable{
         return info;
     }
 
+    public List<String> getParameters(Alert alert){
+        return alert.getParameters();
+    }
+
+    public void setTiming(Alert alert, Timing timing){
+        alert.setTime(timing);
+    }
+
+    public void setMessage(Alert alert, String message){
+        alert.setMessage(message);
+    }
+
 }

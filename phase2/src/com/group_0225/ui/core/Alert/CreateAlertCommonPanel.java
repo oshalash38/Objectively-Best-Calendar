@@ -1,4 +1,4 @@
-package com.group_0225.ui.core;
+package com.group_0225.ui.core.Alert;
 
 import com.group_0225.controller.ControllerContainer;
 import com.group_0225.ui.common.calendar.CalendarLayoutPanel;

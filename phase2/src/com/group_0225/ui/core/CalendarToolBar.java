@@ -181,6 +181,4 @@ public class CalendarToolBar extends JMenuBar {
         }
         return temp;
     }
-
-
 }

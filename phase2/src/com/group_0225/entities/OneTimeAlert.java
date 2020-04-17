@@ -1,6 +1,8 @@
 package com.group_0225.entities;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * An alert that only happens once on a given date and time.
@@ -63,5 +65,21 @@ public class OneTimeAlert extends Alert {
     @Override
     public String getType() {
         return "One time alert";
+    }
+
+    @Override
+    public List<String> getParameters() {
+        List<String> output = new ArrayList<>();
+        output.add("time");
+        output.add("message");
+        return output;
+    }
+
+    /**
+     * @param t the new time of this reminder
+     */
+    @Override
+    public void setTime(Timing t) {
+        this.time = t;
     }
 }

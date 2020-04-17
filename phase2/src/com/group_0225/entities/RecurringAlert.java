@@ -2,6 +2,8 @@ package com.group_0225.entities;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * An alert that happens every specified amount of time until the event associated with this Alert stops being checked
@@ -69,5 +71,22 @@ public class RecurringAlert extends Alert {
     @Override
     public String getType() {
         return "Recurring Alert";
+    }
+
+    @Override
+    public List<String> getParameters() {
+        List<String> output = new ArrayList<>();
+        output.add("time");
+        output.add("message");
+        output.add("frequency");
+        return output;
+    }
+
+    /**
+     * @param t the new time of this reminder
+     */
+    @Override
+    public void setTime(Timing t) {
+        this.nextTime = t;
     }
 }
