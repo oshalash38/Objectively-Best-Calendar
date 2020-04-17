@@ -43,7 +43,7 @@ public class ChangeTimePanel extends CalendarLayoutPanel {
 
             userInputs.add(dateSelection.getJFormattedTextField().getText());
             userInputs.add(timeSelection.getValue().toString().substring(11,19));
-            localTimeController.changeTime(userInputs);
+            localTimeController.changeTime(userInputs, controllerContainer.getCalendarGridController());
             gridController.displayGrid();
         });
 

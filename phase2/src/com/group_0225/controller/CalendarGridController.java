@@ -90,4 +90,8 @@ public class CalendarGridController extends CalendarController{
 
         return eventManager.getNumAlertsPerDay(data, threshold);
     }
+
+    public void updateDisplayTime(){
+        displayTime = new Timing(data.getLocalTime().getStart());
+    }
 }

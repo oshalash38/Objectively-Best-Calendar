@@ -23,6 +23,7 @@ public class LocalTimeController extends CalendarController{
         TimingFactory timingFactory = new TimingFactory();
         data.setLocalTime(timingFactory.createTiming(LocalDateTime.now()));
 
+        calendarGridController.updateDisplayTime();
         calendarGridController.displayGrid();
     }
 
@@ -35,7 +36,7 @@ public class LocalTimeController extends CalendarController{
      * @param input : index 0: Name, index 1: Start Date, index 2: End Date,
      *              index 3: Start Time, index 4: End Time
      */
-    public void changeTime(List<String> input) {
+    public void changeTime(List<String> input, CalendarGridController calendarGridController) {
         TimingFactory timingFactory = new TimingFactory();
         Map<String, String> viewModel = new ViewModelBuilder().build();
 
@@ -50,5 +51,8 @@ public class LocalTimeController extends CalendarController{
         eventManager.updateStatus(data);
 
         presenter.updateUI(new UIUpdateInfo("dialog", Arrays.asList(viewModel.get("TimeChangeSuccessfulString") + timing.toString()), "ChangeTimePanel"));
+
+        calendarGridController.updateDisplayTime();
+        calendarGridController.displayGrid();
     }
 }
