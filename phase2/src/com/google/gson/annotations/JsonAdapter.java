@@ -20,6 +20,7 @@ import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonSerializer;
 import com.google.gson.TypeAdapter;
 import com.google.gson.TypeAdapterFactory;
+
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

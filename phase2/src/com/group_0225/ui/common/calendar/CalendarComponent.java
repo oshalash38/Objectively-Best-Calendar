@@ -2,15 +2,14 @@ package com.group_0225.ui.common.calendar;
 
 import com.group_0225.controller.CalendarGridController;
 import com.group_0225.controller.ControllerContainer;
-import com.group_0225.manager.EventManager;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
 import java.time.LocalDateTime;
 import java.time.YearMonth;
 import java.time.temporal.ChronoField;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CalendarComponent extends CalendarLayoutPanel {
 

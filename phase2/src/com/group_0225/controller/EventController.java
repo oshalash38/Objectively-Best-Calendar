@@ -3,11 +3,14 @@ package com.group_0225.controller;
 import com.group_0225.entities.*;
 import com.group_0225.manager.EventManager;
 import com.group_0225.manager.MemoManager;
-import com.group_0225.ui.common.util.UIUpdateInfo;
 import com.group_0225.ui.common.util.UIPresenter;
+import com.group_0225.ui.common.util.UIUpdateInfo;
 
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Controls high-level logic with respect to events

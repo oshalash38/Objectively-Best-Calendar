@@ -19,15 +19,7 @@ package com.google.gson.internal;
 
 import java.io.ObjectStreamException;
 import java.io.Serializable;
-import java.util.AbstractMap;
-import java.util.AbstractSet;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.ConcurrentModificationException;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.NoSuchElementException;
-import java.util.Set;
+import java.util.*;
 
 /**
  * A map of comparable keys to values. Unlike {@code TreeMap}, this class uses
@@ -72,7 +64,7 @@ public final class LinkedHashTreeMap<K, V> extends AbstractMap<K, V> implements 
   public LinkedHashTreeMap(Comparator<? super K> comparator) {
     this.comparator = comparator != null
         ? comparator
-        : (Comparator) NATURAL_ORDER;
+        : NATURAL_ORDER;
     this.header = new Node<K, V>();
     this.table = new Node[16]; // TODO: sizing/resizing policies
     this.threshold = (table.length / 2) + (table.length / 4); // 3/4 capacity

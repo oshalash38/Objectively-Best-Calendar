@@ -19,14 +19,7 @@ package com.google.gson.internal;
 
 import java.io.ObjectStreamException;
 import java.io.Serializable;
-import java.util.AbstractMap;
-import java.util.AbstractSet;
-import java.util.Comparator;
-import java.util.ConcurrentModificationException;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.NoSuchElementException;
-import java.util.Set;
+import java.util.*;
 
 /**
  * A map of comparable keys to values. Unlike {@code TreeMap}, this class uses
@@ -71,7 +64,7 @@ public final class LinkedTreeMap<K, V> extends AbstractMap<K, V> implements Seri
   public LinkedTreeMap(Comparator<? super K> comparator) {
     this.comparator = comparator != null
         ? comparator
-        : (Comparator) NATURAL_ORDER;
+        : NATURAL_ORDER;
   }
 
   @Override public int size() {

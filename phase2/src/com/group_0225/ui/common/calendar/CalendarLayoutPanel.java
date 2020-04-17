@@ -1,7 +1,6 @@
 package com.group_0225.ui.common.calendar;
 
 import com.group_0225.controller.ControllerContainer;
-import com.group_0225.entities.Timing;
 import com.group_0225.ui.common.util.ViewModelBuilder;
 import org.jdatepicker.impl.DateComponentFormatter;
 import org.jdatepicker.impl.JDatePanelImpl;
@@ -10,8 +9,8 @@ import org.jdatepicker.impl.UtilDateModel;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.*;
 import java.util.List;
+import java.util.*;
 
 public abstract class CalendarLayoutPanel extends JPanel {
 

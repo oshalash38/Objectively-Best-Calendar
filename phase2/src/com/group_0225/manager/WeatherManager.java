@@ -5,8 +5,6 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.group_0225.api.WeatherRequester;
 
-import java.io.IOException;
-import java.text.DecimalFormat;
 import java.util.*;
 
 public class WeatherManager {

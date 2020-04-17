@@ -1,13 +1,11 @@
 package com.group_0225.manager;
 
-import com.group_0225.Main;
 import com.group_0225.entities.CalendarData;
 import com.group_0225.entities.Event;
 import com.group_0225.entities.EventMessage;
 import com.group_0225.entities.User;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 

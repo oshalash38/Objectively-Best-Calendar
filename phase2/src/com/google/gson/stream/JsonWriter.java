@@ -22,13 +22,7 @@ import java.io.IOException;
 import java.io.Writer;
 import java.util.Arrays;
 
-import static com.google.gson.stream.JsonScope.DANGLING_NAME;
-import static com.google.gson.stream.JsonScope.EMPTY_ARRAY;
-import static com.google.gson.stream.JsonScope.EMPTY_DOCUMENT;
-import static com.google.gson.stream.JsonScope.EMPTY_OBJECT;
-import static com.google.gson.stream.JsonScope.NONEMPTY_ARRAY;
-import static com.google.gson.stream.JsonScope.NONEMPTY_DOCUMENT;
-import static com.google.gson.stream.JsonScope.NONEMPTY_OBJECT;
+import static com.google.gson.stream.JsonScope.*;
 
 /**
  * Writes a JSON (<a href="http://www.ietf.org/rfc/rfc7159.txt">RFC 7159</a>)
@@ -145,7 +139,7 @@ public class JsonWriter implements Closeable, Flushable {
   static {
     REPLACEMENT_CHARS = new String[128];
     for (int i = 0; i <= 0x1f; i++) {
-      REPLACEMENT_CHARS[i] = String.format("\\u%04x", (int) i);
+      REPLACEMENT_CHARS[i] = String.format("\\u%04x", i);
     }
     REPLACEMENT_CHARS['"'] = "\\\"";
     REPLACEMENT_CHARS['\\'] = "\\\\";

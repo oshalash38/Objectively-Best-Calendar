@@ -27,9 +27,14 @@ or implied, of Juan Heyns.
 */
 package org.jdatepicker.impl;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Point;
+import org.jdatepicker.DateModel;
+import org.jdatepicker.JDatePanel;
+import org.jdatepicker.JDatePicker;
+
+import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.HierarchyBoundsListener;
@@ -37,20 +42,6 @@ import java.awt.event.HierarchyEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.Calendar;
-
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JFormattedTextField;
-import javax.swing.JPanel;
-import javax.swing.Popup;
-import javax.swing.PopupFactory;
-import javax.swing.SpringLayout;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-
-import org.jdatepicker.DateModel;
-import org.jdatepicker.JDatePanel;
-import org.jdatepicker.JDatePicker;
 
 
 /**

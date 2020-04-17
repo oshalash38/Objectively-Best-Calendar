@@ -16,11 +16,7 @@
 
 package com.google.gson.annotations;
 
-import java.lang.annotation.Documented;
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import java.lang.annotation.*;
 
 /**
  * An annotation that indicates this member should be exposed for JSON
@@ -69,7 +65,7 @@ public @interface Expose {
    * serialized output. Defaults to {@code true}.
    * @since 1.4
    */
-  public boolean serialize() default true;
+  boolean serialize() default true;
 
   /**
    * If {@code true}, the field marked with this annotation is deserialized from the JSON.
@@ -77,5 +73,5 @@ public @interface Expose {
    * Defaults to {@code true}.
    * @since 1.4
    */
-  public boolean deserialize() default true;
+  boolean deserialize() default true;
 }

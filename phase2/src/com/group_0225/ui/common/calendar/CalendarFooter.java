@@ -4,8 +4,6 @@ import com.group_0225.controller.CalendarGridController;
 import com.group_0225.controller.ControllerContainer;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.List;
 
 public class CalendarFooter extends CalendarLayoutPanel {

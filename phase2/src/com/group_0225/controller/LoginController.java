@@ -3,8 +3,8 @@ package com.group_0225.controller;
 import com.group_0225.entities.CalendarData;
 import com.group_0225.entities.User;
 import com.group_0225.manager.UserManager;
-import com.group_0225.ui.common.util.UIUpdateInfo;
 import com.group_0225.ui.common.util.UIPresenter;
+import com.group_0225.ui.common.util.UIUpdateInfo;
 
 import java.io.IOException;
 import java.util.Arrays;
