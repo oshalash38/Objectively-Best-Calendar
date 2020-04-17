@@ -76,14 +76,15 @@ public class CalendarComponent extends CalendarLayoutPanel {
 
                     List<String> dayInfo = new ArrayList<>();
                     dayInfo.add(currDay + "");
-                    dayInfo.add(currentMonth);
-                    dayInfo.add(currentYear);
+                    dayInfo.add(displayMonth);
+                    dayInfo.add(displayYear);
                     dayInfo.add(isCurrentDay + "");
                     dayInfo.add(inputs.get(indexOfEvents + currDay));
                     dayInfo.add(inputs.get(indexOfAlerts + currDay));
 
 
                     dayInfo.add(gridController.getTempForDay(weatherInput, currDay + "", displayMonth, displayYear));
+                    System.err.println(displayMonth + "POGGERS");
 
 
                     CalendarTimeComponent timeComp = new CalendarTimeComponent(controllerContainer);

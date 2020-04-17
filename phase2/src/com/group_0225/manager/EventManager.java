@@ -414,6 +414,7 @@ public class EventManager {
 
     public Event editEvent(CalendarData data, int id, String name, Timing timing) {
         Event event = data.getEvents().get(id);
+        System.err.println(data.getEvents().get(0));
 
         event.setEventName(name);
         event.getTime().setStart(timing.getStart());
