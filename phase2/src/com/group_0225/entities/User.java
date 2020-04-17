@@ -54,6 +54,11 @@ public class User implements Serializable {
         }
         return retList;
     }
+
+    /**
+     * Getter for calendar map
+     * @return the calendar map
+     */
     public Map<String,List<Integer>> getMap(){return this.calendars;}
 
     public List<Integer> getRandomCalendarEvents(){
@@ -84,19 +89,11 @@ public class User implements Serializable {
      */
     public List<Integer> getMemos(){return this.memoIDs;}
 
-//    /**
-//     *
-//     * @param l the list of integers for the memos
-//     * @return List of memo strings
-//     */
-//    public List<String> getMemos(List<Integer> l){
-//        List<String> lst = new ArrayList<String>();
-//        for(int i: l){
-//            lst.add(memos.get(i));
-//        }
-//        return lst;
-//    }
 
+    /**
+     * Adds a request to the user.
+     * @param request the request object
+     */
     public void addRequest(EventMessage request){
         requests.put(request.getMessage(),request);
     }
@@ -105,18 +102,32 @@ public class User implements Serializable {
         return requests.size() > 0;
     }
 
+    /**
+     * A getter for requests
+     * @return list of requests
+     */
     public List<EventMessage> getRequests(){
         return new ArrayList<>(requests.values());
     }
     public EventMessage getRequest(String message){
         return requests.get(message);
     }
+
+    /**
+     * A getter for requests
+     * @return map of requests
+     */
     public Map<String, EventMessage> getMapRequests(){
         return requests;
     }
     public Map<String, EventMessage> getMapResponses(){
         return responses;
     }
+
+    /**
+     * Adds a response to user.
+     * @param response the response object
+     */
     public void addResponse(EventMessage response){
         responses.put(response.getMessage(),response);
     }
@@ -125,28 +136,37 @@ public class User implements Serializable {
         return username.hashCode();
     }
 
+    /**
+     * Adds a calendar to list of calendars for the user.
+     * @param calendarName the name of the calendar.
+     */
     public void addCalendar(String calendarName){
         List<Integer> ids = new ArrayList<>();
         calendars.put(calendarName, ids);
     }
 
+    /**
+     * Adds an id to a specified calendar.
+     * @param calendarName the name of the calendar specified
+     * @param id the id to be added
+     */
     public void addIdToCalendars(String calendarName, int id){
         calendars.get(calendarName).add(id);
     }
 
+
+    /**
+     * Removes a request from the user.
+     * @param request the request object
+     */
     public void removeRequest(EventMessage request) {
         requests.remove(request.getMessage());
     }
 
+    /**
+     * Adds a memo id to the memoIDs list.
+     * @param id the id to be added
+     */
     public void addMemo(Integer id){memoIDs.add(id);}
-
-//    public static void main(String[] args) {
-//        User billy = new User("billy", "oof");
-//        User charles = new User("charles", "foo");
-//        System.out.println(billy.getMapResponses());
-//        TimingFactory tf = new TimingFactory();
-//        Timing t = tf.createTiming(2002,12,2,2,2);
-//        EventMessage e = new EventMessage(new Event("lecture",t),"hi", billy, charles);
-//        billy.addResponse(e);
-//    }
 }
+

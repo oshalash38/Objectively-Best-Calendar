@@ -39,6 +39,10 @@ public class Event implements Serializable, Comparable<Event> {
         this.seriesName = sname;
     }
 
+    /**
+     * Getter for id of this event
+     * @return id of this event
+     */
     public Integer getID(){return this.ID;}
     public void setID(Integer id){this.ID = id;}
 
@@ -164,6 +168,10 @@ public class Event implements Serializable, Comparable<Event> {
         return this.time.getEnd().toString().substring(11, 16);
     }
 
+    /**
+     * A getter method for startDate
+     * @return startDate of this event
+     */
     public String getStartDateString(){
         String year = this.time.getStart().toString().substring(0, 4);
         String month = this.time.getStart().toString().substring(5, 7);
@@ -171,6 +179,10 @@ public class Event implements Serializable, Comparable<Event> {
         return day+"-"+month+"-"+year;
     }
 
+    /**
+     * A getter method for endDate
+     * @return endDate of this event
+     */
     public String getEndDateString(){
         String year = this.time.getEnd().toString().substring(0, 4);
         String month = this.time.getEnd().toString().substring(5, 7);

@@ -54,6 +54,11 @@ public class EventManager {
         return event;
     }
 
+    /**
+     * Sorts the events by generating a unique sequential id for the event.
+     * @param calendarData the metadata of the calendar
+     * @return the id generated
+     */
     private int sortEvents(CalendarData calendarData){
         Map<Integer,Event> events = calendarData.getEvents();
         int high = -1;
@@ -90,12 +95,6 @@ public class EventManager {
      * @return the Event matching the name
      */
     public Event searchEventByName(CalendarData calendarData, String name){
-//        HashMap<Integer,Event> events = (HashMap<Integer, Event>) user.getEvents(currCalendar);
-//        for (Map.Entry<Integer, Event> entry: events.entrySet()){
-//            if (entry.getValue().getEventName().equals(name)){
-//                return entry.getValue();
-//            }
-//        }
         for (Map.Entry<Integer,Event> eventEntry: calendarData.getEvents().entrySet()){
             if (eventEntry.getValue().getEventName().equals(name))
                  return eventEntry.getValue();
@@ -103,6 +102,12 @@ public class EventManager {
         return null;
     }
 
+    /**
+     * Gets an event stored by its id
+     * @param data the calendar metadata
+     * @param id the id of the event
+     * @return the event if found, null otherwise
+     */
     public Event getEventByID(CalendarData data, int id) {
         if(data.getEvents().containsKey(id))
             return data.getEvents().get(id);
@@ -117,14 +122,6 @@ public class EventManager {
      * @return the list of Events
      */
     public List<Event> searchEventsByName(User user, String name, List<Event> events){
-//        HashMap<Integer,Event> events = (HashMap<Integer, Event>) user.getEvents(currCalendar);
-//        ArrayList<Event> output = new ArrayList<Event>();
-//        for (Map.Entry<Integer, Event> entry: events.entrySet()){
-//            if (entry.getValue().getEventName().equals(name)){
-//                output.add(entry.getValue());
-//            }
-//        }
-//        return output;
         ArrayList<Event> output = new ArrayList<Event>();
         for (Event e: events){
             if (e.getEventName().equals(name))
@@ -138,15 +135,17 @@ public class EventManager {
      * @param calendarData The calendar metadata.
      */
     public void updateStatus(CalendarData calendarData){
-//        Map<Integer,Event> events = user.getEvents(currCalendar);
-//        for (Map.Entry<Integer, Event> entry: events.entrySet()){
-//            entry.getValue().updateStatus();
-//        }
         for(Map.Entry<Integer, Event> entry : calendarData.getEvents().entrySet()){
             entry.getValue().updateStatus(calendarData);
         }
     }
 
+    /**
+     * Getter for events according to their status (Current/Upcoming/Past)
+     * @param data The calendar metadata.
+     * @param status the status to be searched
+     * @return list of events of the given status
+     */
     public List<Event> getEventsByStatus(CalendarData data, Status status) {
         List<Event> eventsOfStatus = new ArrayList<>();
 
@@ -179,14 +178,6 @@ public class EventManager {
      * @return
      */
     public List<Event> getEventsByTag(User user, String tag, List<Event> events){
-//        HashMap<Integer,Event> events = (HashMap<Integer, Event>) user.getEvents();
-//        List<Event> eventsByTag = new ArrayList<Event>();
-//        for (Map.Entry<Integer, Event> entry: events.entrySet()){
-//            if (entry.getValue().getTags().contains(tag)){
-//                eventsByTag.add(entry.getValue());
-//            }
-//        }
-//        return eventsByTag;
           List<Event> eventsByTag = new ArrayList<Event>();
           for(Event e: events){
               if(e.getTags().contains(tag))
@@ -195,13 +186,6 @@ public class EventManager {
           return eventsByTag;
     }
     public List<Event> getEventsBySeriesName(User user, String sname, List<Event> events){
-//        HashMap<Integer,Event> events = (HashMap<Integer, Event>) user.getEvents();
-//        List<Event> snEvents = new ArrayList<>();
-//        for (Map.Entry<Integer, Event> entry: events.entrySet()){
-//            if (entry.getValue().getSeriesName().equals(sname)){
-//                snEvents.add(entry.getValue());
-//            }
-//        }return snEvents;
         List<Event> snEvents = new ArrayList<Event>();
         for(Event e: events){
             if(e.getSeriesName().equals(sname))
@@ -249,6 +233,11 @@ public class EventManager {
         return content;
     }
 
+    /**
+     * Gets the tag of a passed event
+     * @param e the event
+     * @return string representing the tag of the event
+     */
     private String getTags(Event e){
         String str = "";
         if(e.getTags().isEmpty())
@@ -266,15 +255,6 @@ public class EventManager {
      * @return a list of events between date1 and date2
      */
     public List<Event> getEventsBetween(CalendarData data, Timing date) {
-//        List<Event> out = new ArrayList<>();
-//        HashMap<Integer,Event> events = (HashMap<Integer, Event>) currUser.getEvents();
-//        for (Map.Entry<Integer, Event> entry: events.entrySet()){
-//            if (entry.getValue().compareTo(date1) == 1 || entry.getValue().compareTo(date1) == 1){
-//                out.add(entry.getValue());
-//            }
-//        }
-//        return out;
-
         List<Event> events = getUserCalendarEvents(data.getEvents(), data.getCurrUser(), data.getCurrCalendar());
 
         List<Event> out = new ArrayList<>();
@@ -336,6 +316,11 @@ public class EventManager {
         return numPerDay;
     }
 
+    /**
+     * Gets a list of name of events from list of events
+     * @param events the list of events
+     * @return the list of the names of the input events
+     */
     public List<String> getNames(List<Event> events) {
         List<String> names = new ArrayList<>();
 
@@ -376,6 +361,11 @@ public class EventManager {
 //        }
 //    }
 
+    /**
+     * Method for deleting a specific event.
+     * @param data the metadata of the calendar
+     * @param id the id of the event to be deleted
+     */
     public void deleteEvent(CalendarData data, int id) {
         for(User u : data.getUsers().values()){
             for(String calendar : u.getCalendars()){
