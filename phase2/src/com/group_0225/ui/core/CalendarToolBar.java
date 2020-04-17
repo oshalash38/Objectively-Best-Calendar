@@ -5,7 +5,6 @@ import com.group_0225.entities.Status;
 import com.group_0225.ui.common.util.ViewModelBuilder;
 
 import javax.swing.*;
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -30,7 +29,7 @@ public class CalendarToolBar extends JMenuBar {
     private JMenu messagingMenu;
     private JMenu userSettings;
     private JMenu timeMachine;
-    private Button notifications;
+    private JMenuItem notifications;
 
 
     public CalendarToolBar(ControllerContainer controllerContainer) {
@@ -77,7 +76,7 @@ public class CalendarToolBar extends JMenuBar {
         this.messagingMenu = new JMenu(viewModel.get("TOOLBARMessagingFunctionsString"));
         this.userSettings = new JMenu(viewModel.get("TOOLBARUserString"));
         this.timeMachine = new JMenu(viewModel.get("TOOLBARTimeMachineString"));
-        this.notifications = new Button(viewModel.get("TOOLBARnotificationString"));
+        this.notifications = new JMenuItem(viewModel.get("TOOLBARnotificationString"));
 
         buildCreateMenu();
         buildViewMenu();
