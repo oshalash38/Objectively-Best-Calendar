@@ -66,8 +66,11 @@ public class InboxPanel extends CalendarLayoutPanel {
         int l = responseMessages + 1;
 
         for (; k < responseMessages; k++){
-            Button button = addButton(c, bottomPane, k + 2, inputs.get(k));
-            responseButtons.put(button, inputs.get(l));
+            System.out.println(inputs.get(l));
+            if (inputs.get(l) != null){
+                Button button = addButton(c, bottomPane, k + 2, inputs.get(k));
+                responseButtons.put(button, inputs.get(l));
+            }
             l++;
         }
 

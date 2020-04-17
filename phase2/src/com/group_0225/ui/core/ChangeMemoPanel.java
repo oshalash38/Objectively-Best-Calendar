@@ -57,10 +57,6 @@ public class ChangeMemoPanel extends CalendarLayoutPanel {
 
         addLabel(c, bottomPane, i + 2, viewModel.get("Empty = Delete"));
 
-//        int successStatus = inputs.indexOf("Success");
-//        if (successStatus != -1){
-//            addLabel(c, bottomPane, i + 2, viewModel.get("ModificationC"));
-//        }
         JLabel success = addLabel(c, bottomPane, i + 3, "");
         save.addActionListener(new ActionListener() {
             @Override
