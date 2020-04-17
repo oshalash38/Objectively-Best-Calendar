@@ -120,8 +120,9 @@ public class MessagingController extends CalendarController {
      *
      * @param input relevant input
      */
-    public void acceptMessage(List<String> input) {
+    public void acceptMessage(List<String> input, CalendarGridController calendarGridController) {
         messagingManager.acceptRequest(data, messagingManager.getEventMessage(data, input.get(0)), input.get(1));
+        calendarGridController.displayGrid();
         pushInboxPanel();
     }
 

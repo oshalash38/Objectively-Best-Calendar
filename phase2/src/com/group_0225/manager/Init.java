@@ -9,13 +9,10 @@ import com.group_0225.entities.User;
 import com.group_0225.ui.UIManager;
 import com.group_0225.ui.common.util.UIPresenter;
 import com.group_0225.ui.core.CalendarFrame;
-import com.group_0225.ui.core.CalendarToolBar;
 
-import javax.swing.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
-import java.io.PrintStream;
 import java.time.LocalDateTime;
 import java.util.Map;
 
@@ -77,15 +74,15 @@ public class Init {
         Object events = databaseReader.readFile("events.txt");
         Object memos = databaseReader.readFile("memos.txt");
         if(users != null){
-            System.out.println(((Map<String, User>)users).size());
+            System.out.println("Num Users: " + ((Map<String, User>)users).size());
             calendarData.setUsers((Map<String, User>)users);
         }
         if(events != null){
-            System.out.println(((Map<Integer, Event>)events).size());
+            System.out.println("Num Events: " + ((Map<Integer, Event>)events).size());
             calendarData.setEvents((Map<Integer, Event>)events);
         }
         if (memos != null){
-            System.out.println(((Map<Integer, String>)memos).size());
+            System.out.println("Num Memos: " +((Map<Integer, String>)memos).size());
             calendarData.setMemos((Map<Integer, String>)memos);
         }
     }
