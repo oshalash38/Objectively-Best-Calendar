@@ -7,6 +7,7 @@ import com.group_0225.manager.MemoManager;
 import com.group_0225.ui.common.calendar.CalendarLayoutPanel;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,8 +25,11 @@ public class MemoListPanel extends CalendarLayoutPanel {
         c.fill = GridBagConstraints.HORIZONTAL;
         c.weighty = 1;
         c.weightx = 1;
+        // Source: https://stackoverflow.com/questions/39348314/set-a-title-for-a-jpanel-on-eclipse
+        String title = viewModel.get("MemoList");
+        Border border = BorderFactory.createTitledBorder(title);
 
-
+        this.setBorder(border);
         JPanel parent = new JPanel(new GridBagLayout());
         parent.setBackground(Color.darkGray);
 

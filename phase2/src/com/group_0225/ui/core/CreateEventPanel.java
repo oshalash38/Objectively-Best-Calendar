@@ -26,6 +26,7 @@ public class CreateEventPanel extends CalendarLayoutPanel {
     @Override
     protected void buildPanel(List<String> inputs) {
 
+
         EventController eventController = controllerContainer.getEventsController();
         CalendarGridController gridController = controllerContainer.getCalendarGridController();
 
@@ -63,7 +64,6 @@ public class CreateEventPanel extends CalendarLayoutPanel {
             endTimeSpinner.setValue(new Date(0,1,1, Integer.parseInt(inputs.get(indexOfEdit + 10)), Integer.parseInt(inputs.get(indexOfEdit + 11))));
         }
 
-        Button create = addButton(c, bottomPane, 10, viewModel.get("CreateString"));
         if (inputs != null && inputs.size() > 0) {
             if (inputs.get(0).equals("Error1")){
                 addLabel(c, bottomPane, 12, viewModel.get("EventError1"));
