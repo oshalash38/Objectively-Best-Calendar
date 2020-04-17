@@ -16,6 +16,7 @@ import java.util.List;
 public class LoginController extends CalendarController{
     UserManager userManager;
 
+
     /**
      * Creates  an instance of loginController
      * @param data All entities required for runtime
@@ -47,6 +48,7 @@ public class LoginController extends CalendarController{
             data.setCurrCalendar("default");
             usersCalendarController.updateCalendars();
             calendarGridController.displayGrid();
+            new AlertController(data, presenter).start();
         }
    }
 

@@ -5,6 +5,7 @@ import com.group_0225.entities.Status;
 import com.group_0225.ui.common.util.ViewModelBuilder;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -29,6 +30,7 @@ public class CalendarToolBar extends JMenuBar {
     private JMenu messagingMenu;
     private JMenu userSettings;
     private JMenu timeMachine;
+    private Button notifications;
 
 
     public CalendarToolBar(ControllerContainer controllerContainer) {
@@ -75,20 +77,26 @@ public class CalendarToolBar extends JMenuBar {
         this.messagingMenu = new JMenu(viewModel.get("TOOLBARMessagingFunctionsString"));
         this.userSettings = new JMenu(viewModel.get("TOOLBARUserString"));
         this.timeMachine = new JMenu(viewModel.get("TOOLBARTimeMachineString"));
+        this.notifications = new Button(viewModel.get("TOOLBARnotificationString"));
 
         buildCreateMenu();
         buildViewMenu();
         buildMessagingMenu();
         buildUserSettingsMenu();
         buildTimeMachinesMenu();
+        buildNotificationsMenu();
 
         this.add(userSettings);
         this.add(createMenu);
         this.add(viewMenu);
         this.add(messagingMenu);
         this.add(timeMachine);
+        this.add(notifications);
     }
 
+    private void buildNotificationsMenu(){
+        this.notifications.addActionListener(e -> alertController.displayAllNotifications());
+    }
     private void buildTimeMachinesMenu() {
         List<JMenuItem> subMenus = buildJMenuItems(timeMachine, true,
                 Arrays.asList("TOOLBARTimeMachineReturnToPresentString", "TOOLBARTimeMachineTimeTravelString"));
@@ -111,7 +119,7 @@ public class CalendarToolBar extends JMenuBar {
         subMenus.get(0).addActionListener(e -> usersCalendarController.pushAddNewCalendar());
 
         //Logout
-        subMenus.get(1).addActionListener(e -> loginController.startUp());
+        subMenus.get(1).addActionListener(e -> {alertController.stop(); loginController.startUp();});
     }
 
     private void buildMessagingMenu() {

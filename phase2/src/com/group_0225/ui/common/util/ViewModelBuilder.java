@@ -40,6 +40,8 @@ public class ViewModelBuilder {
         viewModel.put("MemoError2", "Please enter a valid memo");
         viewModel.put("MemoCreated", "Memo Created.");
         viewModel.put("GET_EVENTS_BY_THRESHOLD", "Get Events By Date Threshold");
+        viewModel.put("Get_events_by_name", "Get Events By Name");
+        viewModel.put("EventName", "Event Name:");
         viewModel.put("Find", "Find");
         viewModel.put("NoMemos", "There are no memos to be displayed.");
         viewModel.put("MemoList", "Memo List");
@@ -120,6 +122,8 @@ public class ViewModelBuilder {
         viewModel.put("AlertString", "Alerts");
         viewModel.put("EditAlertButton", "Edit this alert");
         viewModel.put("DeleteAlertButton", "Delete this alert");
+        viewModel.put("Notification", "You Hve New Notifications!");
+        viewModel.put("notificationView", "View Notifications");
 
         viewModel.put("DaysFrequencyString", "Enter day frequency");
         viewModel.put("HourFrequencyString", "Enter hour frequency");
@@ -138,6 +142,7 @@ public class ViewModelBuilder {
         viewModel.put("TOOLBARUserString", "User");
         viewModel.put("TOOLBARTimeMachineString", "Time Machine");
         viewModel.put("CurrentCalendarString", "Current calendar: ");
+        viewModel.put("TOOLBARnotificationString", "Notifications");
 
         //TOOLBAR options for Create choice
         viewModel.put("TOOLBARCreateMenuEventString", "Create Event");
