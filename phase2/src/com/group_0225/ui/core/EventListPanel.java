@@ -5,6 +5,7 @@ import com.group_0225.controller.EventController;
 import com.group_0225.ui.common.calendar.CalendarLayoutPanel;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -25,6 +26,10 @@ public class EventListPanel extends CalendarLayoutPanel {
         c.fill = GridBagConstraints.HORIZONTAL;
         c.weighty = 1;
         c.weightx = 1;
+        // Source: https://stackoverflow.com/questions/39348314/set-a-title-for-a-jpanel-on-eclipse
+        String title = viewModel.get("EventList");
+        Border border = BorderFactory.createTitledBorder(title);
+        this.setBorder(border);
 
 
         JPanel parent = new JPanel(new GridBagLayout());

@@ -26,6 +26,7 @@ public class CreateEventPanel extends CalendarLayoutPanel {
     @Override
     protected void buildPanel(List<String> inputs) {
 
+
         EventController eventController = controllerContainer.getEventsController();
         CalendarGridController gridController = controllerContainer.getCalendarGridController();
 

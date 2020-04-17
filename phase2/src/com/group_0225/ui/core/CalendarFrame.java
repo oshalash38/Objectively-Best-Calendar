@@ -18,7 +18,7 @@ public class CalendarFrame extends JFrame{
     private Map<String,CalendarLayoutPanel> panels;
 
     public CalendarFrame() {
-        super();
+        super("Objectively Best Calendar");
 
         //Logo from https://freeiconshop.com/icon/calendar-icon-glyph/
         File image = new File("phase2/src/com/group_0225/ui/core/Model/logo.png");
