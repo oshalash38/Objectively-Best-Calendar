@@ -48,6 +48,7 @@ public class GUIBuilder {
         panels.put("AlertChangeTimePanel", new AlertChangeTimePanel(controllerContainer));
         panels.put("AlertChangeMessagePanel", new AlertChangeMessagePanel(controllerContainer));
         panels.put("ResponsePanel", new ResponsePanel(controllerContainer));
+        panels.put("ViewByENameChoicePanel", new ViewByENameChoicePanel(controllerContainer));
         panels.put("AlertChangeFrequencyPanel", new AlertChangeFrequencyPanel(controllerContainer));
         panels.put("MemoOptionsPanel", new MemoOptionsPanel(controllerContainer));
         panels.put("ChangeMemoPanel", new ChangeMemoPanel(controllerContainer));

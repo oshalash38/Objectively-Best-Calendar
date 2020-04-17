@@ -70,6 +70,8 @@ public class ViewModelBuilder {
         viewModel.put("Which series would you like to view?", "Which series would you like to view?");
         viewModel.put("VIEW SERIES", "VIEW SERIES");
         viewModel.put("You have no series.", "You have no series.");
+        viewModel.put("Choose name:","Choose name:");
+        viewModel.put("View Events by Name", "View Events by Name");
         viewModel.put("SendMessage", "Send Message To User");
         viewModel.put("EnterUsername", "Enter Username: ");
         viewModel.put("EnterEvent", "Pick Event: ");
@@ -102,6 +104,9 @@ public class ViewModelBuilder {
         viewModel.put("SelectTimeString", "Select Time: (hh:mm:ss)");
         viewModel.put("SelectTimeFrequencyString", "Select Frequency:");
         viewModel.put("TimeChangeSuccessfulString", "Time travel successful. Local date and time: ");
+
+        viewModel.put("EditString", "Edit");
+        viewModel.put("DeleteString", "Delete");
 
         viewModel.put("CreateAlertTitleString", "Create Alert");
         viewModel.put("CreateOneTimeAlertTitleString", "Create One Time Alert");

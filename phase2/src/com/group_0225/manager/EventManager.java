@@ -179,7 +179,7 @@ public class EventManager {
 
     /**
      * Retrurn a list of events that are associated with a given tag
-     * @param user the user that has all these events
+     * @param data CalendarData instance
      * @param tag the tag being searched for
      * @return
      */
@@ -274,7 +274,7 @@ public class EventManager {
 
         List<Event> out = new ArrayList<>();
         for(Event e: events){
-            if (e.getTime().intersect(date))
+            if (e.getTime().intersect(date) && !out.contains(e))
                 out.add(e);
         }
         return out;
@@ -364,9 +364,18 @@ public class EventManager {
         }
         return tags;
     }
-
+    public List<String> getEventsCurrUserByName(CalendarData data, String name){
+        List<String> output = new ArrayList<>();
+        for (Event e: getUserCalendarEvents(data.getEvents(),data.getCurrUser(),data.getCurrCalendar())){
+            if (e.getEventName().equals(name)){
+                output.add(e.getID().toString());
+            }
+        }
+        return output;
+    }
     public List<String> getEventIDsOfThreshold(CalendarData data, Timing threshold) {
         List<Event> events = getEventsBetween(data, threshold);
+        System.err.println("Unpog?" + events.size());
         return getEventIDs(events);
     }
 
@@ -406,6 +415,7 @@ public class EventManager {
 
     public Event editEvent(CalendarData data, int id, String name, Timing timing) {
         Event event = data.getEvents().get(id);
+        System.err.println(data.getEvents().get(0));
 
         event.setEventName(name);
         event.getTime().setStart(timing.getStart());

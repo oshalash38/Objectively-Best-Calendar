@@ -21,7 +21,8 @@ public class EventController extends CalendarController {
 
     /**
      * Constructs an EventController instance
-     * @param data a CalendarData instance
+     *
+     * @param data      a CalendarData instance
      * @param presenter a UIPresenter instance
      */
     public EventController(CalendarData data, UIPresenter presenter) {
@@ -39,6 +40,7 @@ public class EventController extends CalendarController {
 
     /**
      * Display a dialog that allows the user to edit one of their events
+     *
      * @param rawId the id of the event being edited
      */
     public void pushEditEvent(String rawId) {
@@ -74,7 +76,8 @@ public class EventController extends CalendarController {
 
     /**
      * Edits an event
-     * @param inputs includes any error messages and info required to create the event
+     *
+     * @param inputs         includes any error messages and info required to create the event
      * @param gridController a CalendarGridController instance
      */
     public void editEvent(List<String> inputs, CalendarGridController gridController) {
@@ -106,9 +109,10 @@ public class EventController extends CalendarController {
 
     /**
      * Displays events for the specific point in time given (all input is within the correct bounds)
-     * @param rawDay a day
+     *
+     * @param rawDay   a day
      * @param rawMonth a month
-     * @param rawYear a year
+     * @param rawYear  a year
      */
     public void viewEvents(String rawDay, String rawMonth, String rawYear) {
         int day = Integer.parseInt(rawDay);
@@ -119,6 +123,8 @@ public class EventController extends CalendarController {
         LocalDateTime end = LocalDateTime.of(year, month, day, 23, 59);
 
         Timing threshold = new Timing(start, end);
+
+        System.err.println(threshold);
 
         presenter.updateUI(new UIUpdateInfo("scrollable", eventManager.getEventIDsOfThreshold(data, threshold), "EventListPanel"));
     }
@@ -178,7 +184,8 @@ public class EventController extends CalendarController {
 
     /**
      * Controls the high-level logic for deleting an event
-     * @param rawId the id of an event as a String
+     *
+     * @param rawId          the id of an event as a String
      * @param gridController a CalendarGridController instance
      */
     public void deleteEvent(String rawId, CalendarGridController gridController) {
@@ -201,6 +208,7 @@ public class EventController extends CalendarController {
 
     /**
      * Get the name of an event given its id
+     *
      * @param rawId the id of the event, as a String
      * @return the name of the event
      */
@@ -213,6 +221,7 @@ public class EventController extends CalendarController {
 
     /**
      * Displays a dialog containing the info of the event of the id given
+     *
      * @param rawID given id as a String
      */
     public void displayEvent(String rawID) {
@@ -246,6 +255,7 @@ public class EventController extends CalendarController {
 
     /**
      * Displays a dialog that has all the info of the events that contain the given tag
+     *
      * @param tag the tag by which the user wants to categorize their view of events
      */
     public void viewEventsByTag(String tag) {
@@ -258,6 +268,7 @@ public class EventController extends CalendarController {
 
     /**
      * Displays a dialog that shows events by a particular date threshold
+     *
      * @param input relevant input
      */
     public void getEventsByDateThreshold(List<String> input) {
@@ -286,5 +297,26 @@ public class EventController extends CalendarController {
                 presenter.updateUI(new UIUpdateInfo("dialog", output, "EventListPanel"));
             }
         }
+    }
+
+    /**
+     * Displays a dialog that allows the user to view events by a specific name
+     */
+    public void viewEventByNameChoicePanel() {
+        presenter.updateUI(new UIUpdateInfo("scrollable", Collections.singletonList(""), "ViewByENameChoicePanel"));
+    }
+
+    /**
+     * Displays a panel that allows the user to inspect events with a particular name
+     * @param eventName the name selected by the user
+     */
+    public void viewEventByNamePanel(String eventName) {
+        List<String> ids = eventManager.getEventsCurrUserByName(data, eventName);
+        if (ids.size() == 0) {
+            presenter.updateUI(new UIUpdateInfo("scrollable", Collections.singletonList("No events were found with that name."), "ViewByENameChoicePanel"));
+        } else {
+            presenter.updateUI(new UIUpdateInfo("scrollable", ids, "EventListPanel"));
+        }
+
     }
 }

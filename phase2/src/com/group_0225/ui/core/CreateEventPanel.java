@@ -108,8 +108,7 @@ public class CreateEventPanel extends CalendarLayoutPanel {
                     eventController.createEvent(errList);
                 }
                 else if(inputs != null && inputs.contains("Edit")) {
-                    int indexOfEdit = inputs.indexOf("Edit");
-                    inputs1.add(inputs.get(indexOfEdit + 12));
+                    inputs1.add(inputs.get(inputs.size() - 1));
 
                     eventController.editEvent(inputs1, controllerContainer.getCalendarGridController());
                 }

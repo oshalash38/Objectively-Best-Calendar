@@ -142,8 +142,7 @@ public class CalendarToolBar extends JMenuBar {
         //Tag
         subMenus.get(5).addActionListener(e -> eventController.viewEventsByTagChoice());
         //Name
-        subMenus.get(6).addActionListener(e -> {
-        });
+        subMenus.get(6).addActionListener(e -> eventController.viewEventByNameChoicePanel());
         //Series
         subMenus.get(7).addActionListener(e -> seriesController.viewSNameChoiceScreen());
 
