@@ -396,9 +396,9 @@ public class AlertController extends CalendarController implements Observer {
         for (List<String> s: notifications){
             retNotifications.addAll(s);
         }
-        System.out.println(notifications.size());
-        System.out.println(retNotifications.size());
+
         presenter.updateUI(new UIUpdateInfo("dialog", retNotifications, "NotificationListPanel" ));
+        notifications.clear();
 
     }
     public void start(){
