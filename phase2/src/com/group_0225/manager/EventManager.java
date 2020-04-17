@@ -385,6 +385,14 @@ public class EventManager {
         data.getEvents().remove(id);
     }
 
+    public void editEvent(CalendarData data, int id, String name, Timing timing) {
+        Event event = data.getEvents().get(id);
+
+        event.setEventName(name);
+        event.getTime().setStart(timing.getStart());
+        event.getTime().setEnd(timing.getEnd());
+    }
+
     /**
      * Required since Maps aren't sorted and events must be returned from earliest to latest
      * @param calendar a key-value entry in the User's calendars attribute

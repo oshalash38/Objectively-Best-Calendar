@@ -10,6 +10,7 @@ public class ViewModelBuilder {
         viewModel.put("EnterStartDateString", "Enter Start Date:");
         viewModel.put("EnterEndDateString", "Enter End Date:");
         viewModel.put("CreateString", "Create");
+        viewModel.put("DoneString", "Done");
         viewModel.put("CancelString", "Cancel");
         viewModel.put("return", "return");
         viewModel.put("CreateEventString", "Create Event");

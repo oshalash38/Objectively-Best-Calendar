@@ -4,6 +4,7 @@ import com.group_0225.controller.CalendarGridController;
 import com.group_0225.controller.ControllerContainer;
 import com.group_0225.controller.EventController;
 import com.group_0225.ui.common.calendar.CalendarLayoutPanel;
+import org.jdatepicker.DateModel;
 import org.jdatepicker.impl.JDatePickerImpl;
 
 import javax.swing.*;
@@ -11,7 +12,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class CreateEventPanel extends CalendarLayoutPanel {
@@ -43,7 +46,22 @@ public class CreateEventPanel extends CalendarLayoutPanel {
         JDatePickerImpl endDateField = addCalendarPicker(c, bottomPane, 7);
         addLabel(c, bottomPane, 8, viewModel.get("EnterEndTimeString"));
         JSpinner endTimeSpinner = addTimeSpinner(c, bottomPane, 9);
-        Button create = addButton(c, bottomPane, 10, viewModel.get("CreateString"));
+        Button create = addButton(c, bottomPane, 10, viewModel.get("DoneString"));
+
+        if(inputs != null && inputs.contains("Edit")) {
+            int indexOfEdit = inputs.indexOf("Edit");
+
+            nameField.setText(inputs.get(indexOfEdit + 1));
+            DateModel start = startDateField.getModel();
+            start.setDate(Integer.parseInt(inputs.get(indexOfEdit + 2)), Integer.parseInt(inputs.get(indexOfEdit + 3)), Integer.parseInt(inputs.get(indexOfEdit + 4)));
+            start.setSelected(true);
+            startTimeSpinner.setValue(new Date(0,1,1, Integer.parseInt(inputs.get(indexOfEdit + 5)), Integer.parseInt(inputs.get(indexOfEdit + 6))));
+
+            DateModel end = endDateField.getModel();
+            end.setDate(Integer.parseInt(inputs.get(indexOfEdit + 7)), Integer.parseInt(inputs.get(indexOfEdit + 8)), Integer.parseInt(inputs.get(indexOfEdit + 9)));
+            end.setSelected(true);
+            endTimeSpinner.setValue(new Date(0,1,1, Integer.parseInt(inputs.get(indexOfEdit + 10)), Integer.parseInt(inputs.get(indexOfEdit + 11))));
+        }
 
         if (inputs != null && inputs.size() > 0) {
             if (inputs.get(0).equals("Error1")){
@@ -52,6 +70,8 @@ public class CreateEventPanel extends CalendarLayoutPanel {
                 addLabel(c, bottomPane, 12, viewModel.get("EventCreated"));
             } else if (inputs.get(0).equals("Error2")){
                 addLabel(c, bottomPane, 12, viewModel.get("EventError2"));
+            } else if (inputs.get(0).equals("Edited")) {
+                addLabel(c, bottomPane, 12, "Event Edited");
             }
         }
 //        Button goBack = addButton(c, bottomPane, 11, viewModel.get("CancelString"));
@@ -80,7 +100,14 @@ public class CreateEventPanel extends CalendarLayoutPanel {
                 if (inputs1.get(0).equals("")){
                     List<String> errList = new ArrayList<>();
                     errList.add("Error1");
+
                     eventController.createEvent(errList);
+                }
+                else if(inputs != null && inputs.contains("Edit")) {
+                    int indexOfEdit = inputs.indexOf("Edit");
+                    inputs1.add(inputs.get(indexOfEdit + 12));
+
+                    eventController.editEvent(inputs1, controllerContainer.getCalendarGridController());
                 }
                 else {
                     eventController.createEvent(inputs1);
