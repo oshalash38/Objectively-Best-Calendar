@@ -14,9 +14,9 @@ import java.util.Map;
 public class User implements Serializable {
     //map of calendarNames to list of event ids.
     private Map<String, List<Integer>> calendars = new HashMap<>();
-    private Map<Integer, String> memos = new HashMap<>();
     private String password;
     private String username;
+    private List<Integer> memoIDs = new ArrayList<>();
 
 
     private Map<String,EventMessage> requests = new HashMap<>();
@@ -82,20 +82,20 @@ public class User implements Serializable {
      *
      * @return this.memos
      */
-    public Map<Integer, String> getMemos(){return this.memos;}
+    public List<Integer> getMemos(){return this.memoIDs;}
 
-    /**
-     *
-     * @param l the list of integers for the memos
-     * @return List of memo strings
-     */
-    public List<String> getMemos(List<Integer> l){
-        List<String> lst = new ArrayList<String>();
-        for(int i: l){
-            lst.add(memos.get(i));
-        }
-        return lst;
-    }
+//    /**
+//     *
+//     * @param l the list of integers for the memos
+//     * @return List of memo strings
+//     */
+//    public List<String> getMemos(List<Integer> l){
+//        List<String> lst = new ArrayList<String>();
+//        for(int i: l){
+//            lst.add(memos.get(i));
+//        }
+//        return lst;
+//    }
 
     public void addRequest(EventMessage request){
         requests.put(request.getMessage(),request);
@@ -137,6 +137,8 @@ public class User implements Serializable {
     public void removeRequest(EventMessage request) {
         requests.remove(request.getMessage());
     }
+
+    public void addMemo(Integer id){memoIDs.add(id);}
 
 //    public static void main(String[] args) {
 //        User billy = new User("billy", "oof");

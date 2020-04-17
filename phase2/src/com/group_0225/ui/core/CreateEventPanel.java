@@ -44,7 +44,6 @@ public class CreateEventPanel extends CalendarLayoutPanel {
         addLabel(c, bottomPane, 8, viewModel.get("EnterEndTimeString"));
         JSpinner endTimeSpinner = addTimeSpinner(c, bottomPane, 9);
         Button create = addButton(c, bottomPane, 10, viewModel.get("CreateString"));
-
         if (inputs != null && inputs.size() > 0) {
             if (inputs.get(0).equals("Error1")){
                 addLabel(c, bottomPane, 12, viewModel.get("EventError1"));

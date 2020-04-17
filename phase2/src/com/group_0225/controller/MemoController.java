@@ -41,4 +41,19 @@ public class MemoController extends CalendarController{
         events.addAll(eventManager.getNames(data.getCurrUserEvents()));
         presenter.updateUI(new UIUpdateInfo("dialog", events, "CreateMemoPanel"));
     }
+
+    public void pushDisplayMemos() {
+        List<String> output = new ArrayList<>(memoManager.getCurrUserMemos(data));
+        System.out.println(output.size());
+        presenter.updateUI(new UIUpdateInfo("dialog", output, "MemoListPanel"));
+    }
+
+    public void displayEventsAssociatedWithMemo(String memoID) {
+        List<String> events = memoManager.getEventsAssociatedWithMemo(data, Integer.parseInt(memoID));
+        presenter.updateUI(new UIUpdateInfo("dialog", events, "EventListPanel"));
+    }
+
+    public String getMemo(String s) {
+        return data.getMemoByID(Integer.parseInt(s));
+    }
 }

@@ -35,6 +35,7 @@ public class GUIBuilder {
         panels.put("CreateRepeatingAlertPanel", new CreateRepeatingAlertPanel(controllerContainer));
         panels.put("CreateMemoPanel", new CreateMemoPanel(controllerContainer));
         panels.put("DateThresholdPanel", new DateThresholdPanel(controllerContainer));
+        panels.put("MemoListPanel", new MemoListPanel(controllerContainer));
 
         return panels;
     }

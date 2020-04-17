@@ -6,6 +6,7 @@ import com.group_0225.entities.Event;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class MemoManager {
 
@@ -32,6 +33,7 @@ public class MemoManager {
         for (Event event : events){
             event.addMemoID(idGen);
         }
+        data.getCurrUser().addMemo(idGen);
         return idGen;
     }
 
@@ -108,6 +110,31 @@ public class MemoManager {
             result.add(data.getMemoByID(id));
         }
         return result;
+    }
+
+    public List<String> getCurrUserMemos(CalendarData data){
+        List<String> memos = new ArrayList<>();
+        List<Integer> ids =  data.getCurrUser().getMemos();
+        System.out.println("NUM OF MEMOS: " + data.getMemos().size());
+        System.out.println("curr user id size:" + ids.size());
+        for (Map.Entry<Integer, String> entry : data.getMemos().entrySet()){
+            if (ids.contains(entry.getKey())){
+                memos.add(entry.getKey().toString());
+                System.out.println("Im an iteration");
+            }
+        }
+        return memos;
+    }
+
+    public List<String> getEventsAssociatedWithMemo(CalendarData data, Integer memoID) {
+        List<String> ids = new ArrayList<>();
+        List<Event> events = data.getCurrUserEvents();
+        for (Event e : events){
+            if (e.getMemoIDs().contains(memoID)){
+                ids.add(e.getID().toString());
+            }
+        }
+        return ids;
     }
 }
 

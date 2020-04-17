@@ -41,6 +41,7 @@ public class ViewModelBuilder {
         viewModel.put("MemoCreated", "Memo Created.");
         viewModel.put("GET_EVENTS_BY_THRESHOLD", "Get Events By Date Threshold");
         viewModel.put("Find", "Find");
+        viewModel.put("NoMemos", "There are no memos to be displayed.");
 
         viewModel.put("EnterStartTimeString", "Enter Start Time: (hh:mm:ss)");
         viewModel.put("EnterEndTimeString", "Enter End Time:");

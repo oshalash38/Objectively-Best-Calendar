@@ -135,7 +135,7 @@ public class CalendarToolBar extends JMenuBar {
         //Date threshold
         subMenus.get(3).addActionListener(e -> eventController.viewEventByDateThreshold());
         //Memo
-        subMenus.get(4).addActionListener(e -> {});
+        subMenus.get(4).addActionListener(e -> memoController.pushDisplayMemos());
         //Tag
         subMenus.get(5).addActionListener(e -> {});
         //Name
