@@ -1,5 +1,6 @@
 package com.group_0225.controller;
 
+import com.group_0225.entities.Event;
 import com.group_0225.manager.EventManager;
 import com.group_0225.manager.SeriesManager;
 import com.group_0225.entities.Timing;
@@ -73,7 +74,7 @@ public class SeriesController extends CalendarController {
      * @param input a list of strings of ids that the user selected and the series name
      */
     public void createSeriesFromEvents(String sName, List<String> input) {
-        List<String> args = em.formatEventsForSeries(data, um);
+        List<String> args = em.formatAllEventsForSeries(data, um);
         if (sName.equals("")) {
             args.add(0, "All fields must be completed.");
             pushCreateSeriesFromEventsScreen(args);
@@ -87,26 +88,36 @@ public class SeriesController extends CalendarController {
         }
     }
 
+    /**
+     * Present the screen that allows the user to create a series from existing events
+     */
     public void createSeriesFromEventsScreen() {
-        List<String> inputs = em.formatEventsForSeries(data, um);
+        List<String> inputs = em.formatAllEventsForSeries(data, um);
         inputs.add(0, "");
         pushCreateSeriesFromEventsScreen(inputs);
     }
 
-    private void pushCreateSeriesFromEventsScreen(List<String> args) {
-        presenter.updateUI(new UIUpdateInfo("scrollable", args, "CreateSeriesFromEventsPanel"));
-    }
 
-    private void pushCreateSeriesFromScratchScreen(List<String> args) {
-        presenter.updateUI(new UIUpdateInfo("dialog", args, "CreateSeriesScratchPanel"));
-    }
 
+    /**
+     * Presents a dialog that allows the user to create a series from scratch
+     */
     public void createSeriesFromScratchScreen() {
         pushCreateSeriesFromScratchScreen(Collections.singletonList(""));
     }
 
+    /**
+     * Presents a dialog that gives the user the choice of creating a series from scratch or from existing events
+     */
     public void createSeriesChoiceScreen() {
         presenter.updateUI(new UIUpdateInfo("dialog", new ArrayList<>(), "SeriesChoicePanel"));
+    }
+    public void viewSNameChoiceScreen(){
+        List<String> sNames = sm.getAllSeriesNames(data,em);
+        if (sNames.size() == 0){
+            presenter.updateUI(new UIUpdateInfo("dialog",new ArrayList<>(),"NoSeriesPanel"));
+        }
+        else{presenter.updateUI(new UIUpdateInfo("dialog",sNames,"ViewSNameChoicePanel"));}
     }
 
     private boolean verifyDurationLTFreq(String durationDays, String durationHMS, String freq) {
@@ -123,5 +134,19 @@ public class SeriesController extends CalendarController {
                 return true;
         }
     }
+    private void pushCreateSeriesFromEventsScreen(List<String> args) {
+        presenter.updateUI(new UIUpdateInfo("scrollable", args, "CreateSeriesFromEventsPanel"));
+    }
 
+    private void pushCreateSeriesFromScratchScreen(List<String> args) {
+        presenter.updateUI(new UIUpdateInfo("dialog", args, "CreateSeriesScratchPanel"));
+    }
+
+    public void pushViewSNameScreen(List<String> selectedName) {
+        List<Event> seriesEvents = em.getEventsBySeriesName(data.getCurrUser(),selectedName.get(0),
+                em.getUserCalendarEvents(data.getEvents(),data.getCurrUser(),data.getCurrCalendar()));
+        List<String> formattedEvents = em.formatEventsForSeries(seriesEvents);
+        formattedEvents.add(0,selectedName.get(0));
+        presenter.updateUI(new UIUpdateInfo("scrollable", formattedEvents,"ViewSNamePanel"));
+    }
 }
