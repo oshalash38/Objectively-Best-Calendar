@@ -110,6 +110,10 @@ public class SeriesController extends CalendarController {
     public void createSeriesChoiceScreen() {
         presenter.updateUI(new UIUpdateInfo("dialog", new ArrayList<>(), "SeriesChoicePanel"));
     }
+
+    /**
+     * Pushes the ViewSNameChoicePanel panel to the user.
+     */
     public void viewSNameChoiceScreen(){
         List<String> sNames = sm.getAllSeriesNames(data,em);
         if (sNames.size() == 0 || (sNames.size() == 1 && sNames.get(0).equals(""))){

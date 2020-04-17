@@ -30,6 +30,11 @@ public class MemoController extends CalendarController{
         eventManager = new EventManager();
     }
 
+    /**
+     * Creates a memo and adds it to the events
+     * @param memo the memo to be created
+     * @param eventNames IDs of events that memo should be added to
+     */
     public void createMemo(String memo, List<String> eventNames){
         List<String> events = new ArrayList<>();
         if (eventNames.size() == 0){
@@ -45,35 +50,57 @@ public class MemoController extends CalendarController{
         presenter.updateUI(new UIUpdateInfo("dialog", events, "CreateMemoPanel"));
     }
 
+    /**
+     * pushes the CreateMemoPanel panel
+     */
     public void pushCreateMemo(){
-        // TODO: This is duplicate code from MessagingManager, should eliminate duplicates.
         List<String> events = new ArrayList<>();
         events.add(" ");
         events.addAll(eventManager.getNames(data.getCurrUserEvents()));
         presenter.updateUI(new UIUpdateInfo("dialog", events, "CreateMemoPanel"));
     }
 
+    /**
+     * pushes the MemoListPanel panel
+     */
     public void pushDisplayMemos() {
         List<String> output = new ArrayList<>(memoManager.getCurrUserMemos(data));
         System.out.println(output.size());
         presenter.updateUI(new UIUpdateInfo("dialog", output, "MemoListPanel"));
     }
 
+    /**
+     * Displays all memos that have corresponding memoID
+     * @param memoID the ID to search for
+     */
     public void displayEventsAssociatedWithMemo(String memoID) {
         List<String> events = memoManager.getEventsAssociatedWithMemo(data, Integer.parseInt(memoID));
         presenter.updateUI(new UIUpdateInfo("dialog", events, "EventListPanel"));
     }
 
+    /**
+     * Returns the memo with this memoID
+     * @param s the memo ID
+     * @return
+     */
     public String getMemo(String s) {
         return data.getMemoByID(Integer.parseInt(s));
     }
 
+    /**
+     * pushes the MemoOptionsPanel panel to user
+     * @param rawID the memo ID
+     */
     public void pushMemoOptions(String rawID){
         List<String> output = new ArrayList<>();
         output.add(rawID);
         presenter.updateUI(new UIUpdateInfo("dialog", output, "MemoOptionsPanel"));
     }
 
+    /**
+     * Pushes the "ChangeMemoPanel" to the user
+     * @param input the input that the user entered
+     */
     public void pushEditCurrentEvent(List<String> input){
         Event event = eventManager.getEventByID(data, Integer.parseInt(input.get(0)));
         Map<Integer, String> memos = memoManager.getMemoMapByEvent(data, event);
@@ -95,6 +122,10 @@ public class MemoController extends CalendarController{
         return result;
     }
 
+    /**
+     * Pushes the ChangeMemoPanel panel to the user with the provided inputs
+     * @param input the eventID
+     */
     public void pushEditAll(List<String> input){
         Event event = eventManager.getEventByID(data, Integer.parseInt(input.get(0)));
         Map<Integer, String> memos = memoManager.getMemoMapByEvent(data, event);
@@ -123,6 +154,11 @@ public class MemoController extends CalendarController{
         return eventIDs;
     }
 
+    /**
+     * Edits the memos for the current event
+     * @param eventID the ID for the event
+     * @param newMemos the map of memos from which the memos will be accessed
+     */
     public void editMemosCurrEvent(String eventID, Map<Integer, String> newMemos) {
         Event event = eventManager.getEventByID(data, Integer.parseInt(eventID));
         List<Event> eventList = new ArrayList<>();
@@ -136,6 +172,10 @@ public class MemoController extends CalendarController{
         }
     }
 
+    /**
+     * Edits memos for all the events
+     * @param newMemos the map of memos from which the memos will be accessed
+     */
     public void editMemosAllEvents(Map<Integer, String> newMemos) {
         Map<Integer, String> memos = data.getMemos();
         for (Map.Entry<Integer, String> entry : newMemos.entrySet()){
@@ -146,6 +186,10 @@ public class MemoController extends CalendarController{
         }
     }
 
+    /**
+     * Deleted the memo with id
+     * @param s the Id of the memo to be deleted
+     */
     public void deleteMemo(String s) {
         memoManager.DeleteMemo(data, Integer.parseInt(s));
     }
