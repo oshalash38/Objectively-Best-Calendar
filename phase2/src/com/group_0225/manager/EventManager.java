@@ -179,7 +179,7 @@ public class EventManager {
 
     /**
      * Retrurn a list of events that are associated with a given tag
-     * @param user the user that has all these events
+     * @param data CalendarData instance
      * @param tag the tag being searched for
      * @return
      */
@@ -364,7 +364,15 @@ public class EventManager {
         }
         return tags;
     }
-
+    public List<String> getEventsCurrUserByName(CalendarData data, String name){
+        List<String> output = new ArrayList<>();
+        for (Event e: getUserCalendarEvents(data.getEvents(),data.getCurrUser(),data.getCurrCalendar())){
+            if (e.getEventName().equals(name)){
+                output.add(e.getID().toString());
+            }
+        }
+        return output;
+    }
     public List<String> getEventIDsOfThreshold(CalendarData data, Timing threshold) {
         List<Event> events = getEventsBetween(data, threshold);
         return getEventIDs(events);
