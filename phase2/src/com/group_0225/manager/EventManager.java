@@ -274,7 +274,7 @@ public class EventManager {
 
         List<Event> out = new ArrayList<>();
         for(Event e: events){
-            if (e.getTime().intersect(date))
+            if (e.getTime().intersect(date) && !out.contains(e))
                 out.add(e);
         }
         return out;
@@ -375,6 +375,7 @@ public class EventManager {
     }
     public List<String> getEventIDsOfThreshold(CalendarData data, Timing threshold) {
         List<Event> events = getEventsBetween(data, threshold);
+        System.err.println("Unpog?" + events.size());
         return getEventIDs(events);
     }
 
