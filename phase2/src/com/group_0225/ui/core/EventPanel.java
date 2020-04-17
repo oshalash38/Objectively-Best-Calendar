@@ -28,6 +28,7 @@ public class EventPanel extends CalendarLayoutPanel {
         buildTitle(c, inputs.get(1));
         JPanel optionsHolder = new JPanel(new GridBagLayout());
         Button editButton = this.addButton(c, optionsHolder, 1, "Edit");
+        editButton.addActionListener(e -> eventController.pushEditEvent(inputs.get(0)));
         Button deleteButton = this.addButton(c, optionsHolder, 1, "Delete");
         deleteButton.addActionListener(e -> eventController.deleteEvent(inputs.get(0), gridController));
 

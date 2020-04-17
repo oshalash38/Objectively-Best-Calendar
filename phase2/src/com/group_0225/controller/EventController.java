@@ -31,6 +31,60 @@ public class EventController extends CalendarController {
     public void pushCreateEvent(){
         presenter.updateUI(new UIUpdateInfo("dialog", null, "CreateEventPanel"));
     }
+
+    public void pushEditEvent(String rawId) {
+        Event e = data.getEvents().get(Integer.parseInt(rawId));
+
+        List<String> input = new ArrayList<>();
+        input.add("Edit");
+        input.add(e.getEventName());
+
+        Timing eventTiming = e.getTime();
+        LocalDateTime start = eventTiming.getStart();
+        input.add(start.getYear() + "");
+        input.add((start.getMonthValue() - 1) + "");
+        input.add(start.getDayOfMonth() + "");
+        input.add(start.getHour() + "");
+        input.add(start.getMinute() + "");
+        LocalDateTime end = eventTiming.getEnd();
+        input.add(end.getYear() + "");
+        input.add((end.getMonthValue() - 1) + "");
+        input.add(end.getDayOfMonth() + "");
+        input.add(end.getHour() + "");
+        input.add(end.getMinute() + "");
+
+        input.add(rawId);
+
+        presenter.updateUI(new UIUpdateInfo("dialog", input, "CreateEventPanel"));
+    }
+
+    public void editEvent(List<String> inputs, CalendarGridController gridController) {
+        List<String> output = new ArrayList<>();
+        if (inputs.get(0).equals("Error1")){
+            output.add("Error1");
+        } else {
+            TimingFactory timingFactory = new TimingFactory();
+
+            List<Integer> startDateParsed = parseDate(inputs.get(1));
+            List<Integer> endDateParsed = parseDate(inputs.get(2));
+            List<Integer> startTimeParsed = parseTime(inputs.get(3));
+            List<Integer> endTimeParsed = parseTime(inputs.get(4));
+            Timing timing = timingFactory.createTiming(startDateParsed.get(2), startDateParsed.get(1), startDateParsed.get(0),
+                    startTimeParsed.get(0), startTimeParsed.get(1), endDateParsed.get(2), endDateParsed.get(1), endDateParsed.get(0),
+                    endTimeParsed.get(0), endTimeParsed.get(1));
+            if (timing == null){
+                output.add("Error2");
+            }
+            else {
+                int id = Integer.parseInt(inputs.get(inputs.size() - 1));
+                eventManager.editEvent(data, id, inputs.get(0), timing);
+                output.add("Edited");
+            }
+        }
+        presenter.updateUI(new UIUpdateInfo("dialog", output, "CreateEventPanel"));
+        gridController.displayGrid();
+    }
+
     public void viewEvents(String rawDay, String rawMonth, String rawYear){
         int day = Integer.parseInt(rawDay);
         int month = Integer.parseInt(rawMonth);
