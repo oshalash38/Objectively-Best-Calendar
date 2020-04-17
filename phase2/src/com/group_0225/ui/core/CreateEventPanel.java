@@ -45,7 +45,9 @@ public class CreateEventPanel extends CalendarLayoutPanel {
         JDatePickerImpl endDateField = addCalendarPicker(c, bottomPane, 7);
         addLabel(c, bottomPane, 8, viewModel.get("EnterEndTimeString"));
         JSpinner endTimeSpinner = addTimeSpinner(c, bottomPane, 9);
-        Button create = addButton(c, bottomPane, 10, viewModel.get("DoneString"));
+        addLabel(c, bottomPane,10,viewModel.get("AddTags"));
+        JTextArea tags = addTextArea(c,bottomPane,11);
+        Button create = addButton(c, bottomPane, 12, viewModel.get("DoneString"));
 
         if(inputs != null && inputs.contains("Edit")) {
             int indexOfEdit = inputs.indexOf("Edit");
@@ -62,6 +64,10 @@ public class CreateEventPanel extends CalendarLayoutPanel {
             end.setSelected(true);
             LocalDateTime endDate = LocalDateTime.of(0,1,1, Integer.parseInt(inputs.get(indexOfEdit + 10)), Integer.parseInt(inputs.get(indexOfEdit + 11)));
             endTimeSpinner.setValue(Date.from(endDate.atZone(ZoneId.systemDefault()).toInstant()));
+
+            for (int i = 0; i< Integer.parseInt(inputs.get(indexOfEdit + 12));i++){
+                tags.append(inputs.get(indexOfEdit + i + 1 + 12) + "\n");
+            }
         }
 
         if (inputs != null && inputs.size() > 0) {
@@ -94,6 +100,7 @@ public class CreateEventPanel extends CalendarLayoutPanel {
                 inputs1.add(endDateField.getJFormattedTextField().getText());
                 inputs1.add(startTimeSpinner.getValue().toString().substring(11,19));
                 inputs1.add(endTimeSpinner.getValue().toString().substring(11,19));
+                inputs1.add(tags.getText());
                 if (inputs1.get(0).equals("")){
                     List<String> errList = new ArrayList<>();
                     errList.add("Error1");

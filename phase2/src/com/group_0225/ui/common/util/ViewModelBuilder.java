@@ -78,6 +78,7 @@ public class ViewModelBuilder {
         viewModel.put("Select a tag:", "Select a tag:");
         viewModel.put("VIEW EVENTS", "VIEW EVENTS");
         viewModel.put("No tags:", "You have no tags on any events.");
+        viewModel.put("AddTags", "Optional: tags (put each tag on separate lines)");
 
         viewModel.put("CreateCalendarPanelTitle", "Create New Calendar");
         viewModel.put("CalendarNameString", "New Calendar Name:");

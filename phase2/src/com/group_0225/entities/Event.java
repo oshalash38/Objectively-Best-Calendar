@@ -3,6 +3,7 @@ package com.group_0225.entities;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Represents an event in a calendar
@@ -15,7 +16,7 @@ public class Event implements Serializable, Comparable<Event> {
     private Timing time;
     private ArrayList<Alert> alerts = new ArrayList<>();
     private ArrayList<Integer> memoIDs = new ArrayList<>();
-    private ArrayList<String> tags = new ArrayList<>();
+    private List<String> tags = new ArrayList<>();
     private Status status = Status.UPCOMING;
     private Integer ID;
 
@@ -84,7 +85,7 @@ public class Event implements Serializable, Comparable<Event> {
     /** Get the list of tags for this event
      * @return the list of tags associated with this event
      */
-    public ArrayList<String> getTags() {
+    public List<String> getTags() {
         return tags;
     }
 
@@ -189,7 +190,12 @@ public class Event implements Serializable, Comparable<Event> {
         String day = this.time.getEnd().toString().substring(8, 10);
         return day+"-"+month+"-"+year;
     }
-
+    public void addTags(List<String> input){
+        this.tags.addAll(input);
+    }
+    public void setTags(List<String> input){
+        this.tags = input;
+    }
 
     /**
      * Adds a memo to the list of memos for this event

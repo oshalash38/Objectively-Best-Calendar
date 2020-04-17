@@ -5,10 +5,8 @@ import com.group_0225.entities.Timing;
 import com.group_0225.entities.TimingFactory;
 import com.group_0225.ui.common.util.UIPresenter;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.lang.reflect.Array;
+import java.util.*;
 
 public abstract class CalendarController {
     protected CalendarData data;
@@ -64,4 +62,5 @@ public abstract class CalendarController {
         result.add(Integer.parseInt(s.substring(6, 8)));
         return result;
     }
+
 }

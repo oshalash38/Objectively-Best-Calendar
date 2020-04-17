@@ -53,6 +53,12 @@ public class EventManager {
         System.out.println(id + "\nStart:" + timing.getStart() + "\nEnd:" + timing.getEnd());
         return event;
     }
+    public Event createEvent(CalendarData calendarData, String name, Timing timing,List<String> tags){
+        Event e = createEvent(calendarData,name,timing);
+        e.addTags(tags);
+        return e;
+    }
+
 
     /**
      * Sorts the events by generating a unique sequential id for the event.
@@ -398,14 +404,19 @@ public class EventManager {
         data.getEvents().remove(id);
     }
 
-    public void editEvent(CalendarData data, int id, String name, Timing timing) {
+    public Event editEvent(CalendarData data, int id, String name, Timing timing) {
         Event event = data.getEvents().get(id);
 
         event.setEventName(name);
         event.getTime().setStart(timing.getStart());
         event.getTime().setEnd(timing.getEnd());
+        return event;
     }
+    public void editEvent(CalendarData data, int id, String name, Timing timing,List<String> tags){
+        Event e = editEvent(data, id, name, timing);
+        e.setTags(tags);
 
+    }
     /**
      * Required since Maps aren't sorted and events must be returned from earliest to latest
      * @param calendar a key-value entry in the User's calendars attribute

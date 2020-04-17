@@ -49,6 +49,11 @@ public class EventController extends CalendarController {
         input.add(end.getHour() + "");
         input.add(end.getMinute() + "");
 
+        //number of tags
+        input.add(Integer.toString(e.getTags().size()));
+        //tags
+        input.addAll(e.getTags());
+
         input.add(rawId);
 
         presenter.updateUI(new UIUpdateInfo("dialog", input, "CreateEventPanel"));
@@ -68,11 +73,12 @@ public class EventController extends CalendarController {
             Timing timing = timingFactory.createTiming(startDateParsed.get(2), startDateParsed.get(1), startDateParsed.get(0),
                     startTimeParsed.get(0), startTimeParsed.get(1), endDateParsed.get(2), endDateParsed.get(1), endDateParsed.get(0),
                     endTimeParsed.get(0), endTimeParsed.get(1));
+            List<String> tags = Arrays.asList(inputs.get(5).split("\n"));
             if (timing == null) {
                 output.add("Error2");
             } else {
                 int id = Integer.parseInt(inputs.get(inputs.size() - 1));
-                eventManager.editEvent(data, id, inputs.get(0), timing);
+                eventManager.editEvent(data, id, inputs.get(0), timing, tags);
                 output.add("Edited");
             }
         }
@@ -132,10 +138,11 @@ public class EventController extends CalendarController {
             Timing timing = timingFactory.createTiming(startDateParsed.get(2), startDateParsed.get(1), startDateParsed.get(0),
                     startTimeParsed.get(0), startTimeParsed.get(1), endDateParsed.get(2), endDateParsed.get(1), endDateParsed.get(0),
                     endTimeParsed.get(0), endTimeParsed.get(1));
+            List<String> tags = Arrays.asList(input.get(5).split("\n"));
             if (timing == null) {
                 output.add("Error2");
             } else {
-                eventManager.createEvent(data, input.get(0), timing);
+                eventManager.createEvent(data, input.get(0), timing, tags);
                 output.add("Created");
             }
         }
