@@ -14,6 +14,10 @@ public class AcceptDeclineMessagePanel extends CalendarLayoutPanel {
         super(controllerContainer);
     }
 
+    /**
+     * Builds this CalendarLayoutPanel
+     * @param inputs the inputs to display
+     */
     @Override
     protected void buildPanel(List<String> inputs) {
         MessagingController messagingController = controllerContainer.getMessagingController();

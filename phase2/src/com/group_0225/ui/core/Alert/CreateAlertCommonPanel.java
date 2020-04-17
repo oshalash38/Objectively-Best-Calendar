@@ -19,6 +19,10 @@ public class CreateAlertCommonPanel extends CalendarLayoutPanel {
         this.buildPanel(events);
     }
 
+    /**
+     * Builds this CalendarLayoutPanel
+     * @param inputs the inputs to display
+     */
     @Override
     protected void buildPanel(List<String> inputs) {
         GridBagConstraints c = new GridBagConstraints();

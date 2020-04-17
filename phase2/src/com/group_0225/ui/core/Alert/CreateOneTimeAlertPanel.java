@@ -15,6 +15,10 @@ public class CreateOneTimeAlertPanel extends CalendarLayoutPanel {
         super(controllerContainer);
     }
 
+    /**
+     * Builds this CalendarLayoutPanel
+     * @param inputs the inputs to display
+     */
     @Override
     protected void buildPanel(List<String> inputs) {
         AlertController alertController = controllerContainer.getAlertController();

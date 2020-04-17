@@ -16,6 +16,10 @@ public class AlertPanel extends CalendarLayoutPanel {
         this.eventID = eventID;
     }
 
+    /**
+     * Builds this CalendarLayoutPanel
+     * @param inputs the inputs to display
+     */
     @Override
     protected void buildPanel(List<String> inputs) {
         AlertController alertController = controllerContainer.getAlertController();
