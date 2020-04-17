@@ -100,6 +100,11 @@ public class MemoManager {
      */
     public void DeleteMemo(CalendarData data, int memoId) {
         data.getMemos().remove(memoId);
+        for (Event event : data.getCurrUserEvents()){
+            if (event.getMemoIDs().contains(memoId)){
+                event.removeMemoID(memoId);
+            }
+        }
     }
 
     public List<String> getMemos(Event event, CalendarData data){
