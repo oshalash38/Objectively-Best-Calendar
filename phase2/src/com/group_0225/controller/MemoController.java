@@ -94,7 +94,31 @@ public class MemoController extends CalendarController{
     }
 
     public void pushEditAll(List<String> input){
+        Event event = eventManager.getEventByID(data, Integer.parseInt(input.get(0)));
+        Map<Integer, String> memos = memoManager.getMemoMapByEvent(data, event);
+        List<String> output = new ArrayList<>();
+        output.add("All");
+        List<String> eventIDs = getEventIDsAssociatedWithMemos(memos);
+        output.addAll(eventIDs);
+        output.add("MemoStrings");
+        output.addAll(memos.values());
+        output.add("MemoIDs");
+        output.addAll(getKeys(memos));
+        presenter.updateUI(new UIUpdateInfo("scrollable", output, "ChangeMemoPanel"));
+    }
 
+
+    private List<String> getEventIDsAssociatedWithMemos(Map<Integer, String> memos) {
+        List<Event> events = data.getCurrUserEvents();
+        List<String> eventIDs = new ArrayList<>();
+        for (Map.Entry<Integer, String> entry : memos.entrySet()){ // Sorry about the O(n^2) :(
+            for (Event event : events){
+                if (event.getMemoIDs().contains(entry.getKey())){
+                    eventIDs.add(event.getID().toString());
+                }
+            }
+        }
+        return eventIDs;
     }
 
     public void editMemosCurrEvent(String eventID, Map<Integer, String> newMemos) {
@@ -103,7 +127,25 @@ public class MemoController extends CalendarController{
         eventList.add(event);
         for (Map.Entry<Integer, String> entry : newMemos.entrySet()){
             memoManager.unassociateMemoWithEvent(entry.getKey(), event);
+            if (memoManager.getEventsAssociatedWithMemo(data, entry.getKey()).size() == 0){
+                deleteMemo(entry.getKey().toString());
+            }
             memoManager.CreateMemo(data, entry.getValue(), eventList);
         }
     }
+
+    public void editMemosAllEvents(Map<Integer, String> newMemos) {
+        Map<Integer, String> memos = data.getMemos();
+        for (Map.Entry<Integer, String> entry : newMemos.entrySet()){
+            memos.put(entry.getKey(), entry.getValue());
+            if (memoManager.getEventsAssociatedWithMemo(data, entry.getKey()).size() == 0){
+                deleteMemo(entry.getKey().toString());
+            }
+        }
+    }
+
+    public void deleteMemo(String s) {
+        memoManager.DeleteMemo(data, Integer.parseInt(s));
+    }
+
 }

@@ -93,6 +93,8 @@ public class ViewModelBuilder {
         viewModel.put("Response", "Response: ");
         viewModel.put("eventOptions", "Event Options");
         viewModel.put("Save", "Save");
+        viewModel.put("Empty = Delete", "Delete a memo by leaving it empty.");
+        viewModel.put("ModificationC", "Modifications Implemented Successfully");
 
         viewModel.put("CreateCalendarPanelTitle", "Create New Calendar");
         viewModel.put("CalendarNameString", "New Calendar Name:");

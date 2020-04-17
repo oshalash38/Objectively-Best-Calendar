@@ -459,4 +459,15 @@ public class EventManager {
     public void removeAlert(Event event, Alert alert){
         event.getAlerts().remove(alert);
     }
+
+    public List<Event> getEventsByIDs(CalendarData data, List<String> eventIDs) {
+        List<Event> result = new ArrayList<>();
+        List<Event> events = data.getCurrUserEvents();
+        for (Event event : events){
+            if (eventIDs.contains(event.getID().toString())){
+                result.add(event);
+            }
+        }
+        return result;
+    }
 }

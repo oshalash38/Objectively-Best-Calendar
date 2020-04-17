@@ -95,11 +95,11 @@ public class MemoManager {
 
     /**
      * Deletes memo on the memo map
-     * @param memos The memo map from User
+     * @param data The metadata of the calendar
      * @param memoId The id of the desired memo
      */
-    public void DeleteMemo(Map<Integer, String> memos, int memoId) {
-        memos.remove(memoId);
+    public void DeleteMemo(CalendarData data, int memoId) {
+        data.getMemos().remove(memoId);
     }
 
     public List<String> getMemos(Event event, CalendarData data){
