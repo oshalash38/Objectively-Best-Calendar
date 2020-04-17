@@ -82,7 +82,6 @@ public class MessagingController extends CalendarController {
      * @param message the message that the user has selected
      */
     public void pushAcceptDeclinePanel(List<String> message) {
-        System.out.println(message);
         List<String> input = new ArrayList<>(message);
         input.add(messagingManager.messageToEvent(data.getCurrUser(), message.get(0)));
         //index 0 -> the message

@@ -184,7 +184,6 @@ public class AlertController extends CalendarController {
      * @param calendarGridController a CalendarGridController instance
      */
     public void deleteAlert(int index, int eventID, CalendarGridController calendarGridController){
-        System.out.println(index);
 
         EventManager eventManager = new EventManager();
         Alert toRemove = currAlerts.remove(index);

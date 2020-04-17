@@ -64,7 +64,6 @@ public class CalendarGridController extends CalendarController{
      * @param alter the indicator of the new month in the calendar grid
      */
     public void alterMonth(int alter) {
-        System.err.println("NEED MANAGERS : " + displayTime + " : " + data.getLocalTime());
         displayTime.setStart(displayTime.getStart().plusMonths(alter));
         displayGrid();
     }

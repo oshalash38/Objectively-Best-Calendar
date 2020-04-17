@@ -31,7 +31,6 @@ public class DatabaseReader implements Serializable {
             input.close();
             return obj;
         } catch (IOException ex) {
-            System.out.println("AHHHHHH... not again");
         }
         return null;
     }
@@ -51,8 +50,7 @@ public class DatabaseReader implements Serializable {
             output.writeObject(obj);
             output.close();
         }
-        catch(IOException ex){
-            System.out.println("Failed to save to file");}
+        catch(IOException ex){}
     }
 
 }

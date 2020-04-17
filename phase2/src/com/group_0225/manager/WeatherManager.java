@@ -31,7 +31,6 @@ public class WeatherManager {
     public void setForecastHighs() {
 
         forecast.clear();
-        System.err.println("Setting forecast");
 
         try {
             JsonObject forecastInfo = requester.getForecast();
@@ -65,7 +64,6 @@ public class WeatherManager {
 
                 maxTemp = Math.max(maxTemp, currTemp);
             }
-            System.err.println("FORECAST RECEIVED + :" + forecast.size());
         } catch (Exception e) {
             forecast.clear();
             e.printStackTrace();
@@ -82,7 +80,6 @@ public class WeatherManager {
         formattedForecast += cal.get(Calendar.YEAR) + ",";
         formattedForecast += ((int) forecast) + "";
 
-        System.err.println(formattedForecast);
 
         return formattedForecast;
     }

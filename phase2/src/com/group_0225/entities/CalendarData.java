@@ -26,7 +26,6 @@ public class CalendarData {
     public Map<Integer, String> getMemos() {return memos;}
 
     public User getUser(String username){
-        System.err.println(users.containsKey(username));
         if(users.containsKey(username)) {
             return users.get(username);
         }

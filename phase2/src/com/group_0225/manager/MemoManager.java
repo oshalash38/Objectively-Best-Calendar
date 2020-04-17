@@ -83,12 +83,9 @@ public class MemoManager {
     public List<String> getCurrUserMemos(CalendarData data){
         List<String> memos = new ArrayList<>();
         List<Integer> ids =  data.getCurrUser().getMemos();
-        System.out.println("NUM OF MEMOS: " + data.getMemos().size());
-        System.out.println("curr user id size:" + ids.size());
         for (Map.Entry<Integer, String> entry : data.getMemos().entrySet()){
             if (ids.contains(entry.getKey())){
                 memos.add(entry.getKey().toString());
-                System.out.println("Im an iteration");
             }
         }
         return memos;

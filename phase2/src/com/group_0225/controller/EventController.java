@@ -125,8 +125,6 @@ public class EventController extends CalendarController {
 
         Timing threshold = new Timing(start, end);
 
-        System.err.println(threshold);
-
         presenter.updateUI(new UIUpdateInfo("scrollable", eventManager.getEventIDsOfThreshold(data, threshold), "EventListPanel"));
     }
 

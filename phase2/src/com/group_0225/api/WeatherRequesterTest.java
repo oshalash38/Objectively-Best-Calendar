@@ -10,8 +10,5 @@ public class WeatherRequesterTest {
         WeatherManager weather = new WeatherManager();
         weather.setForecastHighs();
         List<String> forecast = weather.getForecastHighs();
-        for(String high : forecast) {
-            System.err.println(high);
-        }
     }
 }

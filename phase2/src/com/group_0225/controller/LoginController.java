@@ -37,14 +37,12 @@ public class LoginController extends CalendarController{
                       CalendarGridController calendarGridController, UsersCalendarController usersCalendarController){
 
         User user = data.getUser(username);
-        System.err.println(user);
         if(username.length() == 0 || password.length() == 0){
             presenter.updateUI(new UIUpdateInfo("panel", Arrays.asList(username, "Please enter all fields"), "StartupPanel"));
         }
         else if(user == null || !userManager.validatePassword(user, password)){
             presenter.updateUI(new UIUpdateInfo("panel", Arrays.asList(username, "Sorry, username and password did not match."), "StartupPanel"));
         } else {
-            System.out.println("Login successful ");
             data.setCurrUser(user);
             data.setCurrCalendar("default");
             usersCalendarController.updateCalendars();
