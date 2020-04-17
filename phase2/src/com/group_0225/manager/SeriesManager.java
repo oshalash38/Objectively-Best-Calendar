@@ -103,6 +103,13 @@ public class SeriesManager {
         }
 
     }
+
+    /**
+     * Getter for all series names that the current user has built
+     * @param data a CalendarData instance
+     * @param eventManager an EventManager instance
+     * @return the series names
+     */
     public List<String> getAllSeriesNames(CalendarData data, EventManager eventManager){
         List<String> uniqueNames = new ArrayList<>();
         List<Event> events = eventManager.getUserCalendarEvents(data.getEvents(),data.getCurrUser(),data.getCurrCalendar());

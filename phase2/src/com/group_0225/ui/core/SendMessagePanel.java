@@ -11,8 +11,14 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class represents the new dialog opened to let the user send a message
+ */
 public class SendMessagePanel extends CalendarLayoutPanel {
-
+    /**
+     * Creates a SendMessagePanel
+     * @param controllerContainer a ControllerContainer instance
+     */
     public SendMessagePanel(ControllerContainer controllerContainer) {
         super(controllerContainer);
     }

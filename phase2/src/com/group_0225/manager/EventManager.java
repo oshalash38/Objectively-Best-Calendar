@@ -80,11 +80,6 @@ public class EventManager {
             if(entry.getKey() > high){high = entry.getKey();}
         }
         idGen = high + 1;
-        //getCurrCalendar is not static
-//        List<Integer> userEvents = user.getEvents(CalendarController.getCurrCalendar());
-//        events.put(idGen, e);
-//        e.setID(idGen);
-//        userEvents.add(idGen);
         return idGen;
     }
 
@@ -128,8 +123,9 @@ public class EventManager {
         return eventsOfStatus;
     }
 
+
     /**
-     * Retrurn a list of events that are associated with a given tag
+     * Return a list of events that are associated with a given tag
      * @param data CalendarData instance
      * @param tag the tag being searched for
      * @return

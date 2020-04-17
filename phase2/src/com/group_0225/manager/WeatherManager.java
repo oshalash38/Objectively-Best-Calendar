@@ -7,18 +7,27 @@ import com.group_0225.api.WeatherRequester;
 
 import java.util.*;
 
+/**
+ * This class manages weather-related functionality
+ */
 public class WeatherManager {
 
     WeatherRequester requester;
 
     List<String> forecast;
 
+    /**
+     * Creates a WeatherManager instance
+     */
     public WeatherManager() {
         requester = new WeatherRequester();
         requester.requestFiveDayForecast();
         forecast = new ArrayList<>();
     }
 
+    /**
+     * Sets the forecasted highs for the next few days
+     */
     public void setForecastHighs() {
 
         forecast.clear();
@@ -80,5 +89,9 @@ public class WeatherManager {
 
     private double kelvinToCelsius(double kelvin) { return kelvin - 273.15; }
 
+    /**
+     * Getter for the forecasted highs for the next few days
+     * @return the temperatures as a list of strings
+     */
     public List<String> getForecastHighs() { return forecast; }
 }
