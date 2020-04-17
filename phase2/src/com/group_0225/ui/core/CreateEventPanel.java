@@ -9,12 +9,8 @@ import org.jdatepicker.impl.JDatePickerImpl;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -91,10 +87,6 @@ public class CreateEventPanel extends CalendarLayoutPanel {
 //        });
 
         create.addActionListener(e -> {
-            System.out.println(startDateField.getJFormattedTextField().getText());
-            System.out.println(endDateField.getJFormattedTextField().getText());
-            System.out.println(startTimeSpinner.getValue().toString().substring(11,19));
-            System.out.println(endTimeSpinner.getValue().toString().substring(11,19));
             List<String> inputs1 = new ArrayList<>();
             try{
                 inputs1.add(nameField.getText());

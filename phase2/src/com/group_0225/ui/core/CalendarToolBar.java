@@ -52,7 +52,11 @@ public class CalendarToolBar extends JMenuBar {
 
     public void loadCalendars(List<String> calendars) {
         JMenu subCalendars = new JMenu(viewModel.get("TOOLBARUserChangeCalendarString"));
-        List<JMenuItem> calendarItems = buildJMenuItems(subCalendars, false, calendars);
+        subCalendars.add(new JMenuItem(viewModel.get("CurrentCalendarString") + calendars.get(0)));
+        subCalendars.addSeparator();
+
+        List<JMenuItem> calendarItems = buildJMenuItems(subCalendars, false,
+                calendars.subList(1, calendars.size()));
         userSettings.remove(0);
         userSettings.insert(subCalendars, 0);
 

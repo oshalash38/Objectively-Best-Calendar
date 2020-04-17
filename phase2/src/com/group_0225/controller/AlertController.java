@@ -197,8 +197,10 @@ public class AlertController extends CalendarController {
         presenter.updateUI(new UIUpdateInfo("scrollable", toUpload, "AlertListPanel"));
     }
 
-    public void editAlert(int index, int eventID){
+    public void editAlert(int index, int eventID, String info){
+        if(info.equals("One time alert")){
 
+        }
     }
 
     public void deleteAlert(int index, int eventID, CalendarGridController calendarGridController){

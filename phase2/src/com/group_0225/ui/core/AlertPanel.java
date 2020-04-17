@@ -32,7 +32,7 @@ public class AlertPanel extends CalendarLayoutPanel {
         Button editButton = addButton(c, this, 4, viewModel.get("EditAlertButton"));
         Button deleteButton = addButton(c, this, 4, viewModel.get("DeleteAlertButton"));
 
-        editButton.addActionListener(e -> alertController.editAlert(index, eventID));
+        editButton.addActionListener(e -> alertController.editAlert(index, eventID, inputs.get(2)));
         deleteButton.addActionListener(e -> alertController.deleteAlert(index, eventID, controllerContainer.getCalendarGridController()));
     }
 }

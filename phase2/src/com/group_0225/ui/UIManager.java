@@ -97,9 +97,9 @@ public class UIManager implements Observer {
         if(calendarData.getCurrUser() == null){
             calendarToolBar.setVisible(false);
         }
-        else
+        else {
             calendarToolBar.setVisible(true);
-
+        }
         if(currPanel != null)
             calendarFrame.remove(currPanel);
         currPanel = currP;

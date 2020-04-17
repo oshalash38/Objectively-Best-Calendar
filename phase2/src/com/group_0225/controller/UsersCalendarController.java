@@ -6,7 +6,9 @@ import com.group_0225.manager.UserManager;
 import com.group_0225.ui.common.util.UIPresenter;
 import com.group_0225.ui.common.util.UIUpdateInfo;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class UsersCalendarController extends CalendarController {
 
@@ -17,7 +19,10 @@ public class UsersCalendarController extends CalendarController {
     public void updateCalendars(){
         UserManager userManager = new UserManager();
         User user = data.getCurrUser();
-        presenter.updateUI(new UIUpdateInfo("toolbar", userManager.getCalendarNames(user)));
+        List<String> outputs = new ArrayList<>();
+        outputs.add(data.getCurrCalendar());
+        outputs.addAll(userManager.getCalendarNames(user));
+        presenter.updateUI(new UIUpdateInfo("toolbar", outputs));
     }
 
     /**
@@ -49,6 +54,7 @@ public class UsersCalendarController extends CalendarController {
 
     public void changeCalendar(String newCalendar, CalendarGridController calendarGridController){
         data.setCurrCalendar(newCalendar);
+        updateCalendars();
         calendarGridController.displayGrid();
     }
 

@@ -114,6 +114,7 @@ public class ViewModelBuilder {
         viewModel.put("TOOLBARMessagingFunctionsString", "Messaging Functions");
         viewModel.put("TOOLBARUserString", "User");
         viewModel.put("TOOLBARTimeMachineString", "Time Machine");
+        viewModel.put("CurrentCalendarString", "Current calendar: ");
 
         //TOOLBAR options for Create choice
         viewModel.put("TOOLBARCreateMenuEventString", "Create Event");
