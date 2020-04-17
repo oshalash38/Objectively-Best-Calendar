@@ -13,6 +13,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -56,12 +58,14 @@ public class CreateEventPanel extends CalendarLayoutPanel {
             DateModel start = startDateField.getModel();
             start.setDate(Integer.parseInt(inputs.get(indexOfEdit + 2)), Integer.parseInt(inputs.get(indexOfEdit + 3)), Integer.parseInt(inputs.get(indexOfEdit + 4)));
             start.setSelected(true);
-            startTimeSpinner.setValue(new Date(0,1,1, Integer.parseInt(inputs.get(indexOfEdit + 5)), Integer.parseInt(inputs.get(indexOfEdit + 6))));
+            LocalDateTime startDate = LocalDateTime.of(0,1,1, Integer.parseInt(inputs.get(indexOfEdit + 5)), Integer.parseInt(inputs.get(indexOfEdit + 6)));
+            startTimeSpinner.setValue(Date.from(startDate.atZone(ZoneId.systemDefault()).toInstant()));
 
             DateModel end = endDateField.getModel();
             end.setDate(Integer.parseInt(inputs.get(indexOfEdit + 7)), Integer.parseInt(inputs.get(indexOfEdit + 8)), Integer.parseInt(inputs.get(indexOfEdit + 9)));
             end.setSelected(true);
-            endTimeSpinner.setValue(new Date(0,1,1, Integer.parseInt(inputs.get(indexOfEdit + 10)), Integer.parseInt(inputs.get(indexOfEdit + 11))));
+            LocalDateTime endDate = LocalDateTime.of(0,1,1, Integer.parseInt(inputs.get(indexOfEdit + 10)), Integer.parseInt(inputs.get(indexOfEdit + 11)));
+            endTimeSpinner.setValue(Date.from(endDate.atZone(ZoneId.systemDefault()).toInstant()));
         }
 
         if (inputs != null && inputs.size() > 0) {
