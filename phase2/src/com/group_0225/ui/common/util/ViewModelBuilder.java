@@ -32,7 +32,6 @@ public class ViewModelBuilder {
         viewModel.put("CreateSeriesFromEvents", "Create a series from existing events:");
         viewModel.put("seriesname", "Choose series name:");
         viewModel.put("SeriesName:", "Series name: ");
-        //viewModel.put("CreateSeriesFromEvents", "Create a series from events");
         viewModel.put("freq", "How often will events in this series occur?");
         viewModel.put("CreateMemo", "Create New Memo");
         viewModel.put("EnterMemo", "Enter Memo: ");
@@ -60,6 +59,10 @@ public class ViewModelBuilder {
         viewModel.put("From scratch:","From scratch");
         viewModel.put("From events:", "From events in this calendar");
         viewModel.put("SeriesEventsInstructions", "Select the events that you want to be in the new series.");
+        viewModel.put("View Events by Series Name: ", "View Events by Series Name: ");
+        viewModel.put("Which series would you like to view?", "Which series would you like to view?");
+        viewModel.put("VIEW SERIES", "VIEW SERIES");
+        viewModel.put("You have no series.","You have no series.");
         viewModel.put("SendMessage", "Send Message To User");
         viewModel.put("EnterUsername", "Enter Username: ");
         viewModel.put("EnterEvent", "Pick Event: ");

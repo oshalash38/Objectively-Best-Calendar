@@ -103,6 +103,16 @@ public class SeriesManager {
         }
 
     }
+    public List<String> getAllSeriesNames(CalendarData data, EventManager eventManager){
+        List<String> uniqueNames = new ArrayList<>();
+        List<Event> events = eventManager.getUserCalendarEvents(data.getEvents(),data.getCurrUser(),data.getCurrCalendar());
+        for (Event e: events){
+            if (!uniqueNames.contains(e.getSeriesName())){
+                uniqueNames.add(e.getSeriesName());
+            }
+        }
+        return uniqueNames;
+    }
     private List<Integer> toIntegers(List<String> args){
         List<Integer> output = new ArrayList<>();
         for (String s: args){

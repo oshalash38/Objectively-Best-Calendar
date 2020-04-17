@@ -209,12 +209,15 @@ public class EventManager {
         }
         return snEvents;
     }
-    public List<String> formatEventsForSeries(CalendarData data, UserManager um){
+    public List<String> formatAllEventsForSeries(CalendarData data, UserManager um){
         List<Integer> ids = um.getIDs(data.getCurrUser(),data.getCurrCalendar());
         List<Event> events = new ArrayList<>();
         for (Integer i: ids){
             events.add(data.getEvents().get(i));
         }
+        return formatEventsForSeries(events);
+    }
+    public List<String> formatEventsForSeries(List<Event> events){
         List<String> output = new ArrayList<>();
         for (Event e: events){
             output.add("Name: " + e.getEventName());
