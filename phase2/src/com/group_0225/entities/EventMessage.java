@@ -1,8 +1,8 @@
 package com.group_0225.entities;
 
-import com.group_0225.Main;
+import java.io.Serializable;
 
-public class EventMessage {
+public class EventMessage implements Serializable {
     private Event event;
     private String message;
     private User from;

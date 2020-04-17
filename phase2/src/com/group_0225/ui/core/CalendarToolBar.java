@@ -50,6 +50,10 @@ public class CalendarToolBar extends JMenuBar {
     }
 
 
+    /**
+     * Loads the calendars of this user
+     * @param calendars calenders.get(0) is the current calendar. The rest are the other calendars
+     */
     public void loadCalendars(List<String> calendars) {
         JMenu subCalendars = new JMenu(viewModel.get("TOOLBARUserChangeCalendarString"));
         subCalendars.add(new JMenuItem(viewModel.get("CurrentCalendarString") + calendars.get(0)));
