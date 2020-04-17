@@ -10,6 +10,9 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * This class handles the high-level logic related to what the user sees on startup
+ */
 public class LoginController extends CalendarController{
     UserManager userManager;
 
@@ -85,6 +88,9 @@ public class LoginController extends CalendarController{
         presenter.updateUI(new UIUpdateInfo("panel", args, "CreateUserPanel" ));
     }
 
+    /**
+     * Displays the startup panel
+     */
     public void startUp(){
         data.setCurrUser(null);
         presenter.updateUI(new UIUpdateInfo("panel", Arrays.asList("", ""), "StartupPanel"));

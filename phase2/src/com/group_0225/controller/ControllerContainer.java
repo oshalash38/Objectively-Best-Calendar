@@ -87,7 +87,15 @@ public class ControllerContainer {
      */
     public LocalTimeController getLocalTimeController(){return localTimeController; }
 
+    /**
+     * Getter method for AlertController
+     * @return the AlertController being used
+     */
     public AlertController getAlertController(){return alertController;}
 
+    /**
+     * Getter method for MemoController
+     * @return the MemoController being used
+     */
     public MemoController getMemoController(){return memoController;}
 }

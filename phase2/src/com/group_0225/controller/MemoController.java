@@ -9,10 +9,19 @@ import com.group_0225.ui.common.util.UIUpdateInfo;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class handles high-level logic pertaining to memos
+ */
 public class MemoController extends CalendarController{
 
     private MemoManager memoManager;
     private EventManager eventManager;
+
+    /**
+     * Creates a MemoController instance
+     * @param data a CalendarData instance
+     * @param presenter a UIPresenter instance
+     */
     public MemoController(CalendarData data, UIPresenter presenter) {
         super(data, presenter);
         memoManager = new MemoManager();
