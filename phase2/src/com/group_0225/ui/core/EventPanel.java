@@ -29,16 +29,9 @@ public class EventPanel extends CalendarLayoutPanel {
 
         buildTitle(c, inputs.get(1));
         JPanel optionsHolder = new JPanel(new GridBagLayout());
-        Button editButton = this.addButton(c, optionsHolder, 1, "Edit");
-        editButton.addActionListener(e -> eventController.pushEditEvent(inputs.get(0)));
-        Button deleteButton = this.addButton(c, optionsHolder, 1, "Delete");
 
-        Button viewAlerts = this.addButton(c, optionsHolder, 2, viewModel.get("ViewAlertsButtonString"));
 
-        deleteButton.addActionListener(e -> eventController.deleteEvent(inputs.get(0), gridController));
-        viewAlerts.addActionListener(e-> alertController.pushViewAlertsPanel(inputs.get(0)));
 
-        this.add(optionsHolder, c);
 
         JPanel bottomPane = new JPanel(new GridBagLayout());
 
@@ -59,12 +52,23 @@ public class EventPanel extends CalendarLayoutPanel {
             j = j + 2;
         }
 
-        for(String s : inputs)
-            System.err.println(s);
-
-
-
         c.gridy = 2;
         this.add(bottomPane, c);
+
+
+
+        Button editButton = this.addButton(c, optionsHolder, 15 + j, viewModel.get("EditString"));
+        editButton.addActionListener(e -> eventController.pushEditEvent(inputs.get(0)));
+        Button deleteButton = this.addButton(c, optionsHolder, 15 + j, viewModel.get("DeleteString"));
+
+        Button viewAlerts = this.addButton(c, optionsHolder, 15 + j, viewModel.get("ViewAlertsButtonString"));
+
+        deleteButton.addActionListener(e -> eventController.deleteEvent(inputs.get(0), gridController));
+        viewAlerts.addActionListener(e-> alertController.pushViewAlertsPanel(inputs.get(0)));
+
+        c.gridy = 3;
+        this.add(optionsHolder, c);
+
+
     }
 }

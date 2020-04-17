@@ -97,6 +97,9 @@ public class ViewModelBuilder {
         viewModel.put("SelectTimeFrequencyString", "Select Frequency:");
         viewModel.put("TimeChangeSuccessfulString", "Time travel successful. Local date and time: ");
 
+        viewModel.put("EditString", "Edit");
+        viewModel.put("DeleteString", "Delete");
+
         viewModel.put("CreateAlertTitleString", "Create Alert");
         viewModel.put("CreateOneTimeAlertTitleString", "Create One Time Alert");
         viewModel.put("CreateRepeatingAlertTitleString", "Create Repeating Alert");
