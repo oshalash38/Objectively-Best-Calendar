@@ -14,6 +14,10 @@ public class AcceptDeclineMessagePanel extends CalendarLayoutPanel {
         super(controllerContainer);
     }
 
+    /**
+     * Builds this CalendarLayoutPanel
+     * @param inputs the inputs to display
+     */
     @Override
     protected void buildPanel(List<String> inputs) {
         MessagingController messagingController = controllerContainer.getMessagingController();
@@ -42,7 +46,8 @@ public class AcceptDeclineMessagePanel extends CalendarLayoutPanel {
 
         //accept/decline
         Button accept = addButton(constraints,bottomPane,7, viewModel.get("Accept invitation: "));
-        accept.addActionListener(e -> messagingController.acceptMessage(Arrays.asList(inputs.get(0),reply.getText())));
+        accept.addActionListener(e -> messagingController.acceptMessage(Arrays.asList(inputs.get(0),reply.getText()),
+                controllerContainer.getCalendarGridController()));
         Button decline = addButton(constraints,bottomPane,8,viewModel.get("Decline invitation: "));
         decline.addActionListener(e -> {
             //pass the message and the reply

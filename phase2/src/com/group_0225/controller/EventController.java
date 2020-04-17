@@ -196,16 +196,6 @@ public class EventController extends CalendarController {
         gridController.displayGrid();
     }
 
-    // TODO: Should this be here or in manager?
-    private List<String> getEventsName(List<Event> events) {
-        List<String> result = new ArrayList<>();
-        for (Event e : events) {
-            System.out.println(e.getEventName());
-            result.add(e.getEventName());
-        }
-        return result;
-    }
-
     /**
      * Get the name of an event given its id
      *

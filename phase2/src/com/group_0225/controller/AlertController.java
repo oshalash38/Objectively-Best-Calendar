@@ -52,18 +52,6 @@ public class AlertController extends CalendarController {
         pushCreateRepeatingAlertHelper(alertName, error);
     }
 
-    private void pushCreateRepeatingAlertHelper(String alertName, String error){
-        EventManager eventManager = new EventManager();
-
-        List<String> outputs = new ArrayList<String>() {{
-            addAll(Arrays.asList(error, alertName));
-            addAll(eventManager.getNames(data.getCurrUserEvents()));
-        }};
-
-        presenter.updateUI(new UIUpdateInfo("dialog", outputs, "CreateRepeatingAlertPanel"));
-
-    }
-
     /**
      * Displays a dialog that allows the user to create a one-time alert
      */
@@ -80,15 +68,6 @@ public class AlertController extends CalendarController {
         pushCreateOneTimeAlertHelper(alertName, error);
     }
 
-    private void pushCreateOneTimeAlertHelper(String alertName, String error){
-        EventManager eventManager = new EventManager();
-        List<String> outputs = new ArrayList<String>() {{
-            addAll(Arrays.asList(error, alertName));
-            addAll(eventManager.getNames(data.getCurrUserEvents()));
-        }};
-
-        presenter.updateUI(new UIUpdateInfo("dialog", outputs, "CreateOneTimeAlertPanel"));
-    }
 
     /**
      * Parses user input and delegates to AlertManager one-time alert creation
@@ -169,44 +148,6 @@ public class AlertController extends CalendarController {
         calendarGridController.displayGrid();
     }
 
-    private String freqVerification(String input1, String input2, String input3){
-        int freq1;
-        int freq2;
-        int freq3;
-        try{
-            freq1 = Integer.parseInt(input1);
-            freq2 = Integer.parseInt(input2);
-            freq3 = Integer.parseInt(input3);
-        }catch (NumberFormatException e){
-            return "Frequencies MUST be integers.";
-        }
-        if((freq1 == 0 && freq2 == 0 && freq3 == 0 ) ||  (freq1 < 0 || freq2 < 0 || freq3 < 0)){
-            return "Frequencies MUST be positive.";
-        }
-        return null;
-    }
-
-    private String dateVerification(String date, String time, Event event){
-        if(time.equals("")){
-            return "A date MUST be selected.";
-        }
-
-        Timing timing = buildTiming(date, time);
-        if(timing.compareStartTime(event.getTime()) > 0){
-            return "The alert must occur before the event.";
-        }
-        return null;
-    }
-
-    private Timing buildTiming(String date, String time){
-        TimingFactory timingFactory = new TimingFactory();
-        List<Integer> dateList = parseDate(date);
-        List<Integer> timeList = parseTime(time);
-        Timing timing = timingFactory.createTiming(dateList.get(2), dateList.get(1), dateList.get(0), timeList.get(0), timeList.get(1));
-
-        return timing;
-    }
-
     /**
      * Displays a dialog that allows the user to view all the alerts for the event given
      * @param rawEvent the event formatted as a String
@@ -217,28 +158,6 @@ public class AlertController extends CalendarController {
 
         Event event = eventManager.getEventByID(data, id);
         pushViewAlertsByEvent(event, "");
-    }
-
-    private void pushViewAlertsByEvent(Event event, String error){
-        EventManager eventManager = new EventManager();
-        AlertManager alertManager = new AlertManager();
-
-        List<Alert> alerts = eventManager.getAlerts(event);
-        currAlerts = alerts;
-
-
-        if(alerts.size() == 0){
-            List<String> temp = Arrays.asList("No alerts for this event.", "");
-            presenter.updateUI(new UIUpdateInfo("scrollable", temp, "AlertListPanel"));
-            return;
-        }
-        List<String> toUpload = new ArrayList<>();
-        toUpload.add(error);
-        toUpload.add(event.getID().toString());
-        for(Alert alert: alerts){
-            toUpload.addAll(alertManager.getStringRepresentation(alert));
-        }
-        presenter.updateUI(new UIUpdateInfo("scrollable", toUpload, "AlertListPanel"));
     }
 
     /**
@@ -368,5 +287,89 @@ public class AlertController extends CalendarController {
 
         pushChangeFrequency("Frequency changed successfully.");
     }
+
+    private void pushCreateOneTimeAlertHelper(String alertName, String error){
+        EventManager eventManager = new EventManager();
+        List<String> outputs = new ArrayList<String>() {{
+            addAll(Arrays.asList(error, alertName));
+            addAll(eventManager.getNames(data.getCurrUserEvents()));
+        }};
+
+        presenter.updateUI(new UIUpdateInfo("dialog", outputs, "CreateOneTimeAlertPanel"));
+    }
+
+    private void pushCreateRepeatingAlertHelper(String alertName, String error){
+        EventManager eventManager = new EventManager();
+
+        List<String> outputs = new ArrayList<String>() {{
+            addAll(Arrays.asList(error, alertName));
+            addAll(eventManager.getNames(data.getCurrUserEvents()));
+        }};
+
+        presenter.updateUI(new UIUpdateInfo("dialog", outputs, "CreateRepeatingAlertPanel"));
+
+    }
+
+    private String freqVerification(String input1, String input2, String input3){
+        int freq1;
+        int freq2;
+        int freq3;
+        try{
+            freq1 = Integer.parseInt(input1);
+            freq2 = Integer.parseInt(input2);
+            freq3 = Integer.parseInt(input3);
+        }catch (NumberFormatException e){
+            return "Frequencies MUST be integers.";
+        }
+        if((freq1 == 0 && freq2 == 0 && freq3 == 0 ) ||  (freq1 < 0 || freq2 < 0 || freq3 < 0)){
+            return "Frequencies MUST be positive.";
+        }
+        return null;
+    }
+
+    private String dateVerification(String date, String time, Event event){
+        if(time.equals("")){
+            return "A date MUST be selected.";
+        }
+
+        Timing timing = buildTiming(date, time);
+        if(timing.compareStartTime(event.getTime()) > 0){
+            return "The alert must occur before the event.";
+        }
+        return null;
+    }
+
+    private Timing buildTiming(String date, String time){
+        TimingFactory timingFactory = new TimingFactory();
+        List<Integer> dateList = parseDate(date);
+        List<Integer> timeList = parseTime(time);
+        Timing timing = timingFactory.createTiming(dateList.get(2), dateList.get(1), dateList.get(0), timeList.get(0), timeList.get(1));
+
+        return timing;
+    }
+
+    private void pushViewAlertsByEvent(Event event, String error){
+        EventManager eventManager = new EventManager();
+        AlertManager alertManager = new AlertManager();
+
+        List<Alert> alerts = eventManager.getAlerts(event);
+        currAlerts = alerts;
+
+
+        if(alerts.size() == 0){
+            List<String> temp = Arrays.asList("No alerts for this event.", "");
+            presenter.updateUI(new UIUpdateInfo("scrollable", temp, "AlertListPanel"));
+            return;
+        }
+        List<String> toUpload = new ArrayList<>();
+        toUpload.add(error);
+        toUpload.add(event.getID().toString());
+        for(Alert alert: alerts){
+            toUpload.addAll(alertManager.getStringRepresentation(alert));
+        }
+        presenter.updateUI(new UIUpdateInfo("scrollable", toUpload, "AlertListPanel"));
+    }
+
+
 
 }

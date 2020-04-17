@@ -156,7 +156,7 @@ public class ViewModelBuilder {
         viewModel.put("TOOLBARViewMenuSeriesString", "Series");
 
         //TOOLBAR options for Messaging choice
-        viewModel.put("TOOLBARMessagingFunctionsSendMessageString", "Send new message");
+        viewModel.put("TOOLBARMessagingFunctionsSendMessageString", "Send event");
         viewModel.put("TOOLBARMessagingFunctionsInboxString", "Inbox");
 
         //TOOLBAR options for User choice
