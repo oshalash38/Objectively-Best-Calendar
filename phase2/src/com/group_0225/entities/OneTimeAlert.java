@@ -62,11 +62,19 @@ public class OneTimeAlert extends Alert {
         return time.getStatus(dt);
     }
 
+    /**
+     * Return the type description of this alert
+     * @return a String describing this alert as a one-time occurrence
+     */
     @Override
     public String getType() {
         return "One time alert";
     }
 
+    /**
+     * Return the parameters of this alert
+     * @return the time and message of the alert as a list of strings
+     */
     @Override
     public List<String> getParameters() {
         List<String> output = new ArrayList<>();

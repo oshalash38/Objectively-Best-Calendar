@@ -3,8 +3,8 @@ package com.group_0225.controller;
 import com.group_0225.entities.CalendarData;
 import com.group_0225.entities.User;
 import com.group_0225.manager.UserManager;
-import com.group_0225.ui.common.util.UIUpdateInfo;
 import com.group_0225.ui.common.util.UIPresenter;
+import com.group_0225.ui.common.util.UIUpdateInfo;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -15,6 +15,7 @@ import java.util.List;
  */
 public class LoginController extends CalendarController{
     UserManager userManager;
+
 
     /**
      * Creates  an instance of loginController
@@ -37,18 +38,17 @@ public class LoginController extends CalendarController{
                       CalendarGridController calendarGridController, UsersCalendarController usersCalendarController){
 
         User user = data.getUser(username);
-        System.err.println(user);
         if(username.length() == 0 || password.length() == 0){
             presenter.updateUI(new UIUpdateInfo("panel", Arrays.asList(username, "Please enter all fields"), "StartupPanel"));
         }
         else if(user == null || !userManager.validatePassword(user, password)){
             presenter.updateUI(new UIUpdateInfo("panel", Arrays.asList(username, "Sorry, username and password did not match."), "StartupPanel"));
         } else {
-            System.out.println("Login successful ");
             data.setCurrUser(user);
             data.setCurrCalendar("default");
             usersCalendarController.updateCalendars();
             calendarGridController.displayGrid();
+            new AlertController(data, presenter).start();
         }
    }
 

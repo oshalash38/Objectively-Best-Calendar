@@ -1,6 +1,8 @@
 package com.group_0225.controller;
 
-import com.group_0225.entities.*;
+import com.group_0225.entities.CalendarData;
+import com.group_0225.entities.Event;
+import com.group_0225.entities.User;
 import com.group_0225.manager.EventManager;
 import com.group_0225.manager.MessagingManager;
 import com.group_0225.ui.common.util.UIPresenter;
@@ -80,7 +82,6 @@ public class MessagingController extends CalendarController {
      * @param message the message that the user has selected
      */
     public void pushAcceptDeclinePanel(List<String> message) {
-        System.out.println(message);
         List<String> input = new ArrayList<>(message);
         input.add(messagingManager.messageToEvent(data.getCurrUser(), message.get(0)));
         //index 0 -> the message

@@ -39,12 +39,12 @@ public class SeriesManager {
         //initialize duration
         Duration elapsed = parseDuration(durationDays,durationHMS);
         Timing first = tf.createTiming(startLDT,elapsed);
-        em.createEvent(calendarData,seriesName + "#" + Integer.toString(1),first,seriesName);
+        em.createEvent(calendarData,seriesName + "#" + 1,first,seriesName);
 
         int ne = Integer.parseInt(numEvents);
         for (int i = 0; i< ne - 1; i++){
             first = first.addToThis(frequency);
-            em.createEvent(calendarData,seriesName + "#" + Integer.toString(i+2),first,seriesName); //TODO: Do something about duplicate parameter
+            em.createEvent(calendarData,seriesName + "#" + (i + 2),first,seriesName); //TODO: Do something about duplicate parameter
         }
 
     }
@@ -103,6 +103,13 @@ public class SeriesManager {
         }
 
     }
+
+    /**
+     * Getter for all series names that the current user has built
+     * @param data a CalendarData instance
+     * @param eventManager an EventManager instance
+     * @return the series names
+     */
     public List<String> getAllSeriesNames(CalendarData data, EventManager eventManager){
         List<String> uniqueNames = new ArrayList<>();
         List<Event> events = eventManager.getUserCalendarEvents(data.getEvents(),data.getCurrUser(),data.getCurrCalendar());

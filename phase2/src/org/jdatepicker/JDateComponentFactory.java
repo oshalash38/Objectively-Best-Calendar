@@ -27,20 +27,10 @@ or implied, of Juan Heyns.
 */
 package org.jdatepicker;
 
-import java.util.Calendar;
-import java.util.Enumeration;
-import java.util.Locale;
-import java.util.Properties;
-import java.util.ResourceBundle;
+import org.jdatepicker.impl.*;
 
-import javax.swing.JFormattedTextField;
-
-import org.jdatepicker.impl.DateComponentFormatter;
-import org.jdatepicker.impl.JDatePanelImpl;
-import org.jdatepicker.impl.JDatePickerImpl;
-import org.jdatepicker.impl.SqlDateModel;
-import org.jdatepicker.impl.UtilCalendarModel;
-import org.jdatepicker.impl.UtilDateModel;
+import javax.swing.*;
+import java.util.*;
 
 /**
  * Created 18 April 2010

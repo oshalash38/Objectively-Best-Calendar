@@ -27,9 +27,23 @@ or implied, of Juan Heyns.
 */
 package org.jdatepicker.impl;
 
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.GridLayout;
+import org.jdatepicker.DateModel;
+import org.jdatepicker.JDatePanel;
+import org.jdatepicker.graphics.JNextIcon;
+import org.jdatepicker.graphics.JPreviousIcon;
+import org.jdatepicker.util.JDatePickerUtil;
+
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableModel;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -39,37 +53,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.text.DateFormat;
 import java.text.DateFormatSymbols;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.HashSet;
-import java.util.Properties;
-
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JMenuItem;
-import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
-import javax.swing.JSpinner;
-import javax.swing.JTable;
-import javax.swing.ListSelectionModel;
-import javax.swing.SpinnerModel;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-import javax.swing.event.TableModelEvent;
-import javax.swing.event.TableModelListener;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.JTableHeader;
-import javax.swing.table.TableColumn;
-import javax.swing.table.TableModel;
-
-import org.jdatepicker.DateModel;
-import org.jdatepicker.JDatePanel;
-import org.jdatepicker.graphics.JNextIcon;
-import org.jdatepicker.graphics.JPreviousIcon;
-import org.jdatepicker.util.JDatePickerUtil;
+import java.util.*;
 
 /**
  * Created on 26 Mar 2004

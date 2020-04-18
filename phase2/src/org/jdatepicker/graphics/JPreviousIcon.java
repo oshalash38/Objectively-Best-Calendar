@@ -27,11 +27,8 @@ or implied, of Juan Heyns.
 */
 package org.jdatepicker.graphics;
 
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Graphics;
-
-import javax.swing.Icon;
+import javax.swing.*;
+import java.awt.*;
 
 /**
  * Created on 26 Mar 2004

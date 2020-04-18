@@ -1,10 +1,12 @@
 package com.group_0225.controller;
 
-import com.group_0225.entities.*;
+import com.group_0225.entities.CalendarData;
+import com.group_0225.entities.Timing;
+import com.group_0225.entities.TimingFactory;
 import com.group_0225.manager.EventManager;
 import com.group_0225.manager.WeatherManager;
-import com.group_0225.ui.common.util.UIUpdateInfo;
 import com.group_0225.ui.common.util.UIPresenter;
+import com.group_0225.ui.common.util.UIUpdateInfo;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -62,7 +64,6 @@ public class CalendarGridController extends CalendarController{
      * @param alter the indicator of the new month in the calendar grid
      */
     public void alterMonth(int alter) {
-        System.err.println("NEED MANAGERS : " + displayTime + " : " + data.getLocalTime());
         displayTime.setStart(displayTime.getStart().plusMonths(alter));
         displayGrid();
     }

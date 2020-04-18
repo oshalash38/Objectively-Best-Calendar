@@ -1,20 +1,6 @@
 package com.group_0225;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
-import java.io.OutputStream;
-import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
+import java.io.*;
 
 
 /**
@@ -45,7 +31,6 @@ public class DatabaseReader implements Serializable {
             input.close();
             return obj;
         } catch (IOException ex) {
-            System.out.println("AHHHHHH... not again");
         }
         return null;
     }
@@ -65,8 +50,7 @@ public class DatabaseReader implements Serializable {
             output.writeObject(obj);
             output.close();
         }
-        catch(IOException ex){
-            System.out.println("Failed to save to file");}
+        catch(IOException ex){}
     }
 
 }

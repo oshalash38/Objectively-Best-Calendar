@@ -29,6 +29,7 @@ public class CalendarToolBar extends JMenuBar {
     private JMenu messagingMenu;
     private JMenu userSettings;
     private JMenu timeMachine;
+    private JMenuItem notifications;
 
 
     public CalendarToolBar(ControllerContainer controllerContainer) {
@@ -50,6 +51,10 @@ public class CalendarToolBar extends JMenuBar {
     }
 
 
+    /**
+     * Loads the calendars of this user
+     * @param calendars calenders.get(0) is the current calendar. The rest are the other calendars
+     */
     public void loadCalendars(List<String> calendars) {
         JMenu subCalendars = new JMenu(viewModel.get("TOOLBARUserChangeCalendarString"));
         subCalendars.add(new JMenuItem(viewModel.get("CurrentCalendarString") + calendars.get(0)));
@@ -71,20 +76,26 @@ public class CalendarToolBar extends JMenuBar {
         this.messagingMenu = new JMenu(viewModel.get("TOOLBARMessagingFunctionsString"));
         this.userSettings = new JMenu(viewModel.get("TOOLBARUserString"));
         this.timeMachine = new JMenu(viewModel.get("TOOLBARTimeMachineString"));
+        this.notifications = new JMenuItem(viewModel.get("TOOLBARnotificationString"));
 
         buildCreateMenu();
         buildViewMenu();
         buildMessagingMenu();
         buildUserSettingsMenu();
         buildTimeMachinesMenu();
+        buildNotificationsMenu();
 
         this.add(userSettings);
         this.add(createMenu);
         this.add(viewMenu);
         this.add(messagingMenu);
         this.add(timeMachine);
+        this.add(notifications);
     }
 
+    private void buildNotificationsMenu(){
+        this.notifications.addActionListener(e -> alertController.displayAllNotifications());
+    }
     private void buildTimeMachinesMenu() {
         List<JMenuItem> subMenus = buildJMenuItems(timeMachine, true,
                 Arrays.asList("TOOLBARTimeMachineReturnToPresentString", "TOOLBARTimeMachineTimeTravelString"));
@@ -107,7 +118,7 @@ public class CalendarToolBar extends JMenuBar {
         subMenus.get(0).addActionListener(e -> usersCalendarController.pushAddNewCalendar());
 
         //Logout
-        subMenus.get(1).addActionListener(e -> loginController.startUp());
+        subMenus.get(1).addActionListener(e -> {alertController.stop(); alertController.clear(); loginController.startUp();});
     }
 
     private void buildMessagingMenu() {

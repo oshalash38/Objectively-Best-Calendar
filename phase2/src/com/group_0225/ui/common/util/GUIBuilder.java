@@ -5,7 +5,6 @@ import com.group_0225.ui.common.calendar.CalendarLayoutPanel;
 import com.group_0225.ui.core.*;
 import com.group_0225.ui.core.Alert.*;
 
-
 import java.util.Hashtable;
 import java.util.Map;
 
@@ -16,6 +15,7 @@ public class GUIBuilder {
 
         //IMPORTANT
         //THE KEYS TO THE MAP SHOULD BE THE SAME AS THE PANEL THAT THEY MAP TO
+
 
         panels.put("StartupPanel", new StartupPanel(controllerContainer));
         panels.put("CreateUserPanel", new CreateUserPanel(controllerContainer));
@@ -52,7 +52,8 @@ public class GUIBuilder {
         panels.put("AlertChangeFrequencyPanel", new AlertChangeFrequencyPanel(controllerContainer));
         panels.put("MemoOptionsPanel", new MemoOptionsPanel(controllerContainer));
         panels.put("ChangeMemoPanel", new ChangeMemoPanel(controllerContainer));
-
+        panels.put("NotificationListPanel", new NotificationListPanel(controllerContainer));
+        panels.put("NotificationPanel", new NotificationPanel(controllerContainer));
         return panels;
     }
 }

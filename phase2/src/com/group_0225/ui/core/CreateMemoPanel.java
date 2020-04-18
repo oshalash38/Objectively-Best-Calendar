@@ -2,7 +2,6 @@ package com.group_0225.ui.core;
 
 import com.group_0225.controller.ControllerContainer;
 import com.group_0225.controller.MemoController;
-import com.group_0225.entities.Event;
 import com.group_0225.ui.common.calendar.CalendarLayoutPanel;
 
 import javax.swing.*;

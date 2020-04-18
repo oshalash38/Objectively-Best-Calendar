@@ -3,11 +3,14 @@ package com.group_0225.controller;
 import com.group_0225.entities.*;
 import com.group_0225.manager.EventManager;
 import com.group_0225.manager.MemoManager;
-import com.group_0225.ui.common.util.UIUpdateInfo;
 import com.group_0225.ui.common.util.UIPresenter;
+import com.group_0225.ui.common.util.UIUpdateInfo;
 
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Controls high-level logic with respect to events
@@ -16,8 +19,6 @@ public class EventController extends CalendarController {
 
     private EventManager eventManager;
     private MemoManager memoManager;
-
-    // TODO: Not sure if other classes will need this or not as well to avoid duplicate code.
 
     /**
      * Constructs an EventController instance
@@ -123,8 +124,6 @@ public class EventController extends CalendarController {
         LocalDateTime end = LocalDateTime.of(year, month, day, 23, 59);
 
         Timing threshold = new Timing(start, end);
-
-        System.err.println(threshold);
 
         presenter.updateUI(new UIUpdateInfo("scrollable", eventManager.getEventIDsOfThreshold(data, threshold), "EventListPanel"));
     }

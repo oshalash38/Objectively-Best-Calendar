@@ -13,6 +13,9 @@ import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 
+/**
+ * This class observes the UI Presenter and is responsible for displaying all panels in the Gui
+ */
 public class UIManager implements Observer {
 
 
@@ -24,7 +27,12 @@ public class UIManager implements Observer {
     private CalendarData calendarData;
     private ControllerContainer controllerContainer;
 
-
+    /**
+     * Constructs a UIManager instance
+     * @param controllerContainer a ControllerContainer instance
+     * @param calendarData a CalendarData instance
+     * @param calendarFrame a CalendarFrame
+     */
     public UIManager(ControllerContainer controllerContainer, CalendarData calendarData, CalendarFrame calendarFrame){
         this.calendarToolBar = new CalendarToolBar(controllerContainer);
         this.calendarFrame = calendarFrame;
@@ -37,6 +45,9 @@ public class UIManager implements Observer {
         panels = guiBuilder.buildPanels(controllerContainer);
     }
 
+    /**
+     * Runs the program on startup
+     */
     public void run(){
         controllerContainer.getLoginController().startUp();
     }

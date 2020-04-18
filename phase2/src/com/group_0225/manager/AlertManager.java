@@ -14,54 +14,63 @@ import java.util.*;
  * @author ABHIJOY MANDAL .
  */
 public class AlertManager extends Observable{
-    private LocalDateTime currentTime = LocalDateTime.now();
+    private static LocalDateTime currentTime = LocalDateTime.now();
     private List<Alert> upcomingAlerts = new ArrayList<>(0);
     private List<List<String>> printableUpcomingAlerts = new ArrayList<>(0);
+    private User user;
+    private CalendarData data;
     private Timer t = new Timer();
-    private final int CHECKDURATION = 30;
+    private final int CHECKDURATION = 10;
+    private List<Event> UserEvents;
     private TimerTask timerTask = new TimerTask() {
 
         @Override
         public void run() {
-            //AlertManager.this.run();
+            AlertManager.this.run();
         }
     };
 
-    private void run(List<Event> events){
+    private void run(){
         try {
-            List<List<String>> displayAlerts = runUpcomingAlerts(events);
-            setChanged();
-            notifyObservers(displayAlerts);
+
+                updateUserEvents(this.data, user);
+                List<List<String>> displayAlerts = runUpcomingAlerts();
+                if(displayAlerts.size() > 0){
+                    setChanged();
+                    System.out.println("notified");
+                    notifyObservers(displayAlerts);
+                }
+
         } catch (ConcurrentModificationException ex) {
-            run(events);
+            run();
         }
     }
 
 
-    /**
-     * Checks for any alerts which have passed while the program was not running.
-     *
-     *
-     * @return Returns an ArrayList of Alert which have passed.
-     */
-    public List<List<String>> checkNewAlerts(List<Event> UserEvents){
-        currentTime = LocalDateTime.now();
-        List<List<String>> retList =  new ArrayList<>(0);
-            for (Event e : UserEvents) {
-                checkPassedAlertsEvent(e, retList, currentTime);
-
-        }
-        if(upcomingAlerts!= null) {
-            retList.addAll(runUpcomingAlerts(UserEvents));
-        }
-        return retList;
-    }
 
     /**
      * Starts the timer task to excecute every CHECKDURATION*1000 seconds.
      */
-    public void keepChecking(){
+    public void keepChecking(CalendarData data, User currUser){
+        this.user = currUser;
+        this.data = data;
+        updateUserEvents(data, currUser);
+
+
         t.scheduleAtFixedRate(timerTask, CHECKDURATION*1000, CHECKDURATION*1000);
+
+    }
+
+    private void updateUserEvents(CalendarData data, User currUser){
+        List<Integer> eventIDs = currUser.getAllEvents();
+        List<Event> events = new ArrayList<>();
+        for(Integer id: eventIDs){
+            if(data.getEvents().containsKey(id)) {
+                events.add(data.getEvents().get(id));
+            }
+        }
+
+        this.UserEvents = events;
     }
 
 
@@ -85,7 +94,7 @@ public class AlertManager extends Observable{
 
     private List<String> formatAlertDisplay(Event e, Alert a){
         List<String> retList = new ArrayList<>();
-        retList.add("New Alert for:");
+        retList.add("New Alert For: " + e.getEventName());
         retList.add("Event name: " + e.getEventName());
         retList.add("Event Start time: " + e.getTime().toString());
         retList.add("Alert message: " + a.pushReminder());
@@ -144,7 +153,7 @@ public class AlertManager extends Observable{
      * This method compiles a list of a list of alerts in string format
      * @return the upcoming alerts
      */
-    public List<List<String>> checkUpcomingAlerts (List<Event> UserEvents)
+    public List<List<String>> checkUpcomingAlerts ()
     {
        List<List<String>> retList = new ArrayList<>();
        for(Event e: UserEvents) {
@@ -209,21 +218,20 @@ public class AlertManager extends Observable{
         return 1;
     }
 
-    private void getUpcomingAlerts(List<Event> UserEvents){
+    private void getUpcomingAlerts(){
         for (Event e: UserEvents){
             LocalDateTime nextUpdateTime = currentTime.plusSeconds(CHECKDURATION);
             upcomingAlerts = checkPassedAlertsEvent(e, printableUpcomingAlerts, nextUpdateTime);
         }
     }
 
-    private List<List<String>> runUpcomingAlerts(List<Event> events){
+    private List<List<String>> runUpcomingAlerts(){
         List<List<String>> tempPrint= new ArrayList<>();
         tempPrint.addAll(printableUpcomingAlerts);
         upcomingAlerts.clear();
         printableUpcomingAlerts.clear();
-        currentTime = LocalDateTime.now();
-        getUpcomingAlerts(events);
-
+        currentTime = currentTime.plusSeconds(CHECKDURATION);
+        getUpcomingAlerts();
         return tempPrint;
     }
 
@@ -247,6 +255,11 @@ public class AlertManager extends Observable{
         return toDisplay;
     }
 
+    /**
+     * Getter method for the String representation of an alert
+     * @param alert the alert being formatted
+     * @return the String representation of an alert as a list of strings
+     */
     public List<String> getStringRepresentation(Alert alert){
         List<String> info = new ArrayList<>();
         info.add("Message: " + alert.pushReminder());
@@ -255,17 +268,42 @@ public class AlertManager extends Observable{
         return info;
     }
 
+
+    public void setCurrentTime(LocalDateTime time){
+        currentTime = time;
+        //checkNewAlerts();
+    }
+    /**
+     * Getter method for the parameters of an alert
+     * @param alert the alert being accessed
+     * @return the parameters as a list of strings
+     */
     public List<String> getParameters(Alert alert){
         return alert.getParameters();
     }
 
+    /**
+     * Setter for the timing of the alert
+     * @param alert the alert being modified
+     * @param timing the new Timing object for the alert
+     */
     public void setTiming(Alert alert, Timing timing){
         alert.setTime(timing);
     }
 
+    /**
+     * Setter for the message of the alert
+     * @param alert the alert being modified
+     * @param message the new message for this alert
+     */
     public void setMessage(Alert alert, String message){
         alert.setMessage(message);
     }
 
+    /**
+     * Setter for the frequency for a recurring alert
+     * @param alert the alert being modified
+     * @param freq the new frequency for this recurring alert
+     */
     public void setFreq(RecurringAlert alert, Duration freq){alert.setFreq(freq);}
 }

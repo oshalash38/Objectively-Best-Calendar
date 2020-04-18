@@ -1,8 +1,11 @@
 package com.group_0225.entities;
 
-import com.group_0225.Main;
+import java.io.Serializable;
 
-public class EventMessage {
+/**
+ * This class contains an event and an associated message, used for sending invitations to events
+ */
+public class EventMessage implements Serializable {
     private Event event;
     private String message;
     private User from;

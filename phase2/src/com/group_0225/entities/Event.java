@@ -45,6 +45,11 @@ public class Event implements Serializable, Comparable<Event> {
      * @return id of this event
      */
     public Integer getID(){return this.ID;}
+
+    /**
+     * Setter for the id of this event
+     * @param id the new id of this event
+     */
     public void setID(Integer id){this.ID = id;}
 
     /** Get the name of this event

@@ -22,8 +22,6 @@ public class ChangeMemoPanel extends CalendarLayoutPanel {
     /**
      *
      * @param inputs index 0 -> curr/all
-     *               memo strings
-     *               memo idsc
      *
      */
     @Override
@@ -38,6 +36,8 @@ public class ChangeMemoPanel extends CalendarLayoutPanel {
         // Source: https://stackoverflow.com/questions/39348314/set-a-title-for-a-jpanel-on-eclipse
         String title = viewModel.get("editMemos");
         Border border = BorderFactory.createTitledBorder(title);
+        this.setBorder(border);
+
 
 
         if (inputs.get(0).equals("Current")){
@@ -53,6 +53,11 @@ public class ChangeMemoPanel extends CalendarLayoutPanel {
             jTextAreas.add(textArea);
         }
         Button save = addButton(c, bottomPane, i, viewModel.get("Save"));
+
+
+        addLabel(c, bottomPane, i + 2, viewModel.get("Empty = Delete"));
+
+        JLabel success = addLabel(c, bottomPane, i + 3, "");
         save.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -61,14 +66,22 @@ public class ChangeMemoPanel extends CalendarLayoutPanel {
                 int l = memoStrings + 1;
                 for (JTextArea textArea : jTextAreas){
                     if (!textArea.getText().equals(inputs.get(l))){
-                        memos.put(Integer.parseInt(inputs.get(k)), textArea.getText());
+                        if (textArea.getText().equals("")){
+                            memoController.deleteMemo(inputs.get(k));
+                        } else {
+                            memos.put(Integer.parseInt(inputs.get(k)), textArea.getText());
+                        }
                     }
                     k++;
                     l++;
                 }
                 if (inputs.get(0).equals("Current")){
                     memoController.editMemosCurrEvent(inputs.get(1), memos);
+                } else {
+                    memoController.editMemosAllEvents(memos);
                 }
+                success.setText(viewModel.get("ModificationC"));
+//                addLabel(c, bottomPane, finalI + 4, viewModel.get("ModificationC"));
             }
         });
 

@@ -1,30 +1,36 @@
 package com.group_0225.manager;
 
-import com.google.gson.JsonArray;
+import com.google.gson.*;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.group_0225.api.WeatherRequester;
 
-import java.io.IOException;
-import java.text.DecimalFormat;
 import java.util.*;
 
+/**
+ * This class manages weather-related functionality
+ */
 public class WeatherManager {
 
     WeatherRequester requester;
 
     List<String> forecast;
 
+    /**
+     * Creates a WeatherManager instance
+     */
     public WeatherManager() {
         requester = new WeatherRequester();
         requester.requestFiveDayForecast();
         forecast = new ArrayList<>();
     }
 
+    /**
+     * Sets the forecasted highs for the next few days
+     */
     public void setForecastHighs() {
 
         forecast.clear();
-        System.err.println("Setting forecast");
 
         try {
             JsonObject forecastInfo = requester.getForecast();
@@ -58,7 +64,6 @@ public class WeatherManager {
 
                 maxTemp = Math.max(maxTemp, currTemp);
             }
-            System.err.println("FORECAST RECEIVED + :" + forecast.size());
         } catch (Exception e) {
             forecast.clear();
             e.printStackTrace();
@@ -75,12 +80,15 @@ public class WeatherManager {
         formattedForecast += cal.get(Calendar.YEAR) + ",";
         formattedForecast += ((int) forecast) + "";
 
-        System.err.println(formattedForecast);
 
         return formattedForecast;
     }
 
     private double kelvinToCelsius(double kelvin) { return kelvin - 273.15; }
 
+    /**
+     * Getter for the forecasted highs for the next few days
+     * @return the temperatures as a list of strings
+     */
     public List<String> getForecastHighs() { return forecast; }
 }

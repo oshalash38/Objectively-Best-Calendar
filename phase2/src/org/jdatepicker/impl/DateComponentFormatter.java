@@ -27,14 +27,13 @@ or implied, of Juan Heyns.
 */
 package org.jdatepicker.impl;
 
+import org.jdatepicker.util.JDatePickerUtil;
+
+import javax.swing.*;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
-
-import javax.swing.JFormattedTextField;
-
-import org.jdatepicker.util.JDatePickerUtil;
 
 public class DateComponentFormatter extends JFormattedTextField.AbstractFormatter {
 	

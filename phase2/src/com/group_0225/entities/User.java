@@ -55,6 +55,14 @@ public class User implements Serializable {
         return retList;
     }
 
+    public List<Integer> getAllEvents(){
+        List<Integer> retList = new ArrayList<>();
+        for(Map.Entry<String, List<Integer>> e: this.calendars.entrySet()){
+            retList.addAll(e.getValue());
+        }
+        return retList;
+    }
+
     /**
      * Getter for calendar map
      * @return the calendar map

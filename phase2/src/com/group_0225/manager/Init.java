@@ -23,7 +23,11 @@ import java.util.Map;
  */
 
 public class Init {
-
+    /**
+     * Runs the program
+     * @throws IOException for saving/loading issues
+     * @throws ClassNotFoundException if needed class isn't found
+     */
     public void run() throws IOException, ClassNotFoundException {
         TimingFactory timingFactory = new TimingFactory();
         CalendarFrame calendarFrame = new CalendarFrame();
@@ -74,15 +78,12 @@ public class Init {
         Object events = databaseReader.readFile("events.txt");
         Object memos = databaseReader.readFile("memos.txt");
         if(users != null){
-            System.out.println("Num Users: " + ((Map<String, User>)users).size());
             calendarData.setUsers((Map<String, User>)users);
         }
         if(events != null){
-            System.out.println("Num Events: " + ((Map<Integer, Event>)events).size());
             calendarData.setEvents((Map<Integer, Event>)events);
         }
         if (memos != null){
-            System.out.println("Num Memos: " +((Map<Integer, String>)memos).size());
             calendarData.setMemos((Map<Integer, String>)memos);
         }
     }

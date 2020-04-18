@@ -3,6 +3,7 @@ package com.group_0225.controller;
 import com.group_0225.entities.CalendarData;
 import com.group_0225.entities.Timing;
 import com.group_0225.entities.TimingFactory;
+import com.group_0225.manager.AlertManager;
 import com.group_0225.manager.EventManager;
 import com.group_0225.ui.common.util.UIPresenter;
 import com.group_0225.ui.common.util.UIUpdateInfo;
@@ -49,6 +50,9 @@ public class LocalTimeController extends CalendarController{
 
         EventManager eventManager = new EventManager();
         eventManager.updateStatus(data);
+
+        AlertManager alertManager = new AlertManager();
+        alertManager.setCurrentTime(timing.getStart());
 
         presenter.updateUI(new UIUpdateInfo("dialog", Arrays.asList(viewModel.get("TimeChangeSuccessfulString") + timing.toString()), "ChangeTimePanel"));
 

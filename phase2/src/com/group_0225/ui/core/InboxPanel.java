@@ -8,8 +8,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.*;
 import java.util.List;
+import java.util.*;
 
 public class InboxPanel extends CalendarLayoutPanel {
     public InboxPanel(ControllerContainer controllerContainer) {
@@ -66,8 +66,11 @@ public class InboxPanel extends CalendarLayoutPanel {
         int l = responseMessages + 1;
 
         for (; k < responseMessages; k++){
-            Button button = addButton(c, bottomPane, k + 2, inputs.get(k));
-            responseButtons.put(button, inputs.get(l));
+            System.out.println(inputs.get(l));
+            if (inputs.get(l) != null){
+                Button button = addButton(c, bottomPane, k + 2, inputs.get(k));
+                responseButtons.put(button, inputs.get(l));
+            }
             l++;
         }
 

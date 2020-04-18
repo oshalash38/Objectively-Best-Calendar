@@ -1,7 +1,8 @@
 package com.group_0225.entities;
 
 import java.io.Serializable;
-import java.time.*;
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -138,7 +139,7 @@ public class Timing implements Serializable{
      * @return a string with the start date and time.
      */
     public String toString(){
-        return new String(start.getDayOfMonth()+" " + start.getMonth()+ " " + start.getYear() + ", at: " + start.getHour() + ":"+ start.getMinute());
+        return start.getDayOfMonth() + " " + start.getMonth() + " " + start.getYear() + ", at: " + start.getHour() + ":" + start.getMinute();
     }
     /**
      *

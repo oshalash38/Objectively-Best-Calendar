@@ -1,16 +1,11 @@
 package com.group_0225.ui.core;
 
-import com.group_0225.ui.common.util.GUIBuilder;
-import com.group_0225.ui.common.util.UIUpdateInfo;
-import com.group_0225.ui.common.util.UIPresenter;
-import com.group_0225.controller.ControllerContainer;
-import com.group_0225.entities.CalendarData;
 import com.group_0225.ui.common.calendar.CalendarLayoutPanel;
+import com.group_0225.ui.common.util.UIPresenter;
 
 import javax.swing.*;
 import java.io.File;
-import java.net.URL;
-import java.util.*;
+import java.util.Map;
 
 public class CalendarFrame extends JFrame{
 

@@ -27,10 +27,10 @@ or implied, of Juan Heyns.
 */
 package org.jdatepicker.impl;
 
+import org.jdatepicker.AbstractDateModel;
+
 import java.sql.Date;
 import java.util.Calendar;
-
-import org.jdatepicker.AbstractDateModel;
 
 public class SqlDateModel extends AbstractDateModel<java.sql.Date> {
 

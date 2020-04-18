@@ -3,7 +3,9 @@ package com.group_0225.manager;
 import com.group_0225.entities.*;
 
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public class EventManager {
     /**
@@ -16,6 +18,9 @@ public class EventManager {
     TimingFactory timingFactory;
 
 
+    /**
+     * Creates a new EventManager
+     */
     public EventManager(){
         timingFactory = new TimingFactory();
     }
@@ -29,11 +34,8 @@ public class EventManager {
     public Event createEvent(CalendarData calendarData, String name, Timing timing){
         Event event = new Event(name, timing);
         int id = sortEvents(calendarData);
-        //System.out.println(id);
         event.setID(id);
         calendarData.addEvent(id, event);
-        //TODO:testing only
-        System.out.println(id + "\nStart:" + timing.getStart() + "\nEnd:" + timing.getEnd());
         return event;
     }
 
@@ -49,16 +51,22 @@ public class EventManager {
         int id = sortEvents(calendarData);
         event.setID(id);
         calendarData.addEvent(id, event);
-        //TODO:testing only
-        System.out.println(id + "\nStart:" + timing.getStart() + "\nEnd:" + timing.getEnd());
         return event;
     }
+
+    /**
+     * Creates an event as specified
+     * @param calendarData the data for this Calendar
+     * @param name         The name of this new event
+     * @param timing       The start time and date time of this event
+     * @param tags         The tags associated with this event
+     * @return
+     */
     public Event createEvent(CalendarData calendarData, String name, Timing timing,List<String> tags){
         Event e = createEvent(calendarData,name,timing);
         e.addTags(tags);
         return e;
     }
-
 
     /**
      * Sorts the events by generating a unique sequential id for the event.
@@ -72,40 +80,7 @@ public class EventManager {
             if(entry.getKey() > high){high = entry.getKey();}
         }
         idGen = high + 1;
-        //getCurrCalendar is not static
-//        List<Integer> userEvents = user.getEvents(CalendarController.getCurrCalendar());
-//        events.put(idGen, e);
-//        e.setID(idGen);
-//        userEvents.add(idGen);
         return idGen;
-    }
-
-    /**
-     * Changes the name of an event.
-     * @param calendarData Calendar metadata.
-     * @param event The event to be altered
-     * @param newName The new name.
-     */
-    public void changeEventName(CalendarData calendarData, Event event, String newName, List<Event> events){
-        Event currEvent = this.getEventByID(calendarData, event.getID());
-        if (currEvent != null){
-            currEvent.setEventName(newName);
-        }
-    }
-
-
-    /**
-     *
-     * @param calendarData Calendar metadata.
-     * @param name the name being searched
-     * @return the Event matching the name
-     */
-    public Event searchEventByName(CalendarData calendarData, String name){
-        for (Map.Entry<Integer,Event> eventEntry: calendarData.getEvents().entrySet()){
-            if (eventEntry.getValue().getEventName().equals(name))
-                 return eventEntry.getValue();
-        }
-        return null;
     }
 
     /**
@@ -119,21 +94,6 @@ public class EventManager {
             return data.getEvents().get(id);
 
         return null;
-    }
-
-    /**
-     * Returns a list of all the events that have the name sent in
-     * @param user the user being searched in
-     * @param name the name being looked for
-     * @return the list of Events
-     */
-    public List<Event> searchEventsByName(User user, String name, List<Event> events){
-        ArrayList<Event> output = new ArrayList<Event>();
-        for (Event e: events){
-            if (e.getEventName().equals(name))
-                output.add(e);
-        }
-        return output;
     }
 
     /**
@@ -163,35 +123,14 @@ public class EventManager {
         return eventsOfStatus;
     }
 
-    /**
-     * Formats the events by name. Returns only the name of the requested events
-     *
-     * @param events the events that need to be formatted
-     * @return a list of the names of the strings provided
-     */
-    public List<String> formatEventByName(List<Event> events ){
-        List<String> nameList = new ArrayList<String>();
-        for(Event event: events){
-            nameList.add(event.getEventName());
-        }
-        return nameList;
-    }
 
     /**
-     * Retrurn a list of events that are associated with a given tag
+     * Return a list of events that are associated with a given tag
      * @param data CalendarData instance
      * @param tag the tag being searched for
      * @return
      */
     public List<Event> getEventsByTag(String tag, CalendarData data){
-//        HashMap<Integer,Event> events = (HashMap<Integer, Event>) user.getEvents();
-//        List<Event> eventsByTag = new ArrayList<Event>();
-//        for (Map.Entry<Integer, Event> entry: events.entrySet()){
-//            if (entry.getValue().getTags().contains(tag)){
-//                eventsByTag.add(entry.getValue());
-//            }
-//        }
-//        return eventsByTag;
           List<Event> eventsByTag = new ArrayList<Event>();
           List<Event> userEvents = getUserCalendarEvents(data.getEvents(),data.getCurrUser(),data.getCurrCalendar());
           for(Event e: userEvents){
@@ -200,7 +139,14 @@ public class EventManager {
           }
           return eventsByTag;
     }
-    public List<Event> getEventsBySeriesName(User user, String sname, List<Event> events){
+
+    /**
+     * Returns the events of this series
+     * @param sname the series name
+     * @param events the events that need to be checked
+     * @return The lis of events that are part of this series
+     */
+    public List<Event> getEventsBySeriesName(String sname, List<Event> events){
         List<Event> snEvents = new ArrayList<Event>();
         for(Event e: events){
             if(e.getSeriesName().equals(sname))
@@ -208,6 +154,14 @@ public class EventManager {
         }
         return snEvents;
     }
+
+
+    /**
+     * Adds events to a series
+     * @param data the CalendarData where everything is stored
+     * @param um the UserManager for user sue casses
+     * @return The strings of the list of events
+     */
     public List<String> formatAllEventsForSeries(CalendarData data, UserManager um){
         List<Integer> ids = um.getIDs(data.getCurrUser(),data.getCurrCalendar());
         List<Event> events = new ArrayList<>();
@@ -216,6 +170,12 @@ public class EventManager {
         }
         return formatEventsForSeries(events);
     }
+
+    /**
+     * Formats the events with their info to be displayed
+     * @param events the list of events to consider
+     * @return the string representartions
+     */
     public List<String> formatEventsForSeries(List<Event> events){
         List<String> output = new ArrayList<>();
         for (Event e: events){
@@ -226,41 +186,6 @@ public class EventManager {
             output.add(e.getID().toString());
         }
         return output;
-    }
-    /**
-     * Returns a detailed view of this event
-     * @param e the event
-     * @param alertManager the way to interact with alerts
-     * @return
-     */
-    public List<String> getDetailedEvent(Event e, AlertManager alertManager){
-        List<String> content = new ArrayList<String>();
-        content.add(e.getEventName());
-        if(e.getSeriesName().equals(""))
-            content.add("No series");
-        else{
-            content.add(e.getSeriesName());
-        }
-        content.add(e.getStartTimeString());
-        content.add(e.getEndTimeString());
-        content.add(alertManager.formatReminders(e));
-        content.add(getTags(e));
-        return content;
-    }
-
-    /**
-     * Gets the tag of a passed event
-     * @param e the event
-     * @return string representing the tag of the event
-     */
-    private String getTags(Event e){
-        String str = "";
-        if(e.getTags().isEmpty())
-            return "No tags";
-        for(String tag: e.getTags()){
-            str+=tag + ", ";
-        }
-        return str;
     }
 
     /**Return a list of user's events between two dates
@@ -280,6 +205,12 @@ public class EventManager {
         return out;
     }
 
+    /**
+     * Returns a list of events that occur on each day
+     * @param data the data where the events are stored
+     * @param threshold the threshold to check between
+     * @return A list of events for each given day
+     */
     public List<List<Event>> getEventsPerDay(CalendarData data, Timing threshold) {
         List<List<Event>> numOfEvents = new ArrayList<>();
 
@@ -303,6 +234,12 @@ public class EventManager {
         return numOfEvents;
     }
 
+    /**
+     * Returns the number of events per day
+     * @param data the CalendarData where the events are stored
+     * @param threshold the threshold to check between
+     * @return the number of events per day
+     */
     public List<String> getNumEventsPerDay(CalendarData data, Timing threshold) {
         List<String> numPerDay = new ArrayList<>();
 
@@ -312,22 +249,24 @@ public class EventManager {
         return numPerDay;
     }
 
+    /**
+     * Returns the number of alerts per day
+     * @param data the CalendarData where the alerts are stored
+     * @param threshold the threshold to check between
+     * @return the number of alerts per day
+     */
     public List<String> getNumAlertsPerDay(CalendarData data, Timing threshold) {
         List<String> numPerDay = new ArrayList<>();
-
         for(List<Event> eventsOfDay : getEventsPerDay(data, threshold)){
             int alertsForDay = 0;
-
             for(Event e : eventsOfDay) {
                 for(Alert alert : e.getAlerts()){
                     if(alert.getNextTime().intersect(threshold))
                         alertsForDay++;
                 }
             }
-
             numPerDay.add(alertsForDay + "");
         }
-
         return numPerDay;
     }
 
@@ -338,21 +277,28 @@ public class EventManager {
      */
     public List<String> getNames(List<Event> events) {
         List<String> names = new ArrayList<>();
-
         for(Event e : events)
             names.add(e.getEventName() + "");
-
         return names;
     }
 
+    /**
+     * Return a list of IDs for a given list of events
+     * @param events the list of events whose IDs are needed
+     * @return the list of IDs
+     */
     public List<String> getEventIDs(List<Event> events) {
         List<String> id = new ArrayList<>();
-
         for(Event e : events)
             id.add(e.getID() + "");
-
         return id;
     }
+
+    /**
+     * Return a list of all the tags associated with all the given events
+     * @param events the events whose tags are needed
+     * @return the list of tags
+     */
     public List<String> getAllTags(List<Event> events){
         List<String> tags = new ArrayList<>();
         for (Event e: events){
@@ -364,6 +310,13 @@ public class EventManager {
         }
         return tags;
     }
+
+    /**
+     * Return the IDs for the events that have this name
+     * @param data the CalendarData where the events are stored
+     * @param name the name being searched for
+     * @return the IDs that have this name
+     */
     public List<String> getEventsCurrUserByName(CalendarData data, String name){
         List<String> output = new ArrayList<>();
         for (Event e: getUserCalendarEvents(data.getEvents(),data.getCurrUser(),data.getCurrCalendar())){
@@ -373,9 +326,15 @@ public class EventManager {
         }
         return output;
     }
+
+    /**
+     *
+     * @param data
+     * @param threshold
+     * @return
+     */
     public List<String> getEventIDsOfThreshold(CalendarData data, Timing threshold) {
         List<Event> events = getEventsBetween(data, threshold);
-        System.err.println("Unpog?" + events.size());
         return getEventIDs(events);
     }
 
@@ -387,14 +346,6 @@ public class EventManager {
     public void addTag(Event e, String newTag){
         e.getTags().add(newTag);
     }
-
-    //TODO: complete this method... need some clarification about design.
-        public void deleteEvent(Integer i, User u, SeriesManager sm){}
-//        u.getEvents().remove(i);
-//        if (!u.getEvents().get(i).getSeriesName().equals("")){
-//            sm.checkAlone(u.getEvents().get(i).getSeriesName(), u);
-//        }
-//    }
 
     /**
      * Method for deleting a specific event.
@@ -413,35 +364,44 @@ public class EventManager {
         data.getEvents().remove(id);
     }
 
+    /**
+     * Overwrite the data of this event
+     * @param data where the event is stored
+     * @param id The id of this event
+     * @param name the name of this event
+     * @param timing the timing of this event
+     * @return the new edited event
+     */
     public Event editEvent(CalendarData data, int id, String name, Timing timing) {
         Event event = data.getEvents().get(id);
-        System.err.println(data.getEvents().get(0));
 
         event.setEventName(name);
         event.getTime().setStart(timing.getStart());
         event.getTime().setEnd(timing.getEnd());
         return event;
     }
+    /**
+     * Overwrite the data of this event with tags
+     * @param data where the event is stored
+     * @param id The id of this event
+     * @param name the name of this event
+     * @param timing the timing of this event
+     * @param tags the tags of this event
+     * @return the new edited event
+     */
     public void editEvent(CalendarData data, int id, String name, Timing timing,List<String> tags){
         Event e = editEvent(data, id, name, timing);
         e.setTags(tags);
-
     }
+
     /**
-     * Required since Maps aren't sorted and events must be returned from earliest to latest
-     * @param calendar a key-value entry in the User's calendars attribute
-     * @return a sorted list of all events from the User's calendar
+     * Return  a list of events for a given calendar
+     *
+     * @param eventMap the map where events are stored
+     * @param user the user responsible for these events
+     * @param calendarName The calendar being used at the moment
+     * @return the list of events
      */
-    public List<Event> getSortedEvents(Map.Entry<String,List<Integer>> calendar, CalendarData calendarData){
-        List<Integer> unsortedIDs = calendar.getValue();
-        List<Event> unsortedEvents = new ArrayList<>();
-        for (Integer i: unsortedIDs){
-            unsortedEvents.add(calendarData.getEvents().get(i));
-        }
-        Collections.sort(unsortedEvents);
-        return unsortedEvents;
-    }
-
     public List<Event> getUserCalendarEvents(Map<Integer, Event> eventMap, User user, String calendarName) {
         List<Event> events = new ArrayList<>();
 
@@ -452,10 +412,20 @@ public class EventManager {
         return events;
     }
 
+    /**
+     * returns the alerts for this event
+     * @param event the event that is being accessed
+     * @return the alerts for this event
+     */
     public List<Alert> getAlerts(Event event){
         return event.getAlerts();
     }
 
+    /**
+     * Removes a given alert from an event
+     * @param event the event
+     * @param alert the alert
+     */
     public void removeAlert(Event event, Alert alert){
         event.getAlerts().remove(alert);
     }

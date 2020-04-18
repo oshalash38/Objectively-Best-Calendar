@@ -14,12 +14,23 @@ public class RecurringAlert extends Alert {
     private Timing nextTime;
     private Duration freq;
 
+    /**
+     * Creates a RecurringAlert instance
+     * @param time a Timing isntance
+     * @param message the message of the alert
+     * @param freq a Duration instance
+     */
     public RecurringAlert(Timing time, String message, Duration freq){
         super(message);
         nextTime = time;
         this.freq = freq;
     }
 
+    /**
+     * Creates a RecurringAlert instance
+     * @param time a Timing instance
+     * @param freq a Duration instance
+     */
     public RecurringAlert(Timing time, Duration freq){
         super();
         nextTime = time;
@@ -68,11 +79,19 @@ public class RecurringAlert extends Alert {
         }
     }
 
+    /**
+     * Return a description of this type of alert
+     * @return a String indicating that this is a RecurringAlert
+     */
     @Override
     public String getType() {
         return "Recurring Alert";
     }
 
+    /**
+     * Return the basic parameters of this type of alert
+     * @return a list of strings describing the parameters of this type of alert
+     */
     @Override
     public List<String> getParameters() {
         List<String> output = new ArrayList<>();

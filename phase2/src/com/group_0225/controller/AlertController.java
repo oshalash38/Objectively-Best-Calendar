@@ -6,15 +6,14 @@ import com.group_0225.manager.EventManager;
 import com.group_0225.ui.common.util.UIPresenter;
 import com.group_0225.ui.common.util.UIUpdateInfo;
 
+import java.text.ParseException;
 import java.time.Duration;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.time.LocalDateTime;
+import java.util.*;
 
-/**
- * Controls high-level logic with respect to alerts
- */
-public class AlertController extends CalendarController {
+public class AlertController extends CalendarController implements Observer {
+    private static List<List<String>> notifications = new ArrayList<List<String>>();
+    private AlertManager alertManager = new AlertManager();
     private List<Alert> currAlerts = new ArrayList<>();
     private Alert currAlert;
     private Event currEvent;
@@ -25,7 +24,9 @@ public class AlertController extends CalendarController {
      * @param presenter a UIPresenter instance
      */
     public AlertController(CalendarData data, UIPresenter presenter) {
+
         super(data, presenter);
+        alertManager.addObserver(this::update);
     }
 
     /**
@@ -34,6 +35,7 @@ public class AlertController extends CalendarController {
     public void pushCreateNewAlert(){
         presenter.updateUI(new UIUpdateInfo("dialog", Arrays.asList(""), "CreateAlertPromptPanel"));
     }
+
 
 
     /**
@@ -184,7 +186,6 @@ public class AlertController extends CalendarController {
      * @param calendarGridController a CalendarGridController instance
      */
     public void deleteAlert(int index, int eventID, CalendarGridController calendarGridController){
-        System.out.println(index);
 
         EventManager eventManager = new EventManager();
         Alert toRemove = currAlerts.remove(index);
@@ -372,4 +373,75 @@ public class AlertController extends CalendarController {
 
 
 
+
+    @Override
+    public void update(Observable o, Object arg) {
+
+        List<List<String>> temp = (List<List<String>>)arg;
+        if (!temp.isEmpty()){
+            notifications.addAll((List<List<String>>)arg);
+            List<String> retNotifications = new ArrayList<>();
+            for (List<String> s: notifications){
+                retNotifications.addAll(s);
+            }
+            presenter.updateUI(new UIUpdateInfo("dialog", retNotifications, "NotificationListPanel" ));
+        }
+    }
+
+    /**
+     * Dislays the detils of the notification
+     * @param inputs the information about the alert to be diplayed
+     */
+    public void displayNotifications(List<String> inputs){
+        presenter.updateUI(new UIUpdateInfo("dialog", inputs, "NotificationPanel" ));
+    }
+
+    /**
+     * Displays all the notifications
+     */
+    public void displayAllNotifications(){
+        List<String> retNotifications = new ArrayList<>();
+        for (List<String> s: notifications){
+            retNotifications.addAll(s);
+        }
+
+        presenter.updateUI(new UIUpdateInfo("dialog", retNotifications, "NotificationListPanel" ));
+
+
+    }
+
+    /**
+     * starts the timer task in alertManager when user logs in
+     */
+    public void start(){
+        EventManager eventManager = new EventManager();
+        List<Integer> eventID = data.getCurrUser().getAllEvents();
+        List<Event> events = new ArrayList<>();
+        for (int i: eventID){
+            events.add(eventManager.getEventByID(data, i));
+        }
+        alertManager.keepChecking(data, data.getCurrUser());
+    }
+
+    /**
+     * stops the timer after user logs out
+     */
+    public void stop(){
+        alertManager.stopTimer();
+    }
+
+    /**
+     * removes the notification after user has viewed it
+     * @param i index of notification to be removed
+     */
+    public void removeNotification(int i){
+        notifications.remove(i);
+    }
+
+    /**
+     * Used to clear the notifications after user logs out
+     */
+    public void clear(){
+        notifications.clear();
+    }
 }
