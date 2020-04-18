@@ -54,8 +54,6 @@ public class LocalTimeController extends CalendarController{
         AlertManager alertManager = new AlertManager();
         alertManager.setCurrentTime(timing.getStart());
 
-        presenter.updateUI(new UIUpdateInfo("dialog", Arrays.asList(viewModel.get("TimeChangeSuccessfulString") + timing.toString()), "ChangeTimePanel"));
-
         calendarGridController.updateDisplayTime();
         calendarGridController.displayGrid();
     }

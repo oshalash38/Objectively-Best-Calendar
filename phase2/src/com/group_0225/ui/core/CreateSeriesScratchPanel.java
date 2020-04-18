@@ -106,7 +106,6 @@ public class CreateSeriesScratchPanel extends CalendarLayoutPanel {
             List<String> inputs1 = new ArrayList<>();
             //TODO: delete the following test print statements before submission
 
-            try{
                 inputs1.add(seriesName.getText());
                 inputs1.add(((String) Objects.requireNonNull(frequency.getSelectedItem())).substring(0,1));
                 inputs1.add(startDateField.getJFormattedTextField().getText());
@@ -115,7 +114,6 @@ public class CreateSeriesScratchPanel extends CalendarLayoutPanel {
                 inputs1.add(durationField.getValue().toString().substring(11,19));
                 inputs1.add(numEventsField.getValue().toString());
                 sc.createSeriesFromScratch(inputs1, controllerContainer.getCalendarGridController());
-            }catch(Exception someE){}
         });
         addLabel(constraints,bottomPane,16,inputs.get(0));
         constraints.gridy = 1;

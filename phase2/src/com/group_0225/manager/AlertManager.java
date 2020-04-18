@@ -20,7 +20,7 @@ public class AlertManager extends Observable{
     private User user;
     private CalendarData data;
     private Timer t = new Timer();
-    private final int CHECKDURATION = 10;
+    private final int CHECKDURATION = 1;
     private List<Event> UserEvents;
     private TimerTask timerTask = new TimerTask() {
 
@@ -147,22 +147,6 @@ public class AlertManager extends Observable{
             retList.add(this.formatAlertDisplay(e, a));
         }
         return retAlerts;
-    }
-
-    /**
-     * This method compiles a list of a list of alerts in string format
-     * @return the upcoming alerts
-     */
-    public List<List<String>> checkUpcomingAlerts ()
-    {
-       List<List<String>> retList = new ArrayList<>();
-       for(Event e: UserEvents) {
-           if (e.getAlerts().size() > 0) {
-               retList.add(formatAlertDisplay(e, e.getAlerts().get(0)));
-           }
-       }
-       retList.addAll(printableUpcomingAlerts);
-       return retList;
     }
 
     /**
