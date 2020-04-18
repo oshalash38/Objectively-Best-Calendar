@@ -7,9 +7,19 @@ import com.group_0225.ui.common.calendar.CalendarLayoutPanel;
 import java.awt.*;
 import java.util.List;
 
+/**
+ * This class displays an Alert
+ */
 public class AlertPanel extends CalendarLayoutPanel {
     private int index;
     private int eventID;
+
+    /**
+     * Creates a new AlertPanel instances
+     * @param controllerContainer a ControllerContainer instances
+     * @param index the alertIndex
+     * @param eventID the id of the event for this alert
+     */
     public AlertPanel(ControllerContainer controllerContainer, int index, int eventID) {
         super(controllerContainer);
         this.index = index;

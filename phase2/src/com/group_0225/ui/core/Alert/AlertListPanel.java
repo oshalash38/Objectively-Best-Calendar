@@ -7,7 +7,14 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 
+/**
+ * This class displays a list of alerts
+ */
 public class AlertListPanel extends CalendarLayoutPanel {
+    /**
+     * Creates a new AlertListPanel instances
+     * @param controllerContainer a ControllerContainer instance
+     */
     public AlertListPanel(ControllerContainer controllerContainer) {
         super(controllerContainer);
     }

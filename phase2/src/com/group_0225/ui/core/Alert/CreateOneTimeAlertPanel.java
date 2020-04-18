@@ -10,7 +10,14 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This panel allows the user to create a one-time alert
+ */
 public class CreateOneTimeAlertPanel extends CalendarLayoutPanel {
+    /**
+     * Creates a CreateOneTimeAlertPanel instance
+     * @param controllerContainer a ControllerContainer instnace
+     */
     public CreateOneTimeAlertPanel(ControllerContainer controllerContainer) {
         super(controllerContainer);
     }

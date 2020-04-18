@@ -8,11 +8,20 @@ import java.awt.*;
 import java.util.InputMismatchException;
 import java.util.List;
 
+/**
+ * This panel allows the user to create an alert
+ */
 public class CreateAlertCommonPanel extends CalendarLayoutPanel {
     String titleKey;
     TextField alertName;
     JComboBox<String> eventChoice;
 
+    /**
+     * Creates a new CreateAlertCommonPanel instances
+     * @param events list of events, as Strings
+     * @param controllerContainer a ControllerContainer instance
+     * @param title the title of the panel
+     */
     public CreateAlertCommonPanel(List<String> events, ControllerContainer controllerContainer, String title){
         super(controllerContainer);
         this.titleKey = title;

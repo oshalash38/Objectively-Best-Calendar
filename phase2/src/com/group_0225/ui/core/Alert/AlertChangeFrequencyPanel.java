@@ -9,7 +9,14 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This panels allows the user to change the frequency of an alert
+ */
 public class AlertChangeFrequencyPanel extends CalendarLayoutPanel {
+    /**
+     * Creates a new AlertChangeFrequencyPanel instance
+     * @param controllerContainer a ControllerContainer instance
+     */
     public AlertChangeFrequencyPanel(ControllerContainer controllerContainer) {
         super(controllerContainer);
     }

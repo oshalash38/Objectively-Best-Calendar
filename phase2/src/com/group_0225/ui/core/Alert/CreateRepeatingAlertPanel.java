@@ -10,7 +10,14 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This panel allows the user to create a repeating alert
+ */
 public class CreateRepeatingAlertPanel extends CalendarLayoutPanel {
+    /**
+     * Creates a new CreateRepeatingAlertPanel instances
+     * @param controllerContainer a ControllerContainer instance
+     */
     public CreateRepeatingAlertPanel(ControllerContainer controllerContainer) {
         super(controllerContainer);
     }

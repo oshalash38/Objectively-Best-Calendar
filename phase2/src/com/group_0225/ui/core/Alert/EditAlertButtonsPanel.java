@@ -7,7 +7,14 @@ import com.group_0225.ui.common.calendar.CalendarLayoutPanel;
 import java.awt.*;
 import java.util.List;
 
+/**
+ * This panel allows the user to edit alerts
+ */
 public class EditAlertButtonsPanel extends CalendarLayoutPanel {
+    /**
+     * Creates a new EditAlertButtonsPanel instance
+     * @param controllerContainer a ControllerContainer instance
+     */
     public EditAlertButtonsPanel(ControllerContainer controllerContainer) {
         super(controllerContainer);
     }

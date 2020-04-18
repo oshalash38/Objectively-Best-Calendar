@@ -10,7 +10,14 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This panel gives the user the option of changing the time of an alert
+ */
 public class AlertChangeTimePanel extends CalendarLayoutPanel {
+    /**
+     * Creates a new AlertChangeTimePanel instance
+     * @param controllerContainer a ControllerContainer instance
+     */
     public AlertChangeTimePanel(ControllerContainer controllerContainer) {
         super(controllerContainer);
     }

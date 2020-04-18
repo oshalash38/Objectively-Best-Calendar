@@ -9,7 +9,14 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This panel allows the user to change the message of an alert
+ */
 public class AlertChangeMessagePanel extends CalendarLayoutPanel {
+    /**
+     * Creates a new AlertChangeMessagePanel instance
+     * @param controllerContainer a ControllerContainer instance
+     */
     public AlertChangeMessagePanel(ControllerContainer controllerContainer) {
         super(controllerContainer);
     }
