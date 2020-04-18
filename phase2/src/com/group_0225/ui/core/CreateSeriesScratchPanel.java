@@ -109,7 +109,7 @@ public class CreateSeriesScratchPanel extends CalendarLayoutPanel {
                 inputs1.add(((String) Objects.requireNonNull(dayField.getSelectedItem())).substring(0,1));
                 inputs1.add(durationField.getValue().toString().substring(11,19));
                 inputs1.add(numEventsField.getValue().toString());
-                sc.createSeriesFromScratch(inputs1);
+                sc.createSeriesFromScratch(inputs1, controllerContainer.getCalendarGridController());
             }catch(Exception someE){}
         });
         addLabel(constraints,bottomPane,16,inputs.get(0));

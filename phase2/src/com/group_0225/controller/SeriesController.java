@@ -44,7 +44,7 @@ public class SeriesController extends CalendarController {
      *
      * @param input list of strings including series name, frequency, duration, start date, number of events
      */
-    public void createSeriesFromScratch(List<String> input) {
+    public void createSeriesFromScratch(List<String> input, CalendarGridController calendarGridController) {
 
         //0 series name must be non-empty string
         //1 string int from 1-5 determining frequency
@@ -61,6 +61,7 @@ public class SeriesController extends CalendarController {
             String[] split = input.get(2).split("-");
             sm.createSeries(data, input.get(0), input.get(1), input.get(2), Months.get(split[1]), input.get(3), input.get(4), input.get(5), input.get(6), em);
             pushCreateSeriesFromScratchScreen(Collections.singletonList("Series created! You may return to the main menu."));
+            calendarGridController.displayGrid();
         }
 
     }
