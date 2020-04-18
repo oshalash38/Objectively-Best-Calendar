@@ -124,10 +124,18 @@ public class CalendarData {
         this.events = events;
     }
 
+    /**
+     * Setter for the users map
+     * @param users the new map of usernames to users
+     */
     public void setUsers(Map<String, User> users) {
         this.users = users;
     }
 
+    /**
+     * Getter of the current user's events
+     * @return the current user's events as a list of events
+     */
     public List<Event> getCurrUserEvents(){
         List<Event> result = new ArrayList<>();
         List<Integer> ids =  currUser.getEvents(currCalendar);
@@ -139,10 +147,19 @@ public class CalendarData {
         return result;
     }
 
+    /**
+     * setter for the memo map
+     * @param memos the new memo map
+     */
     public void setMemos(Map<Integer, String> memos){
         this.memos = memos;
     }
 
+    /**
+     * Return an event based on the given event name
+     * @param eventName the user's selected event name
+     * @return the event corresponding to the given event name, or null if no event corresponds to the name
+     */
     public Event getEventByName(String eventName){
         List<Event> currUserEvents = getCurrUserEvents();
         for (Event event : currUserEvents){
@@ -153,6 +170,11 @@ public class CalendarData {
         return null;
     }
 
+    /**
+     * Return a list of events based on a list of event names
+     * @param events the list of event names
+     * @return the list of event instances
+     */
     public List<Event> getEventsByNames(List<String> events){
         List<Event> result = new ArrayList<>();
         for (String event : events){
@@ -163,6 +185,11 @@ public class CalendarData {
         return result;
     }
 
+    /**
+     * Return the memo message corresponding to the given memo id
+     * @param id the given memo id
+     * @return the corresponding memo message
+     */
     public String getMemoByID(int id){
         return memos.get(id);
     }
