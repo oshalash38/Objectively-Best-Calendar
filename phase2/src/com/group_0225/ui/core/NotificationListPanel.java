@@ -41,7 +41,7 @@ public class NotificationListPanel extends CalendarLayoutPanel {
             c.gridy = i;
             JButton notification = new JButton(inputs.get(i));
             int finalI = i;
-            notification.addActionListener(e -> alertController.displayNotifications(inputs.subList(finalI, finalI +5)));
+            notification.addActionListener(e -> {alertController.displayNotifications(inputs.subList(finalI, finalI +5)); alertController.removeNotification(finalI/5);});
 
             parent.add(notification, c);
             buttons.add(notification);
@@ -55,9 +55,9 @@ public class NotificationListPanel extends CalendarLayoutPanel {
 
 
 
-        for(String str: inputs){
-            System.out.println(str);
-        }
+//        for(String str: inputs){
+//            System.out.println(str);
+//        }
 
     }
 }

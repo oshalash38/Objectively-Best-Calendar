@@ -26,7 +26,7 @@ public class AlertController extends CalendarController implements Observer {
     public AlertController(CalendarData data, UIPresenter presenter) {
 
         super(data, presenter);
-        alertManager.addObserver(this);
+        alertManager.addObserver(this::update);
     }
 
     /**
@@ -380,7 +380,6 @@ public class AlertController extends CalendarController implements Observer {
         List<List<String>> temp = (List<List<String>>)arg;
         if (!temp.isEmpty()){
             notifications.addAll((List<List<String>>)arg);
-
             List<String> retNotifications = new ArrayList<>();
             for (List<String> s: notifications){
                 retNotifications.addAll(s);
@@ -388,9 +387,18 @@ public class AlertController extends CalendarController implements Observer {
             presenter.updateUI(new UIUpdateInfo("dialog", retNotifications, "NotificationListPanel" ));
         }
     }
+
+    /**
+     * Dislays the detils of the notification
+     * @param inputs the information about the alert to be diplayed
+     */
     public void displayNotifications(List<String> inputs){
         presenter.updateUI(new UIUpdateInfo("dialog", inputs, "NotificationPanel" ));
     }
+
+    /**
+     * Displays all the notifications
+     */
     public void displayAllNotifications(){
         List<String> retNotifications = new ArrayList<>();
         for (List<String> s: notifications){
@@ -398,9 +406,13 @@ public class AlertController extends CalendarController implements Observer {
         }
 
         presenter.updateUI(new UIUpdateInfo("dialog", retNotifications, "NotificationListPanel" ));
-        notifications.clear();
+
 
     }
+
+    /**
+     * starts the timer task in alertManager when user logs in
+     */
     public void start(){
         EventManager eventManager = new EventManager();
         List<Integer> eventID = data.getCurrUser().getAllEvents();
@@ -411,7 +423,25 @@ public class AlertController extends CalendarController implements Observer {
         alertManager.keepChecking(data, data.getCurrUser());
     }
 
+    /**
+     * stops the timer after user logs out
+     */
     public void stop(){
         alertManager.stopTimer();
+    }
+
+    /**
+     * removes the notification after user has viewed it
+     * @param i index of notification to be removed
+     */
+    public void removeNotification(int i){
+        notifications.remove(i);
+    }
+
+    /**
+     * Used to clear the notifications after user logs out
+     */
+    public void clear(){
+        notifications.clear();
     }
 }

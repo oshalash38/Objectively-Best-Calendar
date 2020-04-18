@@ -20,7 +20,7 @@ public class AlertManager extends Observable{
     private User user;
     private CalendarData data;
     private Timer t = new Timer();
-    private final int CHECKDURATION = 5;
+    private final int CHECKDURATION = 10;
     private List<Event> UserEvents;
     private TimerTask timerTask = new TimerTask() {
 
@@ -33,14 +33,13 @@ public class AlertManager extends Observable{
     private void run(){
         try {
 
-            updateUserEvents(this.data, user);
+                updateUserEvents(this.data, user);
                 List<List<String>> displayAlerts = runUpcomingAlerts();
                 if(displayAlerts.size() > 0){
                     setChanged();
+                    System.out.println("notified");
                     notifyObservers(displayAlerts);
                 }
-
-
 
         } catch (ConcurrentModificationException ex) {
             run();
@@ -48,23 +47,6 @@ public class AlertManager extends Observable{
     }
 
 
-    /**
-     * Checks for any alerts which have passed while the program was not running.
-     *
-     *
-     * @return Returns an ArrayList of Alert which have passed.
-     */
-    public List<List<String>> checkNewAlerts(){
-        List<List<String>> retList =  new ArrayList<>(0);
-            for (Event e : UserEvents) {
-                checkPassedAlertsEvent(e, retList, currentTime);
-
-        }
-        if(upcomingAlerts!= null) {
-            retList.addAll(runUpcomingAlerts());
-        }
-        return retList;
-    }
 
     /**
      * Starts the timer task to excecute every CHECKDURATION*1000 seconds.
@@ -73,7 +55,8 @@ public class AlertManager extends Observable{
         this.user = currUser;
         this.data = data;
         updateUserEvents(data, currUser);
-        getUpcomingAlerts();
+
+
         t.scheduleAtFixedRate(timerTask, CHECKDURATION*1000, CHECKDURATION*1000);
 
     }
@@ -287,7 +270,7 @@ public class AlertManager extends Observable{
 
 
     public void setCurrentTime(LocalDateTime time){
-        this.currentTime = time;
+        currentTime = time;
         //checkNewAlerts();
     }
     /**

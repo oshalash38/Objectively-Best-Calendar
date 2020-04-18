@@ -118,7 +118,7 @@ public class CalendarToolBar extends JMenuBar {
         subMenus.get(0).addActionListener(e -> usersCalendarController.pushAddNewCalendar());
 
         //Logout
-        subMenus.get(1).addActionListener(e -> {alertController.stop(); loginController.startUp();});
+        subMenus.get(1).addActionListener(e -> {alertController.stop(); alertController.clear(); loginController.startUp();});
     }
 
     private void buildMessagingMenu() {
