@@ -17,3 +17,5 @@ External Code:
 2. Using Google GSON. All code found within src/com/google. Source https://github.com/google/gson.
 
 3. Using JDatePicker. All code found within src/org/jdatepicker. Source https://github.com/JDatePicker/JDatePicker.
+
+4. Using OpenWeatherApi from https://openweathermap.org/.
