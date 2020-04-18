@@ -8,7 +8,7 @@ import com.group_0225.entities.TimingFactory;
 import com.group_0225.entities.User;
 import com.group_0225.ui.UIManager;
 import com.group_0225.ui.common.util.UIPresenter;
-import com.group_0225.ui.core.CalendarFrame;
+import com.group_0225.ui.common.CalendarFrame;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
