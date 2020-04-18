@@ -250,27 +250,6 @@ public class EventManager {
     }
 
     /**
-     * Returns the number of alerts per day
-     * @param data the CalendarData where the alerts are stored
-     * @param threshold the threshold to check between
-     * @return the number of alerts per day
-     */
-    public List<String> getNumAlertsPerDay(CalendarData data, Timing threshold) {
-        List<String> numPerDay = new ArrayList<>();
-        for(List<Event> eventsOfDay : getEventsPerDay(data, threshold)){
-            int alertsForDay = 0;
-            for(Event e : eventsOfDay) {
-                for(Alert alert : e.getAlerts()){
-                    if(alert.getNextTime().intersect(threshold))
-                        alertsForDay++;
-                }
-            }
-            numPerDay.add(alertsForDay + "");
-        }
-        return numPerDay;
-    }
-
-    /**
      * Gets a list of name of events from list of events
      * @param events the list of events
      * @return the list of the names of the input events

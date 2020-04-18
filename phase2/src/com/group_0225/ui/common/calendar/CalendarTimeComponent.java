@@ -75,18 +75,11 @@ public class CalendarTimeComponent extends CalendarLayoutPanel {
             eventNumber.addMouseListener(viewEventListener);
         }
 
-        if (!inputs.get(5).equals("0")) {
-            c.anchor = GridBagConstraints.CENTER;
-            Label eventNumber = new Label("Alerts: " + inputs.get(5));
-            this.add(eventNumber, c);
-            eventNumber.addMouseListener(viewEventListener);
-        }
-
         c.anchor = GridBagConstraints.FIRST_LINE_END;
         JPanel weatherHolder = new JPanel();
-        if(!inputs.get(6).equals("NONE")) {
+        if(!inputs.get(5).equals("NONE")) {
             JLabel weatherLabel = new JLabel("");
-            weatherLabel.setText(inputs.get(6) + "°C");
+            weatherLabel.setText(inputs.get(5) + "°C");
             weatherLabel.addMouseListener(viewEventListener);
             weatherHolder.add(weatherLabel);
         }

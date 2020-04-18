@@ -51,8 +51,6 @@ public class CalendarGridController extends CalendarController{
         outputs.addAll(data.getLocalTime().getInfo());
         outputs.add("Events");
         outputs.addAll(getNumEventsPerDayOfMonth());
-        outputs.add("Alerts");
-        outputs.addAll(getNumAlertsPerDayOfMonth());
         outputs.add("Weather");
         outputs.addAll(weatherManager.getForecastHighs());
 
@@ -107,20 +105,6 @@ public class CalendarGridController extends CalendarController{
         Timing threshold = new Timing(startTime, endTime);
 
         return eventManager.getNumEventsPerDay(data, threshold);
-    }
-
-    /**
-     * Get the number of alerts per day of month
-     * @return the number of alerts per day of month, as a list of Strings
-     */
-    public List<String> getNumAlertsPerDayOfMonth() {
-        LocalDateTime displayStart = displayTime.getStart();
-        LocalDateTime startTime = LocalDateTime.of(displayStart.getYear(), displayStart.getMonth(), 1, 0, 0);
-        LocalDateTime endTime = startTime.plusMonths(1);
-
-        Timing threshold = new Timing(startTime, endTime);
-
-        return eventManager.getNumAlertsPerDay(data, threshold);
     }
 
     /**
