@@ -10,6 +10,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * This class represents the toolbar at the top of the calendar while the grid is present
+ */
 public class CalendarToolBar extends JMenuBar {
 
     private LoginController loginController;
@@ -31,7 +34,10 @@ public class CalendarToolBar extends JMenuBar {
     private JMenu timeMachine;
     private JMenuItem notifications;
 
-
+    /**
+     * Creates a CalendarToolBar instance
+     * @param controllerContainer a ControllerContainer instance
+     */
     public CalendarToolBar(ControllerContainer controllerContainer) {
         super();
         ViewModelBuilder vmb = new ViewModelBuilder();

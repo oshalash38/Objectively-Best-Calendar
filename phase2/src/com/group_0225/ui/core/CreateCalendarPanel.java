@@ -10,7 +10,14 @@ import java.awt.*;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * This panel allows the user to create a new calendar
+ */
 public class CreateCalendarPanel extends CalendarLayoutPanel {
+    /**
+     * Creates a new CreateCalendarPanel instance
+     * @param controllerContainer a ControllerContainer instance
+     */
     public CreateCalendarPanel(ControllerContainer controllerContainer) {
         super(controllerContainer);
     }

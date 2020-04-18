@@ -8,7 +8,14 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 
+/**
+ * This panel informs the user that no series have been created
+ */
 public class NoSeriesPanel extends CalendarLayoutPanel {
+    /**
+     * Creates a NoSeriesPanel instance
+     * @param controllerContainer a ControllerContainer instance
+     */
     public NoSeriesPanel(ControllerContainer controllerContainer) {
         super(controllerContainer);
     }

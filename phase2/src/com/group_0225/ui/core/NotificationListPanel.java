@@ -10,7 +10,14 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This panel displays a list of notifications to the user
+ */
 public class NotificationListPanel extends CalendarLayoutPanel {
+    /**
+     * Creates a NotificationListPanel instance
+     * @param controllerContainer a ControllerContainer instance
+     */
     public NotificationListPanel (ControllerContainer controllerContainer){
         super(controllerContainer);
     }

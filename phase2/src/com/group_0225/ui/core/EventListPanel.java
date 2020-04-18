@@ -10,8 +10,14 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class allows users to view Events as a list. The events included depend on criteria decided in the controllers.
+ */
 public class EventListPanel extends CalendarLayoutPanel {
-
+    /**
+     * Creates a new EventListPanel instance
+     * @param controllerContainer a ControllerContainer instance
+     */
     public EventListPanel(ControllerContainer controllerContainer) {
         super(controllerContainer);
     }

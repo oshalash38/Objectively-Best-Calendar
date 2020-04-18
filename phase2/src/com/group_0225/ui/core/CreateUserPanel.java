@@ -11,8 +11,14 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * This panel allows the user to enter info to create a new user account
+ */
 public class CreateUserPanel extends CalendarLayoutPanel {
-
+    /**
+     * Creates a new CreateUserPanel instance
+     * @param controllerContainer a ControllerContainer instance
+     */
     public CreateUserPanel(ControllerContainer controllerContainer) {
         super(controllerContainer);
     }

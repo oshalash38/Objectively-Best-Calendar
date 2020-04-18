@@ -14,6 +14,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * This panel allows users to change memos
+ */
 public class ChangeMemoPanel extends CalendarLayoutPanel {
     public ChangeMemoPanel(ControllerContainer controllerContainer) {
         super(controllerContainer);

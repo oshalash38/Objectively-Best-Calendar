@@ -10,6 +10,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
+/**
+ * This panel displays a choice between creating a series from scratch or from created events
+ */
 public class SeriesChoicePanel extends CalendarLayoutPanel {
     public SeriesChoicePanel(ControllerContainer controllerContainer) {
         super(controllerContainer);

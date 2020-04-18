@@ -9,7 +9,14 @@ import java.awt.*;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * This class displays a dialog that allows the user to view an invitation for an event, and accept/decline the invitation
+ */
 public class AcceptDeclineMessagePanel extends CalendarLayoutPanel {
+    /**
+     * Creates an AcceptDeclineMessagePanel
+     * @param controllerContainer a ControllerContainer instance
+     */
     public AcceptDeclineMessagePanel(ControllerContainer controllerContainer) {
         super(controllerContainer);
     }

@@ -8,7 +8,14 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 
+/**
+ * This panel gives the user options with respect to their memos
+ */
 public class MemoOptionsPanel extends CalendarLayoutPanel {
+    /**
+     * Creates a new MemoOptionsPanel instance
+     * @param controllerContainer a ControllerContainer instance
+     */
     public MemoOptionsPanel(ControllerContainer controllerContainer) {
         super(controllerContainer);
     }

@@ -8,7 +8,14 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 
+/**
+ * This class allows the user to create an alert
+ */
 public class CreateAlertPromptPanel extends CalendarLayoutPanel {
+    /**
+     * Creates a CreateAlertPromptPanel instance
+     * @param controllerContainer a ControllerContainer instance
+     */
     public CreateAlertPromptPanel(ControllerContainer controllerContainer) {
         super(controllerContainer);
     }

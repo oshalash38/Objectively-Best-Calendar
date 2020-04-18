@@ -10,6 +10,9 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This panel allows the user to view all their memos
+ */
 public class MemoListPanel extends CalendarLayoutPanel {
     public MemoListPanel(ControllerContainer controllerContainer) {
         super(controllerContainer);

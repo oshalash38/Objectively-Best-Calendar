@@ -11,7 +11,14 @@ import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.*;
 
+/**
+ * This panel allows the user to view any replies or received invitations.
+ */
 public class InboxPanel extends CalendarLayoutPanel {
+    /**
+     * Creates a new InboxPanel instance
+     * @param controllerContainer a ControllerContainer instance
+     */
     public InboxPanel(ControllerContainer controllerContainer) {
         super(controllerContainer);
     }

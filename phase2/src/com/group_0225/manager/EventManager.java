@@ -336,7 +336,7 @@ public class EventManager {
             for(String calendar : u.getCalendars()){
                 List<Integer> events = u.getEvents(calendar);
                 if(events.contains(id))
-                    events.remove(id);
+                    events.remove((Integer)id);
             }
         }
 

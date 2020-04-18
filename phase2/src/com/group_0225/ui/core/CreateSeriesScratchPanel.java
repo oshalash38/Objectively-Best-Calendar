@@ -36,6 +36,11 @@ public class CreateSeriesScratchPanel extends CalendarLayoutPanel {
             Enter number of minutes (0-59)
         the number of events in the series (min. 2)
      */
+
+    /**
+     * Creates a new CreateSeriesScratchPanel instance
+     * @param controllerContainer a ControllerContainer instance
+     */
     public CreateSeriesScratchPanel(ControllerContainer controllerContainer){
         super(controllerContainer);
     }

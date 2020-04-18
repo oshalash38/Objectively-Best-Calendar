@@ -11,8 +11,14 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This panel allows the user to create a new memo
+ */
 public class CreateMemoPanel extends CalendarLayoutPanel {
-
+    /**
+     * Creates a new CreateMemoPanel instance
+     * @param controllerContainer a ControllerContainer instance
+     */
     public CreateMemoPanel(ControllerContainer controllerContainer) {
         super(controllerContainer);
     }

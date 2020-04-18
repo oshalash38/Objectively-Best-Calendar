@@ -15,8 +15,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * This panel allows the user to create a new event
+ */
 public class CreateEventPanel extends CalendarLayoutPanel {
-
+    /**
+     * Creates a new CreateEventPanel instance
+     * @param controllerContainer a ControllerContainer instance
+     */
     public CreateEventPanel(ControllerContainer controllerContainer) {
         super(controllerContainer);
     }

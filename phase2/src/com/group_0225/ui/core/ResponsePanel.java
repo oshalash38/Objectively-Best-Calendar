@@ -8,7 +8,14 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 
+/**
+ * This panel allows the user to view a response to their invitation
+ */
 public class ResponsePanel extends CalendarLayoutPanel {
+    /**
+     * Creates a ResponsePanel instance
+     * @param controllerContainer a ControllerContainer instance
+     */
     public ResponsePanel(ControllerContainer controllerContainer) {
         super(controllerContainer);
     }

@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * This panel allows the user to create a series from a list of events
  * @author Peter
  */
 public class CreateSeriesFromEventsPanel extends CalendarLayoutPanel {
@@ -26,6 +27,11 @@ public class CreateSeriesFromEventsPanel extends CalendarLayoutPanel {
         -some form of id representation
         -can be a list of ids selected, a string of ids separated by commas (preferred), etc
         -let me know which one you have chosen so i can adjust controller accordingly
+     */
+
+    /**
+     * Creates a new CreateSeriesFromEventsPanel instance
+     * @param controllerContainer a ControllerContainer instance
      */
     public CreateSeriesFromEventsPanel(ControllerContainer controllerContainer) {
         super(controllerContainer);

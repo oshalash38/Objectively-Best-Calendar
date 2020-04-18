@@ -9,12 +9,19 @@ import com.group_0225.ui.common.calendar.CalendarLayoutPanel;
 import java.awt.*;
 import java.util.List;
 
+/**
+ * This panel represents the basic calendar
+ */
 public class CalendarPanel extends CalendarLayoutPanel {
 
     CalendarHeader header;
     CalendarComponent component;
     CalendarFooter footer;
 
+    /**
+     * Creates a CalendarPanel instance
+     * @param controllerContainer a ControllerContainer instance
+     */
     public CalendarPanel(ControllerContainer controllerContainer) {
         super(controllerContainer);
     }

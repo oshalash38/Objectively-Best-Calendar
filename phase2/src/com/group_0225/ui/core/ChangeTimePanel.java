@@ -11,7 +11,14 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This panel allows the user to change the time and date for the purpose of time travel
+ */
 public class ChangeTimePanel extends CalendarLayoutPanel {
+    /**
+     * Creates a ChangeTimePanel instance
+     * @param controllerContainer a ControllerContainer instance
+     */
     public ChangeTimePanel(ControllerContainer controllerContainer) {
         super(controllerContainer);
     }

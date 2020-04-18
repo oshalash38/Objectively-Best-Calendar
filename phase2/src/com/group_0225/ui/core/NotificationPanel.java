@@ -7,7 +7,14 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 
+/**
+ * This panel displays the information associated with a notification
+ */
 public class NotificationPanel extends CalendarLayoutPanel {
+    /**
+     * Creates a NotificationPanel instance
+     * @param controllerContainer a ControllerContainer instance
+     */
     public NotificationPanel (ControllerContainer controllerContainer){super(controllerContainer);}
     @Override
     protected void buildPanel(List<String> inputs) {

@@ -7,7 +7,14 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 
+/**
+ * This panel informs the user that they have no total tags
+ */
 public class NoTagsPanel extends CalendarLayoutPanel {
+    /**
+     * Creates a NoTagsPanel instance
+     * @param controllerContainer a ControllerContainer instance
+     */
     public NoTagsPanel(ControllerContainer controllerContainer) {
         super(controllerContainer);
     }

@@ -7,7 +7,14 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 
+/**
+ * This panel allows the user to view an Event and make changes
+ */
 public class EventPanel extends CalendarLayoutPanel {
+    /**
+     * Creates a new EventPanel instance
+     * @param controllerContainer a ControllerContainer instance
+     */
     public EventPanel(ControllerContainer controllerContainer) {
         super(controllerContainer);
     }

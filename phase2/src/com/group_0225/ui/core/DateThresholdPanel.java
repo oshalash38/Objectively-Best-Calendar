@@ -12,7 +12,14 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This panel allows the user to view certain events based on a date threshold
+ */
 public class DateThresholdPanel extends CalendarLayoutPanel {
+    /**
+     * Creates a new DateThresholdPanel
+     * @param controllerContainer a ControllerContainer instance
+     */
     public DateThresholdPanel(ControllerContainer controllerContainer) {
         super(controllerContainer);
     }

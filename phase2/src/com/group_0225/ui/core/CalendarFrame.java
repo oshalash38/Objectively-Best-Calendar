@@ -7,11 +7,17 @@ import javax.swing.*;
 import java.io.File;
 import java.util.Map;
 
+/**
+ * This class extends JFrame and is the main "window" for the UI
+ */
 public class CalendarFrame extends JFrame{
 
     private UIPresenter presenter;
     private Map<String,CalendarLayoutPanel> panels;
 
+    /**
+     * Creates a CalendarFrame instance
+     */
     public CalendarFrame() {
         super("Objectively Best Calendar");
 
