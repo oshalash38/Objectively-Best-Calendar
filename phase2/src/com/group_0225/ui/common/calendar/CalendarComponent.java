@@ -43,7 +43,7 @@ public class CalendarComponent extends CalendarLayoutPanel {
 
         LocalDateTime tempLocal = LocalDateTime.of(2020, Integer.parseInt(displayMonth),1,1,1);
         int weekDay = tempLocal.get(ChronoField.DAY_OF_WEEK) % 7;
-        YearMonth tempYearMonth = YearMonth.of(2020, Integer.parseInt(displayMonth));
+        YearMonth tempYearMonth = YearMonth.of(Integer.parseInt(displayYear), Integer.parseInt(displayMonth));
         int monthLength = tempYearMonth.lengthOfMonth();
 
         int currDay = 1;
