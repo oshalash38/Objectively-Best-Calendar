@@ -53,12 +53,6 @@ public class InboxPanel extends CalendarLayoutPanel {
             });
         }
 
-//        Map<Button,String> buttons = new HashMap<>();
-
-//        int i = 0;
-//        for (; i < inputs.size()/2; i++){
-//            buttons.put(addButton(c, bottomPane, i + 2, inputs.get(i)),inputs.get(inputs.size()/2+i));
-//        }
 
         addLabel(c, bottomPane, i+ 2, viewModel.get("Responses"));
         Map<Button, String> responseButtons = new HashMap<>();
@@ -85,16 +79,6 @@ public class InboxPanel extends CalendarLayoutPanel {
                 }
             });
         }
-
-//        for (Button b: buttons.keySet()){
-//            b.addActionListener(new ActionListener() {
-//                @Override
-//                public void actionPerformed(ActionEvent e) {
-//                    List<String> message = Arrays.asList(buttons.get(b));
-//                    messagingController.pushAcceptDeclinePanel(message);
-//                }
-//            });
-//        }
 
         c.gridy = 1;
         this.add(bottomPane, c);

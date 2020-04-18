@@ -24,11 +24,6 @@ public class ResponsePanel extends CalendarLayoutPanel {
 
         JPanel bottomPane = new JPanel(new GridBagLayout());
 
-//        addLabel(c, bottomPane, 0, viewModel.get("OriginalRequest"));
-//        //display event
-//        addLabel(c,bottomPane,3,viewModel.get("Event information: "));
-//        JTextArea event = addTextArea(inputs.get(1),bottomPane,4,c);
-//        event.setEditable(false);
 
         addLabel(c, bottomPane, 4, viewModel.get("From") + inputs.get(0));
         addLabel(c, bottomPane, 6, viewModel.get("Response"));

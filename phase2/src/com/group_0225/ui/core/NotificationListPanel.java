@@ -28,7 +28,7 @@ public class NotificationListPanel extends CalendarLayoutPanel {
         parent.setBackground(Color.darkGray);
 
         if(inputs.size() == 0){
-            buildTitle(c, "You Have no notifications!!");
+            buildTitle(c, "You have no notifications!");
             return;
         }
         String title = viewModel.get("Notifications");

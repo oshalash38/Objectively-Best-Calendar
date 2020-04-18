@@ -81,16 +81,6 @@ public class CreateEventPanel extends CalendarLayoutPanel {
                 addLabel(c, bottomPane, 13, "Event Edited");
             }
         }
-//        Button goBack = addButton(c, bottomPane, 11, viewModel.get("CancelString"));
-
-
-
-//        goBack.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-////                controllerFacade.mainMenu();
-//            }
-//        });
 
         create.addActionListener(e -> {
             List<String> inputs1 = new ArrayList<>();
