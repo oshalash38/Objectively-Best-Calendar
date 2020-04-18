@@ -5,7 +5,7 @@ import com.group_0225.entities.CalendarData;
 import com.group_0225.ui.common.calendar.CalendarLayoutPanel;
 import com.group_0225.ui.common.util.GUIBuilder;
 import com.group_0225.ui.common.util.UIUpdateInfo;
-import com.group_0225.ui.core.CalendarFrame;
+import com.group_0225.ui.common.CalendarFrame;
 import com.group_0225.ui.core.CalendarToolBar;
 
 import javax.swing.*;

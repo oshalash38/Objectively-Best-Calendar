@@ -1,4 +1,4 @@
-package com.group_0225.ui.core;
+package com.group_0225.ui.common;
 
 import com.group_0225.ui.common.calendar.CalendarLayoutPanel;
 import com.group_0225.ui.common.util.UIPresenter;
