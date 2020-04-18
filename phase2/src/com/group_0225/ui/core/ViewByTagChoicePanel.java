@@ -10,7 +10,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
+/**
+ * This panel allows the user to choose which tag they would like to use to filter their view of events
+ */
 public class ViewByTagChoicePanel extends CalendarLayoutPanel {
+    /**
+     * Creates a new ViewByTagChoicePanel instance
+     * @param controllerContainer a ControllerContainer
+     */
     public ViewByTagChoicePanel(ControllerContainer controllerContainer) {
         super(controllerContainer);
     }

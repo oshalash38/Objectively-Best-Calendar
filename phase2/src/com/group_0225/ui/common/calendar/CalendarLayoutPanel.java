@@ -12,11 +12,18 @@ import java.awt.*;
 import java.util.List;
 import java.util.*;
 
+/**
+ * This panel forms the basis for most other panels in the UI
+ */
 public abstract class CalendarLayoutPanel extends JPanel {
 
     protected ControllerContainer controllerContainer;
     protected Map<String, String> viewModel;
 
+    /**
+     * Creates a new CalendarLayoutPanel instance
+     * @param controllerContainer a ControllerContainer instance
+     */
     public CalendarLayoutPanel(ControllerContainer controllerContainer) {
         super(new GridBagLayout());
         this.controllerContainer = controllerContainer;
@@ -24,6 +31,11 @@ public abstract class CalendarLayoutPanel extends JPanel {
         viewModel = vmb.build();
     }
 
+    /**
+     * Creates a new CalendarLayoutPanel instance
+     * @param layoutManager2 a LayoutManager2 instance
+     * @param controllerContainer a ControllerContainer instance
+     */
     public CalendarLayoutPanel(LayoutManager2 layoutManager2, ControllerContainer controllerContainer) {
         super(layoutManager2);
         this.controllerContainer = controllerContainer;
@@ -31,6 +43,10 @@ public abstract class CalendarLayoutPanel extends JPanel {
         viewModel = vmb.build();
     }
 
+    /**
+     * Builds the panel indicates from inputs
+     * @param inputs information that specifies which panel to build
+     */
     public void updatePanel(List<String> inputs) {
         this.removeAll();
         this.buildPanel(inputs);

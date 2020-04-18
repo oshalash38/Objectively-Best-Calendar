@@ -8,8 +8,15 @@ import com.group_0225.ui.core.Alert.*;
 import java.util.Hashtable;
 import java.util.Map;
 
+/**
+ * This class contains all the CalendarLayoutPanel instances for different features of the calendar
+ */
 public class GUIBuilder {
-
+    /**
+     * Initializes all the panels required for functionality
+     * @param controllerContainer a ControllerContainer instance
+     * @return a Map of CalendarLayoutPanel names to CalendarLayoutPanel instances
+     */
     public Map<String, CalendarLayoutPanel> buildPanels(ControllerContainer controllerContainer) {
         Map<String, CalendarLayoutPanel> panels = new Hashtable<>();
 

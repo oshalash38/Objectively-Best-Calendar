@@ -3,11 +3,19 @@ package com.group_0225.ui.common.calendar;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * This class extends the functionality of JPanel to fit the header of a calendar
+ */
 public class CalendarHeader extends JPanel {
 
     private static final String[] MONTHS = new String[] {"January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December"};
 
+    /**
+     * Creates a new CalendarHeader instance
+     * @param month the month given
+     * @param year the year given
+     */
     public CalendarHeader(int month, int year) {
         super(new GridBagLayout());
 

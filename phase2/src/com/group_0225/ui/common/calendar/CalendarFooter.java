@@ -6,8 +6,15 @@ import com.group_0225.controller.ControllerContainer;
 import java.awt.*;
 import java.util.List;
 
+/**
+ * This class extends CalendarLayoutPanel to add functionality for the footer of the calendar
+ */
 public class CalendarFooter extends CalendarLayoutPanel {
-
+    /**
+     * Creates a new CalendarFooter
+     * @param layoutManager2 a LayoutManager2
+     * @param controllerContainer a ControllerContainer instance
+     */
     public CalendarFooter(LayoutManager2 layoutManager2, ControllerContainer controllerContainer) {
         super(layoutManager2, controllerContainer);
     }

@@ -8,6 +8,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 
+/**
+ * This panel displays all the events associated with a particular series name
+ */
 public class ViewSNamePanel extends CalendarLayoutPanel {
     public ViewSNamePanel(ControllerContainer controllerContainer) {
         super(controllerContainer);

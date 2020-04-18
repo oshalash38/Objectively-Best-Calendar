@@ -9,7 +9,14 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 
+/**
+ * This panel displays all the events associated with a particular tag
+ */
 public class ViewByTagPanel extends CalendarLayoutPanel {
+    /**
+     * Creates a new ViewByTagPanel instance
+     * @param controllerContainer a ControllerContainer instance
+     */
     public ViewByTagPanel(ControllerContainer controllerContainer) {
         super(controllerContainer);
     }

@@ -9,8 +9,14 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.List;
 
+/**
+ * This class extends CalendarLayoutPanel to accomplish time-related functionality
+ */
 public class CalendarTimeComponent extends CalendarLayoutPanel {
-
+    /**
+     * Creates a new CalendarTimeComponent instance
+     * @param controllerContainer a ControllerContainer instance
+     */
     public CalendarTimeComponent(ControllerContainer controllerContainer) {
         super(controllerContainer);
     }

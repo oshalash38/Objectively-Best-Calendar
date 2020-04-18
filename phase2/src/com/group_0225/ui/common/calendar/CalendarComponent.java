@@ -11,10 +11,17 @@ import java.time.temporal.ChronoField;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class extends CalendarLayoutPanel and its functionality
+ */
 public class CalendarComponent extends CalendarLayoutPanel {
 
     List<JPanel> calendarComponent;
 
+    /**
+     * Creates a new CalendarComponent instance
+     * @param controllerContainer a ControllerContainer instance
+     */
     public CalendarComponent(ControllerContainer controllerContainer) {
         super(controllerContainer);
     }

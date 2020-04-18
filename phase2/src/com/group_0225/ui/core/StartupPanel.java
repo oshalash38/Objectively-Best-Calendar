@@ -10,8 +10,14 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 
+/**
+ * This panel is responsible for the displaying the UI on startup
+ */
 public class StartupPanel extends CalendarLayoutPanel {
-
+    /**
+     * Creates a new StartupPanel instance
+     * @param controllerContainer a ControllerContainer instance
+     */
     public StartupPanel(ControllerContainer controllerContainer) {
         super(controllerContainer);
     }

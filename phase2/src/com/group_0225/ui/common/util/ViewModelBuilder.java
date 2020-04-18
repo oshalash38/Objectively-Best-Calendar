@@ -3,7 +3,14 @@ package com.group_0225.ui.common.util;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * This class contains all the Strings used by panels (especially CalendarLayoutPanel instances).
+ */
 public class ViewModelBuilder {
+    /**
+     * Instantiate a map of Strings to be used in panel display
+     * @return a map of Strings
+     */
     public Map<String, String> build() {
         Map<String, String> viewModel = new HashMap<>();
         viewModel.put("EventNameString", "Event Name:");

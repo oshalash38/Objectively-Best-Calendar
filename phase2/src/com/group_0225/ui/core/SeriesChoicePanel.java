@@ -14,6 +14,10 @@ import java.util.List;
  * This panel displays a choice between creating a series from scratch or from created events
  */
 public class SeriesChoicePanel extends CalendarLayoutPanel {
+    /**
+     * Creates a SeriesChoicePanel instance
+     * @param controllerContainer a ControllerContainer instance
+     */
     public SeriesChoicePanel(ControllerContainer controllerContainer) {
         super(controllerContainer);
     }

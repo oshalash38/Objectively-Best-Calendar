@@ -10,7 +10,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
+/**
+ * This Panel allows the user to select by which names events will be viewed
+ */
 public class ViewByENameChoicePanel extends CalendarLayoutPanel {
+    /**
+     * Creates a new ViewByENameChoicePanel instance
+     * @param controllerContainer a ControllerContainer instance
+     */
     public ViewByENameChoicePanel(ControllerContainer controllerContainer) {
         super(controllerContainer);
     }

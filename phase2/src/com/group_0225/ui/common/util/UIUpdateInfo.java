@@ -2,6 +2,9 @@ package com.group_0225.ui.common.util;
 
 import java.util.List;
 
+/**
+ * This class is a package of information that allows the controllers to direct GUI logic concisely (referring to panel creation and deletion)
+ */
 public class UIUpdateInfo {
 
     String panelKey;
@@ -36,15 +39,26 @@ public class UIUpdateInfo {
         this.panelKey = panelKey;
     }
 
-
+    /**
+     * Getter method for the panel key
+     * @return the panel key
+     */
     public String getPanelKey() {
         return panelKey;
     }
 
+    /**
+     * Getter method for the list of data
+     * @return the data
+     */
     public List<String> getData() {
         return data;
     }
 
+    /**
+     * Getter method for the type of panel to be created
+     * @return the recipient, as a String
+     */
     public String getRecipient() {
         return recipient;
     }

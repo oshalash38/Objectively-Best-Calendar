@@ -11,7 +11,14 @@ import java.awt.event.ActionListener;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * This panel collects the user's choice for which series name to filter their view of events
+ */
 public class ViewSNameChoicePanel extends CalendarLayoutPanel {
+    /**
+     * Creates a new ViewSNameChoicePanel instance
+     * @param controllerContainer a ControllerContainer instance
+     */
     public ViewSNameChoicePanel(ControllerContainer controllerContainer) {
         super(controllerContainer);
     }
