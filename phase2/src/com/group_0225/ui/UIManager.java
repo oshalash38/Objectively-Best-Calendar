@@ -54,7 +54,6 @@ public class UIManager implements Observer {
 
 
     /**
-     * TODO FIGURE OUT HOW TO GET RID OF THIS CODE SMELL IT IS VERY STINKY
      * This method is called whenever the observed object is changed. An
      * application calls an <tt>Observable</tt> object's
      * <code>notifyObservers</code> method to have all the object's
